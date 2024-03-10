@@ -26,10 +26,6 @@ ARTIST: Justo T, Joel Ch
  - MARC - DEVELOPER, AUDIO
  - JOEL - TECHNICAL ARTIST, QA TESTER
 
-## License
-
-This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
-
 ## Links
 
  - Link to [GDD](https://docs.google.com/document/d/10BjJT5iYlnWMUcPq0piOajL4E_s3uIRq5hB165xh6m0/edit?usp=sharing)
