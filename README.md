@@ -1,3 +1,6 @@
+![BGGLogo](https://github.com/BackgroundGames/SacredPyramid/assets/85459149/bfa61457-921b-41a7-bf9f-dc44cd3e9c7c)
+
+
 # Zhaak and the Sacred Pyramid: The Legacy of Ra
 
 ## Description
