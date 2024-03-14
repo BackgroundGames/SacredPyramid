@@ -3,6 +3,7 @@
 #include "App.h"
 #include "Window.h"
 #include "GuiManager.h"
+#include "Settings.h"
 #include "Level1.h"
 #include "SceneIntro.h"
 #include "Menu.h"
@@ -15,10 +16,12 @@ SceneManager::SceneManager()
 	sceneIntro = new SceneIntro();
 	menu = new Menu();
 	level1 = new Level1();
+	settings = new Settings();
 
 	scenes.Add(sceneIntro);
 	scenes.Add(menu);
 	scenes.Add(level1);
+	scenes.Add(settings);
 }
 
 SceneManager::~SceneManager()
@@ -157,16 +160,18 @@ void SceneManager::MakeFade()
 
 void SceneManager::OpenSettings()
 {
-	//settings->Start();
-	//settings->active = true;
+	app->guiManager->DesactvieAllGui();
+	currentScene->settings = true;
+	settings->Start();
+	settings->active = true;
 }
 
 void SceneManager::CloseSettings()
 {
-	//settings->CleanUp();
-	//settings->active = false;
-	//app->guiManager->ActiveAllGui();
-	//currentScene->settings = false;
+	settings->CleanUp();
+	settings->active = false;
+	app->guiManager->ActiveAllGui();
+	currentScene->settings = false;
 }
 
 bool SceneManager::SaveState(pugi::xml_node node)

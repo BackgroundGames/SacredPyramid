@@ -87,7 +87,7 @@ bool GuiCheckBox::Update(float dt)
 			break;
 		}
 		app->render->DrawTexture(box, bounds.x + app->render->camera.x * -1, bounds.y + app->render->camera.y * -1, NULL);
-		//app->render->DrawText(text.GetString(), bounds.x - bounds.w / 2 - text.Length() * 25, bounds.y, text.Length() * 25, 50, 255, 255, 255);
+		app->render->DrawText(text.GetString(), bounds.x - bounds.w / 2 - text.Length() * 25, bounds.y, text.Length() * 25, 50, 255, 255, 255);
 	}
 
 	return false;
