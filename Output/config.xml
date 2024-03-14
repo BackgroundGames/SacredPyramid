@@ -1,0 +1,32 @@
+<!-- Config file for the game -->
+<!--Create configuration file-->
+<config>
+	<app>
+		<title>My video game</title>
+		<maxFrameDuration value="16"/>
+	</app>
+
+	<renderer>
+		<vsync value="false"/>
+		<mouse texturePath="Assets/Textures/cursor.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>
+		<font arialPath="Assets/Fonts/arial/arial.ttf"/>
+	</renderer>
+
+	<window>
+		<resolution width="1280" height="720" scale="1"/>
+		<fullscreen value="false"/>
+		<borderless value="false"/>
+		<resizable value="false"/>
+		<fullscreen_window value="false"/>
+	</window>
+
+	<scenemanager>
+		<sceneintro texturePath="Assets/Textures/bgg.jpg"/>
+		<menu texturePath="Assets/Textures/menu.jpg"/>
+		<level1>
+			<player x="150" y="672" texturePath="Assets/Textures/pj.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>
+			<map path="Assets/Maps/" name="iso.tmx"/>
+		</level1>
+	</scenemanager>
+  
+</config>
