@@ -75,7 +75,7 @@ bool GuiSlider::Update(float dt)
 			break;
 		}
 		SDL_Rect title = { bounds.x + bounds.w / 2 - textW / 2, bounds.y - textH, textW, textH };
-		//app->render->DrawText(text.GetString(), bounds.x + bounds.w/2 - (text.Length() * 25)/2, bounds.y - 50 - 10, text.Length()*25, 50, 255, 255, 255);
+		app->render->DrawText(text.GetString(), bounds.x + bounds.w/2 - (text.Length() * 25)/2, bounds.y - 50 - 10, text.Length()*25, 50, 255, 255, 255);
 	}
 	return false;
 }

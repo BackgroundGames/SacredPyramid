@@ -71,6 +71,9 @@
     <ClCompile Include="Source\SceneManager.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Settings.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -176,6 +179,9 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneManager.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Settings.h">
       <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>

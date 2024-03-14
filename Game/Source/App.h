@@ -91,6 +91,9 @@ public:
 
 	bool debug = false;
 
+	//Set the maximun frame duration in miliseconds.
+	uint32 maxFrameDuration = 16;
+
 private:
 
 	int argc;
@@ -117,9 +120,6 @@ private:
 
 	float averageFps = 0.0f;
 	uint32 secondsSinceStartup = 0;
-
-	//Set the maximun frame duration in miliseconds.
-	uint32 maxFrameDuration = 16;
 
 };
 

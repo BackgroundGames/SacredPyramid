@@ -48,11 +48,6 @@ private:
 	GuiSlider* gcFSlider;
 	GuiCheckBox* checkBoxFS;
 	GuiCheckBox* checkBoxVS;
-
-	GuiControlButton* resumeButton;
-	GuiControlButton* settingsButton;
-	GuiControlButton* menuButton;
-	GuiControlButton* exitButton;
 	
 };
 

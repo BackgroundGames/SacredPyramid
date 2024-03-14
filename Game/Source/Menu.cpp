@@ -113,9 +113,7 @@ bool Menu::OnGuiMouseClickEvent(GuiControl* control)
 		}*/
 	}
 	if (control->id == 3) {
-		/*app->guiManager->DesactvieAllGui();
 		app->sceneManager->OpenSettings();
-		settings = true;*/
 	}
 	if (control->id == 4) {
 		/*app->sceneManager->level1->reset = false;
