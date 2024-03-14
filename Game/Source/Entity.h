@@ -40,17 +40,6 @@ public:
 	{
 		return true;
 	}
-
-	virtual bool LoadState(pugi::xml_node&)
-	{
-		return true;
-	}
-
-	virtual bool SaveState(pugi::xml_node&)
-	{
-		return true;
-	}
-
 	void Entity::Enable()
 	{
 		if (!active)
@@ -69,6 +58,17 @@ public:
 		}
 	}
 
+	virtual bool LoadState(pugi::xml_node&)
+	{
+		return true;
+	}
+
+	virtual bool SaveState(pugi::xml_node&)
+	{
+		return true;
+	}
+
+
 
 
 public:
@@ -77,10 +77,14 @@ public:
 	EntityType type;
 	bool active = true;
 	pugi::xml_node parameters; 
+	
+	SDL_Texture* texture = NULL;
+	uint texH, texW;
+
+	iPoint position;      
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
-	iPoint position;       
 	bool renderable = true;
 };
 

@@ -48,7 +48,7 @@ bool Level1::Start()
 	//Get player paremeters
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	//Assigns the XML node to a member in player
-	player->config = sceneconfig.child("player");
+	player->parameters = sceneconfig.child("player");
 	player->Start();
 
 
