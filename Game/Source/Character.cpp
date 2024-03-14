@@ -30,6 +30,10 @@ bool Character::Start()
 	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
 	app->tex->GetSize(texture, texW, texH);
 
+	//aquests valors son per el pj de prova
+	texW = 28;
+	texH = 62;
+
 	selectionTex = app->tex->Load(parameters.attribute("selectionPath").as_string());
 
 	return true;
@@ -67,37 +71,38 @@ bool Character::Update(float dt)
 	//debug player rect
 	prect.x = position.x;
 	prect.y = position.y;
-	prect.w = 28;
-	prect.h = 62;
+	prect.w = texW;
+	prect.h = texH;
 	if (app->debug)
 		app->render->DrawRectangle(prect, 255, 0, 0, 255, false);
 
 	//darw
+	//pos x en la imagen
 	prect.x = 245;
 
 	if (PosState == Direction::UL) {
-
+		//pos y en la imagen
 		prect.y = 116;
-		app->render->DrawTexture(texture, position.x, position.y - 62 / 2, &prect);
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, &prect);
 	}
 	else if (PosState == Direction::UR) {
 		prect.y = 116;
-		app->render->IDrawTexture(texture, position.x, position.y - 62 / 2, &prect);
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, &prect);
 	}
 	else if (PosState == Direction::DL) {
 		prect.y = 216;
-		app->render->DrawTexture(texture, position.x, position.y - 62 / 2, &prect);
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, &prect);
 	}
 	else if (PosState == Direction::DR) {
 		prect.y = 216;
-		app->render->IDrawTexture(texture, position.x, position.y - 62 / 2, &prect);
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, &prect);
 	}
 
 	if (app->debug)
 	{
 		//debug the midle of the player rect
-		prect.x = position.x + 14;
-		prect.y = position.y + 31;
+		prect.x = position.x + texW/2;
+		prect.y = position.y + texH/2;
 		prect.w = 2;
 		prect.h = 2;
 		app->render->DrawRectangle(prect, 255, 255, 255, 255, false);
@@ -114,13 +119,13 @@ bool Character::CleanUp()
 void Character::TpToCell(int x, int y)
 {
 	position = iPoint(app->map->MapToWorld(x, y));
-	position += iPoint((app->map->GetTileWidth() / 2) - (28 / 2), 0);
+	position += iPoint((app->map->GetTileWidth() / 2) - (texW / 2), 0);
 }
 
 void Character::moveTo(iPoint destination)
 {
 	//check if dest is walkable
-	if (app->map->pathfinding->CreatePath(app->map->WorldToMap(position.x, position.y + 15), destination) != -1) {
+	if (app->map->pathfinding->CreatePath(app->map->WorldToMap(position.x, position.y + texH/4), destination) != -1) {
 		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 
 		//check if dest is walkable
@@ -156,14 +161,14 @@ void Character::DoPathMoving()
 	//get next cell X and Y (window pos pixels)
 	int NextPathX = app->map->MapToWorld(path->At(pathingIteration)->x, path->At(pathingIteration)->y).x + app->map->GetTileWidth() / 2;
 	int NextPathy = app->map->MapToWorld(path->At(pathingIteration)->x, path->At(pathingIteration)->y).y + app->map->GetTileHeight();
-	int PlayerMidPosX = position.x + 28 / 2;
+	int PlayerMidPosX = position.x + texW / 2;
 
 	//calculate movement direction
 	if (NextPathX > PlayerMidPosX)
 	{
 		translationOffset.x += 2;
 
-		if (NextPathy > (position.y + 62 / 2))
+		if (NextPathy > (position.y + texH / 2))
 		{
 			translationOffset.y += 1;
 			PosState = Direction::DR;
@@ -178,7 +183,7 @@ void Character::DoPathMoving()
 	{
 		translationOffset.x -= 2;
 
-		if (NextPathy > (position.y + 62 / 2))
+		if (NextPathy > (position.y + texH / 2))
 		{
 			PosState = Direction::DL;
 			translationOffset.y += 1;
@@ -223,6 +228,6 @@ void Character::DoPathMoving()
 iPoint Character::GetTile()
 {
 	//el 14 seria la meitat del w i el 31 la meitat de h
-	return app->map->WorldToMap(position.x + 14 - app->map->GetTileWidth() / 2, position.y + 31 - app->map->GetTileWidth() / 4);
+	return app->map->WorldToMap(position.x + texW/2 - app->map->GetTileWidth() / 2, position.y + texH/2 - app->map->GetTileWidth() / 4);
 
 }
