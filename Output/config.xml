@@ -25,6 +25,7 @@
 		<menu texturePath="Assets/Textures/menu.jpg"/>
 		<level1>
 			<player x="150" y="672" texturePath="Assets/Textures/pj.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>
+			<enemy x="550" y="400" texturePath="Assets/Textures/pj.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>
 			<map path="Assets/Maps/" name="iso.tmx"/>
 		</level1>
 	</scenemanager>

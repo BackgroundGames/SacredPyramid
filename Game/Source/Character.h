@@ -57,17 +57,32 @@ public:
 
 	iPoint GetTile();
 
+	uint Character::GetHealth()	{ return this->stats.health; }
+
+	uint Character::GetMana() {	return this->stats.mana; }
+
+	uint Character::GetAttack()	{ return this->stats.attack; }
+
+	uint Character::GetDefense() { return this->stats.defense; }
+
+	uint Character::GetMagicAttack() { return this->stats.magicAttack; }
+
+	uint Character::GetMagicDefense() { return this->stats.magicDefense; }
+
+	uint Character::GetInitiative() { return this->stats.initiative; }
+
 public:
 
 	//Declare character parameters
 	Stats stats;
-	Equipment equipment;
+	Equipment inventory;
 	float speed = 0.2f;
 
 	//Animation
 	//Animation* currentAnim;
 
 	//to move
+	const DynArray<iPoint>* path;
 	int pathingIteration = 0;
 	bool move = false;
 	bool finishMoving = false;

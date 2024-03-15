@@ -11,17 +11,11 @@
     <ClCompile Include="Source\EntityManager.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Item.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\App.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="Source\PerfTimer.cpp">
       <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Player.cpp">
-      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="Source\Timer.cpp">
       <Filter>Utils</Filter>
@@ -71,11 +65,20 @@
     <ClCompile Include="Source\SceneManager.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Character.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Settings.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Character.cpp">
+      <Filter>Entities\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Entities\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>Entities\Characters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,9 +118,6 @@
     <ClInclude Include="Source\EntityManager.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Item.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Module.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -126,9 +126,6 @@
     </ClInclude>
     <ClInclude Include="Source\PerfTimer.h">
       <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Player.h">
-      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\Timer.h">
       <Filter>Utils</Filter>
@@ -184,11 +181,20 @@
     <ClInclude Include="Source\SceneManager.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Character.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Settings.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Character.h">
+      <Filter>Entities\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h">
+      <Filter>Entities\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>Entities\Characters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +218,12 @@
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{ddfbd81e-c1f4-4f6e-b61f-77bccda7646f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Characters">
+      <UniqueIdentifier>{2e61f5d2-bd69-40ea-a52b-7a97516b431f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Items">
+      <UniqueIdentifier>{2b04cc88-4765-44ff-9ced-668e2caf5821}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

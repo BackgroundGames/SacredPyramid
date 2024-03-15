@@ -8,8 +8,17 @@
 
 enum class EntityType
 {
+	//CHARCTER types
 	PLAYER,
+	ENEMY,
+	NPC,
+	
+	//ITEM types
 	ITEM,
+	WEAPON,
+	CONSUMABLE,
+	QUESTITEM,
+
 	UNKNOWN
 };
 

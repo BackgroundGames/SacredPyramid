@@ -3,11 +3,7 @@
 
 #include "Entity.h"
 #include "Character.h"
-#include "Point.h"
-#include "SDL/include/SDL.h"
-#include "DynArray.h"
 
-struct SDL_Texture;
 
 class Player : public Character
 {

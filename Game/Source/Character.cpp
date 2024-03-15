@@ -30,10 +30,6 @@ bool Character::Start()
 	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
 	app->tex->GetSize(texture, texW, texH);
 
-	//aquests valors son per el pj de prova
-	texW = 28;
-	texH = 62;
-
 	selectionTex = app->tex->Load(parameters.attribute("selectionPath").as_string());
 
 	return true;
@@ -47,13 +43,11 @@ bool Character::Update(float dt)
 		DoPathMoving();
 
 		// debug the path
-		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-
 		for (uint i = 0; i < path->Count(); ++i)
 		{
 			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 
-			//if (app->debug)
+			if (app->debug)
 				app->render->DrawTexture(selectionTex, pos.x, pos.y + app->map->GetTileHeight() / 2);
 
 			//drw the midle of the cell
@@ -125,17 +119,21 @@ void Character::TpToCell(int x, int y)
 void Character::moveTo(iPoint destination)
 {
 	//check if dest is walkable
-	if (app->map->pathfinding->CreatePath(app->map->WorldToMap(position.x, position.y + texH/4), destination) != -1) {
-		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+	if (app->map->pathfinding->CreatePath(app->map->WorldToMap(position.x, position.y + texH/4), destination) != -1) 
+	{
+		path = app->map->pathfinding->GetLastPath();
 
 		//check if dest is walkable
-		if (path->Count() != 1) {
+		if (path->Count() != 1) 
+		{
 			move = true;
 			pathingIteration = 0;
 			prevDestination = destination;
 		}
-		else {
-			if (move) {
+		else 
+		{
+			if (move) 
+			{
 				move = false;
 				TpToCell(path->At(0)->x, path->At(0)->y);
 			}
@@ -145,8 +143,6 @@ void Character::moveTo(iPoint destination)
 
 void Character::DoPathMoving()
 {
-	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-
 	//start from the fisrt cell
 	if (pathingIteration == 0) {
 		if (translationOffset.x == 0) {
@@ -229,5 +225,4 @@ iPoint Character::GetTile()
 {
 	//el 14 seria la meitat del w i el 31 la meitat de h
 	return app->map->WorldToMap(position.x + texW/2 - app->map->GetTileWidth() / 2, position.y + texH/2 - app->map->GetTileWidth() / 4);
-
 }

@@ -6,6 +6,7 @@
 #include "PugiXml/src/pugixml.hpp"
 
 class Player;
+class Enemy;
 class GuiControl;
 
 class Scene
@@ -56,25 +57,24 @@ public:
 		return true;
 	}
 
-	virtual Player* GetPlayer() {
-		return player;
-	}
+	virtual Player* GetPlayer() {	return player;	}
 
 	virtual bool OnGuiMouseClickEvent(GuiControl* control)
 	{
 		return true;
 	}
 
-	uint windowW, windowH;
 
 public:
 
 	pugi::xml_node sceneconfig;
+	uint windowW, windowH;
 
 	SString name;
 	bool active;
 	bool settings;
 	Player* player = nullptr;
+	Enemy* enemy = nullptr;
 	bool quit = false;
 };
 

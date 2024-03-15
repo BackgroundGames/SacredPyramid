@@ -3,6 +3,7 @@
 
 #include "Scene.h"
 #include "Player.h"
+#include "Enemy.h"
 
 struct SDL_Texture;
 
@@ -33,11 +34,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	iPoint GetPLayerPosition();
-
-	Player* GetPLayer() {
-		return player;
-	}
+	Player* GetPLayer() {	return player;	}
 
 private:
 	SDL_Texture* img;

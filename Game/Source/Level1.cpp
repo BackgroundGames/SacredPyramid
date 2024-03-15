@@ -51,6 +51,9 @@ bool Level1::Start()
 	player->parameters = sceneconfig.child("player");
 	player->Start();
 
+	enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+	enemy->parameters = sceneconfig.child("enemy");
+	enemy->Start();
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
