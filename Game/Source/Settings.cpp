@@ -54,10 +54,6 @@ bool Settings::Update(float dt)
 		app->sceneManager->CloseSettings();
 	}
 
-	if (quit) {
-		return false;
-	}
-
 	return true;
 }
 

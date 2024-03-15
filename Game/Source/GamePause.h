@@ -1,20 +1,18 @@
-#ifndef __SETTINGS__
-#define __SETTINGS__
+#ifndef __GAMEPAUSE__
+#define __GAMEPAUSE__
 
 #include "Scene.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
-#include "GuiSlider.h"
-#include "GuiCheckBox.h"
 
-class Settings :  public Scene
+class GamePause :  public Scene
 {
 public:
 
-	Settings();
+	GamePause();
 
 	// Destructor
-	virtual ~Settings();
+	virtual ~GamePause();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -37,17 +35,12 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 	uint windowW, windowH;
-	bool menuSetings = false;
 
 private:
-	bool quit = false;
-	bool fullscreen;
-	// L15: TODO 2: Declare a GUI Control Button 
-	GuiSlider* gcMSlider;
-	GuiSlider* gcFSlider;
-	GuiCheckBox* checkBoxFS;
-	GuiCheckBox* checkBoxVS;
-	
+	GuiControlButton* resumeButton;
+	GuiControlButton* settingsButton;
+	GuiControlButton* menuButton;
+	GuiControlButton* exitButton;
 };
 
 #endif //__SETTINGS__

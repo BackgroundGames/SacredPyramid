@@ -77,6 +77,9 @@
     <ClCompile Include="Source\Settings.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GamePause.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -188,6 +191,9 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\Settings.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GamePause.h">
       <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>

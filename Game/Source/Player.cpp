@@ -54,8 +54,11 @@ bool Player::Update(float dt)
 
 
 	//If space button is pressed modify put player in the cell of the cursor
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		Character::TpToCell(mouseTile.x, mouseTile.y);
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && move == false)
+		TpToCell(mouseTile.x, mouseTile.y);
+
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->sceneManager->currentScene->settings == false)
+		app->sceneManager->OpenGamePause();
 
 	//move to the tile clicked
 	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
