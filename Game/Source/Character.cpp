@@ -24,7 +24,7 @@ bool Character::Awake()
 
 bool Character::Start()
 {
-	//Initialize Chaarcter parameters
+	//Initialize Character parameters
 	position = iPoint(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
 
 	texture = app->tex->Load(parameters.attribute("texturePath").as_string());

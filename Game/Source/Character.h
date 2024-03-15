@@ -9,12 +9,19 @@
 struct Stats
 {
 	uint health;
+	uint mana;
 	uint attack;
 	uint defense;
-	uint magicPenetration;
 	uint magicAttack;
 	uint magicDefense;
 	uint initiative;
+};
+
+struct Equipment
+{
+	//Weapon weapon;
+	//Armor armor;
+	//Accessory accessory;
 };
 
 enum class Direction {
@@ -54,6 +61,7 @@ public:
 
 	//Declare character parameters
 	Stats stats;
+	Equipment equipment;
 	float speed = 0.2f;
 
 	//Animation

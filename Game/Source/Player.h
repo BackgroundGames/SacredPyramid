@@ -26,20 +26,7 @@ public:
 	bool CleanUp();
 
 public:
-
-	//Declare player parameters
-	float speed = 0.2f;
-
-	int pathingIteration = 0;
-	bool move = false;
-	bool finishMoving = false;
-	fPoint translationOffset;
-	iPoint auxPosition;
-	iPoint prevDestination;
-	Direction PosState;
-
-	//Tile selection
-	SDL_Texture* selectionTex = NULL;
+	bool lastStand = false;
 };
 
 #endif // __PLAYER_H__
