@@ -80,6 +80,9 @@
     <ClCompile Include="Source\Enemy.cpp">
       <Filter>Entities\Characters</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GamePause.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -195,6 +198,9 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy.h">
       <Filter>Entities\Characters</Filter>
+    </ClCompile>
+    <ClInclude Include="Source\GamePause.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

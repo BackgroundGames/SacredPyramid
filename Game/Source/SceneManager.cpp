@@ -7,6 +7,8 @@
 #include "Level1.h"
 #include "SceneIntro.h"
 #include "Menu.h"
+#include "GamePause.h"
+#include "Map.h"
 
 
 SceneManager::SceneManager()
@@ -17,10 +19,12 @@ SceneManager::SceneManager()
 	menu = new Menu();
 	level1 = new Level1();
 	settings = new Settings();
+	gamePause = new GamePause();
 
 	scenes.Add(sceneIntro);
 	scenes.Add(menu);
 	scenes.Add(level1);
+	scenes.Add(gamePause);
 	scenes.Add(settings);
 }
 
@@ -91,8 +95,6 @@ bool SceneManager::Update(float dt)
 
 bool SceneManager::PostUpdate()
 {
-	//OPTICK_EVENT();
-
 	bool ret = true;
 	ListItem<Scene*>* item;
 	Scene* pScene = NULL;
@@ -141,7 +143,15 @@ void SceneManager::MakeFade()
 				currentScene->CleanUp();
 				currentScene->active = false;
 			}
+
 			currentScene = newScene;
+
+			if (currentScene == menu) {
+				app->map->CleanUp();
+				app->map->active = false;
+				app->entityManager->CleanUp();
+			}
+
 			currentScene->Init();
 			currentScene->Start();
 			currentStep = Fade_Step::FROM_BLACK;
@@ -160,7 +170,6 @@ void SceneManager::MakeFade()
 
 void SceneManager::OpenSettings()
 {
-	app->guiManager->DesactvieAllGui();
 	currentScene->settings = true;
 	settings->Start();
 	settings->active = true;
@@ -170,8 +179,13 @@ void SceneManager::CloseSettings()
 {
 	settings->CleanUp();
 	settings->active = false;
-	app->guiManager->ActiveAllGui();
-	currentScene->settings = false;
+	if (currentScene == menu) {
+		app->guiManager->ActiveAllGui();
+		currentScene->settings = false;
+	}
+	else {
+		OpenGamePause();
+	}
 }
 
 bool SceneManager::SaveState(pugi::xml_node node)
@@ -182,4 +196,18 @@ bool SceneManager::SaveState(pugi::xml_node node)
 	scene.append_attribute("currentScene").set_value(sceneType);
 
 	return ret;
+}
+
+void SceneManager::CloseGamePause()
+{
+	gamePause->CleanUp();
+	gamePause->active = false;
+	currentScene->settings = false;
+}
+
+void SceneManager::OpenGamePause()
+{
+	currentScene->settings = true;
+	gamePause->Start();
+	gamePause->active = true;
 }

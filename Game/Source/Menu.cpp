@@ -113,6 +113,7 @@ bool Menu::OnGuiMouseClickEvent(GuiControl* control)
 		}*/
 	}
 	if (control->id == 3) {
+		app->guiManager->DesactvieAllGui();
 		app->sceneManager->OpenSettings();
 	}
 	if (control->id == 4) {

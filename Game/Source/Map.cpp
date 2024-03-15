@@ -148,6 +148,8 @@ bool Map::CleanUp()
         layerItem = layerItem->next;
     }
 
+    mapData.layers.Clear();
+
     return true;
 }
 

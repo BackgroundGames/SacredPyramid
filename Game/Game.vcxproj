@@ -98,6 +98,7 @@
     <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\GamePause.cpp" />
     <ClCompile Include="Source\GuiCheckBox.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\GamePause.h" />
     <ClInclude Include="Source\GuiCheckBox.h" />
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiControlButton.h" />
