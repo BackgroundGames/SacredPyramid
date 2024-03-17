@@ -97,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Bandit.cpp" />
     <ClCompile Include="Source\Character.cpp" />
+    <ClCompile Include="Source\DialogueTree.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\GamePause.cpp" />
@@ -124,6 +125,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Bandit.h" />
     <ClInclude Include="Source\Character.h" />
+    <ClInclude Include="Source\DialogueTree.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />

@@ -7,6 +7,7 @@
 #include "Window.h"
 #include "Map.h"
 #include "Item.h"
+#include "DialogueTree.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -112,6 +113,9 @@ bool Level1::Update(float dt)
 
 	//Implement a method that repositions the player in the map with a mouse click
 
+
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		app->dialogueTree->performDialogue();
 	
 	return true;
 }
@@ -128,5 +132,12 @@ bool Level1::PostUpdate()
 
 bool Level1::CleanUp()
 {
+	return true;
+}
+
+bool Level1::OnGuiMouseClickEvent(GuiControl* control) {
+
+	app->dialogueTree->ChoseOption(control->id);
+
 	return true;
 }

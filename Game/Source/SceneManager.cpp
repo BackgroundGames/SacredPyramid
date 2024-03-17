@@ -40,7 +40,9 @@ bool SceneManager::Awake(pugi::xml_node config)
 	screenRect = { 0, 0, (int)windowW, (int)windowH };
 
 	configScenes = config;
+
 	bool ret = true;
+
 	ListItem<Scene*>* item;
 	Scene* pScene = NULL;
 
