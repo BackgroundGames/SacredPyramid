@@ -29,6 +29,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="Source\Log.cpp" />
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="Source\Bandit.cpp" />
     <ClCompile Include="Source\DialogueTree.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +72,7 @@
     <ClInclude Include="Source\DynArray.h" />
     <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="Source\Bandit.h" />
     <ClInclude Include="Source\DialogueTree.h" />
   </ItemGroup>
 </Project>
