@@ -7,6 +7,10 @@ Bandit::Bandit()
 	type = EntityType::ENEMY;
 }
 
+Bandit::~Bandit()
+{
+}
+
 bool Bandit::Awake()
 {
 	return true;
