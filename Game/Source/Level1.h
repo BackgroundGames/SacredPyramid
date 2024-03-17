@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "GuiControl.h"
 
 struct SDL_Texture;
 
@@ -35,6 +36,8 @@ public:
 	bool CleanUp();
 
 	Player* GetPLayer() {	return player;	}
+
+	bool OnGuiMouseClickEvent(GuiControl* control);
 
 private:
 	SDL_Texture* img;

@@ -75,7 +75,9 @@ public:
 	// 
 	void NotifyObserver()
 	{
-		observer->OnGuiMouseClickEvent(this);
+		if (observer != nullptr) {
+			observer->OnGuiMouseClickEvent(this);
+		}
 	}
 
 	virtual void CleanUp() {

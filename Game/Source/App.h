@@ -22,6 +22,7 @@ class EntityManager;
 class SceneManager;
 class GuiManager;
 class Map;
+class DialogueTree;
 
 class App
 {
@@ -88,6 +89,7 @@ public:
 	SceneManager* sceneManager;
 	GuiManager* guiManager;
 	Map* map;
+	DialogueTree* dialogueTree;
 
 	bool debug = false;
 
