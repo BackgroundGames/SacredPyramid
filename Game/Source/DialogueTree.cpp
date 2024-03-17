@@ -8,7 +8,7 @@
 
 DialogueTree::DialogueTree() : Module()
 {
-	name.Create("dialoguetree");
+	name.Create("dialogues");
 }
 
 DialogueOption::DialogueOption(const char* Text, int ReturnCode, DialogueNode* NextNode)
@@ -31,6 +31,7 @@ DialogueTree::~DialogueTree()
 bool DialogueTree::Awake(pugi::xml_node config)
 {
 	active = false;
+	treeConf = config;
 
 	return true;
 }
@@ -64,34 +65,33 @@ bool DialogueTree::CleanUp()
 	return true;
 }
 
-int DialogueTree::performDialogue()
+int DialogueTree::performDialogue(const char * dialogueName)
 {
+	pugi::xml_node itemNode = treeConf.child(dialogueName).child("node");
 
-	DialogueNode* node0 = new DialogueNode("hola que tal");
-	DialogueNode* node1 = new DialogueNode("llastima");
-	DialogueNode* node2 = new DialogueNode("si? que guai, 4 o 5?");
-	DialogueNode* node3 = new DialogueNode("nem al 5?");
-	DialogueNode* node4 = new DialogueNode("soc 5  i final");
+	for (itemNode = itemNode; itemNode; itemNode = itemNode.next_sibling("node"))
+	{
+		DialogueNode* node = new DialogueNode(itemNode.attribute("text").as_string());
+		dialogueNodes.push_back(node);
+	}
 
-	node0->dialogueOptions.push_back(DialogueOption("mal", 0, node1));
-	node0->dialogueOptions.push_back(DialogueOption("be", 0, node2));
-	dialogueNodes.push_back(node0);
+	itemNode = treeConf.child(dialogueName).child("node");
 
-	node1->dialogueOptions.push_back(DialogueOption("chao", 0, nullptr));
-	dialogueNodes.push_back(node1);
-
-	node2->dialogueOptions.push_back(DialogueOption("chao", 0, nullptr));
-	node2->dialogueOptions.push_back(DialogueOption("5", 0, node4));
-	node2->dialogueOptions.push_back(DialogueOption("4", 0, node3));
-	dialogueNodes.push_back(node2);
-
-	node3->dialogueOptions.push_back(DialogueOption("go 5", 0, node4));
-	node3->dialogueOptions.push_back(DialogueOption("im out", 0, nullptr));
-	dialogueNodes.push_back(node3);
-
-	node4->dialogueOptions.push_back(DialogueOption("acepto", 1, nullptr));
-	node4->dialogueOptions.push_back(DialogueOption("im out", 0, nullptr));
-	dialogueNodes.push_back(node4);
+	for (size_t i = 0; i < dialogueNodes.size(); i++)
+	{
+		for (pugi::xml_node optionNode = itemNode.child("option"); optionNode; optionNode = optionNode.next_sibling("option"))
+		{
+			if (optionNode.attribute("pnode").as_int() == -1) {
+				dialogueNodes[i]->dialogueOptions.push_back(DialogueOption(optionNode.attribute("text").as_string(),
+					optionNode.attribute("returnCode").as_int(), nullptr));
+			}
+			else {
+				dialogueNodes[i]->dialogueOptions.push_back(DialogueOption(optionNode.attribute("text").as_string(),
+					optionNode.attribute("returnCode").as_int(), dialogueNodes[optionNode.attribute("pnode").as_int()]));
+			}
+		}
+		itemNode = itemNode.next_sibling("node");
+	}
 
 	if (dialogueNodes.empty()) {
 		return -1;

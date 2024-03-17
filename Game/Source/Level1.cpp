@@ -115,7 +115,7 @@ bool Level1::Update(float dt)
 
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-		app->dialogueTree->performDialogue();
+		app->dialogueTree->performDialogue("dialogue1");
 	
 	return true;
 }

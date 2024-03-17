@@ -1,5 +1,10 @@
+#ifndef __DIALOGUETREE_H__
+#define __DIALOGUETREE_H__
+
 #include "Module.h"
 #include <vector>
+
+#include "PugiXml/src/pugixml.hpp"
 
 using namespace std;
 
@@ -42,7 +47,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	int performDialogue();
+	int performDialogue(const char* dialogueName);
 
 	bool ChoseOption(int optionid);
 
@@ -52,5 +57,7 @@ private:
 	vector <DialogueNode*> dialogueNodes;
 	vector <GuiControlButton*> optionNodes;
 	DialogueNode* currentNode;
+	pugi::xml_node treeConf;
 };
 
+#endif
