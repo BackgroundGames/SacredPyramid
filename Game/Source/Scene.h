@@ -72,7 +72,7 @@ public:
 
 	SString name;
 	bool active;
-	bool settings;
+	bool settings = false;
 	Player* player = nullptr;
 	Enemy* enemy = nullptr;
 	bool quit = false;

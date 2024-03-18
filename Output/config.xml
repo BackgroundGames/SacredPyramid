@@ -32,23 +32,23 @@
 	
 	<dialogues>
 		<dialogue1>
-			<node id="0" text="hola que tal">
+			<node id="0" text="hola que tal dsff sdf sd fsdf sd fsdf sd fsdfsd fsd fsd fsd fsd f">
 				<option text="mal" returnCode="0" pnode="1"/>
 				<option text="be" returnCode="0" pnode="2"/>
 			</node>
 			<node id="1" text="llastima">
 				<option text="chao" returnCode="0" pnode="-1"/>
 			</node>
-			<node id="2" text="si? que guai, 4 o 5?">
-				<option text="caho" returnCode="0" pnode="-1"/>
+			<node id="2" text="si? que guai, 4 o 5? asdf sad fasd fsdf sdfasdfas df">
+				<option text="chao" returnCode="0" pnode="-1"/>
 				<option text="5" returnCode="0" pnode="4"/>
 				<option text="4" returnCode="0" pnode="3"/>
 			</node>
-			<node id="3" text="nem al 5?">
+			<node id="3" text="nem al 5? asdfasdfasdf ">
 				<option text="go 5" returnCode="0" pnode="4"/>
 				<option text="chao" returnCode="0" pnode="-1"/>
 			</node>
-			<node id="4" text="soc 5  i final">
+			<node id="4" text="soc 5  i final asdfasdf asdfasdfasdfasdfasdfjashdkfajshfkasjhdkfjashdkfjahsdkfjhaskfjhaskdfjhaksjfh">
 				<option text="accepto" returnCode="1" pnode="-1"/>
 				<option text="im out" returnCode="0" pnode="-1"/>
 			</node>

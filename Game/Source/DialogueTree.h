@@ -58,6 +58,9 @@ private:
 	vector <GuiControlButton*> optionNodes;
 	DialogueNode* currentNode;
 	pugi::xml_node treeConf;
+	int longitud_total;
+	int longitud_seccion = 30;
+	int numero_secciones;
 };
 
 #endif
