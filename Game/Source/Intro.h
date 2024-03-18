@@ -5,14 +5,14 @@
 
 struct SDL_Texture;
 
-class SceneIntro : public Scene
+class Intro : public Scene
 {
 public:
 
-	SceneIntro();
+	Intro();
 
 	// Destructor
-	virtual ~SceneIntro();
+	virtual ~Intro();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);

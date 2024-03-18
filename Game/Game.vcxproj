@@ -95,6 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Amir.cpp" />
     <ClCompile Include="Source\Bandit.cpp" />
     <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\DialogueTree.cpp" />
@@ -117,12 +118,14 @@
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Render.cpp" />
-    <ClCompile Include="Source\SceneIntro.cpp" />
+    <ClCompile Include="Source\Intro.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\Settings.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
+    <ClCompile Include="Source\Zhaak.cpp" />
+    <ClInclude Include="Source\Amir.h" />
     <ClInclude Include="Source\Bandit.h" />
     <ClInclude Include="Source\Character.h" />
     <ClInclude Include="Source\DialogueTree.h" />
@@ -150,7 +153,7 @@
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Scene.h" />
-    <ClInclude Include="Source\SceneIntro.h" />
+    <ClInclude Include="Source\Intro.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\Settings.h" />
     <ClInclude Include="Source\Textures.h" />
@@ -166,6 +169,7 @@
     <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
+    <ClInclude Include="Source\Zhaak.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

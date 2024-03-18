@@ -21,7 +21,7 @@
 	</window>
 
 	<scenemanager>
-		<sceneintro texturePath="Assets/Textures/bgg.jpg"/>
+		<intro texturePath="Assets/Textures/bgg.jpg"/>
 		<menu texturePath="Assets/Textures/menu.jpg"/>
 		<level1>
 			<player x="150" y="672" texturePath="Assets/Textures/pj.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>

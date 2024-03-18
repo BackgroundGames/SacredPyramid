@@ -66,16 +66,13 @@
     <ClCompile Include="Source\Render.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Player.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Settings.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\SceneManager.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SceneIntro.cpp">
+    <ClCompile Include="Source\Intro.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\Enemy.cpp">
@@ -86,6 +83,15 @@
     </ClCompile>
     <ClCompile Include="Source\Character.cpp">
       <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Entities\Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Zhaak.cpp">
+      <Filter>Entities\Party</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Amir.cpp">
+      <Filter>Entities\Party</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,9 +192,6 @@
     <ClInclude Include="Source\Render.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Player.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Scene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -198,7 +201,7 @@
     <ClInclude Include="Source\SceneManager.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SceneIntro.h">
+    <ClInclude Include="Source\Intro.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy.h">
@@ -209,6 +212,15 @@
     </ClInclude>
     <ClInclude Include="Source\Character.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h">
+      <Filter>Entities\Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Zhaak.h">
+      <Filter>Entities\Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Amir.h">
+      <Filter>Entities\Party</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +241,9 @@
     </Filter>
     <Filter Include="Entities\Enemy">
       <UniqueIdentifier>{1e6fe5d9-4dd3-4d43-bd7f-7c14c2497010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Party">
+      <UniqueIdentifier>{73fe4def-130b-45a3-8166-d0d143a3109c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

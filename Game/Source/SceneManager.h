@@ -10,7 +10,7 @@
 
 class Level1;
 class Level2;
-class SceneIntro;
+class Intro;
 class Menu;
 class Settings;
 class GamePause;
@@ -76,7 +76,7 @@ public:
 	void ChangeScane(Scene* newScene);
 
 	Level1* level1;
-	SceneIntro* sceneIntro;
+	Intro* intro;
 	Menu* menu;
 	Settings* settings;
 	GamePause* gamePause;

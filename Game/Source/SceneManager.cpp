@@ -5,7 +5,7 @@
 #include "GuiManager.h"
 #include "Settings.h"
 #include "Level1.h"
-#include "SceneIntro.h"
+#include "Intro.h"
 #include "Menu.h"
 #include "GamePause.h"
 #include "Map.h"
@@ -15,13 +15,13 @@ SceneManager::SceneManager()
 {
 	name.Create("scenemanager");
 
-	sceneIntro = new SceneIntro();
+	intro = new Intro();
 	menu = new Menu();
 	level1 = new Level1();
 	settings = new Settings();
 	gamePause = new GamePause();
 
-	scenes.Add(sceneIntro);
+	scenes.Add(intro);
 	scenes.Add(menu);
 	scenes.Add(level1);
 	scenes.Add(gamePause);
@@ -57,7 +57,7 @@ bool SceneManager::Awake(pugi::xml_node config)
 
 bool SceneManager::Start()
 {
-	ChangeScane(sceneIntro);
+	ChangeScane(intro);
 
 	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 

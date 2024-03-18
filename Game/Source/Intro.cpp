@@ -1,4 +1,4 @@
-#include "SceneIntro.h"
+#include "Intro.h"
 #include "App.h"
 #include "Textures.h"
 #include "Render.h"
@@ -7,22 +7,22 @@
 #include "Window.h"
 #include "Audio.h"
 
-SceneIntro::SceneIntro() : Scene()
+Intro::Intro() : Scene()
 {
-	name.Create("sceneintro");
+	name.Create("intro");
 }
 
-SceneIntro::~SceneIntro()
+Intro::~Intro()
 {
 }
 
-bool SceneIntro::Awake(pugi::xml_node config)
+bool Intro::Awake(pugi::xml_node config)
 {
 	sceneconfig = config;
 	return true;
 }
 
-bool SceneIntro::Start()
+bool Intro::Start()
 {
 	img = app->tex->Load(sceneconfig.attribute("texturePath").as_string());
 	app->tex->GetSize(img, texW, texH);
@@ -32,17 +32,17 @@ bool SceneIntro::Start()
 	return true;
 }
 
-bool SceneIntro::PreUpdate()
+bool Intro::PreUpdate()
 {
 	return true;
 }
 
-bool SceneIntro::Update(float dt)
+bool Intro::Update(float dt)
 {
 	return true;
 }
 
-bool SceneIntro::PostUpdate()
+bool Intro::PostUpdate()
 {
 	//OPTICK_EVENT();
 
@@ -59,7 +59,7 @@ bool SceneIntro::PostUpdate()
 	return true;
 }
 
-bool SceneIntro::CleanUp()
+bool Intro::CleanUp()
 {
 	app->tex->UnLoad(img);
 	return true;

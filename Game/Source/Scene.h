@@ -74,6 +74,7 @@ public:
 	bool active;
 	bool settings = false;
 	Player* player = nullptr;
+	Enemy* enemy = nullptr;
 	bool quit = false;
 };
 
