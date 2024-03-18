@@ -32,7 +32,7 @@
 	
 	<dialogues>
 		<dialogue1>
-			<node id="0" text="hola que tal qtlqgqglfghfghfh fg hgfh fh fg hrtyurtyurt yurtyurty urtyurtyurty urtyu rty urty urty urtyurty urty urtyu rty urty urty urt yurt yurty urt yurty urt yurt yurt yurty urty ur tyurt yurt yur tyurt uyr tyrtyur tyurt yur tyufgh fg hfg hfg hfg hfg hfg hf dgs">
+			<node id="0" text="hola que tal qtlqgqglfghfghfh fg hgfh fh ft yurty urt yurt yurt yurty urty ur tyurt yurt yur tyurt uyr tyrtyur tyurt yur tyufgh fg hfg hfg hfg hfg hfg hf dgs">
 				<option text="- mal" returnCode="0" pnode="1"/>
 				<option text="- be" returnCode="0" pnode="2"/>
 			</node>
