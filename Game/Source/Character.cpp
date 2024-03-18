@@ -32,6 +32,8 @@ bool Character::Start()
 
 	selectionTex = app->tex->Load(parameters.attribute("selectionPath").as_string());
 
+	PosState = Direction::DR;
+
 	return true;
 }
 

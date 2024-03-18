@@ -56,21 +56,26 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 
 bool GuiManager::Update(float dt)
 {	
+
+	ListItem<GuiControl*>* control = guiControlsList.start;
+
 	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
+
 		if (debug) {
 			debug = false;
 		}
 		else {
 			debug = true;
 		}
+
+		while (control != nullptr)
+		{
+			if (control->data->active) {
+				control->data->debug = debug;
+			}
+			control = control->next;
+		}
 	}
-
-	/*if (app->sceneManager->currentScene->settings) {
-		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(125));
-		SDL_RenderFillRect(app->render->renderer, &quat);
-	}*/
-
-	ListItem<GuiControl*>* control = guiControlsList.start;
 
 	while (control != nullptr)
 	{

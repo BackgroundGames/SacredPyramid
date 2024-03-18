@@ -24,6 +24,7 @@ public:
 	DialogueNode(const char* Text);
 	const char* text;
 	vector <DialogueOption> dialogueOptions;
+	char* textLines[6];
 };
 
 class GuiControlButton;
@@ -63,6 +64,7 @@ private:
 	int longitud_seccion = 30;
 	int numero_secciones;
 	SDL_Rect quat;
+	bool delOptions = false;
 };
 
 #endif

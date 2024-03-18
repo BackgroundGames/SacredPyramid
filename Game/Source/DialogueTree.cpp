@@ -3,6 +3,7 @@
 #include "App.h"
 #include "Render.h"
 #include "GuiManager.h"
+#include "GuiControlButton.h"
 #include "SceneManager.h"
 #include "Window.h"
 #include "Log.h"
@@ -55,13 +56,17 @@ bool DialogueTree::Start()
 
 bool DialogueTree::Update(float dt)
 {
+	if (delOptions) {
+		deleteOptions();
+	}
+
 	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(125));
 	SDL_RenderFillRect(app->render->renderer, &quat);
 
 	longitud_total = std::strlen(currentNode->text);
 
 	// Definir la longitud de las secciones
-	longitud_seccion = quat.w/10; // Por ejemplo, longitud de cada sección
+	longitud_seccion = quat.w/10 - 1; // Por ejemplo, longitud de cada sección
 
 	// Calcular el número total de secciones
 	numero_secciones = longitud_total / longitud_seccion;
@@ -87,7 +92,7 @@ bool DialogueTree::Update(float dt)
 
 
 		// Imprimir la sección actual
-		app->render->DrawText(seccion_actual, quat.x, quat.y + (25 * i), longitud_actual * 10, 25, 0, 0, 255);
+		app->render->DrawText(seccion_actual, quat.x + 5, quat.y + (25 * i) + 5, longitud_actual * 10, 25, 220, 220, 220);
 
 		// Liberar la memoria asignada para la sección actual
 		delete[] seccion_actual;
@@ -99,6 +104,13 @@ bool DialogueTree::Update(float dt)
 bool DialogueTree::CleanUp()
 {
 	active = false;
+
+	for (int i = 0; i < optionNodes.size(); i++) {
+		app->guiManager->DeleteGuiControl((GuiControl*)optionNodes.at(i));
+		delete optionNodes[i];
+	}
+
+	optionNodes.clear();
 
 	for (int i = 0; i < dialogueNodes.size(); i++) {
 		delete dialogueNodes[i];
@@ -115,9 +127,45 @@ int DialogueTree::performDialogue(const char * dialogueName)
 {
 	pugi::xml_node itemNode = treeConf.child(dialogueName).child("node");
 
+	int aux = 0;
+
 	for (itemNode = itemNode; itemNode; itemNode = itemNode.next_sibling("node"))
 	{
 		DialogueNode* node = new DialogueNode(itemNode.attribute("text").as_string());
+		longitud_total = std::strlen(node->text);
+
+		// Definir la longitud de las secciones
+		longitud_seccion = quat.w / 10 - 1; // Por ejemplo, longitud de cada sección
+
+		// Calcular el número total de secciones
+		numero_secciones = longitud_total / longitud_seccion;
+		if (longitud_total % longitud_seccion != 0) {
+			numero_secciones++; // Asegurar que la última sección contenga el resto de caracteres
+		}
+
+		// Iterar sobre cada sección e imprimirla
+		for (int i = 0; i < numero_secciones; ++i) {
+			int indice_inicial = i * longitud_seccion;
+
+			// Calcular la longitud de la sección actual
+			int longitud_actual = std::min(longitud_seccion, longitud_total - indice_inicial);
+
+			// Crear un buffer para almacenar la sección actual
+			char * seccion_actual = new char[longitud_actual + 1]; // +1 para el carácter nulo terminador
+
+			// Copiar la sección actual del texto original al buffer
+			for (int j = 0; j < longitud_actual; ++j) {
+				seccion_actual[j] = node->text[indice_inicial + j];
+			}
+			seccion_actual[longitud_actual] = '\0'; // Asegurarse de que el buffer está terminado con el carácter nulo
+
+			node->textLines[i] = seccion_actual;
+
+			delete[] seccion_actual;
+		}
+
+		aux++;
+
 		dialogueNodes.push_back(node);
 	}
 
@@ -145,21 +193,11 @@ int DialogueTree::performDialogue(const char * dialogueName)
 
 	currentNode = dialogueNodes[0];
 
-	longitud_total = std::strlen(currentNode->text);
-
-	// Definir la longitud de las secciones
-	longitud_seccion = quat.w / 20 * 2; // Por ejemplo, longitud de cada sección
-
-	// Calcular el número total de secciones
-	numero_secciones = longitud_total / longitud_seccion;
-	if (longitud_total % longitud_seccion != 0) {
-		numero_secciones++; // Asegurar que la última sección contenga el resto de caracteres
-	}
-
 	for (int i = 0; i < currentNode->dialogueOptions.size(); i++) {
 		size_t Size = strlen(currentNode->dialogueOptions[i].text);
-		SDL_Rect playPos = { quat.x, quat.y + (25 * numero_secciones) + 25 * i, 25 * Size,25 };
+		SDL_Rect playPos = { quat.x, quat.y + (quat.h - 25*3) + (25 * i), 15 * Size,20 };
 		optionNodes.push_back((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, currentNode->dialogueOptions[i].text, playPos, app->sceneManager->currentScene));
+		optionNodes[i]->animated = false;
 	}
 
 	active = true;
@@ -170,7 +208,7 @@ int DialogueTree::performDialogue(const char * dialogueName)
 bool DialogueTree::ChoseOption(int optionid)
 {
 
-	deleteOptions();
+	delOptions = true;
 
 	currentNode = currentNode->dialogueOptions[optionid].nextNode;
 
@@ -179,19 +217,7 @@ bool DialogueTree::ChoseOption(int optionid)
 		return true;
 	}
 
-	longitud_total = std::strlen(currentNode->text);
-
-	// Calcular el número total de secciones
-	numero_secciones = longitud_total / longitud_seccion;
-	if (longitud_total % longitud_seccion != 0) {
-		numero_secciones++; // Asegurar que la última sección contenga el resto de caracteres
-	}
-
-	for (int i = 0; i < currentNode->dialogueOptions.size(); i++) {
-		size_t Size = strlen(currentNode->dialogueOptions[i].text);
-		SDL_Rect playPos = { quat.x, quat.y + (25 * numero_secciones) + 25 * i, 25 * Size,25 };
-		optionNodes.push_back((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, currentNode->dialogueOptions[i].text, playPos, app->sceneManager->currentScene));
-	}
+	app->input->ResetMouseButtonState();
 
 	return true;
 }
@@ -200,8 +226,18 @@ void DialogueTree::deleteOptions()
 {
 	for (int i = 0; i < optionNodes.size(); i++) {
 		app->guiManager->DeleteGuiControl((GuiControl*)optionNodes.at(i));
+		delete optionNodes[i];
 	}
 
 	optionNodes.clear();
+
+	delOptions = false;
+
+	for (int i = 0; i < currentNode->dialogueOptions.size(); i++) {
+		size_t Size = strlen(currentNode->dialogueOptions[i].text);
+		SDL_Rect playPos = { quat.x, quat.y + (quat.h - 25 * 3) + (25 * i), 15 * Size,25 };
+		optionNodes.push_back((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, currentNode->dialogueOptions[i].text, playPos, app->sceneManager->currentScene));
+		optionNodes[i]->animated = false;
+	}
 	
 }

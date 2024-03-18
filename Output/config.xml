@@ -24,7 +24,7 @@
 		<intro texturePath="Assets/Textures/bgg.jpg"/>
 		<menu texturePath="Assets/Textures/menu.jpg"/>
 		<level1>
-			<player x="150" y="672" texturePath="Assets/Textures/pj.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>
+			<player x="200" y="672" texturePath="Assets/Textures/pj.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>
 			<enemy x="550" y="400" texturePath="Assets/Textures/pj.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>
 			<map path="Assets/Maps/" name="iso.tmx"/>
 		</level1>
@@ -32,25 +32,25 @@
 	
 	<dialogues>
 		<dialogue1>
-			<node id="0" text="hola que tal dsff sdf sd fsdf sd fsdf sd fsdfsd fsd fsd fsd fsd f">
-				<option text="mal" returnCode="0" pnode="1"/>
-				<option text="be" returnCode="0" pnode="2"/>
+			<node id="0" text="hola que tal qtlqgqglfghfghfh fg hgfh fh fg hrtyurtyurt yurtyurty urtyurtyurty urtyu rty urty urty urtyurty urty urtyu rty urty urty urt yurt yurty urt yurty urt yurt yurt yurty urty ur tyurt yurt yur tyurt uyr tyrtyur tyurt yur tyufgh fg hfg hfg hfg hfg hfg hf dgs">
+				<option text="- mal" returnCode="0" pnode="1"/>
+				<option text="- be" returnCode="0" pnode="2"/>
 			</node>
 			<node id="1" text="llastima">
-				<option text="chao" returnCode="0" pnode="-1"/>
+				<option text="- chao" returnCode="0" pnode="-1"/>
 			</node>
-			<node id="2" text="si? que guai, 4 o 5? asdf sad fasd fsdf sdfasdfas df">
-				<option text="chao" returnCode="0" pnode="-1"/>
-				<option text="5" returnCode="0" pnode="4"/>
-				<option text="4" returnCode="0" pnode="3"/>
+			<node id="2" text="si? que guai, 4 o 5? asdf sad fasd fsdf sdfasdfas dfds f">
+				<option text="- chao" returnCode="0" pnode="-1"/>
+				<option text="- 5" returnCode="0" pnode="4"/>
+				<option text="- 4" returnCode="0" pnode="3"/>
 			</node>
 			<node id="3" text="nem al 5? asdfasdfasdf ">
-				<option text="go 5" returnCode="0" pnode="4"/>
-				<option text="chao" returnCode="0" pnode="-1"/>
+				<option text="- go 5" returnCode="0" pnode="4"/>
+				<option text="- chao" returnCode="0" pnode="-1"/>
 			</node>
-			<node id="4" text="soc 5  i final asdfasdf asdfasdfasdfasdfasdfjashdkfajshfkasjhdkfjashdkfjahsdkfjhaskfjhaskdfjhaksjfh">
-				<option text="accepto" returnCode="1" pnode="-1"/>
-				<option text="im out" returnCode="0" pnode="-1"/>
+			<node id="4" text="soc 5  i final asdfasdf asdfasdfasdfasdfasdfjashdkfajshfkasjhdkfjashdsd fsk">
+				<option text="- accepto" returnCode="1" pnode="-1"/>
+				<option text="- im out" returnCode="0" pnode="-1"/>
 			</node>
 		</dialogue1>
 	</dialogues>

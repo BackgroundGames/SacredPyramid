@@ -99,8 +99,9 @@ public:
 
 	Scene* observer;        // Observer 
 
-	bool debug;
+	bool debug = false;
 	bool active = true;
+	bool animated = true;
 };
 
 #endif // __GUICONTROL_H__
