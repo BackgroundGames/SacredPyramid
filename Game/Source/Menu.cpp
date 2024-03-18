@@ -27,11 +27,6 @@ bool Menu::Awake(pugi::xml_node config)
 
 bool Menu::Start()
 {
-	app->win->GetWindowSize(windowW, windowH);
-	quat.x = 0;
-	quat.y = 0;
-	quat.w = windowW;
-	quat.h = windowH;
 	img = app->tex->Load(config.attribute("texturePath").as_string());
 	/*app->audio->PlayMusic(config.attribute("musicpath").as_string(),0);*/
 	app->tex->GetSize(img, texW, texH);
@@ -68,14 +63,6 @@ bool Menu::PreUpdate()
 bool Menu::Update(float dt)
 {
 	app->render->DrawTexture(img, windowW / 2 - texW / 2, windowH / 2 - texH / 2, NULL);
-
-	//poner el degradado
-	if (settings) {
-		quat.x = app->render->camera.x;
-		quat.y = app->render->camera.y;
-		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(125));
-		SDL_RenderFillRect(app->render->renderer, &quat);
-	}
 
 	return true;
 }

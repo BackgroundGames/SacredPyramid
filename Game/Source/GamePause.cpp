@@ -22,6 +22,10 @@ bool GamePause::Awake(pugi::xml_node config)
 bool GamePause::Start()
 {
 	app->win->GetWindowSize(windowW, windowH);
+	quat.w = windowW;
+	quat.h = windowH;
+	quat.x = 0;
+	quat.y = 0;
 
 	SDL_Rect resumePos = { windowW / 2 - 75, windowH / 2 - 25 - (windowH / 7) * 2, 150,50 };
 	resumeButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "RESUME", resumePos, this);
@@ -42,6 +46,9 @@ bool GamePause::PreUpdate()
 
 bool GamePause::Update(float dt)
 {
+	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(125));
+	SDL_RenderFillRect(app->render->renderer, &quat);
+
 	return true;
 }
 

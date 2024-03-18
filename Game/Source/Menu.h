@@ -41,7 +41,6 @@ public:
 	uint windowW, windowH;
 
 private:
-	SDL_Rect quat;
 	int fx;
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;

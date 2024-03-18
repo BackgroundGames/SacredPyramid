@@ -43,6 +43,7 @@ private:
 	bool quit = false;
 	bool fullscreen;
 	// L15: TODO 2: Declare a GUI Control Button 
+	SDL_Rect quat;
 	GuiSlider* gcMSlider;
 	GuiSlider* gcFSlider;
 	GuiCheckBox* checkBoxFS;

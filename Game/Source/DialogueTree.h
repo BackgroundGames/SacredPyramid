@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include <vector>
+#include "SDL/include/SDL_rect.h"
 
 #include "PugiXml/src/pugixml.hpp"
 
@@ -61,6 +62,7 @@ private:
 	int longitud_total;
 	int longitud_seccion = 30;
 	int numero_secciones;
+	SDL_Rect quat;
 };
 
 #endif

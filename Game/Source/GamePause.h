@@ -41,6 +41,8 @@ private:
 	GuiControlButton* settingsButton;
 	GuiControlButton* menuButton;
 	GuiControlButton* exitButton;
+
+	SDL_Rect quat;
 };
 
 #endif //__SETTINGS__

@@ -23,6 +23,11 @@ bool Settings::Start()
 {
 	app->win->GetWindowSize(windowW, windowH);
 
+	quat.w = windowW;
+	quat.h = windowH;
+	quat.x = 0;
+	quat.y = 0;
+
 	SDL_Rect sliderMusic = { windowW / 2 - 200, windowH / 2 - 10 - (windowH / 10) * 2, 400,20 };
 	SDL_Rect sliderMusicBounds = { sliderMusic.x + sliderMusic.w - 15, sliderMusic.y + (sliderMusic.h / 2) - 15, 30, 30 };
 	gcMSlider = (GuiSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 6, "MUSIC VOLUME", sliderMusic, this, sliderMusicBounds);
@@ -49,6 +54,8 @@ bool Settings::PreUpdate()
 
 bool Settings::Update(float dt)
 {
+	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(125));
+	SDL_RenderFillRect(app->render->renderer, &quat);
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		app->sceneManager->CloseSettings();
