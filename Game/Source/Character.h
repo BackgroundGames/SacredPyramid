@@ -57,19 +57,19 @@ public:
 
 	iPoint GetTile();
 
-	uint Character::GetHealth()	{ return this->stats.health; }
+	uint GetHealth() { return this->stats.health; }
 
-	uint Character::GetMana() {	return this->stats.mana; }
+	uint GetMana() { return this->stats.mana; }
 
-	uint Character::GetAttack()	{ return this->stats.attack; }
+	uint GetAttack() { return this->stats.attack; }
 
-	uint Character::GetDefense() { return this->stats.defense; }
+	uint GetDefense() { return this->stats.defense; }
 
-	uint Character::GetMagicAttack() { return this->stats.magicAttack; }
+	uint GetMagicAttack() { return this->stats.magicAttack; }
 
-	uint Character::GetMagicDefense() { return this->stats.magicDefense; }
+	uint GetMagicDefense() { return this->stats.magicDefense; }
 
-	uint Character::GetInitiative() { return this->stats.initiative; }
+	uint GetInitiative() { return this->stats.initiative; }
 
 public:
 

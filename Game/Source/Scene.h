@@ -57,7 +57,7 @@ public:
 		return true;
 	}
 
-	virtual Player* GetPlayer() {	return player;	}
+	Player* GetPlayer() { return player; }
 
 	virtual bool OnGuiMouseClickEvent(GuiControl* control)
 	{
@@ -74,7 +74,6 @@ public:
 	bool active;
 	bool settings = false;
 	Player* player = nullptr;
-	Enemy* enemy = nullptr;
 	bool quit = false;
 };
 

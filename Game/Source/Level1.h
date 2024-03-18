@@ -35,8 +35,6 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	Player* GetPLayer() {	return player;	}
-
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 private:
