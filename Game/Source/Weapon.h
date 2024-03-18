@@ -7,6 +7,8 @@
 enum WeaponType {
 	SWORD,
 	BOOK,
+	SHIELD,
+	WRAPS,
 	DAGGER
 };
 
