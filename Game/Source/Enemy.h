@@ -25,6 +25,9 @@ public:
 private:
 	bool patrol = true;
 	const DynArray<iPoint>* path;
+
+public:
+	EnemyType subtype;
 };
 #endif // !__ENEMY_H__
 

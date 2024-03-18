@@ -15,11 +15,21 @@ enum class EntityType
 	
 	//ITEM types
 	ITEM,
-	WEAPON,
-	CONSUMABLE,
-	QUESTITEM,
 
 	UNKNOWN
+};
+
+enum class EnemyType
+{
+	BANDIT,
+	EVILMUMMY
+};
+
+enum class ItemType
+{
+	WEAPON,
+	ARMOR,
+	ACCESSORY
 };
 
 class PhysBody;

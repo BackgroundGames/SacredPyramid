@@ -25,6 +25,7 @@ public:
 public:
 
 	bool isPicked = false;
+	ItemType subtype;
 
 private:
 

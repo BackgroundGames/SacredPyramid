@@ -5,6 +5,7 @@ Bandit::Bandit()
 {
 	name.Create("Bandit");
 	type = EntityType::ENEMY;
+	subtype = EnemyType::BANDIT;
 }
 
 Bandit::~Bandit()

@@ -27,9 +27,6 @@
     <ClCompile Include="Source\GuiSlider.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Item.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Log.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
@@ -92,6 +89,17 @@
     </ClCompile>
     <ClCompile Include="Source\Amir.cpp">
       <Filter>Entities\Party</Filter>
+    <ClCompile Include="Source\Item.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Weapon.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Armor.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Accessory.cpp">
+      <Filter>Entities\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,9 +139,6 @@
     </ClInclude>
     <ClInclude Include="Source\GuiSlider.h">
       <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Item.h">
-      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\List.h">
       <Filter>Tools</Filter>
@@ -221,6 +226,17 @@
     </ClInclude>
     <ClInclude Include="Source\Amir.h">
       <Filter>Entities\Party</Filter>
+    <ClInclude Include="Source\Item.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Weapon.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Armor.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Accessory.h">
+      <Filter>Entities\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +260,8 @@
     </Filter>
     <Filter Include="Entities\Party">
       <UniqueIdentifier>{73fe4def-130b-45a3-8166-d0d143a3109c}</UniqueIdentifier>
+    <Filter Include="Entities\Items">
+      <UniqueIdentifier>{8e9bdc06-e47a-46cb-88ef-4f2f0d7a8bc7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
