@@ -30,6 +30,10 @@ bool Player::Start() {
 	texW = 28;
 	texH = 62;
 
+	mainState = MainState::OUT_OF_COMBAT;
+
+	app->sceneManager->currentScene->LockCamera();
+
 	return true;
 }
 

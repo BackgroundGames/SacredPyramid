@@ -64,6 +64,10 @@ public:
 		return true;
 	}
 
+	virtual void LockCamera() {
+
+	};
+
 
 public:
 

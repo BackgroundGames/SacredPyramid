@@ -27,12 +27,17 @@ bool Character::Start()
 	//Initialize Character parameters
 	position = iPoint(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
 
+	position = app->map->MapToWorld(position.x, position.y);
+
 	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
 	app->tex->GetSize(texture, texW, texH);
 
 	selectionTex = app->tex->Load(parameters.attribute("selectionPath").as_string());
 
 	PosState = Direction::DR;
+	mainState = MainState::NONE;
+	combatState = CombatState::NONE;
+	exploringState = ExploringState::NONE;
 
 	return true;
 }

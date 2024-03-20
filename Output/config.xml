@@ -24,8 +24,8 @@
 		<intro texturePath="Assets/Textures/bgg.jpg"/>
 		<menu texturePath="Assets/Textures/menu.jpg"/>
 		<level1>
-			<player x="200" y="672" texturePath="Assets/Textures/pj.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>
-			<enemy x="550" y="400" texturePath="Assets/Textures/pj.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>
+			<player x="17" y="13" texturePath="Assets/Textures/pj.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>
+			<enemy x="15" y="1" texturePath="Assets/Textures/pj.png" selectionPath="Assets/Maps/tileSelectionIso.png"/>
 			<map path="Assets/Maps/" name="iso.tmx"/>
 		</level1>
 	</scenemanager>

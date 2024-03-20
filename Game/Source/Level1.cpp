@@ -52,17 +52,21 @@ bool Level1::Start()
 	player->parameters = sceneconfig.child("player");
 	player->Start();
 
-	/*enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+	enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
 	enemy->parameters = sceneconfig.child("enemy");
-	enemy->Start();*/
+	enemy->Start();
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
-	for (pugi::xml_node itemNode = sceneconfig.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
+	/*for (pugi::xml_node itemNode = sceneconfig.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
 		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 		item->parameters = itemNode;
-	}
+	}*/
+
+	app->render->camera.y = 0;
+	app->render->camera.x = 0;
+	LockCamera();
 
 	return true;
 }
@@ -74,28 +78,7 @@ bool Level1::PreUpdate()
 
 bool Level1::Update(float dt)
 {
-	int limitCamXend = (app->map->getMapWidth() / 2 + app->map->GetTileWidth() / 2 - windowW) * -1;
-	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2);
-
-	app->render->camera.y = ((player->position.y - 26 / 2) - windowH / 2) * -1;
-	app->render->camera.x = ((player->position.x - 40 / 2) - (windowW / 2)) * -1;
-
-	if (app->render->camera.x > limitCamXbeg) {
-		app->render->camera.x = limitCamXbeg;
-	}
-	else if (app->render->camera.x < limitCamXend) {
-		app->render->camera.x = limitCamXend;
-	}
-
-	int limitCamYend = (app->map->getMapHeght() + app->map->GetTileHeight() / 2 - windowH) * -1;
-	int limitCamYbeg = app->map->GetTileHeight() / 2 * -1;
-
-	if (app->render->camera.y > limitCamYbeg) {
-		app->render->camera.y = limitCamYbeg;
-	}
-	else if (app->render->camera.y < limitCamYend) {
-		app->render->camera.y = limitCamYend;
-	}
+	LockCamera();
 	//Make the camera movement independent of framerate
 	float camSpeed = 1;
 
@@ -140,4 +123,30 @@ bool Level1::OnGuiMouseClickEvent(GuiControl* control) {
 	app->dialogueTree->ChoseOption(control->id);
 
 	return true;
+}
+
+void Level1::LockCamera()
+{
+	int limitCamXend = (app->map->getMapWidth() / 2 + app->map->GetTileWidth() / 2 - windowW) * -1;
+	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2);
+
+	app->render->camera.y = ((player->position.y - 26 / 2) - windowH / 2) * -1;
+	app->render->camera.x = ((player->position.x - 40 / 2) - (windowW / 2)) * -1;
+
+	if (app->render->camera.x > limitCamXbeg) {
+		app->render->camera.x = limitCamXbeg;
+	}
+	else if (app->render->camera.x < limitCamXend) {
+		app->render->camera.x = limitCamXend;
+	}
+
+	int limitCamYend = (app->map->getMapHeght() + app->map->GetTileHeight() / 2 - windowH) * -1;
+	int limitCamYbeg = app->map->GetTileHeight() / 2 * -1;
+
+	if (app->render->camera.y > limitCamYbeg) {
+		app->render->camera.y = limitCamYbeg;
+	}
+	else if (app->render->camera.y < limitCamYend) {
+		app->render->camera.y = limitCamYend;
+	}
 }

@@ -60,8 +60,8 @@ bool Enemy::Update(float dt)
 	//if (abs(this->position.x - app->sceneManager->currentScene->GetPlayer()->position.x) < 10 &&
 	//	abs(this->position.y - app->sceneManager->currentScene->GetPlayer()->position.y) < 10)
 	//{
-		if (iPoint(21, 10) != prevDestination)
-			moveTo(iPoint(21,10));
+	if (iPoint(21, 10) != prevDestination)
+		moveTo(iPoint(21,10));
 	//}
 
 	Character::Update(dt);

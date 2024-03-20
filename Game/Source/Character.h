@@ -24,6 +24,28 @@ struct Equipment
 	//Accessory accessory;
 };
 
+enum class MainState
+{
+	OUT_OF_COMBAT,
+	IN_COMBAT,
+	NONE
+};
+
+enum class CombatState
+{
+	WAITING,
+	MOVING,
+	NONE
+};
+
+enum class ExploringState
+{
+	IDLE,
+	MOVING,
+	TALKING,
+	NONE
+};
+
 enum class Direction {
 	UL,
 	UR,
@@ -86,14 +108,18 @@ public:
 	int pathingIteration = 0;
 	bool move = false;
 	bool finishMoving = false;
-	fPoint translationOffset;
-	iPoint auxPosition;
-	iPoint prevDestination;
+	fPoint translationOffset = fPoint{ 0.0f, 0.0f };
+	iPoint auxPosition = iPoint{ 0, 0 };
+	iPoint prevDestination = iPoint{ 0, 0 };
 	Direction PosState;
 
 	//debug
 	SDL_Rect prect;
 	SDL_Texture* selectionTex = NULL;
+
+	MainState mainState;
+	CombatState combatState;
+	ExploringState exploringState;
 };
 
 

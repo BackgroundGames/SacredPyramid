@@ -37,6 +37,8 @@ public:
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	void LockCamera();
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
