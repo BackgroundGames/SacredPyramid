@@ -25,9 +25,7 @@ bool Character::Awake()
 bool Character::Start()
 {
 	//Initialize Character parameters
-	position = iPoint(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
-
-	position = app->map->MapToWorld(position.x, position.y);
+	TpToCell(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
 
 	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
 	app->tex->GetSize(texture, texW, texH);
