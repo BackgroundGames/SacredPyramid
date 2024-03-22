@@ -129,8 +129,7 @@ void Character::moveTo(iPoint destination)
 		path = app->map->pathfinding->GetLastPath();
 
 		//check if dest is walkable
-		if (path->Count() != 1) 
-		{
+		if (path->Count() != 1) {
 			move = true;
 			pathingIteration = 0;
 			prevDestination = destination;
@@ -229,5 +228,5 @@ void Character::DoPathMoving()
 iPoint Character::GetTile()
 {
 	//el 14 seria la meitat del w i el 31 la meitat de h
-	return app->map->WorldToMap(position.x + texW/2 - app->map->GetTileWidth() / 2, position.y + texH/2 - app->map->GetTileHeight() / 4);
+	return app->map->WorldToMap(position.x + texW/2 - app->map->GetTileWidth() / 2, position.y + texH/2 - app->map->GetTileHeight()/2);
 }
