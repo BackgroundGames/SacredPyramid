@@ -83,27 +83,27 @@ bool Character::Update(float dt)
 		//pos y en la imagen
 		prect.y = 116;
 		app->render->DrawTexture(texture, position.x, position.y - texH / 2, &prect);
-	}
-	else if (PosState == Direction::UR) {
-		prect.y = 116;
+	}																		 
+	else if (PosState == Direction::UR) {									 
+		prect.y = 116;														 
 		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, &prect);
-	}
-	else if (PosState == Direction::DL) {
+	}																		 
+	else if (PosState == Direction::DL) {	
 		prect.y = 216;
 		app->render->DrawTexture(texture, position.x, position.y - texH / 2, &prect);
-	}
-	else if (PosState == Direction::DR) {
-		prect.y = 216;
+	}																		 
+	else if (PosState == Direction::DR) {									 
+		prect.y = 216;														 
 		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, &prect);
 	}
 
 	if (app->debug)
 	{
 		//debug the midle of the player rect
-		prect.x = position.x + texW/2;
-		prect.y = position.y + texH/2;
-		prect.w = 2;
-		prect.h = 2;
+		prect.x = position.x + texW/2 -1;
+		prect.y = position.y + texH/2 -1;
+		prect.w = 3;
+		prect.h = 3;
 		app->render->DrawRectangle(prect, 255, 255, 255, 255, false);
 	}
 
@@ -118,13 +118,13 @@ bool Character::CleanUp()
 void Character::TpToCell(int x, int y)
 {
 	position = iPoint(app->map->MapToWorld(x, y));
-	position += iPoint((app->map->GetTileWidth() / 2) - (texW / 2), 0);
+	position += iPoint((app->map->GetTileWidth() / 2) - (texW / 2), (app->map->GetTileHeight()) - (texH / 2));
 }
 
 void Character::moveTo(iPoint destination)
 {
 	//check if dest is walkable
-	if (app->map->pathfinding->CreatePath(app->map->WorldToMap(position.x, position.y + texH/4), destination) != -1) 
+	if (app->map->pathfinding->CreatePath(GetTile(), destination) != -1)
 	{
 		path = app->map->pathfinding->GetLastPath();
 
@@ -229,5 +229,5 @@ void Character::DoPathMoving()
 iPoint Character::GetTile()
 {
 	//el 14 seria la meitat del w i el 31 la meitat de h
-	return app->map->WorldToMap(position.x + texW/2 - app->map->GetTileWidth() / 2, position.y + texH/2 - app->map->GetTileWidth() / 4);
+	return app->map->WorldToMap(position.x + texW/2 - app->map->GetTileWidth() / 2, position.y + texH/2 - app->map->GetTileHeight() / 4);
 }
