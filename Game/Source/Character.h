@@ -5,6 +5,9 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "DynArray.h"
+#include "Weapon.h"
+#include "Armor.h"
+#include "Accessory.h"
 
 struct Stats
 {
@@ -19,9 +22,9 @@ struct Stats
 
 struct Equipment
 {
-	//Weapon weapon;
-	//Armor armor;
-	//Accessory accessory;
+	Weapon weapon;
+	Armor armor;
+	Accessory accessory;
 };
 
 enum class MainState

@@ -9,6 +9,7 @@
 #include "Log.h"
 
 #include <cstring>
+#include <algorithm>
 
 DialogueTree::DialogueTree() : Module()
 {
