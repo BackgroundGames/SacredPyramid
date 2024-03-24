@@ -14,6 +14,7 @@ class Intro;
 class Menu;
 class Settings;
 class GamePause;
+class Level2;
 
 enum Fade_Step
 {
@@ -72,10 +73,12 @@ public:
 
 	Scene* currentScene = nullptr;
 	Scene* newScene = nullptr;
+	Scene* previousScene = nullptr;
 
 	void ChangeScane(Scene* newScene);
 
 	Level1* level1;
+	Level2* level2;
 	Intro* intro;
 	Menu* menu;
 	Settings* settings;

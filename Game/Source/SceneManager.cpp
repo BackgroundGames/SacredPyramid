@@ -5,6 +5,7 @@
 #include "GuiManager.h"
 #include "Settings.h"
 #include "Level1.h"
+#include "Level2.h"
 #include "Intro.h"
 #include "Menu.h"
 #include "GamePause.h"
@@ -18,12 +19,14 @@ SceneManager::SceneManager()
 	intro = new Intro();
 	menu = new Menu();
 	level1 = new Level1();
+	level2 = new Level2();
 	settings = new Settings();
 	gamePause = new GamePause();
 
 	scenes.Add(intro);
 	scenes.Add(menu);
 	scenes.Add(level1);
+	scenes.Add(level2);
 	scenes.Add(gamePause);
 	scenes.Add(settings);
 }
@@ -130,6 +133,7 @@ bool SceneManager::CleanUp()
 void SceneManager::ChangeScane(Scene* newScene)
 {
 	fade = true;
+	previousScene = currentScene;
 	this->newScene = newScene;
 	currentStep = Fade_Step::TO_BLACK;
 }

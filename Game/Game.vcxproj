@@ -110,6 +110,7 @@
     <ClCompile Include="Source\GuiSlider.cpp" />
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
+    <ClCompile Include="Source\Level2.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -127,7 +128,6 @@
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
     <ClCompile Include="Source\Window.cpp" />
-
     <ClCompile Include="Source\Zhaak.cpp" />
     <ClInclude Include="Source\Amir.h" />
     <ClInclude Include="Source\Accessory.h" />
@@ -146,6 +146,7 @@
     <ClInclude Include="Source\GuiSlider.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\Level1.h" />
+    <ClInclude Include="Source\Level2.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\Pathfinding.h" />

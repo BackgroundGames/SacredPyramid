@@ -26,7 +26,6 @@ bool Map::Awake(pugi::xml_node config)
 {
     LOG("Loading Map Parser");
     bool ret = true;
-
     return ret;
 }
 
@@ -127,15 +126,16 @@ bool Map::CleanUp()
     //Clean up pathfing class
     pathfinding->CleanUp();
 
-    //Make sure you clean up any memory allocated from tilesets/map
-    ListItem<TileSet*>* tileset;
+   ListItem<TileSet*>* tileset;
     tileset = mapData.tilesets.start;
     
     while (tileset != NULL) {
+        app->tex->UnLoad(tileset->data->texture);
+        tileset->data->texture = nullptr;
         RELEASE(tileset->data);
         tileset = tileset->next;
     }
-
+    
     mapData.tilesets.Clear();
 
     //Clean up all layer data
@@ -149,6 +149,11 @@ bool Map::CleanUp()
     }
 
     mapData.layers.Clear();
+
+    mapData.height = 0;
+    mapData.width = 0;
+    mapData.tileheight = 0;
+    mapData.tilewidth = 0;
 
     return true;
 }
@@ -415,6 +420,8 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
 void Map::InitMap()
 {
     //Calls the functon to load the map, make sure that the filename is assigned
+    CleanUp();
+
     SString mapPath = path;
     mapPath += name;
     Load(mapPath);
@@ -422,7 +429,8 @@ void Map::InitMap()
     //Initialize the navigation map
     uchar* navigationMap = NULL;
     CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
-    pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
+    pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);    
+
     RELEASE_ARRAY(navigationMap);
 
     active = true;

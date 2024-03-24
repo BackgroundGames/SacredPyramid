@@ -25,12 +25,15 @@ bool Character::Awake()
 bool Character::Start()
 {
 	//Initialize Character parameters
+
+	if (texture == nullptr) {
+		texture = app->tex->Load(parameters.attribute("texturePath").as_string());
+		app->tex->GetSize(texture, texW, texH);
+	}
+
 	TpToCell(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
 
-	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
-	app->tex->GetSize(texture, texW, texH);
-
-	selectionTex = app->tex->Load(parameters.attribute("selectionPath").as_string());
+	selectionTex = app->render->GetSelectionTex();
 
 	PosState = Direction::DR;
 	mainState = MainState::NONE;
@@ -82,19 +85,19 @@ bool Character::Update(float dt)
 	if (PosState == Direction::UL) {
 		//pos y en la imagen
 		prect.y = 116;
-		app->render->DrawTexture(texture, position.x, position.y - texH / 2, &prect);
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::UR) {									 
 		prect.y = 116;														 
-		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, &prect);
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::DL) {	
 		prect.y = 216;
-		app->render->DrawTexture(texture, position.x, position.y - texH / 2, &prect);
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::DR) {									 
 		prect.y = 216;														 
-		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, &prect);
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}
 
 	if (app->debug)

@@ -45,14 +45,20 @@ public:
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
 
+	void SetSelectionTex(SDL_Texture* selectionTex);
+
+	SDL_Texture* GetSelectionTex() {
+		return selectionTex;
+	};
+
 private:
 	std::string mousePos;
 	std::string playerPos;
 
 	//Tile selection
-	SDL_Texture* selectionTex = NULL;
+	SDL_Texture* selectionTex = nullptr;
 	//New mouse
-	SDL_Texture* mouseText = NULL;
+	SDL_Texture* mouseText = nullptr;
 
 public:
 	SDL_Renderer* renderer;

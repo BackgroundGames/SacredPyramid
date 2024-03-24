@@ -61,9 +61,6 @@ bool Render::Awake(pugi::xml_node config)
 	mouseText = app->tex->Load(config.child("mouse").attribute("texturePath").as_string());
 	SDL_ShowCursor(0);
 
-	//Selection texture
-	selectionTex = app->tex->Load(config.child("mouse").attribute("selectionPath").as_string());
-
 	//Font initializtation
 	TTF_Init();
 	font = TTF_OpenFont(config.child("font").attribute("arialPath").as_string(), 200);
@@ -89,7 +86,7 @@ bool Render::PreUpdate()
 
 bool Render::Update(float dt)
 {
-	if (app->debug)
+	if (app->debug && app->map->active)
 	{
 		int X, Y;
 		app->input->GetMousePosition(X, Y);
@@ -150,6 +147,14 @@ bool Render::CleanUp()
 void Render::SetBackgroundColor(SDL_Color color)
 {
 	background = color;
+}
+
+void Render::SetSelectionTex(SDL_Texture* selectionTex)
+{
+	if (selectionTex != nullptr) {
+		app->tex->UnLoad(this->selectionTex);
+	}
+	this->selectionTex = selectionTex;
 }
 
 void Render::SetViewPort(const SDL_Rect& rect)

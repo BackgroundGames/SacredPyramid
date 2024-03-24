@@ -1,4 +1,4 @@
-#include "Level1.h"
+#include "Level2.h"
 #include "App.h"
 #include "Input.h"
 #include "Textures.h"
@@ -12,26 +12,22 @@
 #include "Defs.h"
 #include "Log.h"
 
-Level1::Level1() : Scene()
+Level2::Level2() : Scene()
 {
-	name.Create("level1");
+	name.Create("level2");
 }
 
-Level1::~Level1()
+Level2::~Level2()
 {
 }
 
-bool Level1::Awake(pugi::xml_node config)
+bool Level2::Awake(pugi::xml_node config)
 {
-	LOG("Loading Scene");
-	bool ret = true;
-
 	sceneconfig = config;
-
-	return ret;
+	return true;
 }
 
-bool Level1::Start()
+bool Level2::Start()
 {
 	//Get the map name from the config file and assigns the value in the module
 	app->map->name = sceneconfig.child("map").attribute("name").as_string();
@@ -44,8 +40,9 @@ bool Level1::Start()
 
 	//Instantiate the player using the entity manager
 	//Get player paremeters
-	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	//Assigns the XML node to a member in player
+	player = app->sceneManager->previousScene->GetPlayer();
+	//SI HA CARREGAT PARTIDA MIRAR AL SAVE
+	//////player->parameters = sceneconfig.child("player");
 	player->parameters = sceneconfig.child("player");
 	player->Start();
 
@@ -63,18 +60,17 @@ bool Level1::Start()
 
 	app->render->camera.y = 0;
 	app->render->camera.x = 0;
-
 	LockCamera();
 
 	return true;
 }
 
-bool Level1::PreUpdate()
+bool Level2::PreUpdate()
 {
 	return true;
 }
 
-bool Level1::Update(float dt)
+bool Level2::Update(float dt)
 {
 	LockCamera();
 	//Make the camera movement independent of framerate
@@ -98,41 +94,32 @@ bool Level1::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 		app->dialogueTree->performDialogue("dialogue1");
 
-	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
-	
 	return true;
 }
 
-bool Level1::PostUpdate()
-{
-	bool ret = true;
-
-	//if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		//ret = false;
-
-	return ret;
-}
-
-bool Level1::CleanUp()
+bool Level2::PostUpdate()
 {
 	return true;
 }
 
-bool Level1::OnGuiMouseClickEvent(GuiControl* control) {
+bool Level2::CleanUp()
+{
+	return true;
+}
 
+bool Level2::OnGuiMouseClickEvent(GuiControl* control)
+{
 	app->dialogueTree->ChoseOption(control->id);
-
 	return true;
 }
 
-void Level1::LockCamera()
+void Level2::LockCamera()
 {
 	int limitCamXend = (app->map->getMapWidth() / 2 + app->map->GetTileWidth() / 2 - windowW) * -1;
 	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2);
 
-	app->render->camera.y = ((player->position.y - player->texW / 2) - windowH / 2) * -1;
-	app->render->camera.x = ((player->position.x - player->texH / 2) - (windowW / 2)) * -1;
+	app->render->camera.y = ((player->position.y - 26 / 2) - windowH / 2) * -1;
+	app->render->camera.x = ((player->position.x - 40 / 2) - (windowW / 2)) * -1;
 
 	if (app->render->camera.x > limitCamXbeg) {
 		app->render->camera.x = limitCamXbeg;

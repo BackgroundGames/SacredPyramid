@@ -1,5 +1,5 @@
-#ifndef __LEVEL1_H__
-#define __LEVEL1_H__
+#ifndef __LEVEL2_H__
+#define __LEVEL2_H__
 
 #include "Scene.h"
 #include "Player.h"
@@ -8,14 +8,13 @@
 
 struct SDL_Texture;
 
-class Level1 : public Scene
+class Level2 :  public Scene
 {
 public:
-
-	Level1();
+	Level2();
 
 	// Destructor
-	virtual ~Level1();
+	virtual ~Level2();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -34,6 +33,7 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+	uint windowW, windowH;
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
@@ -46,4 +46,4 @@ private:
 	SDL_Texture* mouseTileTex = nullptr;
 };
 
-#endif // __LEVEL1_H__
+#endif
