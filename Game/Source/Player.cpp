@@ -133,3 +133,10 @@ bool Player::CleanUp()
 	return true;
 }
 
+bool Player::OnGuiMouseClickEvent(Entity* control)
+{
+	TpToCell(GetTile().x,GetTile().y);
+	move = false;
+	return false;
+}
+

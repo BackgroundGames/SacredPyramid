@@ -3,6 +3,7 @@
 #include "Map.h"
 #include "Render.h"
 #include "Player.h"
+#include "Log.h"
 
 Enemy::Enemy()
 {
@@ -50,6 +51,8 @@ bool Enemy::Start()
 	combatState = CombatState::NONE;
 	exploringState = ExploringState::IDLE;
 
+	observer = app->sceneManager->currentScene->GetPlayer();
+
 	return true;
 }
 
@@ -68,19 +71,25 @@ bool Enemy::Update(float dt)
 		{
 		case ExploringState::IDLE:
 
-			if (app->sceneManager->currentScene->GetPlayer()->GetTile() != prevDestination) {
+			/*if (app->sceneManager->currentScene->GetPlayer()->GetTile() != prevDestination) {
 				if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) {
 					exploringState = ExploringState::MOVING;
 				}
-			}
+			}*/
 
-			/*app->input->GetMousePosition(mouseX, mouseY);
-
-			if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
+			int X;
+			int Y;
+			app->input->GetMousePosition(X, Y);
+			X += -app->render->camera.x - app->map->GetTileWidth() / 2;
+			Y += -app->render->camera.y - app->map->GetTileHeight() / 2;
+			if (app->map->WorldToMap(X, Y) == GetTile()) {
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
+					if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) {
+						exploringState = ExploringState::MOVING;
+					}
 					NotifyObserver();
 				}
-			}*/
+			}
 
 			break;
 		case ExploringState::MOVING:

@@ -20,6 +20,8 @@ public:
 
 	bool CleanUp();
 
+	bool OnGuiMouseClickEvent(Entity* control);
+
 public:
 	bool lastStand = false;
 };
