@@ -40,29 +40,73 @@ bool Enemy::Start()
 	texW = 28;
 	texH = 62;
 
+	TpToCell(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
+
 	//Patrol
 	iPoint patrol1 = app->map->WorldToMap(500, 400);
 	iPoint patrol2 = app->map->WorldToMap(600, 400);
+
+	mainState = MainState::OUT_OF_COMBAT;
+	combatState = CombatState::NONE;
+	exploringState = ExploringState::IDLE;
 
 	return true;
 }
 
 bool Enemy::Update(float dt)
 {
-	/*if (patrol)
+
+	if (app->sceneManager->currentScene->settings) {
+		previousEState = exploringState;
+		exploringState = ExploringState::NONE;
+	}
+
+	switch (mainState)
 	{
-		if (this->position == )
+	case MainState::OUT_OF_COMBAT:
+		switch (exploringState)
 		{
+		case ExploringState::IDLE:
 
+			if (app->sceneManager->currentScene->GetPlayer()->GetTile() != prevDestination) {
+				if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) {
+					exploringState = ExploringState::MOVING;
+				}
+			}
+
+			break;
+		case ExploringState::MOVING:
+
+			//move to the tile clicked
+			if (app->sceneManager->currentScene->GetPlayer()->GetTile() != prevDestination) {
+				moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile());
+			}
+
+			DoPathMoving();
+
+			if (!move) {
+				exploringState = ExploringState::IDLE;
+			}
+
+			break;
+		case ExploringState::TALKING:
+			break;
+		case ExploringState::NONE:
+			if (!app->sceneManager->currentScene->settings) {
+				exploringState = previousEState;
+			}
+			break;
+		default:
+			break;
 		}
-	}*/
-
-	//if (abs(this->position.x - app->sceneManager->currentScene->GetPlayer()->position.x) < 10 &&
-	//	abs(this->position.y - app->sceneManager->currentScene->GetPlayer()->position.y) < 10)
-	//{
-	if (iPoint(21, 10) != prevDestination)
-		moveTo(iPoint(21,10));
-	//}
+		break;
+	case MainState::IN_COMBAT:
+		break;
+	case MainState::NONE:
+		break;
+	default:
+		break;
+	}
 
 	Character::Update(dt);
 

@@ -76,9 +76,11 @@ public:
 
 	void TpToCell(int x, int y);
 
-	void moveTo(iPoint destination);
+	bool moveTo(iPoint destination);
 
 	void DoPathMoving();
+
+	void DebugPath();
 
 	iPoint GetTile();
 
@@ -107,7 +109,7 @@ public:
 	//Animation* currentAnim;
 
 	//to move
-	const DynArray<iPoint>* path;
+	DynArray<iPoint> path;
 	int pathingIteration = 0;
 	bool move = false;
 	bool finishMoving = false;
@@ -123,6 +125,10 @@ public:
 	MainState mainState;
 	CombatState combatState;
 	ExploringState exploringState;
+
+	ExploringState previousEState;
+
+	float velocity = 1;
 };
 
 
