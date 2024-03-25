@@ -37,8 +37,8 @@ bool Enemy::Start()
 	Character::Start();
 
 	//aquests valors son per el pj de prova
-	texW = 28;
-	texH = 62;
+	//texW = 28;
+	//texH = 62;
 
 	TpToCell(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
 
@@ -73,6 +73,14 @@ bool Enemy::Update(float dt)
 					exploringState = ExploringState::MOVING;
 				}
 			}
+
+			/*app->input->GetMousePosition(mouseX, mouseY);
+
+			if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
+					NotifyObserver();
+				}
+			}*/
 
 			break;
 		case ExploringState::MOVING:

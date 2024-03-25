@@ -67,19 +67,19 @@ bool Character::Update(float dt)
 	if (PosState == Direction::UL) {
 		//pos y en la imagen
 		prect.y = 116;
-		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, &prect);
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::UR) {									 
 		prect.y = 116;														 
-		app->render->DrawTexture(texture, position.x, position.y - texH / 2, &prect);
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::DL) {	
 		prect.y = 216;
-		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, &prect);
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::DR) {									 
 		prect.y = 216;														 
-		app->render->DrawTexture(texture, position.x, position.y - texH / 2, &prect);
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}
 
 	if (app->debug)

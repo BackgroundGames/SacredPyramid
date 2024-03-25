@@ -87,8 +87,16 @@ public:
 		return true;
 	}
 
+	virtual bool OnGuiMouseClickEvent(Entity* control) {
+		return true;
+	};
 
-
+	void NotifyObserver()
+	{
+		if (observer != nullptr) {
+			observer->OnGuiMouseClickEvent(this);
+		}
+	}
 
 public:
 
@@ -105,6 +113,8 @@ public:
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
 	bool renderable = true;
+
+	Entity* observer;
 };
 
 #endif // __ENTITY_H__
