@@ -249,3 +249,8 @@ iPoint Character::GetTile()
 	//el 14 seria la meitat del w i el 31 la meitat de h
 	return app->map->WorldToMap(position.x + texW/2 - app->map->GetTileWidth() / 2, position.y + texH/2 - app->map->GetTileHeight()/2);
 }
+
+bool Character::compareInitiative(Character* first, Character* second)
+{
+	return first->GetInitiative() > second->GetInitiative();
+}

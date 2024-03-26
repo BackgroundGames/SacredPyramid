@@ -37,6 +37,7 @@
     <ClCompile Include="Source\Log.cpp" />
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
     <ClCompile Include="Source\Level2.cpp" />
+    <ClCompile Include="Source\BattleManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Amir.h" />
@@ -86,5 +87,6 @@
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Source\Zhaak.h" />
     <ClInclude Include="Source\Level2.h" />
+    <ClInclude Include="Source\BattleManager.h" />
   </ItemGroup>
 </Project>

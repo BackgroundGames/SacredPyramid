@@ -255,6 +255,23 @@ public:
 		return ret;
 	}
 
+	void BubbleSortTheInitiative()
+	{
+		bool swapped = true;
+		while (swapped) {
+			swapped = false;
+			ListItem<Character>* tmp = start;
+
+			while (tmp != NULL && tmp->next != NULL) {
+				if (tmp->data.stats.initiative > tmp->next->data.stats.initiative) {
+					SWAP(tmp->data, tmp->next->data);
+					swapped = true;
+				}
+				tmp = tmp->next;
+			}
+		}
+	}
+
 	int Find(const tdata& data)
 	{
 		ListItem<tdata>* tmp = start;
