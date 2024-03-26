@@ -98,8 +98,6 @@ public:
 
 	uint GetInitiative() { return this->stats.initiative; }
 
-	bool compareInitiative(Character* first, Character* second);
-
 public:
 
 	//Declare character parameters
