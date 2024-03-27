@@ -22,6 +22,7 @@ enum class EntityType
 enum class EnemyType
 {
 	BANDIT,
+	DRUNKARD,
 	EVILMUMMY
 };
 
