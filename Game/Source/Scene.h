@@ -2,9 +2,12 @@
 #define __SCENE_H__
 
 #include "SString.h"
+#include "List.h"
+
 
 #include "PugiXml/src/pugixml.hpp"
 
+class Entity;
 class Player;
 class Enemy;
 class GuiControl;
@@ -80,6 +83,9 @@ public:
 	Player* player = nullptr;
 	Enemy* enemy = nullptr;
 	bool quit = false;
+
+	List<Entity*> enemies;
+	List<Entity*> players;
 };
 
 #endif // __SCENE_H__

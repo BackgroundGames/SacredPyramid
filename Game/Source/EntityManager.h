@@ -5,6 +5,38 @@
 #include "Entity.h"
 #include "List.h"
 
+class CombatManager {
+
+public:
+
+	CombatManager();
+
+	// Destructor
+	virtual ~CombatManager();
+
+	// Called after Awake
+	bool Start();
+
+	// Called every frame
+	bool Update(float dt);
+
+	// Called before quitting
+	bool CleanUp();
+
+	void DestroyEntity(Entity* entity);
+
+	void AddEntity(Entity* entity);
+
+public:
+
+	List<Entity*> enemies;
+	List<Entity*> players;
+	List<Entity*> CombatList;
+
+	Uint32 startTime;
+
+};
+
 class EntityManager : public Module
 {
 public:
@@ -33,10 +65,12 @@ public:
 
 	void AddEntity(Entity* entity);
 
+	void StartCombat(List<Entity*> enemies);
+
 public:
 
 	List<Entity*> entities;
-
+	CombatManager* combatManager = nullptr;
 };
 
 #endif // __ENTITYMANAGER_H__

@@ -27,8 +27,8 @@ bool Player::Start() {
 	Character::Start();
 
 	//aquests valors son per el pj de prova
-	//texW = 28;
-	//texH = 62;
+	//texW = 25;
+	//texH = 55;
 
 	mainState = MainState::OUT_OF_COMBAT;
 	combatState = CombatState::NONE;

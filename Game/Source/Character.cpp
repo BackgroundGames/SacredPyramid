@@ -62,23 +62,23 @@ bool Character::Update(float dt)
 
 	//darw
 	//pos x en la imagen
-	prect.x = 245;
+	prect.x = 22;
 
 	if (PosState == Direction::UL) {
 		//pos y en la imagen
-		prect.y = 116;
+		prect.y = 4;
 		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::UR) {									 
-		prect.y = 116;														 
+		prect.y = 4;														 
 		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::DL) {	
-		prect.y = 216;
+		prect.y = 4;
 		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::DR) {									 
-		prect.y = 216;														 
+		prect.y = 4;														 
 		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}
 

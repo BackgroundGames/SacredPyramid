@@ -45,6 +45,7 @@ bool Level1::Start()
 	//Instantiate the player using the entity manager
 	//Get player paremeters
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+	players.Add(player);
 	//Assigns the XML node to a member in player
 	player->parameters = sceneconfig.child("player");
 	player->Start();
@@ -116,6 +117,8 @@ bool Level1::PostUpdate()
 
 bool Level1::CleanUp()
 {
+	players.Clear();
+	enemies.Clear();
 	return true;
 }
 
