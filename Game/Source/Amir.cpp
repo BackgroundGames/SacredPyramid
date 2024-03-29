@@ -1,4 +1,5 @@
 #include "Amir.h"
+#include "App.h"
 
 Amir::Amir()
 {
@@ -17,16 +18,23 @@ Amir::~Amir() {}
 
 bool Amir::Awake()
 {
+	Player::Awake();
 	return true;
 }
 
 bool Amir::Start()
 {
+	Player::Start();
 	return true;
 }
 
 bool Amir::Update(float dt)
 {
+	destination = Player::GetMouseTile(mousePos);
+
+	Direction auxState = app->sceneManager->currentScene->GetEli()->PosState;
+
+	Player::Update(dt);
 	return true;
 }
 

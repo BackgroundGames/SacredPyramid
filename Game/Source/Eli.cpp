@@ -30,27 +30,8 @@ bool Eli::Start()
 
 bool Eli::Update(float dt)
 {
-	mouseTile = Player::GetMouseTile(mousePos);
+	destination = Player::GetMouseTile(mousePos);
 	
-	Direction auxState = app->sceneManager->currentScene->GetZhaak()->PosState;
-
-	if (auxState == Direction::DR)
-	{
-		mouseTile.x--;
-	}
-	else if(auxState == Direction::UR)
-	{
-		mouseTile.y++;
-	}
-	else if (auxState == Direction::DL)
-	{
-		mouseTile.y--;
-	}
-	else if (auxState == Direction::UL)
-	{
-		mouseTile.x++;
-	}
-
 	Player::Update(dt);
 	return true;
 }

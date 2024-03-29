@@ -47,6 +47,7 @@ enum class ExploringState
 {
 	IDLE,
 	MOVING,
+	FOLLOWING,
 	TALKING,
 	NONE
 };

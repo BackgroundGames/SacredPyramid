@@ -3,16 +3,6 @@
 
 #include "Character.h"
 
-enum class PlayerType
-{
-	UNKNOWN,
-
-	ZHAAK,
-	AMIR,
-	AMUMMY,
-	ELI
-};
-
 class Player : public Character
 {
 public:
@@ -36,7 +26,7 @@ public:
 
 public:
 	iPoint mousePos = iPoint{ 0, 0 };
-	iPoint mouseTile = iPoint{ 0, 0 };
+	iPoint destination = iPoint{ 0, 0 };
 
 	bool lastStand = false;
 	PlayerType subtype;

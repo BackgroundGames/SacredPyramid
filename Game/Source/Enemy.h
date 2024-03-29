@@ -4,15 +4,6 @@
 #include "Entity.h"
 #include "Character.h"
 
-enum class EnemyType
-{
-	BANDIT,
-	DRUNK,
-	EVIL_MUMMY,
-
-	UNKNOWN
-};
-
 class Enemy : public Character
 {
 public:

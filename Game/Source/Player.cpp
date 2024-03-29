@@ -67,11 +67,6 @@ bool Player::Update(float dt)
 		}
 	}
 
-	iPoint mousePos;
-	app->input->GetMousePosition(mousePos.x, mousePos.y);
-	iPoint mouseTile = app->map->WorldToMap(mousePos.x - app->render->camera.x - app->map->GetTileWidth() / 2,
-		mousePos.y - app->render->camera.y - app->map->GetTileHeight() / 2);
-
 	switch (mainState)
 	{
 	case MainState::OUT_OF_COMBAT:
@@ -79,28 +74,58 @@ bool Player::Update(float dt)
 		{
 		case ExploringState::IDLE:
 
-			//move to the tile clicked
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
+			if (this != app->sceneManager->currentScene->GetZhaak())
 			{
-				if (mouseTile != prevDestination)
-					if (moveTo(mouseTile))
-						exploringState = ExploringState::MOVING;
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
+				{
+					if (moveTo(*app->sceneManager->currentScene->GetZhaak()->path.At(app->sceneManager->currentScene->GetZhaak()->path.Count() - 2)))
+						exploringState = ExploringState::FOLLOWING;
+				}
 			}
+			else
+			{
+				//move to the tile clicked
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
+				{
+					if (destination != prevDestination)
+						if (moveTo(destination))
+							exploringState = ExploringState::MOVING;
+				}
 
-			//If space button is pressed modify put player in the cell of the cursor
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && move == false) {
-				TpToCell(mouseTile.x, mouseTile.y);
-				app->sceneManager->currentScene->LockCamera();
+				//If space button is pressed modify put player in the cell of the cursor
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && move == false) {
+					TpToCell(destination.x, destination.y);
+					app->sceneManager->currentScene->LockCamera();
+				}
 			}
-
 			break;
+
 		case ExploringState::MOVING:
 
 			//move to the tile clicked
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 			{
-				if (mouseTile != prevDestination)
-					moveTo(mouseTile);
+				if (destination != prevDestination)
+					moveTo(destination);
+			}
+
+			if (move)
+			{
+				DoPathMoving();
+			}
+			else
+			{
+				exploringState = ExploringState::IDLE;
+			}
+
+			break;
+
+		case ExploringState::FOLLOWING:
+
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+			{
+				if (destination != prevDestination)
+					moveTo(*app->sceneManager->currentScene->GetZhaak()->path.At(app->sceneManager->currentScene->GetZhaak()->path.Count() - 2));
 			}
 
 			DoPathMoving();
@@ -110,8 +135,10 @@ bool Player::Update(float dt)
 			}
 
 			break;
+
 		case ExploringState::TALKING:
 			break;
+
 		case ExploringState::NONE:
 			if (!app->sceneManager->currentScene->settings) {
 				exploringState = previousEState;
@@ -125,8 +152,8 @@ bool Player::Update(float dt)
 		if (!hasMoved) {
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 			{
-				if (mouseTile != prevDestination)
-					if (moveTo(mouseTile)) {
+				if (destination != prevDestination)
+					if (moveTo(destination)) {
 						exploringState = ExploringState::MOVING;
 					}
 			}

@@ -2,8 +2,15 @@
 #include "Player.h"
 #include "Zhaak.h"
 #include "Eli.h"
+#include "Amir.h"
+
 #include "Enemy.h"
+#include "Bandit.h"
+#include "Drunkard.h"
+
 #include "Item.h"
+#include "Weapon.h"
+#include "Armor.h"
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
@@ -79,22 +86,30 @@ bool EntityManager::CleanUp()
 	return ret;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type, uint id)
+Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyType e_type, ItemType i_type)
 {
-	Entity* entity = nullptr; 
+	Entity* entity = nullptr;
 
 	//Instantiate entity according to the type and add the new entity to the list of Entities
 	switch (type)
 	{
 	case EntityType::PLAYER:
-		
-		switch (id)
+
+		switch (p_type)
 		{
-		case 1:
+		case PlayerType::ZHAAK:
 			entity = new Zhaak();
 			break;
-		case 2:
+		case PlayerType::AMIR:
+			entity = new Amir();
+			break;
+		case PlayerType::AMUMMY:
+			break;
+		case PlayerType::ELI:
 			entity = new Eli();
+			break;
+		case PlayerType::UNKNOWN:
+			entity = new Player();
 			break;
 		default:
 			break;
@@ -102,11 +117,45 @@ Entity* EntityManager::CreateEntity(EntityType type, uint id)
 		break;
 
 	case EntityType::ENEMY:
-		entity = new Enemy();
+
+		switch (e_type)
+		{
+		case EnemyType::BANDIT:
+			entity = new Bandit();
+			break;
+		case EnemyType::DRUNK:
+			//entity = new Drunkard();
+			break;
+		case EnemyType::EVIL_MUMMY:
+			break;
+		case EnemyType::UNKNOWN:
+			entity = new Enemy();
+			break;
+		default:
+			break;
+		}
 		break;
+
 	case EntityType::ITEM:
-		entity = new Item();
+
+		switch (i_type)
+		{
+		case ItemType::WEAPON:
+			entity = new Weapon();
+			break;
+		case ItemType::ARMOR:
+			entity = new Armor();
+			break;
+		case ItemType::ACCESSORY:
+			break;
+		case ItemType::UNKNOWN:
+			entity = new Item();
+			break;
+		default:
+			break;
+		}
 		break;
+
 	default:
 		break;
 	}

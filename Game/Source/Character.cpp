@@ -137,8 +137,8 @@ bool Character::moveTo(iPoint destination)
 			if (move) 
 			{
 				move = false;
-				path.Clear();
 				TpToCell(path.At(0)->x, path.At(0)->y);
+				path.Clear();
 				hasMoved = true;
 			}
 		}

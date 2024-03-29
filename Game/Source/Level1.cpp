@@ -44,21 +44,21 @@ bool Level1::Start()
 
 	//Instantiate the player using the entity manager
 	//Get player paremeters
-	zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, 1);
+	zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ZHAAK);
 	players.Add(zhaak);
 	//Assigns the XML node to a member in player
 	zhaak->parameters = sceneconfig.child("zhaak");
 	zhaak->Start();
 
-	eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, 2);
-	players.Add(eli);
-	//Assigns the XML node to a member in player
-	eli->parameters = sceneconfig.child("eli");
-	eli->Start();
+	//eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
+	//players.Add(eli);
+	////Assigns the XML node to a member in player
+	//eli->parameters = sceneconfig.child("eli");
+	//eli->Start();
 
-	enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, 0);
+	/*enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
 	enemy->parameters = sceneconfig.child("enemy");
-	enemy->Start();
+	enemy->Start();*/
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access

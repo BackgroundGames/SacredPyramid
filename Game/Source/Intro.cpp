@@ -52,7 +52,7 @@ bool Intro::PostUpdate()
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->menu);
 
 	//Debug key to skip the Menu
-	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level1);
 
 	

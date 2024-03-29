@@ -30,7 +30,7 @@ bool Zhaak::Start()
 
 bool Zhaak::Update(float dt)
 {
-	mouseTile = Player::GetMouseTile(mousePos);
+	destination = Player::GetMouseTile(mousePos);
 
 	Player::Update(dt);
 	return true;

@@ -19,7 +19,33 @@ enum class EntityType
 	UNKNOWN
 };
 
-class PhysBody;
+enum class PlayerType
+{
+	ZHAAK,
+	AMIR,
+	AMUMMY,
+	ELI,
+
+	UNKNOWN
+};
+
+enum class EnemyType
+{
+	BANDIT,
+	DRUNK,
+	EVIL_MUMMY,
+
+	UNKNOWN
+};
+
+enum class ItemType
+{
+	WEAPON,
+	ARMOR,
+	ACCESSORY,
+
+	UNKNOWN
+};
 
 class Entity
 {

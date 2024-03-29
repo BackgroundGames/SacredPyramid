@@ -58,9 +58,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-
 	// Additional methods
-	Entity* CreateEntity(EntityType type, uint id);
+	Entity* CreateEntity(EntityType type, PlayerType p_type = PlayerType::UNKNOWN, EnemyType e_type = EnemyType::UNKNOWN, ItemType i_type = ItemType::UNKNOWN);
 
 	void DestroyEntity(Entity* entity);
 
