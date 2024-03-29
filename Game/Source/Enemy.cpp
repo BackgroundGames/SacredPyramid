@@ -51,7 +51,7 @@ bool Enemy::Start()
 	combatState = CombatState::NONE;
 	exploringState = ExploringState::IDLE;
 
-	observer = app->sceneManager->currentScene->GetZhaak();
+	observer = app->sceneManager->currentScene->GetPlayer();
 
 	return true;
 }
@@ -71,35 +71,33 @@ bool Enemy::Update(float dt)
 		{
 		case ExploringState::IDLE:
 
-			if (app->sceneManager->currentScene->GetZhaak()->GetTile() != prevDestination) {
-				if (moveTo(app->sceneManager->currentScene->GetZhaak()->GetTile())) {
+			/*if (app->sceneManager->currentScene->GetPlayer()->GetTile() != prevDestination) {
+				if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) {
 					exploringState = ExploringState::MOVING;
 				}
-			}
+			}*/
 
-			//int X;
-			//int Y;
-			//app->input->GetMousePosition(X, Y);
-			//X += -app->render->camera.x - app->map->GetTileWidth() / 2;
-			//Y += -app->render->camera.y - app->map->GetTileHeight() / 2;
-			//if (app->map->WorldToMap(X, Y) == GetTile()) {
-			//	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
-			//		if (moveTo(app->sceneManager->currentScene->GetZhaak()->GetTile())) {
-			//			exploringState = ExploringState::MOVING;
-			//			/*List<Entity*> enemies;
-			//			enemies.Add(this);
-			//			app->entityManager->StartCombat(enemies);*/
-			//		}
-			//		NotifyObserver();
-			//	}
-			//}
+			int X, Y;
+			app->input->GetMousePosition(X, Y);
+			X += -app->render->camera.x - app->map->GetTileWidth() / 2;
+			Y += -app->render->camera.y - app->map->GetTileHeight() / 2;
+			if (app->map->WorldToMap(X, Y) == GetTile()) {
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
+					if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) {
+						//exploringState = ExploringState::MOVING;
+						enemies.Add(this);
+						app->entityManager->StartCombat(enemies);
+					}
+					NotifyObserver();
+				}
+			}
 
 			break;
 		case ExploringState::MOVING:
 
 			//move to the tile clicked
-			if (app->sceneManager->currentScene->GetZhaak()->GetTile() != prevDestination) {
-				moveTo(app->sceneManager->currentScene->GetZhaak()->GetTile());
+			if (app->sceneManager->currentScene->GetPlayer()->GetTile() != prevDestination) {
+				moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile());
 			}
 
 			DoPathMoving();

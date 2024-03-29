@@ -188,15 +188,17 @@ void EntityManager::StartCombat(List<Entity*> enemies)
 
 	for (int i = 0; i < app->sceneManager->currentScene->players.Count(); i++)
 	{
-		combatManager->players.Add(app->sceneManager->currentScene->players[i]);
-		dynamic_cast<Player*>(combatManager->players[i])->mainState = MainState::IN_COMBAT;
+		combatManager->players.Add((Player*)app->sceneManager->currentScene->players[i]);
+		combatManager->players[i]->mainState = MainState::IN_COMBAT;
+		combatManager->players[i]->combatState = CombatState::WAITING;
 		length++;
 	}
 
 	for (int j = 0; j < enemies.Count(); j++)
 	{
-		combatManager->enemies.Add(enemies[j]);
-		dynamic_cast<Enemy*>(combatManager->enemies[j])->mainState = MainState::IN_COMBAT;
+		combatManager->enemies.Add((Enemy*)enemies[j]);
+		combatManager->enemies[j]->mainState = MainState::IN_COMBAT;
+		combatManager->enemies[j]->combatState = CombatState::WAITING;
 		length++;
 	}
 
@@ -226,6 +228,9 @@ void EntityManager::StartCombat(List<Entity*> enemies)
 			}
 		}
 	}
+
+	combatManager->currentCharacterTurn = (Character*)combatManager->CombatList[0];
+	combatManager->CombatList[0]->combatState = CombatState::IDLE;
 }
 
 bool EntityManager::Update(float dt)
@@ -247,7 +252,7 @@ bool EntityManager::Update(float dt)
 
 	}
 	else {
-		//ret = combatManager->Update();
+		ret = combatManager->Update(dt);
 	}
 
 	return ret;
@@ -269,8 +274,8 @@ bool CombatManager::Start()
 bool CombatManager::Update(float dt)
 {
 
-	Uint32 currentTime = SDL_GetTicks();
-	Uint32 elapsedTime = currentTime - startTime;
+	/*Uint32 currentTime = SDL_GetTicks();
+	Uint32 elapsedTime = currentTime - startTime;*/
 
 	//Seconds = (elapsedTime / 1000) % 60;
 	////Seconds = elapsedTime % 1000;
@@ -278,6 +283,30 @@ bool CombatManager::Update(float dt)
 	//	MaxSeconds -= 1;
 	//	auxSeconds = Seconds;
 	//}
+
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) 
+	{
+		currentCharacterTurn->combatState = CombatState::WAITING;
+		currentCharacterTurn = CombatList[NextTurn()];
+		currentCharacterTurn->combatState = CombatState::IDLE;
+	}
+
+	ListItem<Character*>* item;
+	Entity* pEntity = NULL;
+
+	for (item = CombatList.start; item != NULL; item = item->next)
+	{
+		pEntity = item->data;
+
+		if (currentCharacterTurn->combatState == CombatState::WAITING) 
+		{
+			currentCharacterTurn = CombatList[NextTurn()];
+			currentCharacterTurn->combatState = CombatState::IDLE;
+		}
+
+		if (pEntity->active == false) continue;
+			item->data->Update(dt);
+	}
 
 	return true;
 }
@@ -287,10 +316,20 @@ bool CombatManager::CleanUp()
 	return false;
 }
 
-void CombatManager::DestroyEntity(Entity* entity)
+void CombatManager::DestroyEntity(Character* entity)
 {
 }
 
-void CombatManager::AddEntity(Entity* entity)
+void CombatManager::AddEntity(Character* entity)
 {
+}
+
+int CombatManager::NextTurn()
+{
+	turn++;
+
+	if (turn == CombatList.Count()) 
+		turn = 0;
+
+	return turn;
 }

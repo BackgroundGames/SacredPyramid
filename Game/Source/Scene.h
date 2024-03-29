@@ -60,8 +60,9 @@ public:
 		return true;
 	}
 
-	Player* GetZhaak() { return zhaak; }
-	Player* GetEli() { return eli; }
+	Player* GetPlayer() {
+		return (Player*)players.At(0)->data;
+	}
 
 	virtual bool OnGuiMouseClickEvent(GuiControl* control)
 	{

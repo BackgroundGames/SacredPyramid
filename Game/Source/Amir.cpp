@@ -32,8 +32,6 @@ bool Amir::Update(float dt)
 {
 	destination = Player::GetMouseTile(mousePos);
 
-	Direction auxState = app->sceneManager->currentScene->GetEli()->PosState;
-
 	Player::Update(dt);
 	return true;
 }

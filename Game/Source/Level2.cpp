@@ -40,7 +40,7 @@ bool Level2::Start()
 
 	//Instantiate the player using the entity manager
 	//Get player paremeters
-	zhaak = (Zhaak*)app->sceneManager->previousScene->GetZhaak();
+	zhaak = (Zhaak*)app->sceneManager->previousScene->GetPlayer();
 	//SI HA CARREGAT PARTIDA MIRAR AL SAVE
 	//////player->parameters = sceneconfig.child("player");
 	zhaak->parameters = sceneconfig.child("player");

@@ -57,15 +57,7 @@ bool Player::Update(float dt)
 			position.y += 0.2 * dt;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
-		if (mainState == MainState::OUT_OF_COMBAT) {
-			mainState = MainState::IN_COMBAT;
-		}
-		else {
-			mainState = MainState::OUT_OF_COMBAT;
-			hasMoved = false;
-		}
-	}
+	destination = Player::GetMouseTile(mousePos);
 
 	switch (mainState)
 	{
@@ -74,12 +66,13 @@ bool Player::Update(float dt)
 		{
 		case ExploringState::IDLE:
 
-			if (this != app->sceneManager->currentScene->GetZhaak())
+			if (this != app->sceneManager->currentScene->GetPlayer())
 			{
-				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && destination != app->sceneManager->currentScene->GetPlayer()->GetTile())
 				{
-					if (moveTo(*app->sceneManager->currentScene->GetZhaak()->path.At(app->sceneManager->currentScene->GetZhaak()->path.Count() - 2)))
+					if (moveTo(*app->sceneManager->currentScene->GetPlayer()->path.At(app->sceneManager->currentScene->GetPlayer()->path.Count() - 2))) {
 						exploringState = ExploringState::FOLLOWING;
+					}
 				}
 			}
 			else
@@ -103,7 +96,7 @@ bool Player::Update(float dt)
 		case ExploringState::MOVING:
 
 			//move to the tile clicked
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 			{
 				if (destination != prevDestination)
 					moveTo(destination);
@@ -122,15 +115,23 @@ bool Player::Update(float dt)
 
 		case ExploringState::FOLLOWING:
 
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 			{
-				if (destination != prevDestination)
-					moveTo(*app->sceneManager->currentScene->GetZhaak()->path.At(app->sceneManager->currentScene->GetZhaak()->path.Count() - 2));
+				if (destination != app->sceneManager->currentScene->GetPlayer()->GetTile()) {
+					moveTo(*app->sceneManager->currentScene->GetPlayer()->path.At(app->sceneManager->currentScene->GetPlayer()->path.Count() - 2));
+				}
+				else {
+					TpToCell(GetTile().x, GetTile().y);
+					move = false;
+				}
 			}
 
-			DoPathMoving();
-
-			if (!move) {
+			if (move)
+			{
+				DoPathMoving();
+			}
+			else
+			{
 				exploringState = ExploringState::IDLE;
 			}
 
@@ -144,19 +145,55 @@ bool Player::Update(float dt)
 				exploringState = previousEState;
 			}
 			break;
+			
 		default:
 			break;
 		}
 		break;
+
 	case MainState::IN_COMBAT:
-		if (!hasMoved) {
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
+
+		switch (combatState)
+		{
+
+		case CombatState::WAITING:
+			break;
+
+		case CombatState::IDLE:
+
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && (DistanceToTile(GetTile(), destination) <= (stats.mobility - mobilityUsed)))
 			{
-				if (destination != prevDestination)
-					if (moveTo(destination)) {
-						exploringState = ExploringState::MOVING;
-					}
+				if (moveTo(destination)) {
+					combatState = CombatState::MOVING;
+					mobilityUsed += path.Count() - 1;
+				}
 			}
+			break;
+			
+		case CombatState::MOVING:
+
+			if (move)
+			{
+				DoPathMoving();
+			}
+			else
+			{
+				combatState = CombatState::IDLE;
+				if (mobilityUsed == stats.mobility) {
+					combatState = CombatState::WAITING;
+					mobilityUsed = 0;
+				}
+			}
+			break;
+
+		case CombatState::ATTACKING:
+			break;
+		case CombatState::DEAD:
+			break;
+		case CombatState::NONE:
+			break;
+		default:
+			break;
 		}
 		break;
 	case MainState::NONE:
@@ -183,8 +220,13 @@ bool Player::CleanUp()
 
 bool Player::OnGuiMouseClickEvent(Entity* control)
 {
-	TpToCell(GetTile().x,GetTile().y);
-	move = false;
+	for (size_t i = 0; i < app->sceneManager->currentScene->players.Count(); i++)
+	{
+		Player* auxp = (Player*)app->sceneManager->currentScene->players[i];
+		auxp->TpToCell(auxp->GetTile().x, auxp->GetTile().y);
+		auxp->move = false;
+		auxp->translationOffset = { 0, 0 };
+	}
 	return false;
 }
 

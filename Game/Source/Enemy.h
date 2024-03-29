@@ -3,6 +3,7 @@
 
 #include "Entity.h"
 #include "Character.h"
+#include "List.h"
 
 class Enemy : public Character
 {
@@ -26,7 +27,7 @@ public:
 private:
 	bool patrol = true;
 	const DynArray<iPoint>* path;
-
+	List<Entity*> enemies;
 public:
 	EnemyType subtype;
 };

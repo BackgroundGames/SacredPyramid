@@ -69,19 +69,19 @@ bool Character::Update(float dt)
 	if (PosState == Direction::UL) {
 		//pos y en la imagen
 		prect.y = 0;
-		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, new SDL_Rect{ 2/2, 250/2, 110/2, 236/2 });
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::UR) {									 
 		prect.y = 0;														 
-		app->render->DrawTexture(texture, position.x, position.y - texH / 2, new SDL_Rect{ 2 / 2, 250 / 2, 110 / 2, 236 / 2 });
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::DL) {	
 		prect.y = 4;
-		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, new SDL_Rect{ 0, 0, 112/2, 245/2 });
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::DR) {									 
 		prect.y = 4;														 
-		app->render->DrawTexture(texture, position.x, position.y - texH / 2, new SDL_Rect{ 0, 0, 112 / 2, 245 / 2 });
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}
 
 	if (app->debug)
@@ -137,9 +137,11 @@ bool Character::moveTo(iPoint destination)
 			if (move) 
 			{
 				move = false;
-				TpToCell(path.At(0)->x, path.At(0)->y);
+				pathingIteration = 0;
 				path.Clear();
-				hasMoved = true;
+				TpToCell(GetTile().x, GetTile().y);
+				app->sceneManager->currentScene->LockCamera();
+				translationOffset = { 0, 0 };
 			}
 		}
 	}
@@ -210,11 +212,9 @@ void Character::DoPathMoving()
 		if (pathingIteration > path.Count() - 1)
 		{
 			pathingIteration = 0;
-			finishMoving = true;
 			move = false;
 			auxPosition = position;
-			translationOffset.x = 0;
-			translationOffset.y = 0;
+			translationOffset = { 0, 0 };
 			path.Clear();
 		}
 		//reasuring player is in the correct position in the cell
@@ -222,8 +222,7 @@ void Character::DoPathMoving()
 		{
 			//TpToCell(path->At(pathingIteration -1)->x, path->At(pathingIteration-1)->y);
 			auxPosition = position;
-			translationOffset.x = 0;
-			translationOffset.y = 0;
+			translationOffset = { 0, 0 };
 		}
 	}
 }
@@ -251,4 +250,13 @@ iPoint Character::GetTile()
 {
 	//el 14 seria la meitat del w i el 31 la meitat de h
 	return app->map->WorldToMap(position.x + texW/2 - app->map->GetTileWidth() / 2, position.y + texH/2 - app->map->GetTileHeight()/2);
+}
+
+uint Character::DistanceToTile(iPoint Tile1, iPoint Tile2)
+{
+	uint ret;
+
+	ret = abs(abs(Tile1.x) - abs(Tile2.x)) + abs(abs(Tile1.y) - abs(Tile2.y));
+
+	return ret;
 }

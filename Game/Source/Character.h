@@ -18,7 +18,7 @@ struct Stats
 	uint magicAttack;
 	uint magicDefense;
 	uint initiative;
-	uint mobility;
+	uint mobility = 3;
 };
 
 struct Equipment
@@ -38,7 +38,9 @@ enum class MainState
 enum class CombatState
 {
 	WAITING,
+	IDLE,
 	MOVING,
+	ATTACKING,
 	DEAD,
 	NONE
 };
@@ -103,6 +105,8 @@ public:
 
 	uint GetMobility() { return this->stats.mobility; }
 
+	uint DistanceToTile(iPoint Tile1, iPoint Tile2);
+
 public:
 
 	//Declare character parameters
@@ -117,7 +121,6 @@ public:
 	DynArray<iPoint> path;
 	int pathingIteration = 0;
 	bool move = false;
-	bool finishMoving = false;
 	fPoint translationOffset = fPoint{ 0.0f, 0.0f };
 	iPoint auxPosition = iPoint{ 0, 0 };
 	iPoint prevDestination = iPoint{ 0, 0 };
@@ -135,8 +138,9 @@ public:
 
 	float velocity = 1;
 
-	bool hasMoved;
 	bool hasAttacked;
+
+	uint mobilityUsed = 0;
 };
 
 

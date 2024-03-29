@@ -5,6 +5,10 @@
 #include "Entity.h"
 #include "List.h"
 
+class Character;
+class Player;
+class Enemy;
+
 class CombatManager {
 
 public:
@@ -23,16 +27,20 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	void DestroyEntity(Entity* entity);
+	void DestroyEntity(Character* entity);
 
-	void AddEntity(Entity* entity);
+	void AddEntity(Character* entity);
+
+	int NextTurn();
 
 public:
 
-	List<Entity*> enemies;
-	List<Entity*> players;
-	List<Entity*> CombatList;
+	List<Enemy*> enemies;
+	List<Player*> players;
+	List<Character*> CombatList;
+	Character* currentCharacterTurn;
 
+	int turn = 0;
 	Uint32 startTime;
 
 };

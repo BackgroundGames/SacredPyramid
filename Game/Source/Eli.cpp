@@ -29,9 +29,7 @@ bool Eli::Start()
 }
 
 bool Eli::Update(float dt)
-{
-	destination = Player::GetMouseTile(mousePos);
-	
+{	
 	Player::Update(dt);
 	return true;
 }
