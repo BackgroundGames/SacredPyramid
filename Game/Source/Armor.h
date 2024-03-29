@@ -24,6 +24,7 @@ public:
 	bool CleanUp();
 public:
 	ArmorEffect effect;
+	int defense;
 };
 
 #endif // __ARMOR_H__

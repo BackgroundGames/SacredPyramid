@@ -53,6 +53,8 @@ bool Character::Update(float dt)
 			DebugPath();
 		}
 	}
+	texW = 56;
+	texH = 123;
 
 	//debug player rect
 	prect.x = position.x;
@@ -62,24 +64,24 @@ bool Character::Update(float dt)
 
 	//darw
 	//pos x en la imagen
-	prect.x = 22;
+	prect.x = 0;
 
 	if (PosState == Direction::UL) {
 		//pos y en la imagen
-		prect.y = 4;
-		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
+		prect.y = 0;
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, new SDL_Rect{ 2/2, 250/2, 110/2, 236/2 });
 	}																		 
 	else if (PosState == Direction::UR) {									 
-		prect.y = 4;														 
-		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
+		prect.y = 0;														 
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, new SDL_Rect{ 2 / 2, 250 / 2, 110 / 2, 236 / 2 });
 	}																		 
 	else if (PosState == Direction::DL) {	
 		prect.y = 4;
-		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, new SDL_Rect{ 0, 0, 112/2, 245/2 });
 	}																		 
 	else if (PosState == Direction::DR) {									 
 		prect.y = 4;														 
-		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, new SDL_Rect{ 0, 0, 112 / 2, 245 / 2 });
 	}
 
 	if (app->debug)

@@ -70,13 +70,13 @@ bool Enemy::Update(float dt)
 		switch (exploringState)
 		{
 		case ExploringState::IDLE:
-
+			/*
 			if (app->sceneManager->currentScene->GetPlayer()->GetTile() != prevDestination) {
 				if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) {
 					exploringState = ExploringState::MOVING;
 				}
 			}
-
+			*/
 			//int X;
 			//int Y;
 			//app->input->GetMousePosition(X, Y);

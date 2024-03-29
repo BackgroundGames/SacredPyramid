@@ -36,6 +36,8 @@ public:
 public:
 	WeaponType wtype;
 	WeaponEffect effect;
+	int range;
+	int damage;
 };
 
 #endif // __WEAPON_H__
