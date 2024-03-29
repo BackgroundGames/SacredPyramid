@@ -18,6 +18,7 @@ struct Stats
 	uint magicAttack;
 	uint magicDefense;
 	uint initiative;
+	uint mobility;
 };
 
 struct Equipment
@@ -38,6 +39,7 @@ enum class CombatState
 {
 	WAITING,
 	MOVING,
+	DEAD,
 	NONE
 };
 
@@ -98,6 +100,8 @@ public:
 
 	uint GetInitiative() { return this->stats.initiative; }
 
+	uint GetMobility() { return this->stats.mobility; }
+
 public:
 
 	//Declare character parameters
@@ -129,6 +133,9 @@ public:
 	ExploringState previousEState;
 
 	float velocity = 1;
+
+	bool hasMoved;
+	bool hasAttacked;
 };
 
 

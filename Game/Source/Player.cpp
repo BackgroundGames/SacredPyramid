@@ -57,6 +57,21 @@ bool Player::Update(float dt)
 			position.y += 0.2 * dt;
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
+		if (mainState == MainState::OUT_OF_COMBAT) {
+			mainState = MainState::IN_COMBAT;
+		}
+		else {
+			mainState = MainState::OUT_OF_COMBAT;
+			hasMoved = false;
+		}
+	}
+
+	iPoint mousePos;
+	app->input->GetMousePosition(mousePos.x, mousePos.y);
+	iPoint mouseTile = app->map->WorldToMap(mousePos.x - app->render->camera.x - app->map->GetTileWidth() / 2,
+		mousePos.y - app->render->camera.y - app->map->GetTileHeight() / 2);
+
 	switch (mainState)
 	{
 	case MainState::OUT_OF_COMBAT:
@@ -107,6 +122,15 @@ bool Player::Update(float dt)
 		}
 		break;
 	case MainState::IN_COMBAT:
+		if (!hasMoved) {
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
+			{
+				if (mouseTile != prevDestination)
+					if (moveTo(mouseTile)) {
+						exploringState = ExploringState::MOVING;
+					}
+			}
+		}
 		break;
 	case MainState::NONE:
 		break;

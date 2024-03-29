@@ -58,5 +58,8 @@ bool BattleManager::isPartyDefeated(List<Character>& party)
 
 void BattleManager::characterTurn(Character& character, List<Character>& allCharacters)
 {
-	//TODO
+
 }
+
+//Damage formula
+//(Character attack + Character weapon damage) - (Target defense + Target armor defense)
