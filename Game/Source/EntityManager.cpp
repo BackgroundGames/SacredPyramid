@@ -1,5 +1,7 @@
 #include "EntityManager.h"
 #include "Player.h"
+#include "Zhaak.h"
+#include "Eli.h"
 #include "Enemy.h"
 #include "Item.h"
 #include "App.h"
@@ -77,7 +79,7 @@ bool EntityManager::CleanUp()
 	return ret;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type)
+Entity* EntityManager::CreateEntity(EntityType type, uint id)
 {
 	Entity* entity = nullptr; 
 
@@ -85,8 +87,20 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	switch (type)
 	{
 	case EntityType::PLAYER:
-		entity = new Player();
+		
+		switch (id)
+		{
+		case 1:
+			entity = new Zhaak();
+			break;
+		case 2:
+			entity = new Eli();
+			break;
+		default:
+			break;
+		}
 		break;
+
 	case EntityType::ENEMY:
 		entity = new Enemy();
 		break;

@@ -3,12 +3,14 @@
 Amir::Amir()
 {
 	name.Create("Amir");
+	subtype = PlayerType::AMIR;
 }
 
 Amir::Amir(Stats stats)
 {
 	name.Create("Amir");
 	this->stats = stats;
+	subtype = PlayerType::AMIR;
 }
 
 Amir::~Amir() {}

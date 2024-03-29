@@ -3,6 +3,8 @@
 
 #include "Scene.h"
 #include "Player.h"
+#include "Zhaak.h"
+#include "Amir.h"
 #include "Enemy.h"
 #include "GuiControl.h"
 

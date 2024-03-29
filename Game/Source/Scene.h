@@ -60,7 +60,8 @@ public:
 		return true;
 	}
 
-	Player* GetPlayer() { return player; }
+	Player* GetZhaak() { return zhaak; }
+	Player* GetEli() { return eli; }
 
 	virtual bool OnGuiMouseClickEvent(GuiControl* control)
 	{
@@ -80,7 +81,8 @@ public:
 	SString name;
 	bool active;
 	bool settings = false;
-	Player* player = nullptr;
+	Player* zhaak = nullptr;
+	Player* eli = nullptr;
 	Enemy* enemy = nullptr;
 	bool quit = false;
 

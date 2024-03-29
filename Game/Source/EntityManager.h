@@ -58,8 +58,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+
 	// Additional methods
-	Entity* CreateEntity(EntityType type);
+	Entity* CreateEntity(EntityType type, uint id);
 
 	void DestroyEntity(Entity* entity);
 

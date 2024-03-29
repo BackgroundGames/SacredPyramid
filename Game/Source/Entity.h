@@ -19,20 +19,6 @@ enum class EntityType
 	UNKNOWN
 };
 
-enum class EnemyType
-{
-	BANDIT,
-	DRUNKARD,
-	EVILMUMMY
-};
-
-enum class ItemType
-{
-	WEAPON,
-	ARMOR,
-	ACCESSORY
-};
-
 class PhysBody;
 
 class Entity

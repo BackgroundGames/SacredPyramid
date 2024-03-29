@@ -112,9 +112,10 @@ bool Render::Update(float dt)
 		DrawText(text, 0, 50, 250, 30, 0, 0, 255);
 
 		//Player tile print text
-		X = app->sceneManager->currentScene->GetPlayer()->GetTile().x;
-		Y = app->sceneManager->currentScene->GetPlayer()->GetTile().y;
-		playerPos = "Player Tile: (" + std::to_string(X) + ", " + std::to_string(Y) + ")";
+		X = app->sceneManager->currentScene->GetZhaak()->GetTile().x;
+		Y = app->sceneManager->currentScene->GetZhaak()->GetTile().y;
+		int direction = static_cast<int>(app->sceneManager->currentScene->GetZhaak()->PosState);
+		playerPos = "Player Tile: (" + std::to_string(X) + ", " + std::to_string(Y) + ") Direction: " + std::to_string(direction) + ")";
 		text = playerPos.c_str();
 		DrawText(text, 0, 80, 250, 30, 0, 0, 255);
 	}

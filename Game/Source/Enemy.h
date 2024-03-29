@@ -4,11 +4,21 @@
 #include "Entity.h"
 #include "Character.h"
 
+enum class EnemyType
+{
+	BANDIT,
+	DRUNK,
+	EVIL_MUMMY,
+
+	UNKNOWN
+};
+
 class Enemy : public Character
 {
 public:
 	
 	Enemy();
+	Enemy(EnemyType subtype);
 
 	Enemy(uint hp, uint mp, uint atk, uint def, uint matk, uint mdef, uint ini);
 

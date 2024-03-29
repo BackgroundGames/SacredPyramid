@@ -40,11 +40,11 @@ bool Level2::Start()
 
 	//Instantiate the player using the entity manager
 	//Get player paremeters
-	player = app->sceneManager->previousScene->GetPlayer();
+	zhaak = (Zhaak*)app->sceneManager->previousScene->GetZhaak();
 	//SI HA CARREGAT PARTIDA MIRAR AL SAVE
 	//////player->parameters = sceneconfig.child("player");
-	player->parameters = sceneconfig.child("player");
-	player->Start();
+	zhaak->parameters = sceneconfig.child("player");
+	zhaak->Start();
 
 	/*enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
 	enemy->parameters = sceneconfig.child("enemy");
@@ -118,8 +118,8 @@ void Level2::LockCamera()
 	int limitCamXend = (app->map->getMapWidth() / 2 + app->map->GetTileWidth() / 2 - windowW) * -1;
 	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2);
 
-	app->render->camera.y = ((player->position.y - 26 / 2) - windowH / 2) * -1;
-	app->render->camera.x = ((player->position.x - 40 / 2) - (windowW / 2)) * -1;
+	app->render->camera.y = ((zhaak->position.y - 26 / 2) - windowH / 2) * -1;
+	app->render->camera.x = ((zhaak->position.x - 40 / 2) - (windowW / 2)) * -1;
 
 	if (app->render->camera.x > limitCamXbeg) {
 		app->render->camera.x = limitCamXbeg;

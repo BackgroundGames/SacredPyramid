@@ -7,11 +7,14 @@ void BattleManager::startBattle(List<Character>& allCharacters)
 	List<Character> enemies;
 
 	ListItem<Character>* character = allCharacters.start;
-	while (character != NULL) {
-		if (character->data.type == EntityType::ENEMY) {
+	while (character != NULL) 
+	{
+		if (character->data.type == EntityType::ENEMY) 
+		{
 			enemies.Add(character->data);
 		}
-		else {
+		else 
+		{
 			allies.Add(character->data);
 		}
 		character = character->next;
@@ -19,10 +22,13 @@ void BattleManager::startBattle(List<Character>& allCharacters)
 
 	allCharacters.BubbleSortTheInitiative();
 
-	while (!isBattleOver(allies, enemies)) {
+	while (!isBattleOver(allies, enemies)) 
+	{
 		ListItem<Character>* currentCharacter = allCharacters.start;
-		while (currentCharacter != nullptr) {
-			if (currentCharacter->data.GetHealth() > 0) {
+		while (currentCharacter != nullptr) 
+		{
+			if (currentCharacter->data.GetHealth() > 0) 
+			{
 				characterTurn(currentCharacter->data, allCharacters);
 			}
 			currentCharacter = currentCharacter->next;
@@ -39,8 +45,10 @@ bool BattleManager::isPartyDefeated(List<Character>& party)
 {
 	ListItem<Character>* currentCharacter = party.start;
 
-	while (currentCharacter != NULL) {
-		if (currentCharacter->data.GetHealth() > 0) {
+	while (currentCharacter != NULL) 
+	{
+		if (currentCharacter->data.GetHealth() > 0) 
+		{
 			return false;
 		}
 		currentCharacter = currentCharacter->next;

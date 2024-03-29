@@ -5,6 +5,15 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 
+enum class ItemType
+{
+	WEAPON,
+	ARMOR,
+	ACCESSORY,
+
+	UNKNOWN
+};
+
 struct SDL_Texture;
 
 class Item : public Entity

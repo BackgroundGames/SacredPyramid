@@ -44,13 +44,19 @@ bool Level1::Start()
 
 	//Instantiate the player using the entity manager
 	//Get player paremeters
-	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-	players.Add(player);
+	zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, 1);
+	players.Add(zhaak);
 	//Assigns the XML node to a member in player
-	player->parameters = sceneconfig.child("player");
-	player->Start();
+	zhaak->parameters = sceneconfig.child("zhaak");
+	zhaak->Start();
 
-	enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+	eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, 2);
+	players.Add(eli);
+	//Assigns the XML node to a member in player
+	eli->parameters = sceneconfig.child("eli");
+	eli->Start();
+
+	enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, 0);
 	enemy->parameters = sceneconfig.child("enemy");
 	enemy->Start();
 
@@ -134,8 +140,8 @@ void Level1::LockCamera()
 	int limitCamXend = (app->map->getMapWidth() / 2 + app->map->GetTileWidth() / 2 - windowW) * -1;
 	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2);
 
-	app->render->camera.y = ((player->position.y - player->texW / 2) - windowH / 2) * -1;
-	app->render->camera.x = ((player->position.x - player->texH / 2) - (windowW / 2)) * -1;
+	app->render->camera.y = ((zhaak->position.y - zhaak->texW / 2) - windowH / 2) * -1;
+	app->render->camera.x = ((zhaak->position.x - zhaak->texH / 2) - (windowW / 2)) * -1;
 
 	if (app->render->camera.x > limitCamXbeg) {
 		app->render->camera.x = limitCamXbeg;

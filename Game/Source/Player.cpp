@@ -42,22 +42,20 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	//Render the player texture and modify the position of the player using WSAD keys and render the texture
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		position.x += -0.2*dt;
+	if (app->debug)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+			position.x += -0.2 * dt;
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		position.x += 0.2*dt;
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+			position.x += 0.2 * dt;
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		position.y += -0.2 * dt;
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+			position.y += -0.2 * dt;
 
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		position.y += 0.2 * dt;
-
-	iPoint mousePos;
-	app->input->GetMousePosition(mousePos.x, mousePos.y);
-	iPoint mouseTile = app->map->WorldToMap(mousePos.x - app->render->camera.x - app->map->GetTileWidth() / 2,
-		mousePos.y - app->render->camera.y - app->map->GetTileHeight() / 2);
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+			position.y += 0.2 * dt;
+	}
 
 	switch (mainState)
 	{
@@ -70,9 +68,8 @@ bool Player::Update(float dt)
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 			{
 				if (mouseTile != prevDestination)
-					if (moveTo(mouseTile)) {
+					if (moveTo(mouseTile))
 						exploringState = ExploringState::MOVING;
-					}
 			}
 
 			//If space button is pressed modify put player in the cell of the cursor
@@ -138,5 +135,12 @@ bool Player::OnGuiMouseClickEvent(Entity* control)
 	TpToCell(GetTile().x,GetTile().y);
 	move = false;
 	return false;
+}
+
+iPoint Player::GetMouseTile(iPoint mousePos)
+{
+	app->input->GetMousePosition(mousePos.x, mousePos.y);
+	return app->map->WorldToMap(mousePos.x - app->render->camera.x - app->map->GetTileWidth() / 2,
+								mousePos.y - app->render->camera.y - app->map->GetTileHeight() / 2);
 }
 

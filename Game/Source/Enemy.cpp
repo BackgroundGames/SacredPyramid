@@ -51,7 +51,7 @@ bool Enemy::Start()
 	combatState = CombatState::NONE;
 	exploringState = ExploringState::IDLE;
 
-	observer = app->sceneManager->currentScene->GetPlayer();
+	observer = app->sceneManager->currentScene->GetZhaak();
 
 	return true;
 }
@@ -70,13 +70,13 @@ bool Enemy::Update(float dt)
 		switch (exploringState)
 		{
 		case ExploringState::IDLE:
-			/*
-			if (app->sceneManager->currentScene->GetPlayer()->GetTile() != prevDestination) {
-				if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) {
+
+			if (app->sceneManager->currentScene->GetZhaak()->GetTile() != prevDestination) {
+				if (moveTo(app->sceneManager->currentScene->GetZhaak()->GetTile())) {
 					exploringState = ExploringState::MOVING;
 				}
 			}
-			*/
+
 			//int X;
 			//int Y;
 			//app->input->GetMousePosition(X, Y);
@@ -84,7 +84,7 @@ bool Enemy::Update(float dt)
 			//Y += -app->render->camera.y - app->map->GetTileHeight() / 2;
 			//if (app->map->WorldToMap(X, Y) == GetTile()) {
 			//	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
-			//		if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) {
+			//		if (moveTo(app->sceneManager->currentScene->GetZhaak()->GetTile())) {
 			//			exploringState = ExploringState::MOVING;
 			//			/*List<Entity*> enemies;
 			//			enemies.Add(this);
@@ -98,8 +98,8 @@ bool Enemy::Update(float dt)
 		case ExploringState::MOVING:
 
 			//move to the tile clicked
-			if (app->sceneManager->currentScene->GetPlayer()->GetTile() != prevDestination) {
-				moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile());
+			if (app->sceneManager->currentScene->GetZhaak()->GetTile() != prevDestination) {
+				moveTo(app->sceneManager->currentScene->GetZhaak()->GetTile());
 			}
 
 			DoPathMoving();
