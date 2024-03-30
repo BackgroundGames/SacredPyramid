@@ -67,19 +67,14 @@ bool Level1::Start()
 		eli->parameters = sceneconfig.child("eli");
 		eli->Start();
 
-		enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-		enemies.Add(enemy);
-		enemy->parameters = sceneconfig.child("enemy");
-		enemy->Start();
-	}
-
-	for (pugi::xml_node enemyNode = sceneconfig.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
-	{
-		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-		enemy->id = enemyNode.attribute("id").as_uint();
-		enemies.Add(enemy);
-		enemy->parameters = enemyNode;
-		enemy->Start();
+		for (pugi::xml_node enemyNode = sceneconfig.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+		{
+			Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+			enemy->id = enemyNode.attribute("id").as_uint();
+			enemies.Add(enemy);
+			enemy->parameters = enemyNode;
+			enemy->Start();
+		}
 	}
 
 	// iterate all items in the scene
