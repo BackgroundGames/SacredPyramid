@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "SceneManager.h"
 #include "Player.h"
+#include "Enemy.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -93,8 +94,8 @@ bool Render::Update(float dt)
 		X -= app->render->camera.x;
 		Y -= app->render->camera.y;
 		//Mouse pixel pos print
-		mousePos = "Mouse Pos: (" + std::to_string(X) + ", " + std::to_string(Y) + ")";
-		const char* text = mousePos.c_str();
+		mousePosDebug = "Mouse Pos: (" + std::to_string(X) + ", " + std::to_string(Y) + ")";
+		const char* text = mousePosDebug.c_str();
 		DrawText(text, 0, 10, 250, 30, 0, 0, 255);
 
 		// Get the mouse position and obtain the map coordinate
@@ -107,17 +108,23 @@ bool Render::Update(float dt)
 		app->render->DrawTexture(selectionTex, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
 
 		//Mouse Tile print text
-		mousePos = "Mouse Tile : (" + std::to_string(app->map->WorldToMap(X, Y).x) + ", " + std::to_string(app->map->WorldToMap(X, Y).y) + ")";
-		text = mousePos.c_str();
+		mousePosDebug = "Mouse Tile : (" + std::to_string(app->map->WorldToMap(X, Y).x) + ", " + std::to_string(app->map->WorldToMap(X, Y).y) + ")";
+		text = mousePosDebug.c_str();
 		DrawText(text, 0, 50, 250, 30, 0, 0, 255);
 
 		//Player tile print text
 		X = app->sceneManager->currentScene->GetPlayer()->GetTile().x;
 		Y = app->sceneManager->currentScene->GetPlayer()->GetTile().y;
-		int direction = static_cast<int>(app->sceneManager->currentScene->GetPlayer()->PosState);
-		playerPos = "Player Tile: (" + std::to_string(X) + ", " + std::to_string(Y) + ") Direction: " + std::to_string(direction) + ")";
-		text = playerPos.c_str();
+		playerPosDebug = "Player Tile: (" + std::to_string(X) + ", " + std::to_string(Y) + ")";
+		text = playerPosDebug.c_str();
 		DrawText(text, 0, 80, 250, 30, 0, 0, 255);
+
+		//Enemy tile print text
+		/*X = app->sceneManager->currentScene->GetEnemy(1)->GetTile().x;
+		Y = app->sceneManager->currentScene->GetEnemy(1)->GetTile().y;
+		enemyPosDebug = "Enemy Tile: (" + std::to_string(X) + ", " + std::to_string(Y) + ") id: " +std::to_string(app->sceneManager->currentScene->GetEnemy(1)->id);
+		text = enemyPosDebug.c_str();
+		DrawText(text, 0, 110, 250, 30, 0, 0, 255);*/
 	}
 
 	return true;

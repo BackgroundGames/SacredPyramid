@@ -8,6 +8,14 @@ Bandit::Bandit()
 	subtype = EnemyType::BANDIT;
 }
 
+Bandit::Bandit(Stats stats)
+{
+	name.Create("Bandit");
+	this->stats = stats;
+	type = EntityType::ENEMY;
+	subtype = EnemyType::BANDIT;
+}
+
 Bandit::~Bandit()
 {
 }

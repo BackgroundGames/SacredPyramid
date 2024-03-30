@@ -10,7 +10,6 @@ class Enemy : public Character
 public:
 	
 	Enemy();
-	Enemy(EnemyType subtype);
 
 	Enemy(uint hp, uint mp, uint atk, uint def, uint matk, uint mdef, uint ini);
 
@@ -26,9 +25,10 @@ public:
 
 private:
 	bool patrol = true;
-	const DynArray<iPoint>* path;
 	List<Entity*> enemies;
+
 public:
+	uint id;
 	EnemyType subtype;
 };
 #endif // !__ENEMY_H__
