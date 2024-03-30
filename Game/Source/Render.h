@@ -52,8 +52,10 @@ public:
 	};
 
 private:
-	std::string mousePos;
-	std::string playerPos;
+	std::string mousePosDebug;
+	std::string playerPosDebug;
+	std::string playerStateDebug;
+	std::string enemyPosDebug;
 
 	//Tile selection
 	SDL_Texture* selectionTex = nullptr;

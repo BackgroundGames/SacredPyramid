@@ -8,7 +8,6 @@ class Player : public Character
 public:
 
 	Player();
-	Player(PlayerType subtype);
 
 	virtual ~Player();
 

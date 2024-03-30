@@ -1,6 +1,8 @@
 #include "App.h"
 #include "Map.h"
 #include "PathFinding.h"
+#include "Scene.h"
+#include "Enemy.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -50,8 +52,15 @@ bool PathFinding::CheckBoundaries(const iPoint& pos) const
 // Utility: returns true is the tile is walkable
 bool PathFinding::IsWalkable(const iPoint& pos) const
 {
+	bool isWalkable = false;
+
+	for (size_t i = 0; i < app->sceneManager->currentScene->enemies.Count(); i++)
+		if (pos == app->sceneManager->currentScene->GetEnemy(i)->GetTile())
+			return isWalkable;
+
 	uchar walkId = GetTileAt(pos);
-	bool isWalkable = walkId != INVALID_WALK_CODE && walkId > 0;
+	isWalkable = walkId != INVALID_WALK_CODE && walkId > 0;
+
 	return  isWalkable;
 }
 

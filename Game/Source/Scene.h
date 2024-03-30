@@ -65,6 +65,10 @@ public:
 		return (Player*)players.start->data;
 	}
 
+	Enemy* GetEnemy(uint id) {
+		return (Enemy*)enemies.At(id)->data;
+	}
+
 	Player* GetZhaak() {
 		return (Player*)zhaak;
 	}
@@ -93,7 +97,6 @@ public:
 	bool settings = false;
 	Player* zhaak = nullptr;
 	Player* eli = nullptr;
-	Enemy* enemy = nullptr;
 	bool quit = false;
 
 	List<Entity*> enemies;
