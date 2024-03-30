@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Player.h"
 #include "Log.h"
+#include "Pathfinding.h"
 
 Enemy::Enemy()
 {
@@ -58,6 +59,7 @@ bool Enemy::Start()
 
 bool Enemy::Update(float dt)
 {
+	distanceFromPlayer = DistanceToTile(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
 
 	if (app->sceneManager->currentScene->settings) {
 		previousEState = exploringState;
@@ -119,6 +121,41 @@ bool Enemy::Update(float dt)
 		}
 		break;
 	case MainState::IN_COMBAT:
+		switch (combatState)
+		{
+		case CombatState::WAITING:
+			break;
+		case CombatState::IDLE:
+			if (distanceFromPlayer > 1) {
+				app->map->pathfinding->CreatePath(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
+				if (distanceFromPlayer > 3) {
+					moveTo(*app->map->pathfinding->GetLastPath()->At(3));
+				}
+				else {
+					moveTo(*app->map->pathfinding->GetLastPath()->At(distanceFromPlayer - 1));
+				}
+				combatState = CombatState::MOVING;
+			}
+			break;
+		case CombatState::MOVING:
+
+			if (move) {
+				DoPathMoving();
+			}
+			else {
+				combatState = CombatState::WAITING;
+			}
+
+			break;
+		case CombatState::ATTACKING:
+			break;
+		case CombatState::DEAD:
+			break;
+		case CombatState::NONE:
+			break;
+		default:
+			break;
+		}
 		break;
 	case MainState::NONE:
 		break;

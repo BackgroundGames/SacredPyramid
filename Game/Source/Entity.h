@@ -128,6 +128,7 @@ public:
 	bool renderable = true;
 
 	Entity* observer;
+	int distanceFromPlayer = 0;
 };
 
 #endif // __ENTITY_H__
