@@ -10,6 +10,7 @@
 class Entity;
 class Player;
 class Enemy;
+class Zhaak;
 class GuiControl;
 
 class Scene
@@ -62,6 +63,10 @@ public:
 
 	Player* GetPlayer() {
 		return (Player*)players.At(0)->data;
+	}
+
+	Player* GetZhaak() {
+		return (Player*)zhaak;
 	}
 
 	virtual bool OnGuiMouseClickEvent(GuiControl* control)
