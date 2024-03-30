@@ -136,6 +136,9 @@ bool Enemy::Update(float dt)
 				}
 				combatState = CombatState::MOVING;
 			}
+			else {
+				combatState = CombatState::WAITING;
+			}
 			break;
 		case CombatState::MOVING:
 

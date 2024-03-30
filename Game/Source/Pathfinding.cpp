@@ -52,14 +52,14 @@ bool PathFinding::CheckBoundaries(const iPoint& pos) const
 // Utility: returns true is the tile is walkable
 bool PathFinding::IsWalkable(const iPoint& pos) const
 {
-	bool isWalkable = false;
+	/*bool isWalkable = false;
 
 	for (size_t i = 0; i < app->sceneManager->currentScene->enemies.Count(); i++)
 		if (pos == app->sceneManager->currentScene->GetEnemy(i)->GetTile())
-			return isWalkable;
+			return isWalkable;*/
 
 	uchar walkId = GetTileAt(pos);
-	isWalkable = walkId != INVALID_WALK_CODE && walkId > 0;
+	bool isWalkable = walkId != INVALID_WALK_CODE && walkId > 0;
 
 	return  isWalkable;
 }
