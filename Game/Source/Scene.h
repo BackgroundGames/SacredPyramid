@@ -69,6 +69,10 @@ public:
 		return (Player*)zhaak;
 	}
 
+	Player* GetEli() {
+		return (Player*)eli;
+	}
+
 	virtual bool OnGuiMouseClickEvent(GuiControl* control)
 	{
 		return true;

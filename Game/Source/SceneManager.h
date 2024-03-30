@@ -71,6 +71,8 @@ public:
 
 	void OpenGamePause();
 
+	void CleanAllLevels();
+
 	Scene* currentScene = nullptr;
 	Scene* newScene = nullptr;
 	Scene* previousScene = nullptr;

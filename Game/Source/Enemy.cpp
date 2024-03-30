@@ -170,5 +170,6 @@ bool Enemy::Update(float dt)
 
 bool Enemy::CleanUp()
 {
+	Character::CleanUp();
 	return true;
 }

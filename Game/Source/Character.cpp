@@ -103,6 +103,9 @@ bool Character::Update(float dt)
 
 bool Character::CleanUp()
 {
+	app->tex->UnLoad(texture);
+	texture = nullptr;
+
 	return true;
 }
 

@@ -156,6 +156,7 @@ void SceneManager::MakeFade()
 				app->map->CleanUp();
 				app->map->active = false;
 				app->entityManager->CleanUp();
+				CleanAllLevels();
 			}
 
 			currentScene->Init();
@@ -216,4 +217,9 @@ void SceneManager::OpenGamePause()
 	currentScene->settings = true;
 	gamePause->Start();
 	gamePause->active = true;
+}
+
+void SceneManager::CleanAllLevels() {
+	level1->CleanUp();
+	level2->CleanUp();
 }

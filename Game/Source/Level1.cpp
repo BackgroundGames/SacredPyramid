@@ -42,23 +42,38 @@ bool Level1::Start()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	//Instantiate the player using the entity manager
-	//Get player paremeters
-	zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ZHAAK);
-	players.Add(zhaak);
-	//Assigns the XML node to a member in player
-	zhaak->parameters = sceneconfig.child("zhaak");
-	zhaak->Start();
+	if (app->sceneManager->previousScene != (Scene*)app->sceneManager->menu &&
+		app->sceneManager->previousScene != (Scene*)app->sceneManager->intro) {
+		players.Add(zhaak);
+		zhaak->parameters = sceneconfig.child("zhaak");
+		zhaak->Start();
 
-	eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
-	players.Add(eli);
-	//Assigns the XML node to a member in player
-	eli->parameters = sceneconfig.child("eli");
-	eli->Start();
+		players.Add(eli);
+		eli->parameters = sceneconfig.child("eli");
+		eli->Start();
+	}
+	else {
+		//Instantiate the player using the entity manager
+		//Get player paremeters
+		zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ZHAAK);
+		players.Add(zhaak);
+		//Assigns the XML node to a member in player
+		zhaak->parameters = sceneconfig.child("zhaak");
+		zhaak->Start();
 
-	enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-	enemy->parameters = sceneconfig.child("enemy");
-	enemy->Start();
+		eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
+		players.Add(eli);
+		//Assigns the XML node to a member in player
+		eli->parameters = sceneconfig.child("eli");
+		eli->Start();
+
+		enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+		enemies.Add(enemy);
+		enemy->parameters = sceneconfig.child("enemy");
+		enemy->Start();
+	}
+
+	
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
@@ -126,8 +141,28 @@ bool Level1::PostUpdate()
 
 bool Level1::CleanUp()
 {
-	players.Clear();
+	if (app->sceneManager->newScene == (Scene*)app->sceneManager->menu) {
+		for (size_t i = 0; i < players.Count(); i++)
+		{
+			players[i]->CleanUp();
+			app->entityManager->DestroyEntity((Entity*)players[i]);
+			delete players[i];
+		}
+		zhaak = nullptr;
+		eli = nullptr;
+	}
+
+	for (size_t i = 0; i < enemies.Count(); i++)
+	{
+		enemies[i]->CleanUp();
+		app->entityManager->DestroyEntity((Entity*)enemies[i]);
+		delete enemies[i];
+	}
 	enemies.Clear();
+
+
+	players.Clear();
+
 	return true;
 }
 

@@ -38,14 +38,32 @@ bool Level2::Start()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	//Instantiate the player using the entity manager
-	//Get player paremeters
-	zhaak = (Zhaak*)app->sceneManager->previousScene->GetZhaak();
-	players.Add(zhaak);
-	//SI HA CARREGAT PARTIDA MIRAR AL SAVE
-	//////player->parameters = sceneconfig.child("player");
-	zhaak->parameters = sceneconfig.child("player");
-	zhaak->Start();
+	if (zhaak != nullptr) {
+		players.Add(zhaak);
+		zhaak->parameters = sceneconfig.child("zhaak");
+		zhaak->Start();
+
+		players.Add(eli);
+		eli->parameters = sceneconfig.child("eli");
+		eli->Start();
+	}
+	else {
+		//Instantiate the player using the entity manager
+		//Get player paremeters
+		zhaak = (Player*)app->sceneManager->previousScene->GetZhaak();
+		players.Add(zhaak);
+		//SI HA CARREGAT PARTIDA MIRAR AL SAVE
+		//////player->parameters = sceneconfig.child("player");
+		zhaak->parameters = sceneconfig.child("zhaak");
+		zhaak->Start();
+
+		eli = (Player*)app->sceneManager->previousScene->GetEli();
+		players.Add(eli);
+		//SI HA CARREGAT PARTIDA MIRAR AL SAVE
+		//////player->parameters = sceneconfig.child("player");
+		eli->parameters = sceneconfig.child("eli");
+		eli->Start();
+	}
 
 	/*enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
 	enemy->parameters = sceneconfig.child("enemy");
@@ -108,6 +126,20 @@ bool Level2::PostUpdate()
 
 bool Level2::CleanUp()
 {
+	if (app->sceneManager->newScene == (Scene*)app->sceneManager->menu) {
+		for (size_t i = 0; i < players.Count(); i++)
+		{
+			players[i]->CleanUp();
+			app->entityManager->DestroyEntity((Entity*)players[i]);
+			delete players[i];
+		}
+		zhaak = nullptr;
+		eli = nullptr;
+
+	}
+
+	players.Clear();
+
 	return true;
 }
 

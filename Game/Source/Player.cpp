@@ -215,6 +215,7 @@ bool Player::Update(float dt)
 
 bool Player::CleanUp()
 {
+	Character::CleanUp();
 	return true;
 }
 
