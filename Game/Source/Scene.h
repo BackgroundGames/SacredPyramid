@@ -62,7 +62,7 @@ public:
 	}
 
 	Player* GetPlayer() {
-		return (Player*)players.At(0)->data;
+		return (Player*)players.start->data;
 	}
 
 	Player* GetZhaak() {

@@ -64,6 +64,9 @@ bool Menu::Update(float dt)
 {
 	app->render->DrawTexture(img, windowW / 2 - texW / 2, windowH / 2 - texH / 2, NULL);
 
+	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->intro);
+
 	return true;
 }
 

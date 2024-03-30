@@ -107,6 +107,9 @@ bool Level1::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
+
+	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->menu);
 	
 	return true;
 }
