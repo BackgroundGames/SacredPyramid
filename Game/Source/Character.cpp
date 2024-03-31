@@ -28,17 +28,11 @@ bool Character::Start()
 
 	if (texture == nullptr) {
 		texture = app->tex->Load(parameters.attribute("texturePath").as_string());
-		app->tex->GetSize(texture, texW, texH);
 	}
-
-	TpToCell(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
 
 	selectionTex = app->render->GetSelectionTex();
 
 	PosState = Direction::DR;
-	mainState = MainState::NONE;
-	combatState = CombatState::NONE;
-	exploringState = ExploringState::NONE;
 
 	return true;
 }
@@ -53,8 +47,10 @@ bool Character::Update(float dt)
 			DebugPath();
 		}
 	}
-	texW = 56;
-	texH = 123;
+
+	currentAnimation->Update();
+	texW = currentAnimation->GetCurrentFrame().w;
+	texH = currentAnimation->GetCurrentFrame().h;
 
 	//debug player rect
 	prect.x = position.x;
@@ -62,25 +58,16 @@ bool Character::Update(float dt)
 	prect.w = texW;
 	prect.h = texH;
 
-	//darw
-	//pos x en la imagen
-	prect.x = 0;
-
 	if (PosState == Direction::UL) {
-		//pos y en la imagen
-		prect.y = 0;
 		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
-	else if (PosState == Direction::UR) {									 
-		prect.y = 0;														 
+	else if (PosState == Direction::UR) {									 													 
 		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
 	else if (PosState == Direction::DL) {	
-		prect.y = 4;
 		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}																		 
-	else if (PosState == Direction::DR) {									 
-		prect.y = 4;														 
+	else if (PosState == Direction::DR) {									 													 
 		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
 	}
 
@@ -223,7 +210,6 @@ void Character::DoPathMoving()
 		//reasuring player is in the correct position in the cell
 		else
 		{
-			//TpToCell(path->At(pathingIteration -1)->x, path->At(pathingIteration-1)->y);
 			auxPosition = position;
 			translationOffset = { 0, 0 };
 		}

@@ -39,7 +39,7 @@ public:
 		return !loop && !pingpong && loopCount > 0;
 	}
 
-	void Update(float dt)
+	void Update()
 	{
 		currentFrame += speed;
 		if (currentFrame >= totalFrames)

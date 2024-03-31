@@ -8,6 +8,7 @@
 #include "Weapon.h"
 #include "Armor.h"
 #include "Accessory.h"
+#include "Animation.h"
 
 struct Stats
 {
@@ -129,6 +130,7 @@ public:
 	//debug
 	SDL_Rect prect;
 	SDL_Texture* selectionTex = NULL;
+	Animation* currentAnimation = nullptr;
 
 	MainState mainState;
 	CombatState combatState;

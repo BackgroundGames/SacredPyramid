@@ -133,6 +133,7 @@
     <ClCompile Include="Source\Zhaak.cpp" />
     <ClInclude Include="Source\Amir.h" />
     <ClInclude Include="Source\Accessory.h" />
+    <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Armor.h" />
     <ClInclude Include="Source\Bandit.h" />
     <ClInclude Include="Source\BattleManager.h" />

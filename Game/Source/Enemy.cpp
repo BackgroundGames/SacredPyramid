@@ -38,9 +38,15 @@ bool Enemy::Start()
 {
 	Character::Start();
 
-	//aquests valors son per el pj de prova
-	//texW = 28;
-	//texH = 62;
+	if (currentAnimation == nullptr) {
+		idleAnim.loop = true;
+		idleAnim.speed = 1.0f;
+		idleAnim.PushBack({ 0, 0, 56, 124 });
+	}
+
+	currentAnimation = &idleAnim;
+	texW = currentAnimation->GetCurrentFrame().w;
+	texH = currentAnimation->GetCurrentFrame().h;
 
 	TpToCell(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
 

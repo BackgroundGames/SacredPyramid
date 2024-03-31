@@ -29,6 +29,8 @@ public:
 
 	bool lastStand = false;
 	PlayerType subtype;
+
+	Animation idleAnim;
 };
 
 #endif // __PLAYER_H__

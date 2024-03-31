@@ -90,5 +90,6 @@
     <ClInclude Include="Source\Level2.h" />
     <ClInclude Include="Source\BattleManager.h" />
     <ClInclude Include="Source\Eli.h" />
+    <ClInclude Include="Source\Animation.h" />
   </ItemGroup>
 </Project>

@@ -27,6 +27,8 @@ private:
 	bool patrol = true;
 	List<Entity*> enemies;
 
+	Animation idleAnim;
+
 public:
 	uint id;
 	EnemyType subtype;
