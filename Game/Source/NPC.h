@@ -19,9 +19,12 @@ public:
 
 	bool CleanUp();
 
+	void PerformDialog();
+
 public:
 	Animation idleAnim;
 	uint id;
+	bool startTalking = false;
 };
 #endif // !__NPC_H__
 

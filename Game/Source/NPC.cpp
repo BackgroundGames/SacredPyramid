@@ -43,26 +43,20 @@ bool NPC::Update(float dt)
 {
 	distanceFromPlayer = DistanceToTile(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
 
-	if (GetMouseTile(mousePos) == GetTile() && app->sceneManager->currentScene->GetPlayer()->exploringState != ExploringState::TALKING)
+	if (GetMouseTile(mousePos) == GetTile() && app->sceneManager->currentScene->GetPlayer()->interacted != this)
 	{
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 		{
 			NotifyObserver();
 		}
-	}
-
-	if (distanceFromPlayer <= 1)
-	{
-		app->dialogueTree->performDialogue("dialogue1");
-
-		for (size_t i = 0; i < app->sceneManager->currentScene->players.Count(); i++)
-		{
-			dynamic_cast<Player*>(app->sceneManager->currentScene->players.At(i)->data)->exploringState = ExploringState::TALKING;
-		}
-	}
-	
+	}	
 
 	Character::Update(dt);
+
+	if (startTalking) {
+		app->dialogueTree->performDialogue("dialogue1");
+		startTalking = false;
+	}
 
 	return true;
 }
@@ -71,4 +65,14 @@ bool NPC::CleanUp()
 {
 	Character::CleanUp();
 	return true;
+}
+
+void NPC::PerformDialog()
+{
+	app->dialogueTree->performDialogue("dialogue1");
+
+	for (size_t i = 0; i < app->sceneManager->currentScene->players.Count(); i++)
+	{
+		dynamic_cast<Player*>(app->sceneManager->currentScene->players.At(i)->data)->exploringState = ExploringState::TALKING;
+	}
 }

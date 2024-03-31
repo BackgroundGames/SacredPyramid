@@ -32,6 +32,8 @@ private:
 public:
 	uint id;
 	EnemyType subtype;
+
+	bool assaulted = false;
 };
 #endif // !__ENEMY_H__
 

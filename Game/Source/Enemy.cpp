@@ -81,16 +81,15 @@ bool Enemy::Update(float dt)
 
 			if (GetMouseTile(mousePos) == GetTile()) 
 			{
-				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) 
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && app->sceneManager->currentScene->GetPlayer()->interacted != this)
 				{
-					if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) 
-					{
-						//exploringState = ExploringState::MOVING;
-						enemies.Add(this);
-						app->entityManager->StartCombat(enemies);
-					}
 					NotifyObserver();
 				}
+			}
+
+			if (assaulted) {
+				enemies.Add(this);
+				app->entityManager->StartCombat(enemies);
 			}
 
 			break;

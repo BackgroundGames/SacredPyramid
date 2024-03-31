@@ -52,6 +52,7 @@ enum class ExploringState
 	MOVING,
 	FOLLOWING,
 	TALKING,
+	INTERACT,
 	NONE
 };
 

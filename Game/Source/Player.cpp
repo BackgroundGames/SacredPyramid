@@ -8,6 +8,8 @@
 #include "Log.h"
 #include "Point.h"
 #include "Map.h"
+#include "NPC.h"
+#include "Enemy.h"
 
 Player::Player()
 {
@@ -134,6 +136,10 @@ bool Player::Update(float dt)
 				}
 			}
 
+			if (app->sceneManager->currentScene->GetPlayer()->exploringState == ExploringState::TALKING) {
+				move = false;
+			}
+
 			if (move)
 			{
 				DoPathMoving();
@@ -147,6 +153,39 @@ bool Player::Update(float dt)
 
 		case ExploringState::TALKING:
 
+			break;
+
+		case ExploringState::INTERACT:
+
+			switch (interacted->type)
+			{
+			case EntityType::NPC:
+
+				if (pathingIteration < path.Count() - 1) {
+					DoPathMoving();
+				}
+				else {
+					exploringState = ExploringState::TALKING;
+					dynamic_cast<NPC*>(interacted)->startTalking = true;
+					move = false;
+				}
+				break;
+			case EntityType::ENEMY:
+
+				if (pathingIteration < path.Count() - 1) {
+					DoPathMoving();
+				}
+				else {
+					exploringState = ExploringState::TALKING;
+					dynamic_cast<Enemy*>(interacted)->assaulted = true;
+					move = false;
+				}
+
+				break;
+
+			default:
+				break;
+			}
 			break;
 
 		case ExploringState::NONE:
@@ -238,10 +277,23 @@ bool Player::OnGuiMouseClickEvent(Entity* control)
 		auxp->translationOffset = { 0, 0 };
 	}*/
 
-	if (control->type == EntityType::NPC)
+	interacted = control;
+	exploringState = ExploringState::INTERACT;
+
+	switch (interacted->type)
 	{
-		interacted = (Character*) control;
-		exploringState = ExploringState::TALKING;
+	case EntityType::NPC:
+
+		moveTo(dynamic_cast<Character*>(interacted)->GetTile());
+		break;
+
+	case EntityType::ENEMY:
+
+		moveTo(dynamic_cast<Character*>(interacted)->GetTile());
+		break;
+
+	default:
+		break;
 	}
 
 	return false;
