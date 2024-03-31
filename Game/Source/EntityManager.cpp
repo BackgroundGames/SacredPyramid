@@ -1,4 +1,5 @@
 #include "EntityManager.h"
+#include "Window.h"
 #include "Player.h"
 #include "Zhaak.h"
 #include "Eli.h"
@@ -51,6 +52,8 @@ bool EntityManager::Awake(pugi::xml_node config)
 
 bool EntityManager::Start() {
 
+	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+
 	bool ret = true; 
 
 	//Iterates over the entities and calls Start
@@ -64,6 +67,10 @@ bool EntityManager::Start() {
 		if (pEntity->active == false) continue;
 		ret = item->data->Start();
 	}
+
+	app->win->GetWindowSize(windowW, windowH);
+
+	screenRect = { 0, 0, (int)windowW, (int)windowH };
 
 	return ret;
 }
@@ -182,6 +189,10 @@ void EntityManager::AddEntity(Entity* entity)
 
 void EntityManager::StartCombat(List<Entity*> enemies)
 {
+	currentStep = Fade_StepFade::TO_BLACKF;
+
+	startCombat = true;
+
 	combatManager = new CombatManager();
 
 	int length = 0;
@@ -230,7 +241,6 @@ void EntityManager::StartCombat(List<Entity*> enemies)
 	}
 
 	combatManager->currentCharacterTurn = (Character*)combatManager->CombatList[0];
-	combatManager->CombatList[0]->combatState = CombatState::IDLE;
 }
 
 bool EntityManager::Update(float dt)
@@ -240,7 +250,7 @@ bool EntityManager::Update(float dt)
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;
 
-	if (combatManager == nullptr) {
+	if (!inCombat) {
 
 		for (item = entities.start; item != NULL && ret == true; item = item->next)
 		{
@@ -252,10 +262,30 @@ bool EntityManager::Update(float dt)
 
 	}
 	else {
-		ret = combatManager->Update(dt);
+		combatManager->Update(dt);
 	}
 
 	return ret;
+}
+
+bool EntityManager::PostUpdate()
+{
+
+	if (combatFinished) {
+		MakeEndCombatFade();
+	}
+	else if (startCombat) {
+		MakeStartCombatFade();
+	}
+
+	if (combatFinished || startCombat) {
+		float fadeRatio = (float)frameCount / (float)maxFadeFrames;
+		// Render the black square with alpha on the screen
+		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
+		SDL_RenderFillRect(app->render->renderer, &screenRect);
+	}
+
+	return true;
 }
 
 CombatManager::CombatManager()
@@ -308,6 +338,12 @@ bool CombatManager::Update(float dt)
 			item->data->Update(dt);
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+	{
+		app->entityManager->combatFinished = true;
+		app->entityManager->currentStep = Fade_StepFade::TO_BLACKF;
+	}
+
 	return true;
 }
 
@@ -332,4 +368,77 @@ int CombatManager::NextTurn()
 		turn = 0;
 
 	return turn;
+}
+
+void CombatManager::EndCombat()
+{
+	// victory
+	for (int i = 0; i < players.Count(); i++)
+	{
+		players[i]->mainState = MainState::OUT_OF_COMBAT;
+		players[i]->combatState = CombatState::NONE;
+		players[i]->exploringState = ExploringState::IDLE;
+		players[i] = nullptr;
+	}
+	players.Clear();
+
+	for (int i = 0; i < enemies.Count(); i++)
+	{
+		enemies[i]->CleanUp();
+		app->entityManager->DestroyEntity((Entity*)enemies[i]);
+		enemies[i] = nullptr;
+	}
+	enemies.Clear();
+
+	currentCharacterTurn = nullptr;
+
+	CombatList.Clear();
+}
+
+void EntityManager::MakeStartCombatFade()
+{
+	if (currentStep == Fade_StepFade::TO_BLACKF)
+	{
+		++frameCount;
+		if (frameCount >= maxFadeFrames)
+		{
+			currentStep = Fade_StepFade::FROM_BLACKF;
+			inCombat = true;
+			combatManager->CombatList[0]->combatState = CombatState::IDLE;
+		}
+	}
+	else
+	{
+		--frameCount;
+		if (frameCount <= 0)
+		{
+			startCombat = false;
+			currentStep = Fade_StepFade::NOF;
+		}
+	}
+}
+
+void EntityManager::MakeEndCombatFade()
+{
+	if (currentStep == Fade_StepFade::TO_BLACKF)
+	{
+		++frameCount;
+		if (frameCount >= maxFadeFrames)
+		{
+			currentStep = Fade_StepFade::FROM_BLACKF;
+			combatManager->EndCombat();
+			delete combatManager;
+			combatManager = nullptr;
+			inCombat = false;
+		}
+	}
+	else
+	{
+		--frameCount;
+		if (frameCount <= 0)
+		{
+			currentStep = Fade_StepFade::NOF;
+			combatFinished = false;
+		}
+	}
 }
