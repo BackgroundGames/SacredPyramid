@@ -8,6 +8,9 @@
 #include "Window.h"
 #include "Log.h"
 
+#include "SceneManager.h"
+#include "Player.h"
+
 #include <cstring>
 #include <algorithm>
 
@@ -121,6 +124,11 @@ bool DialogueTree::CleanUp()
 
 	app->guiManager->CleanUp();
 
+	for (size_t i = 0; i < app->sceneManager->currentScene->players.Count(); i++)
+	{
+		dynamic_cast<Player*>(app->sceneManager->currentScene->players.At(i)->data)->exploringState = ExploringState::IDLE;
+	}
+
 	return true;
 }
 
@@ -188,7 +196,8 @@ int DialogueTree::performDialogue(const char * dialogueName)
 		itemNode = itemNode.next_sibling("node");
 	}
 
-	if (dialogueNodes.empty()) {
+	if (dialogueNodes.empty()) 
+	{
 		return -1;
 	}
 

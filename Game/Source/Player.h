@@ -21,15 +21,14 @@ public:
 
 	bool OnGuiMouseClickEvent(Entity* control);
 
-	iPoint GetMouseTile(iPoint mousePos);
-
 public:
-	iPoint mousePos = iPoint{ 0, 0 };
 	iPoint destination = iPoint{ 0, 0 };
-
-	bool lastStand = false;
 	PlayerType subtype;
 
+	bool lastStand = false;
+	Entity* interacted = nullptr;
+
+private:
 	Animation idleAnim;
 };
 

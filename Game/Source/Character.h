@@ -19,7 +19,7 @@ struct Stats
 	uint magicAttack;
 	uint magicDefense;
 	uint initiative;
-	uint mobility = 3;
+	uint movement = 3;
 };
 
 struct Equipment
@@ -89,6 +89,7 @@ public:
 	void DebugPath();
 
 	iPoint GetTile();
+	iPoint GetMouseTile(iPoint mousePos);
 
 	uint GetHealth() { return this->stats.health; }
 
@@ -104,19 +105,20 @@ public:
 
 	uint GetInitiative() { return this->stats.initiative; }
 
-	uint GetMobility() { return this->stats.mobility; }
+	uint GetMovement() { return this->stats.movement; }
 
 	uint DistanceToTile(iPoint Tile1, iPoint Tile2);
 
 public:
-
 	//Declare character parameters
 	Stats stats;
 	Equipment inventory;
 	float speed = 0.2f;
+	float velocity = 1;
 
-	//Animation
-	//Animation* currentAnim;
+	iPoint mousePos = iPoint{ 0, 0 };
+	bool hasAttacked;
+	uint movementUsed = 0;
 
 	//to move
 	DynArray<iPoint> path;
@@ -132,17 +134,11 @@ public:
 	SDL_Texture* selectionTex = NULL;
 	Animation* currentAnimation = nullptr;
 
+	//player stats
 	MainState mainState;
 	CombatState combatState;
 	ExploringState exploringState;
-
 	ExploringState previousEState;
-
-	float velocity = 1;
-
-	bool hasAttacked;
-
-	uint mobilityUsed = 0;
 };
 
 

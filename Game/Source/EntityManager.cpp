@@ -9,6 +9,8 @@
 #include "Bandit.h"
 #include "Drunkard.h"
 
+#include "NPC.h"
+
 #include "Item.h"
 #include "Weapon.h"
 #include "Armor.h"
@@ -141,6 +143,10 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		default:
 			break;
 		}
+		break;
+
+	case EntityType::NPC:
+		entity = new NPC();
 		break;
 
 	case EntityType::ITEM:

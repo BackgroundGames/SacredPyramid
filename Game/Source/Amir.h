@@ -13,7 +13,7 @@ public:
 
 	Amir(Stats stats);
 
-	~Amir();
+	virtual ~Amir();
 
 	bool Awake();
 

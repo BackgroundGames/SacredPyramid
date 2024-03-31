@@ -7,6 +7,7 @@
 #include "Eli.h"
 #include "Amir.h"
 #include "Enemy.h"
+#include "NPC.h"
 #include "GuiControl.h"
 
 struct SDL_Texture;

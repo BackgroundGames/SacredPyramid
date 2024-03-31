@@ -67,6 +67,7 @@ bool Level1::Start()
 		eli->parameters = sceneconfig.child("eli");
 		eli->Start();
 
+		// iterate all entities in the scene --> Check https://pugixml.org/docs/quickstart.html#access
 		for (pugi::xml_node enemyNode = sceneconfig.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
 		{
 			Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
@@ -75,15 +76,22 @@ bool Level1::Start()
 			enemy->parameters = enemyNode;
 			enemy->Start();
 		}
-	}
 
-	// iterate all items in the scene
-	// Check https://pugixml.org/docs/quickstart.html#access
-	/*for (pugi::xml_node itemNode = sceneconfig.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
-	{
-		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-		item->parameters = itemNode;
-	}*/
+		for (pugi::xml_node npcNode = sceneconfig.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
+		{
+			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
+			npc->id = npcNode.attribute("id").as_uint();
+			npcs.Add(npc);
+			npc->parameters = npcNode;
+			npc->Start();
+		}
+
+		/*for (pugi::xml_node itemNode = sceneconfig.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
+		{
+			Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+			item->parameters = itemNode;
+		}*/
+	}
 
 	app->render->camera.y = 0;
 	app->render->camera.x = 0;
@@ -116,12 +124,7 @@ bool Level1::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x += (int)ceil(camSpeed * dt);
 
-	//Implement a method that repositions the player in the map with a mouse click
-
-
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-		app->dialogueTree->performDialogue("dialogue1");
-
+	//DEBUG: Change Scenes forward and backward
 	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
 

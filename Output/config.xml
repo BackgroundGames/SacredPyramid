@@ -28,6 +28,7 @@
 			<eli x="17" y="14" texturePath="Assets/Textures/ELI_GRANDE.png"/>
 			<enemy x="15" y="10" id="0" texturePath="Assets/Textures/Enemy1.png"/>
 			<enemy x="10" y="10" id="1" texturePath="Assets/Textures/Enemy2.png"/>
+			<npc x="5" y="5" id="0" texturePath="Assets/Textures/NPC1.png"/>
 			<map path="Assets/Maps/" name="Mapa desierto.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 		</level1>
 		<level2>

@@ -10,7 +10,7 @@
 class Entity;
 class Player;
 class Enemy;
-class Zhaak;
+class NPC;
 class GuiControl;
 
 class Scene
@@ -101,6 +101,7 @@ public:
 
 	List<Entity*> enemies;
 	List<Entity*> players;
+	List<Entity*> npcs;
 };
 
 #endif // __SCENE_H__

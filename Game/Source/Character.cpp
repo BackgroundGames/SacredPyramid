@@ -238,7 +238,14 @@ void Character::DebugPath()
 iPoint Character::GetTile()
 {
 	//el 14 seria la meitat del w i el 31 la meitat de h
-	return app->map->WorldToMap(position.x + texW/2 - app->map->GetTileWidth() / 2, position.y + texH/2 - app->map->GetTileHeight()/2);
+	return app->map->WorldToMap(position.x + texW / 2 - app->map->GetTileWidth() / 2, position.y + texH / 2 - app->map->GetTileHeight() / 2);
+}
+
+iPoint Character::GetMouseTile(iPoint mousePos)
+{
+	app->input->GetMousePosition(mousePos.x, mousePos.y);
+	return app->map->WorldToMap(mousePos.x - app->render->camera.x - app->map->GetTileWidth() / 2,
+		mousePos.y - app->render->camera.y - app->map->GetTileHeight() / 2);
 }
 
 uint Character::DistanceToTile(iPoint Tile1, iPoint Tile2)

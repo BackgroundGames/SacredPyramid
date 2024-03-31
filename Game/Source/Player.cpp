@@ -146,6 +146,7 @@ bool Player::Update(float dt)
 			break;
 
 		case ExploringState::TALKING:
+
 			break;
 
 		case ExploringState::NONE:
@@ -169,11 +170,11 @@ bool Player::Update(float dt)
 
 		case CombatState::IDLE:
 
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && (DistanceToTile(GetTile(), destination) <= (stats.mobility - mobilityUsed)))
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && (DistanceToTile(GetTile(), destination) <= (stats.movement - movementUsed)))
 			{
 				if (moveTo(destination)) {
 					combatState = CombatState::MOVING;
-					mobilityUsed += path.Count() - 1;
+					movementUsed += path.Count() - 1;
 				}
 			}
 			break;
@@ -187,9 +188,9 @@ bool Player::Update(float dt)
 			else
 			{
 				combatState = CombatState::IDLE;
-				if (mobilityUsed == stats.mobility) {
+				if (movementUsed == stats.movement) {
 					combatState = CombatState::WAITING;
-					mobilityUsed = 0;
+					movementUsed = 0;
 				}
 			}
 			break;
@@ -229,20 +230,20 @@ bool Player::CleanUp()
 
 bool Player::OnGuiMouseClickEvent(Entity* control)
 {
-	for (size_t i = 0; i < app->sceneManager->currentScene->players.Count(); i++)
+	/*for (size_t i = 0; i < app->sceneManager->currentScene->players.Count(); i++)
 	{
 		Player* auxp = (Player*)app->sceneManager->currentScene->players[i];
 		auxp->TpToCell(auxp->GetTile().x, auxp->GetTile().y);
 		auxp->move = false;
 		auxp->translationOffset = { 0, 0 };
-	}
-	return false;
-}
+	}*/
 
-iPoint Player::GetMouseTile(iPoint mousePos)
-{
-	app->input->GetMousePosition(mousePos.x, mousePos.y);
-	return app->map->WorldToMap(mousePos.x - app->render->camera.x - app->map->GetTileWidth() / 2,
-								mousePos.y - app->render->camera.y - app->map->GetTileHeight() / 2);
+	if (control->type == EntityType::NPC)
+	{
+		interacted = (Character*) control;
+		exploringState = ExploringState::TALKING;
+	}
+
+	return false;
 }
 

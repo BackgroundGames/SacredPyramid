@@ -25,8 +25,6 @@ Enemy::Enemy(uint hp, uint mp, uint atk, uint def, uint matk, uint mdef, uint in
 	this->stats.initiative = ini;
 }
 
-
-
 Enemy::~Enemy() {}
 
 bool Enemy::Awake()
@@ -49,10 +47,6 @@ bool Enemy::Start()
 	texH = currentAnimation->GetCurrentFrame().h;
 
 	TpToCell(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
-
-	//Patrol
-	iPoint patrol1 = app->map->WorldToMap(500, 400);
-	iPoint patrol2 = app->map->WorldToMap(600, 400);
 
 	mainState = MainState::OUT_OF_COMBAT;
 	combatState = CombatState::NONE;
@@ -85,13 +79,12 @@ bool Enemy::Update(float dt)
 				}
 			}*/
 
-			int X, Y;
-			app->input->GetMousePosition(X, Y);
-			X += -app->render->camera.x - app->map->GetTileWidth() / 2;
-			Y += -app->render->camera.y - app->map->GetTileHeight() / 2;
-			if (app->map->WorldToMap(X, Y) == GetTile()) {
-				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
-					if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) {
+			if (GetMouseTile(mousePos) == GetTile()) 
+			{
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) 
+				{
+					if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) 
+					{
 						//exploringState = ExploringState::MOVING;
 						enemies.Add(this);
 						app->entityManager->StartCombat(enemies);
@@ -114,8 +107,6 @@ bool Enemy::Update(float dt)
 				exploringState = ExploringState::IDLE;
 			}
 
-			break;
-		case ExploringState::TALKING:
 			break;
 		case ExploringState::NONE:
 			if (!app->sceneManager->currentScene->settings) {
