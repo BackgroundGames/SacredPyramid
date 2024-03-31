@@ -184,7 +184,15 @@ void EntityManager::DestroyEntity(Entity* entity)
 
 	for (item = entities.start; item != NULL; item = item->next)
 	{
-		if (item->data == entity) entities.Del(item);
+		if (item->data == entity) {
+			for (size_t i = 0; i < app->sceneManager->currentScene->enemies.Count(); i++)
+			{
+				if (app->sceneManager->currentScene->enemies[i] == item->data) {
+					app->sceneManager->currentScene->enemies[i] = nullptr;
+				}
+			}
+			entities.Del(item);
+		}
 	}
 }
 
@@ -388,13 +396,8 @@ void CombatManager::EndCombat()
 	}
 	players.Clear();
 
-	for (int i = 0; i < enemies.Count(); i++)
-	{
-		enemies[i]->CleanUp();
-		app->entityManager->DestroyEntity((Entity*)enemies[i]);
-		enemies[i] = nullptr;
-	}
-	enemies.Clear();
+	enemies[enemies.Count()-1]->CleanUp();
+	app->entityManager->DestroyEntity((Entity*)enemies[enemies.Count()-1]);
 
 	currentCharacterTurn = nullptr;
 

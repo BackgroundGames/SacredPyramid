@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Character.h"
 #include "List.h"
+#include "DynArray.h"
 
 class Enemy : public Character
 {
@@ -25,14 +26,13 @@ public:
 
 private:
 	bool patrol = true;
-	List<Entity*> enemies;
-
 	Animation idleAnim;
 
 public:
 	uint id;
 	EnemyType subtype;
-
+	List<Entity*> enemies;
+	DynArray<Entity*> hola;
 	bool assaulted = false;
 };
 #endif // !__ENEMY_H__

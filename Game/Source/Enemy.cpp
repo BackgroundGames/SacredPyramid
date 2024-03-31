@@ -5,6 +5,8 @@
 #include "Player.h"
 #include "Log.h"
 #include "Pathfinding.h"
+#include "Bandit.h"
+#include "Textures.h"
 
 Enemy::Enemy()
 {
@@ -48,9 +50,25 @@ bool Enemy::Start()
 
 	TpToCell(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
 
-	mainState = MainState::OUT_OF_COMBAT;
-	combatState = CombatState::NONE;
-	exploringState = ExploringState::IDLE;
+	for (pugi::xml_node enemyNode = parameters.child("minion"); enemyNode; enemyNode = enemyNode.next_sibling("minion"))
+	{
+		if (enemyNode.attribute("id").as_int() == 0) {
+			Enemy* enemy = new Bandit();
+			enemy->id = enemyNode.attribute("id").as_uint();
+			enemies.Add(enemy);
+			enemy->parameters = enemyNode;
+			enemy->mainState = MainState::NONE;
+			enemy->combatState = CombatState::NONE;
+			enemy->exploringState = ExploringState::NONE;
+			enemy->Start();
+		}
+	}
+
+	if (enemies.Count() != 0) {
+		mainState = MainState::OUT_OF_COMBAT;
+		combatState = CombatState::NONE;
+		exploringState = ExploringState::IDLE;
+	}
 
 	observer = app->sceneManager->currentScene->GetPlayer();
 
@@ -169,6 +187,13 @@ bool Enemy::Update(float dt)
 
 bool Enemy::CleanUp()
 {
+	if (enemies.Count() > 0) {
+		for (size_t i = 0; i < enemies.Count() - 1; i++)
+		{
+			enemies[i]->CleanUp();
+			delete enemies[i];
+		}
+	}
 	Character::CleanUp();
 	return true;
 }

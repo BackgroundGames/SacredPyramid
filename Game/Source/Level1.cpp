@@ -159,9 +159,11 @@ bool Level1::CleanUp()
 
 	for (size_t i = 0; i < enemies.Count(); i++)
 	{
-		enemies[i]->CleanUp();
-		app->entityManager->DestroyEntity((Entity*)enemies[i]);
-		delete enemies[i];
+		if (enemies[i] != nullptr) {
+			enemies[i]->CleanUp();
+			app->entityManager->DestroyEntity((Entity*)enemies[i]);
+			delete enemies[i];
+		}
 	}
 	enemies.Clear();
 
