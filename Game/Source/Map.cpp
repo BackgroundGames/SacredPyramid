@@ -51,10 +51,10 @@ bool Map::Update(float dt)
 
     //comprovar amb la pos del centre de la camara i no amb el player
 
-    int Xi = app->sceneManager->currentScene->GetPlayer()->GetTile().x - 20;
-    int Xf = app->sceneManager->currentScene->GetPlayer()->GetTile().x + 20;
-    int Yi = app->sceneManager->currentScene->GetPlayer()->GetTile().y - 22;
-    int Yf = app->sceneManager->currentScene->GetPlayer()->GetTile().y + 22;
+    int Xi = app->sceneManager->currentScene->GetPlayer()->GetTile().x - 10;
+    int Xf = app->sceneManager->currentScene->GetPlayer()->GetTile().x + 5;
+    int Yi = app->sceneManager->currentScene->GetPlayer()->GetTile().y - 10;
+    int Yf = app->sceneManager->currentScene->GetPlayer()->GetTile().y + 10;
 
     if (Xi < 0) {
         Xi = 0;

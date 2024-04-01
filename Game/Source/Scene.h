@@ -3,6 +3,7 @@
 
 #include "SString.h"
 #include "List.h"
+#include "DynArray.h"
 
 
 #include "PugiXml/src/pugixml.hpp"

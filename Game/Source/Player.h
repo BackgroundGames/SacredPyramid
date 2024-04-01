@@ -30,6 +30,7 @@ public:
 
 private:
 	Animation idleAnim;
+	Animation walkingAnim;
 };
 
 #endif // __PLAYER_H__
