@@ -28,8 +28,9 @@ public:
 	bool lastStand = false;
 	Entity* interacted = nullptr;
 
-private:
+public:
 	Animation idleAnim;
+	Animation idleAnimB;
 	Animation walkingAnim;
 };
 

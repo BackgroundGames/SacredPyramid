@@ -53,7 +53,7 @@ bool GuiControlButton::Update(float dt)
 			if (debug) {
 				app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
 			}
-			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, 220, 220, 220);
+			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, 0, 0, 0);
 			anim = false;
 			animW = 0;
 			animH = 0;
@@ -84,7 +84,7 @@ bool GuiControlButton::Update(float dt)
 			if (debug) {
 				app->render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
 			}
-			app->render->DrawText(text.GetString(), bounds.x + 5, bounds.y + 5, bounds.w - 10, bounds.h - 10, 25, 25, 25);
+			app->render->DrawText(text.GetString(), bounds.x + 5, bounds.y + 5, bounds.w - 10, bounds.h - 10, 125, 125, 125);
 			break;
 		}
 

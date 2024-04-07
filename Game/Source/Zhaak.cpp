@@ -25,6 +25,16 @@ bool Zhaak::Awake()
 bool Zhaak::Start()
 {
 	Player::Start();
+	idleAnim.speed = 0.05f;
+	idleAnim.PushBack({ 56, 0, 56, 123 });
+	idleAnim.PushBack({ 112, 0, 56, 123 });
+	idleAnim.PushBack({168, 0, 56, 123}); 
+	idleAnimB.loop = true;
+	idleAnimB.speed = 0.05f;
+	idleAnimB.PushBack({ 0, 123, 54, 123 });
+	idleAnimB.PushBack({ 54, 123, 54, 123 });
+	idleAnimB.PushBack({ 108, 123, 54, 123 });
+	idleAnimB.PushBack({ 162, 123, 54, 123 });
 	return true;
 }
 

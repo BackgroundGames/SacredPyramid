@@ -30,7 +30,6 @@ bool Player::Start() {
 
 	if (currentAnimation == nullptr) {
 		idleAnim.loop = true;
-		idleAnim.speed = 1.0f;
 		idleAnim.PushBack({ 0, 0, 56, 123 });
 	}
 
@@ -76,6 +75,13 @@ bool Player::Update(float dt)
 		{
 		case ExploringState::IDLE:
 
+			if (PosState == Direction::UL || PosState == Direction::UR) {
+				currentAnimation = &idleAnimB;
+			}
+			else {
+				currentAnimation = &idleAnim;
+			}
+
 			if (this != app->sceneManager->currentScene->GetPlayer())
 			{
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && destination != app->sceneManager->currentScene->GetPlayer()->GetTile() && app->sceneManager->currentScene->GetPlayer()->path.Count() > 0)
@@ -105,6 +111,13 @@ bool Player::Update(float dt)
 
 		case ExploringState::MOVING:
 
+			if (PosState == Direction::UL || PosState == Direction::UR) {
+				currentAnimation = &idleAnimB;
+			}
+			else {
+				currentAnimation = &idleAnim;
+			}
+
 			//move to the tile clicked
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 			{
@@ -124,6 +137,13 @@ bool Player::Update(float dt)
 			break;
 
 		case ExploringState::FOLLOWING:
+
+			if (PosState == Direction::UL || PosState == Direction::UR) {
+				currentAnimation = &idleAnimB;
+			}
+			else {
+				currentAnimation = &idleAnim;
+			}
 
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 			{

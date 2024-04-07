@@ -22,10 +22,10 @@
 
 	<scenemanager>
 		<intro texturePath="Assets/Textures/bgg.jpg"/>
-		<menu texturePath="Assets/Textures/menu.jpg"/>
+		<menu texturePath="Assets/Textures/Menu Piramide.jpeg"/>
 		<level1>
-			<zhaak x="17" y="13" texturePath="Assets/Textures/zACK_REESCALADO.png"/>
-			<eli x="17" y="14" texturePath="Assets/Textures/ELI_GRANDE.png"/>
+			<zhaak x="17" y="13" texturePath="Assets/Textures/Zhaak anim.png"/>
+			<eli x="17" y="14" texturePath="Assets/Textures/Eli anim.png"/>
 			<enemy x="15" y="10" id="0" texturePath="Assets/Textures/Enemy1.png" p1x="12" p1y="12" p2x="14" p2y="12">
 				<minion x="13" y="7" id="0" texturePath="Assets/Textures/Enemy1.png"/>
 				<minion x="11" y="9" id="0" texturePath="Assets/Textures/Enemy1.png"/>

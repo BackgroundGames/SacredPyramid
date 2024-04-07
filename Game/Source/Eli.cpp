@@ -25,6 +25,12 @@ bool Eli::Awake()
 bool Eli::Start()
 {
 	Player::Start();
+	idleAnim.speed = 0.05f;
+	idleAnim.PushBack({ 56, 0, 56, 123 });
+	idleAnimB.loop = true;
+	idleAnimB.speed = 0.05f;
+	idleAnimB.PushBack({ 0, 123, 56, 123 });
+	idleAnimB.PushBack({ 56, 123, 56, 123 });
 	return true;
 }
 

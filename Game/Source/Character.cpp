@@ -59,16 +59,16 @@ bool Character::Update(float dt)
 	prect.h = texH;
 
 	if (PosState == Direction::UL) {
-		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, &currentAnimation->GetCurrentFrame());
 	}																		 
 	else if (PosState == Direction::UR) {									 													 
-		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, &currentAnimation->GetCurrentFrame());
 	}																		 
 	else if (PosState == Direction::DL) {	
-		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, NULL);
+		app->render->IDrawTexture(texture, position.x, position.y - texH / 2, &currentAnimation->GetCurrentFrame());
 	}																		 
 	else if (PosState == Direction::DR) {									 													 
-		app->render->DrawTexture(texture, position.x, position.y - texH / 2, NULL);
+		app->render->DrawTexture(texture, position.x, position.y - texH / 2, &currentAnimation->GetCurrentFrame());
 	}
 
 	if (app->debug)
