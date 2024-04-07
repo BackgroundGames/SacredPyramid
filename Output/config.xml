@@ -34,7 +34,7 @@
 				<minion x="14" y="9" id="0" texturePath="Assets/Textures/Enemy2.png"/>
 			</enemy>
 			<npc x="5" y="5" id="0" texturePath="Assets/Textures/NPC1.png"/>
-			<map path="Assets/Maps/" name="Mapa desierto.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
+			<map path="Assets/Maps/" name="Map2.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 		</level1>
 		<level2>
 			<map path="Assets/Maps/" name="proba.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
