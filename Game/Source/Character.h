@@ -2,9 +2,10 @@
 #define __CHARACTER_H__
 
 #include "Entity.h"
-#include "Point.h"
 #include "SDL/include/SDL.h"
 #include "DynArray.h"
+
+
 #include "Weapon.h"
 #include "Armor.h"
 #include "Accessory.h"

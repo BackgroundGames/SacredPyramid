@@ -33,8 +33,6 @@ bool Player::Start() {
 	combatState = CombatState::NONE;
 	exploringState = ExploringState::IDLE;
 
-	app->sceneManager->currentScene->LockCamera();
-
 	return true;
 }
 

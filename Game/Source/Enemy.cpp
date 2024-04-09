@@ -45,29 +45,9 @@ bool Enemy::Start()
 
 	TpToCell(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
 
-	for (pugi::xml_node enemyNode = parameters.child("minion"); enemyNode; enemyNode = enemyNode.next_sibling("minion"))
-	{
-		Enemy* enemy;
-		if (enemyNode.attribute("id").as_int() == 0) {
-			enemy = new Bandit();
-		}
-		else {
-			enemy = new Drunkard();
-		}
-		enemy->id = enemyNode.attribute("id").as_uint();
-		enemies.Add(enemy);
-		enemy->parameters = enemyNode;
-		enemy->mainState = MainState::NONE;
-		enemy->combatState = CombatState::NONE;
-		enemy->exploringState = ExploringState::NONE;
-		enemy->Start();
-	}
-
-	if (enemies.Count() != 0) {
-		mainState = MainState::OUT_OF_COMBAT;
-		combatState = CombatState::NONE;
-		exploringState = ExploringState::IDLE;
-	}
+	mainState = MainState::OUT_OF_COMBAT;
+	combatState = CombatState::NONE;
+	exploringState = ExploringState::IDLE;
 
 	observer = app->sceneManager->currentScene->GetPlayer();
 
@@ -107,8 +87,27 @@ bool Enemy::Update(float dt)
 			}
 
 			if (assaulted) {
-				enemies.Add(this);
-				app->entityManager->StartCombat(enemies);
+
+				for (pugi::xml_node enemyNode = parameters.child("minion"); enemyNode; enemyNode = enemyNode.next_sibling("minion"))
+				{
+					Enemy* enemy;
+					if (enemyNode.attribute("id").as_int() == 0) {
+						enemy = new Bandit();
+					}
+					else {
+						enemy = new Drunkard();
+					}
+
+					enemy->id = enemyNode.attribute("id").as_uint();
+					enemies.push_back(enemy);
+					enemy->parameters = enemyNode;
+					enemy->Start();
+					enemy->mainState = MainState::NONE;
+					enemy->combatState = CombatState::NONE;
+					enemy->exploringState = ExploringState::NONE;
+				}
+				app->entityManager->StartCombat(enemies, this);
+				assaulted = false;
 			}
 
 			break;
@@ -188,13 +187,7 @@ bool Enemy::Update(float dt)
 
 bool Enemy::CleanUp()
 {
-	if (enemies.Count() > 0) {
-		for (size_t i = 0; i < enemies.Count() - 1; i++)
-		{
-			enemies[i]->CleanUp();
-			delete enemies[i];
-		}
-	}
+	enemies.clear();
 	Character::CleanUp();
 	return true;
 }

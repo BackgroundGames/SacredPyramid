@@ -2,7 +2,6 @@
 #define __SCENE_H__
 
 #include "SString.h"
-#include "List.h"
 #include <vector>
 
 using namespace std;
@@ -64,11 +63,11 @@ public:
 	}
 
 	Player* GetPlayer() {
-		return (Player*)players.start->data;
+		return (Player*)players.front();
 	}
 
 	Enemy* GetEnemy(uint id) {
-		return (Enemy*)enemies.At(id)->data;
+		return (Enemy*)enemies.at(id);
 	}
 
 	Player* GetZhaak() {
@@ -88,6 +87,16 @@ public:
 
 	};
 
+	void DeleteEnemy(Enemy* enemy) {
+		for (size_t i = 0; i < enemies.size(); i++)
+		{
+			if (enemies[i] == (Entity*)enemy) {
+				enemies[i] = nullptr;
+				enemies.erase(enemies.begin() + i);
+			}
+		}
+	}
+
 
 public:
 
@@ -101,13 +110,11 @@ public:
 	Player* eli = nullptr;
 	bool quit = false;
 
-	List<Entity*> enemies;
-	List<Entity*> players;
-	List<Entity*> npcs;
+	vector<Entity*> enemies;
+	vector<Entity*> players;
+	vector<Entity*> npcs;
 
-	//vector<Entity*> enemies1;
-	//vector<Entity*> players;
-	//vector<Entity*> npcs;
+	Entity* cameraFocus = nullptr;
 };
 
 #endif // __SCENE_H__

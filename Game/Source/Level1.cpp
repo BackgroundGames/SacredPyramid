@@ -44,11 +44,11 @@ bool Level1::Start()
 
 	if (app->sceneManager->previousScene != (Scene*)app->sceneManager->menu &&
 		app->sceneManager->previousScene != (Scene*)app->sceneManager->intro) {
-		players.Add(zhaak);
+		players.push_back(zhaak);
 		zhaak->parameters = sceneconfig.child("zhaak");
 		zhaak->Start();
 
-		players.Add(eli);
+		players.push_back(eli);
 		eli->parameters = sceneconfig.child("eli");
 		eli->Start();
 	}
@@ -56,13 +56,13 @@ bool Level1::Start()
 		//Instantiate the player using the entity manager
 		//Get player paremeters
 		zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ZHAAK);
-		players.Add(zhaak);
+		players.push_back(zhaak);
 		//Assigns the XML node to a member in player
 		zhaak->parameters = sceneconfig.child("zhaak");
 		zhaak->Start();
 
 		eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
-		players.Add(eli);
+		players.push_back(eli);
 		//Assigns the XML node to a member in player
 		eli->parameters = sceneconfig.child("eli");
 		eli->Start();
@@ -79,7 +79,7 @@ bool Level1::Start()
 				enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::DRUNKARD);
 			}
 			enemy->id = enemyNode.attribute("id").as_uint();
-			enemies.Add(enemy);
+			enemies.push_back(enemy);
 			enemy->parameters = enemyNode;
 			enemy->Start();
 		}
@@ -88,7 +88,7 @@ bool Level1::Start()
 		{
 			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
 			npc->id = npcNode.attribute("id").as_uint();
-			npcs.Add(npc);
+			npcs.push_back(npc);
 			npc->parameters = npcNode;
 			npc->Start();
 		}
@@ -102,6 +102,7 @@ bool Level1::Start()
 
 	app->render->camera.y = 0;
 	app->render->camera.x = 0;
+	cameraFocus = GetPlayer();
 
 	LockCamera();
 
@@ -154,7 +155,7 @@ bool Level1::PostUpdate()
 bool Level1::CleanUp()
 {
 	if (app->sceneManager->newScene == (Scene*)app->sceneManager->menu) {
-		for (size_t i = 0; i < players.Count(); i++)
+		for (size_t i = 0; i < players.size(); i++)
 		{
 			players[i]->CleanUp();
 			app->entityManager->DestroyEntity((Entity*)players[i]);
@@ -162,20 +163,16 @@ bool Level1::CleanUp()
 		}
 		zhaak = nullptr;
 		eli = nullptr;
+		players.clear();
 	}
 
-	for (size_t i = 0; i < enemies.Count(); i++)
+	for (size_t i = 0; i < enemies.size(); i++)
 	{
-		if (enemies[i] != nullptr) {
-			enemies[i]->CleanUp();
-			app->entityManager->DestroyEntity((Entity*)enemies[i]);
-			delete enemies[i];
-		}
+		enemies[i]->CleanUp();
+		app->entityManager->DestroyEntity((Entity*)enemies[i]);
+		delete enemies[i];
 	}
-	enemies.Clear();
-
-
-	players.Clear();
+	enemies.clear();
 
 	return true;
 }
@@ -192,8 +189,8 @@ void Level1::LockCamera()
 	int limitCamXend = (app->map->getMapWidth() / 2 + app->map->GetTileWidth() / 2 - windowW) * -1;
 	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2);
 
-	app->render->camera.y = ((zhaak->position.y - zhaak->texW / 2) - windowH / 2) * -1;
-	app->render->camera.x = ((zhaak->position.x - zhaak->texH / 2) - (windowW / 2)) * -1;
+	app->render->camera.y = ((cameraFocus->position.y - cameraFocus->texW / 2) - (windowH / 2)) * -1;
+	app->render->camera.x = ((cameraFocus->position.x - cameraFocus->texH / 2) - (windowW / 2)) * -1;
 
 	if (app->render->camera.x > limitCamXbeg) {
 		app->render->camera.x = limitCamXbeg;

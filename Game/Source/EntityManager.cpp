@@ -185,12 +185,6 @@ void EntityManager::DestroyEntity(Entity* entity)
 	for (item = entities.start; item != NULL; item = item->next)
 	{
 		if (item->data == entity) {
-			for (size_t i = 0; i < app->sceneManager->currentScene->enemies.Count(); i++)
-			{
-				if (app->sceneManager->currentScene->enemies[i] == item->data) {
-					app->sceneManager->currentScene->enemies[i] = nullptr;
-				}
-			}
 			entities.Del(item);
 		}
 	}
@@ -201,7 +195,7 @@ void EntityManager::AddEntity(Entity* entity)
 	if ( entity != nullptr) entities.Add(entity);
 }
 
-void EntityManager::StartCombat(List<Entity*> enemies)
+void EntityManager::StartCombat(vector<Entity*> &enemies, Entity* summoner)
 {
 	currentStep = Fade_StepFade::TO_BLACKF;
 
@@ -211,15 +205,20 @@ void EntityManager::StartCombat(List<Entity*> enemies)
 
 	int length = 0;
 
-	for (int i = 0; i < app->sceneManager->currentScene->players.Count(); i++)
+	combatManager->summoner = (Enemy*)summoner;
+	combatManager->summoner->mainState = MainState::IN_COMBAT;
+	combatManager->summoner->combatState = CombatState::WAITING;
+	length++;
+
+	for (int i = 0; i < app->sceneManager->currentScene->players.size(); i++)
 	{
-		combatManager->players.Add((Player*)app->sceneManager->currentScene->players[i]);
+		combatManager->players.push_back((Player*)app->sceneManager->currentScene->players[i]);
 		combatManager->players[i]->mainState = MainState::IN_COMBAT;
 		combatManager->players[i]->combatState = CombatState::WAITING;
 		length++;
 	}
 
-	for (int j = 0; j < enemies.Count(); j++)
+	for (int j = 0; j < enemies.size(); j++)
 	{
 		combatManager->enemies.Add((Enemy*)enemies[j]);
 		combatManager->enemies[j]->mainState = MainState::IN_COMBAT;
@@ -233,22 +232,27 @@ void EntityManager::StartCombat(List<Entity*> enemies)
 	for (size_t k = 0; k < length; k++)
 	{
 		if (k%2 == 0) {
-			if (paux < combatManager->players.Count()) {
-				combatManager->CombatList.Add(combatManager->players[paux]);
+			if (paux < combatManager->players.size()) { 
+				combatManager->CombatList.push_back(combatManager->players[paux]);
 				paux++;
 			}
-			else if (eaux < combatManager->enemies.Count()) {
-				combatManager->CombatList.Add(combatManager->enemies[eaux]);
+			else if (eaux <= combatManager->enemies.Count()) {
+				combatManager->CombatList.push_back(combatManager->enemies[eaux]);
 				eaux++;
 			}
 		}
 		else {
-			if (eaux < combatManager->enemies.Count()) {
-				combatManager->CombatList.Add(combatManager->enemies[eaux]);
-				eaux++;
+			if (eaux <= combatManager->enemies.Count()) {
+				if (k == 1) {
+					combatManager->CombatList.push_back(combatManager->summoner);
+				}
+				else {
+					combatManager->CombatList.push_back(combatManager->enemies[eaux]);
+					eaux++;
+				}
 			}
-			else if (paux < combatManager->players.Count()) {
-				combatManager->CombatList.Add(combatManager->players[paux]);
+			else if (paux < combatManager->players.size()) {
+				combatManager->CombatList.push_back(combatManager->players[paux]);
 				paux++;
 			}
 		}
@@ -335,21 +339,16 @@ bool CombatManager::Update(float dt)
 		currentCharacterTurn->combatState = CombatState::IDLE;
 	}
 
-	ListItem<Character*>* item;
-	Entity* pEntity = NULL;
-
-	for (item = CombatList.start; item != NULL; item = item->next)
+	for (int i = 0; i < CombatList.size(); i++)
 	{
-		pEntity = item->data;
-
 		if (currentCharacterTurn->combatState == CombatState::WAITING) 
 		{
 			currentCharacterTurn = CombatList[NextTurn()];
 			currentCharacterTurn->combatState = CombatState::IDLE;
+			//app->sceneManager->currentScene->cameraFocus = currentCharacterTurn;
 		}
 
-		if (pEntity->active == false) continue;
-			item->data->Update(dt);
+		CombatList[i]->Update(dt);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
@@ -378,7 +377,7 @@ int CombatManager::NextTurn()
 {
 	turn++;
 
-	if (turn == CombatList.Count()) 
+	if (turn == CombatList.size()) 
 		turn = 0;
 
 	return turn;
@@ -387,21 +386,36 @@ int CombatManager::NextTurn()
 void CombatManager::EndCombat()
 {
 	// victory
-	for (int i = 0; i < players.Count(); i++)
+	for (int i = 0; i < players.size(); i++)
 	{
 		players[i]->mainState = MainState::OUT_OF_COMBAT;
 		players[i]->combatState = CombatState::NONE;
 		players[i]->exploringState = ExploringState::IDLE;
 		players[i] = nullptr;
 	}
-	players.Clear();
+	players.clear();
 
-	enemies[enemies.Count()-1]->CleanUp();
-	app->entityManager->DestroyEntity((Entity*)enemies[enemies.Count()-1]);
+	ListItem<Enemy*>* item;
+
+	for (item = enemies.start; item != NULL; item = item->next)
+	{
+		item->data->CleanUp();
+		enemies.Del(item);
+		delete item->data;
+	}
+	enemies.Clear();
+
+	if (summoner != nullptr) {
+		app->sceneManager->currentScene->DeleteEnemy(summoner);
+		app->entityManager->DestroyEntity(summoner);
+		delete summoner;
+	}
 
 	currentCharacterTurn = nullptr;
 
-	CombatList.Clear();
+	CombatList.clear();
+
+	app->sceneManager->currentScene->cameraFocus = app->sceneManager->currentScene->GetPlayer();
 }
 
 void EntityManager::MakeStartCombatFade()

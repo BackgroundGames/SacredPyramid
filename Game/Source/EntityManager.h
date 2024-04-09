@@ -3,7 +3,10 @@
 
 #include "Module.h"
 #include "Entity.h"
+#include <vector>
 #include "List.h"
+
+using namespace std;
 
 class Character;
 class Player;
@@ -44,10 +47,11 @@ public:
 
 public:
 
+	Enemy* summoner = nullptr;
 	List<Enemy*> enemies;
-	List<Player*> players;
-	List<Character*> CombatList;
-	Character* currentCharacterTurn;
+	vector<Player*> players;
+	vector<Character*> CombatList;
+	Character* currentCharacterTurn = nullptr;
 
 	int turn = 0;
 	Uint32 startTime;
@@ -83,7 +87,7 @@ public:
 
 	void AddEntity(Entity* entity);
 
-	void StartCombat(List<Entity*> enemies);
+	void StartCombat(vector<Entity*> &enemies, Entity* summoner);
 
 	void MakeStartCombatFade();
 	

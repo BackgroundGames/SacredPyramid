@@ -124,10 +124,10 @@ bool DialogueTree::CleanUp()
 
 	app->guiManager->CleanUp();
 
-	for (size_t i = 0; i < app->sceneManager->currentScene->players.Count(); i++)
+	for (size_t i = 0; i < app->sceneManager->currentScene->players.size(); i++)
 	{
-		dynamic_cast<Player*>(app->sceneManager->currentScene->players.At(i)->data)->exploringState = ExploringState::IDLE;
-		dynamic_cast<Player*>(app->sceneManager->currentScene->players.At(i)->data)->interacted = nullptr;
+		dynamic_cast<Player*>(app->sceneManager->currentScene->players.at(i))->exploringState = ExploringState::IDLE;
+		dynamic_cast<Player*>(app->sceneManager->currentScene->players.at(i))->interacted = nullptr;
 	}
 
 	return true;

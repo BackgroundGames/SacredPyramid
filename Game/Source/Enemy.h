@@ -1,10 +1,10 @@
 #ifndef __ENEMY_H__
 #define __ENEMY_H__
 
-#include "Entity.h"
 #include "Character.h"
-#include "List.h"
+#include <vector>
 
+using namespace std;
 
 class Enemy : public Character
 {
@@ -30,8 +30,7 @@ private:
 public:
 	uint id;
 	EnemyType subtype;
-	List<Entity*> enemies;
-	DynArray<Entity*> hola;
+	vector<Entity*> enemies;
 	bool assaulted = false;
 };
 #endif // !__ENEMY_H__
