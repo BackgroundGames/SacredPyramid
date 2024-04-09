@@ -96,6 +96,9 @@ public:
 	//Set the maximun frame duration in miliseconds.
 	uint32 maxFrameDuration = 16;
 
+	// xml_document to store the config file
+	pugi::xml_document configFile;
+
 private:
 
 	int argc;
@@ -104,9 +107,6 @@ private:
 	SString organization;
 
 	List<Module *> modules;
-
-	// xml_document to store the config file
-	pugi::xml_document configFile;
 	
 	uint frames;
 	float dt;

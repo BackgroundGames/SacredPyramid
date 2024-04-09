@@ -19,19 +19,9 @@ Player::Player()
 
 Player::~Player() {}
 
-bool Player::Awake() {
-
-	return true;
-}
-
 bool Player::Start() {
 	
 	Character::Start();
-
-	if (currentAnimation == nullptr) {
-		idleAnim.loop = true;
-		idleAnim.PushBack({ 0, 0, 56, 123 });
-	}
 
 	currentAnimation = &idleAnim;
 	texW = currentAnimation->GetCurrentFrame().w;

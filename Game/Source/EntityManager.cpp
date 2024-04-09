@@ -132,8 +132,8 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		case EnemyType::BANDIT:
 			entity = new Bandit();
 			break;
-		case EnemyType::DRUNK:
-			//entity = new Drunkard();
+		case EnemyType::DRUNKARD:
+			entity = new Drunkard();
 			break;
 		case EnemyType::EVIL_MUMMY:
 			break;

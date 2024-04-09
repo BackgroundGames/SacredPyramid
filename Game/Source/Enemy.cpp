@@ -6,6 +6,7 @@
 #include "Log.h"
 #include "Pathfinding.h"
 #include "Bandit.h"
+#include "Drunkard.h"
 #include "Textures.h"
 
 Enemy::Enemy()
@@ -38,12 +39,6 @@ bool Enemy::Start()
 {
 	Character::Start();
 
-	if (currentAnimation == nullptr) {
-		idleAnim.loop = true;
-		idleAnim.speed = 1.0f;
-		idleAnim.PushBack({ 0, 0, 56, 124 });
-	}
-
 	currentAnimation = &idleAnim;
 	texW = currentAnimation->GetCurrentFrame().w;
 	texH = currentAnimation->GetCurrentFrame().h;
@@ -52,16 +47,20 @@ bool Enemy::Start()
 
 	for (pugi::xml_node enemyNode = parameters.child("minion"); enemyNode; enemyNode = enemyNode.next_sibling("minion"))
 	{
+		Enemy* enemy;
 		if (enemyNode.attribute("id").as_int() == 0) {
-			Enemy* enemy = new Bandit();
-			enemy->id = enemyNode.attribute("id").as_uint();
-			enemies.Add(enemy);
-			enemy->parameters = enemyNode;
-			enemy->mainState = MainState::NONE;
-			enemy->combatState = CombatState::NONE;
-			enemy->exploringState = ExploringState::NONE;
-			enemy->Start();
+			enemy = new Bandit();
 		}
+		else {
+			enemy = new Drunkard();
+		}
+		enemy->id = enemyNode.attribute("id").as_uint();
+		enemies.Add(enemy);
+		enemy->parameters = enemyNode;
+		enemy->mainState = MainState::NONE;
+		enemy->combatState = CombatState::NONE;
+		enemy->exploringState = ExploringState::NONE;
+		enemy->Start();
 	}
 
 	if (enemies.Count() != 0) {
@@ -90,6 +89,8 @@ bool Enemy::Update(float dt)
 		switch (exploringState)
 		{
 		case ExploringState::IDLE:
+
+			currentAnimation = &idleAnim;
 
 			/*if (app->sceneManager->currentScene->GetPlayer()->GetTile() != prevDestination) {
 				if (moveTo(app->sceneManager->currentScene->GetPlayer()->GetTile())) {

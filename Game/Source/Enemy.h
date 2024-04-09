@@ -26,7 +26,6 @@ public:
 
 private:
 	bool patrol = true;
-	Animation idleAnim;
 
 public:
 	uint id;

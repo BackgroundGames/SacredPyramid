@@ -3,8 +3,9 @@
 
 #include "SString.h"
 #include "List.h"
-#include "DynArray.h"
+#include <vector>
 
+using namespace std;
 
 #include "PugiXml/src/pugixml.hpp"
 
@@ -103,6 +104,10 @@ public:
 	List<Entity*> enemies;
 	List<Entity*> players;
 	List<Entity*> npcs;
+
+	//vector<Entity*> enemies1;
+	//vector<Entity*> players;
+	//vector<Entity*> npcs;
 };
 
 #endif // __SCENE_H__

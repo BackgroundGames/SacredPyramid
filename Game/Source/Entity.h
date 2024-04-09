@@ -32,7 +32,7 @@ enum class PlayerType
 enum class EnemyType
 {
 	BANDIT,
-	DRUNK,
+	DRUNKARD,
 	EVIL_MUMMY,
 
 	UNKNOWN
@@ -117,6 +117,7 @@ public:
 	EntityType type;
 	bool active = true;
 	pugi::xml_node parameters; 
+	pugi::xml_node parametersAnim;
 	
 	SDL_Texture* texture = NULL;
 	uint texH, texW;

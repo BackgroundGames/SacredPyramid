@@ -19,6 +19,7 @@ Character::~Character() {}
 
 bool Character::Awake()
 {
+	parametersAnim = app->configFile.child("config").child("animations").child(name.GetString());
 	return true;
 }
 
@@ -27,7 +28,7 @@ bool Character::Start()
 	//Initialize Character parameters
 
 	if (texture == nullptr) {
-		texture = app->tex->Load(parameters.attribute("texturePath").as_string());
+		texture = app->tex->Load(parametersAnim.attribute("texturePath").as_string());
 	}
 
 	selectionTex = app->render->GetSelectionTex();

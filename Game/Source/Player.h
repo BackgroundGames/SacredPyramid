@@ -11,8 +11,6 @@ public:
 
 	virtual ~Player();
 
-	bool Awake();
-
 	bool Start();
 
 	bool Update(float dt);
@@ -27,11 +25,6 @@ public:
 
 	bool lastStand = false;
 	Entity* interacted = nullptr;
-
-public:
-	Animation idleAnim;
-	Animation idleAnimB;
-	Animation walkingAnim;
 };
 
 #endif // __PLAYER_H__

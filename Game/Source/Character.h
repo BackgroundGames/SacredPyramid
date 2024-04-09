@@ -133,7 +133,12 @@ public:
 	//debug
 	SDL_Rect prect;
 	SDL_Texture* selectionTex = NULL;
+
+	//anim
 	Animation* currentAnimation = nullptr;
+	Animation idleAnim;
+	Animation idleAnimB;
+	Animation walkingAnim;
 
 	//player stats
 	MainState mainState;

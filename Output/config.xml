@@ -24,22 +24,22 @@
 		<intro texturePath="Assets/Textures/bgg.jpg"/>
 		<menu texturePath="Assets/Textures/Menu Piramide.jpeg"/>
 		<level1>
-			<zhaak x="17" y="13" texturePath="Assets/Textures/Zhaak anim.png"/>
-			<eli x="17" y="14" texturePath="Assets/Textures/Eli anim.png"/>
-			<enemy x="15" y="10" id="0" texturePath="Assets/Textures/Enemy1.png" p1x="12" p1y="12" p2x="14" p2y="12">
-				<minion x="13" y="7" id="0" texturePath="Assets/Textures/Enemy1.png"/>
-				<minion x="11" y="9" id="0" texturePath="Assets/Textures/Enemy1.png"/>
+			<zhaak x="17" y="13"/>
+			<eli x="17" y="14"/>
+			<enemy x="15" y="15" id="0" p1x="12" p1y="12" p2x="14" p2y="12">
+				<minion x="13" y="7" id="0"/>
+				<minion x="11" y="9" id="1"/>
 			</enemy>
-			<enemy x="11" y="9" id="1" texturePath="Assets/Textures/Enemy2.png">
-				<minion x="14" y="9" id="0" texturePath="Assets/Textures/Enemy2.png"/>
+			<enemy x="11" y="9" id="1">
+				<minion x="14" y="9" id="0"/>
 			</enemy>
-			<npc x="5" y="5" id="0" texturePath="Assets/Textures/NPC1.png"/>
+			<npc x="17" y="15" id="0"/>
 			<map path="Assets/Maps/" name="TabernaMAP.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 		</level1>
 		<level2>
 			<map path="Assets/Maps/" name="proba.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
-			<zhaak x="6" y="6" texturePath="Assets/Textures/ELI_GRANDE.png"/>
-			<eli x="7" y="7" texturePath="Assets/Textures/ELI_GRANDE.png"/>
+			<zhaak x="6" y="6"/>
+			<eli x="7" y="7"/>
 		</level2>
 	</scenemanager>
 	
@@ -67,5 +67,63 @@
 			</node>
 		</dialogue1>
 	</dialogues>
+	
+	<animations>
+	
+		<zhaak texturePath="Assets/Textures/Zhaak anim.png">
+			<idleAnim loop="true" speed="0.05f">
+				<idle x="0" y="0" w="56" h="123"/>
+				<idle x="56" y="0" w="56" h="123"/>
+				<idle x="112" y="0" w="56" h="123"/>
+				<idle x="168" y="0" w="56" h="123"/>
+			</idleAnim>
+			<idleBAnim loop="true" speed="0.05f">
+				<idleB x="0" y="123" w="54" h="123"/>
+				<idleB x="54" y="123" w="54" h="123"/>
+				<idleB x="108" y="123" w="54" h="123"/>
+				<idleB x="162" y="123" w="54" h="123"/>
+			</idleBAnim>
+		</zhaak>
+		
+		<eli texturePath="Assets/Textures/Eli anim.png">
+			<idleAnim loop="true" speed="0.05f">
+				<idle x="0" y="0" w="56" h="123"/>
+				<idle x="56" y="0" w="56" h="123"/>
+			</idleAnim>
+			<idleBAnim loop="true" speed="0.05f">
+				<idleB x="0" y="123" w="56" h="123"/>
+				<idleB x="56" y="123" w="56" h="123"/>
+			</idleBAnim>
+		</eli>
+		
+		<bandit texturePath="Assets/Textures/Enemigo1 Idleanim.png">
+			<idleAnim loop="true" speed="0.05f">
+				<idle x="0" y="0" w="56" h="123"/>
+				<idle x="56" y="0" w="56" h="123"/>
+			</idleAnim>
+			<idleBAnim loop="true" speed="0.05f">
+				<idleB x="0" y="123" w="56" h="123"/>
+				<idleB x="56" y="123" w="56" h="123"/>
+			</idleBAnim>
+		</bandit>
+		
+		<drunkard texturePath="Assets/Textures/Enemigo 2 anim1.png">
+			<idleAnim loop="true" speed="0.02f">
+				<idle x="0" y="0" w="56" h="123"/>
+				<idle x="56" y="0" w="56" h="123"/>
+			</idleAnim>
+			<idleBAnim loop="true" speed="0.02f">
+				<idleB x="0" y="0" w="56" h="123"/>
+				<idleB x="56" y="0" w="56" h="123"/>
+			</idleBAnim>
+		</drunkard>
+		
+		<npc texturePath="Assets/Textures/NPC1.png">
+			<idleAnim loop="true" speed="0.05f">
+				<idle x="0" y="0" w="56" h="124"/>
+			</idleAnim>
+		</npc>
+		
+	</animations>
   
 </config>

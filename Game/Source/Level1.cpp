@@ -70,7 +70,14 @@ bool Level1::Start()
 		// iterate all entities in the scene --> Check https://pugixml.org/docs/quickstart.html#access
 		for (pugi::xml_node enemyNode = sceneconfig.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
 		{
-			Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+			Enemy* enemy;
+			if (enemyNode.attribute("id").as_uint() == 0)
+			{
+				enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::BANDIT);
+			}
+			else {
+				enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::DRUNKARD);
+			}
 			enemy->id = enemyNode.attribute("id").as_uint();
 			enemies.Add(enemy);
 			enemy->parameters = enemyNode;

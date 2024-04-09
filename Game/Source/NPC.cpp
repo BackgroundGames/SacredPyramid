@@ -7,14 +7,16 @@
 
 NPC::NPC()
 {
-	name.Create("NPC");
+	name.Create("npc");
 	type = EntityType::NPC;
+	Awake();
 }
 
 NPC::~NPC() {}
 
 bool NPC::Awake()
 {
+	Character::Awake();
 	return true;
 }
 
