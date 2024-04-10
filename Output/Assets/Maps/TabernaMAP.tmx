@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="isometric" renderorder="right-down" width="16" height="16" tilewidth="128" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="isometric" renderorder="right-down" width="16" height="16" tilewidth="128" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="1">
  <tileset firstgid="1" name="Level 2" tilewidth="128" tileheight="128" tilecount="60" columns="12">
   <tileoffset x="0" y="32"/>
   <image source="Level 2.png" width="1539" height="650"/>
@@ -586,8 +586,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="9"/>
-   <tile gid="9"/>
+   <tile/>
+   <tile gid="22"/>
    <tile/>
    <tile gid="29"/>
    <tile/>
@@ -602,8 +602,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="21"/>
    <tile gid="9"/>
-   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -687,6 +687,7 @@
    <tile gid="40"/>
    <tile/>
    <tile/>
+   <tile/>
    <tile gid="42"/>
    <tile/>
    <tile/>
@@ -698,8 +699,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
    <tile gid="39"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile gid="41"/>
@@ -717,8 +718,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
    <tile gid="52"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile gid="54"/>
@@ -732,8 +733,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
    <tile gid="51"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile gid="53"/>
@@ -746,6 +747,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="22"/>
    <tile/>
    <tile/>
    <tile/>
@@ -760,9 +762,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="21"/>
    <tile/>
    <tile/>
    <tile/>
