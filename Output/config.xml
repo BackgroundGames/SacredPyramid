@@ -107,14 +107,14 @@
 			</idleBAnim>
 		</bandit>
 		
-		<drunkard texturePath="Assets/Textures/Enemigo 2 anim1.png">
+		<drunkard texturePath="Assets/Textures/Enemigo 2 anim.png">
 			<idleAnim loop="true" speed="0.02f">
-				<idle x="0" y="0" w="56" h="123"/>
-				<idle x="56" y="0" w="56" h="123"/>
+				<idle x="0" y="0" w="56" h="122"/>
+				<idle x="56" y="0" w="56" h="122"/>
 			</idleAnim>
 			<idleBAnim loop="true" speed="0.02f">
-				<idleB x="0" y="0" w="56" h="123"/>
-				<idleB x="56" y="0" w="56" h="123"/>
+				<idleB x="0" y="0" w="56" h="122"/>
+				<idleB x="56" y="0" w="56" h="122"/>
 			</idleBAnim>
 		</drunkard>
 		
