@@ -51,6 +51,11 @@ bool Enemy::Start()
 
 	observer = app->sceneManager->currentScene->GetPlayer();
 
+	//prova combat
+	stats.health = 1;
+	inventory.weapon.range = 1;
+	inventory.weapon.damage = 1;
+
 	return true;
 }
 
@@ -135,24 +140,33 @@ bool Enemy::Update(float dt)
 		}
 		break;
 	case MainState::IN_COMBAT:
+
+		aviableMovement = stats.movement - movementUsed;
+
 		switch (combatState)
 		{
 		case CombatState::WAITING:
+			movementUsed = 0;
+			hasAttacked = false;
 			break;
 		case CombatState::IDLE:
-			if (distanceFromPlayer > 1) {
+			
+			if(distanceFromPlayer <= inventory.weapon.range && !hasAttacked) {
+				combatState = CombatState::ATTACKING;
+				hasAttacked = true;
+			}
+			else {
 				app->map->pathfinding->CreatePath(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
-				if (distanceFromPlayer > 3) {
-					moveTo(*app->map->pathfinding->GetLastPath()->At(3));
+				if (distanceFromPlayer > (aviableMovement + inventory.weapon.range)) {
+					moveTo(*app->map->pathfinding->GetLastPath()->At(aviableMovement));
 				}
 				else {
-					moveTo(*app->map->pathfinding->GetLastPath()->At(distanceFromPlayer - 1));
+					moveTo(*app->map->pathfinding->GetLastPath()->At(distanceFromPlayer - inventory.weapon.range));
+					movementUsed = distanceFromPlayer - inventory.weapon.range;
 				}
 				combatState = CombatState::MOVING;
 			}
-			else {
-				combatState = CombatState::WAITING;
-			}
+
 			break;
 		case CombatState::MOVING:
 
@@ -160,11 +174,19 @@ bool Enemy::Update(float dt)
 				DoPathMoving();
 			}
 			else {
-				combatState = CombatState::WAITING;
+				if (distanceFromPlayer == inventory.weapon.range) {
+					combatState = CombatState::ATTACKING;
+				}
+				else {
+					combatState = CombatState::WAITING;
+				}
 			}
 
 			break;
 		case CombatState::ATTACKING:
+			LOG("hola");
+			app->entityManager->combatManager->CheckIfHit(app->sceneManager->currentScene->GetPlayer()->GetTile(), &inventory.weapon);
+			combatState = CombatState::WAITING;
 			break;
 		case CombatState::DEAD:
 			break;

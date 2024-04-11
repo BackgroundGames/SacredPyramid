@@ -13,7 +13,7 @@
 
 struct Stats
 {
-	uint health;
+	int health;
 	uint mana;
 	uint attack;
 	uint defense;
@@ -119,8 +119,9 @@ public:
 	float velocity = 1;
 
 	iPoint mousePos = iPoint{ 0, 0 };
-	bool hasAttacked;
+
 	uint movementUsed = 0;
+	uint aviableMovement = 0;
 
 	//to move
 	DynArray<iPoint> path;

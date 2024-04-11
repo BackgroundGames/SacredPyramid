@@ -161,6 +161,10 @@ public:
         return mapData.width * mapData.tilewidth;
     }
 
+    int GetMapTilesWidth() {
+        return mapData.width;
+    }
+
     void InitMap();
 
 public: 

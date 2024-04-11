@@ -125,6 +125,12 @@ bool Render::Update(float dt)
 		enemyPosDebug = "Enemy Tile: (" + std::to_string(X) + ", " + std::to_string(Y) + ") id: " +std::to_string(app->sceneManager->currentScene->GetEnemy(1)->id);
 		text = enemyPosDebug.c_str();
 		DrawText(text, 0, 110, 250, 30, 0, 0, 255);*/
+
+		if (app->sceneManager->currentScene->GetPlayer()->mainState == MainState::IN_COMBAT) {
+			combatTurnTimer = "Turn Timer: (" + std::to_string(app->entityManager->combatManager->seconds) + ")";
+			text = combatTurnTimer.c_str();
+			DrawText(text, 0, 110, 250, 30, 0, 0, 255);
+		}
 	}
 
 	return true;

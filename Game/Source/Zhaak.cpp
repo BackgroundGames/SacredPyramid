@@ -5,6 +5,9 @@ Zhaak::Zhaak()
 {
 	name.Create("zhaak");
 	subtype = PlayerType::ZHAAK;
+	inventory.weapon.damage = 1;
+	inventory.weapon.range = 1;
+	stats.health = 1;
 	Awake();
 }
 
@@ -13,6 +16,9 @@ Zhaak::Zhaak(Stats stats)
 	name.Create("zhaak");
 	this->stats = stats;
 	subtype = PlayerType::ZHAAK;
+	//porves
+
+
 	Awake();
 }
 

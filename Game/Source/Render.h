@@ -56,6 +56,7 @@ private:
 	std::string playerPosDebug;
 	std::string playerStateDebug;
 	std::string enemyPosDebug;
+	std::string combatTurnTimer;
 
 	//Tile selection
 	SDL_Texture* selectionTex = nullptr;

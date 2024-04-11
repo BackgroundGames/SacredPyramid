@@ -1,5 +1,7 @@
 #include "EntityManager.h"
 #include "Window.h"
+#include "Map.h"
+
 #include "Player.h"
 #include "Zhaak.h"
 #include "Eli.h"
@@ -215,8 +217,11 @@ void EntityManager::StartCombat(vector<Entity*> &enemies, Entity* summoner)
 		combatManager->players.push_back((Player*)app->sceneManager->currentScene->players[i]);
 		combatManager->players[i]->mainState = MainState::IN_COMBAT;
 		combatManager->players[i]->combatState = CombatState::WAITING;
+		combatManager->players[i]->stats.health = 1;
 		length++;
 	}
+
+	combatManager->playersAlive = combatManager->players.size();
 
 	for (int j = 0; j < enemies.size(); j++)
 	{
@@ -259,6 +264,15 @@ void EntityManager::StartCombat(vector<Entity*> &enemies, Entity* summoner)
 	}
 
 	combatManager->currentCharacterTurn = (Character*)combatManager->CombatList[0];
+
+	/*for (size_t i = 0; i < combatManager->CombatList.size(); i++)
+	{
+		if (combatManager->CombatList[i] != combatManager->currentCharacterTurn) {
+			int pos = (combatManager->CombatList[i]->GetTile().y * app->map->GetMapTilesWidth()) + combatManager->CombatList[i]->GetTile().x;
+			app->map->pathfinding->map[pos] = 0;
+		}
+	}*/
+	
 }
 
 bool EntityManager::Update(float dt)
@@ -322,36 +336,64 @@ bool CombatManager::Start()
 bool CombatManager::Update(float dt)
 {
 
-	/*Uint32 currentTime = SDL_GetTicks();
-	Uint32 elapsedTime = currentTime - startTime;*/
+	Uint32 currentTime = SDL_GetTicks();
+	Uint32 elapsedTime = currentTime - startTime;
 
-	//Seconds = (elapsedTime / 1000) % 60;
-	////Seconds = elapsedTime % 1000;
-	//if (auxSeconds != Seconds) {
-	//	MaxSeconds -= 1;
-	//	auxSeconds = Seconds;
-	//}
+	seconds = (elapsedTime / 1000) % 60;
+	//Seconds = elapsedTime % 1000;
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) 
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || seconds >= 5.0f)
 	{
 		currentCharacterTurn->combatState = CombatState::WAITING;
 		currentCharacterTurn = CombatList[NextTurn()];
 		currentCharacterTurn->combatState = CombatState::IDLE;
 	}
 
+	if (currentCharacterTurn->combatState == CombatState::WAITING)
+	{
+		currentCharacterTurn = CombatList[NextTurn()];
+		currentCharacterTurn->combatState = CombatState::IDLE;
+	}
+
 	for (int i = 0; i < CombatList.size(); i++)
 	{
-		if (currentCharacterTurn->combatState == CombatState::WAITING) 
-		{
-			currentCharacterTurn = CombatList[NextTurn()];
-			currentCharacterTurn->combatState = CombatState::IDLE;
+
+			/*for (size_t i = 0; i < pathfindingBlock.size(); i++)
+			{
+				app->map->pathfinding->map[pathfindingBlock[i]] = 1;
+			}
+			pathfindingBlock.clear();*/
+
+			/*for (size_t i = 0; i < CombatList.size(); i++)
+			{
+				if (CombatList[i] != currentCharacterTurn) {
+					pathfindingBlock.push_back((CombatList[i]->GetTile().y * app->map->GetMapTilesWidth()) + CombatList[i]->GetTile().x);
+					int aux = pathfindingBlock.back();
+					app->map->pathfinding->map[aux] = 0;
+				}
+			}*/
+
 			//app->sceneManager->currentScene->cameraFocus = currentCharacterTurn;
+
+		if (CombatList[i]->combatState == CombatState::DEAD) {
+			if (CombatList[i]->type == EntityType::PLAYER) {
+				CombatList.erase(CombatList.begin() + i);
+				playersAlive--;
+			}
+			else {
+				DestroyEntity(CombatList[i], i);
+			}
+			i--;
+			if (i < 0) {
+				i = 0;
+			}
+			turn--;
 		}
 
 		CombatList[i]->Update(dt);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || (enemies.Count() == 0 && summoner == nullptr) || playersAlive == 0)
 	{
 		app->entityManager->combatFinished = true;
 		app->entityManager->currentStep = Fade_StepFade::TO_BLACKF;
@@ -365,8 +407,29 @@ bool CombatManager::CleanUp()
 	return false;
 }
 
-void CombatManager::DestroyEntity(Character* entity)
+void CombatManager::DestroyEntity(Character* entity, int i)
 {
+	if (entity == summoner) {
+		app->sceneManager->currentScene->DeleteEnemy(summoner);
+		app->entityManager->DestroyEntity(summoner);
+		delete summoner;
+		summoner = nullptr;
+	}
+	else {
+
+		ListItem<Enemy*>* item;
+
+		for (item = enemies.start; item != NULL; item = item->next)
+		{
+			if (item->data == entity) {
+				item->data->CleanUp();
+				enemies.Del(item);
+				delete item->data;
+			}
+		}
+	}
+
+	CombatList.erase(CombatList.begin() + i);
 }
 
 void CombatManager::AddEntity(Character* entity)
@@ -380,6 +443,8 @@ int CombatManager::NextTurn()
 	if (turn == CombatList.size()) 
 		turn = 0;
 
+	startTime = SDL_GetTicks();
+
 	return turn;
 }
 
@@ -391,6 +456,7 @@ void CombatManager::EndCombat()
 		players[i]->mainState = MainState::OUT_OF_COMBAT;
 		players[i]->combatState = CombatState::NONE;
 		players[i]->exploringState = ExploringState::IDLE;
+		players[i]->stats.health = 1;
 		players[i] = nullptr;
 	}
 	players.clear();
@@ -406,6 +472,7 @@ void CombatManager::EndCombat()
 	enemies.Clear();
 
 	if (summoner != nullptr) {
+		summoner->CleanUp();
 		app->sceneManager->currentScene->DeleteEnemy(summoner);
 		app->entityManager->DestroyEntity(summoner);
 		delete summoner;
@@ -418,6 +485,18 @@ void CombatManager::EndCombat()
 	app->sceneManager->currentScene->cameraFocus = app->sceneManager->currentScene->GetPlayer();
 }
 
+void CombatManager::CheckIfHit(iPoint& dest, Weapon* weapon)
+{
+	for (int i = 0; i < CombatList.size(); i++) {
+		if (CombatList[i]->GetTile() == dest) {
+			CombatList[i]->stats.health -= weapon->damage;
+			if (CombatList[i]->stats.health <= 0) {
+				CombatList[i]->combatState = CombatState::DEAD;
+			}
+		}
+	}
+}
+
 void EntityManager::MakeStartCombatFade()
 {
 	if (currentStep == Fade_StepFade::TO_BLACKF)
@@ -428,6 +507,7 @@ void EntityManager::MakeStartCombatFade()
 			currentStep = Fade_StepFade::FROM_BLACKF;
 			inCombat = true;
 			combatManager->CombatList[0]->combatState = CombatState::IDLE;
+			combatManager->startTime = SDL_GetTicks();
 		}
 	}
 	else

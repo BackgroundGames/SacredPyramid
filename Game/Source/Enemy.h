@@ -32,6 +32,7 @@ public:
 	EnemyType subtype;
 	vector<Entity*> enemies;
 	bool assaulted = false;
+	bool hasAttacked = false;
 };
 #endif // !__ENEMY_H__
 

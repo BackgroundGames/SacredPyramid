@@ -5,6 +5,9 @@ Eli::Eli()
 {
 	name.Create("eli");
 	subtype = PlayerType::ELI;
+	inventory.weapon.damage = 1;
+	inventory.weapon.range = 1;
+	stats.health = 1;
 	Awake();
 }
 
@@ -13,6 +16,12 @@ Eli::Eli(Stats stats)
 	name.Create("eli");
 	this->stats = stats;
 	subtype = PlayerType::ELI;
+
+	//porves
+	inventory.weapon.damage = 1;
+	inventory.weapon.range = 1;
+	stats.health = 1;
+
 	Awake();
 }
 

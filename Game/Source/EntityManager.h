@@ -5,6 +5,8 @@
 #include "Entity.h"
 #include <vector>
 #include "List.h"
+#include "Pathfinding.h"
+#include "Weapon.h"
 
 using namespace std;
 
@@ -37,7 +39,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	void DestroyEntity(Character* entity);
+	void DestroyEntity(Character* entity, int i);
 
 	void AddEntity(Character* entity);
 
@@ -45,16 +47,22 @@ public:
 
 	void EndCombat();
 
+	void CheckIfHit(iPoint& dest, Weapon* weapon);
+
 public:
 
 	Enemy* summoner = nullptr;
 	List<Enemy*> enemies;
 	vector<Player*> players;
 	vector<Character*> CombatList;
-	Character* currentCharacterTurn = nullptr;
 
+	Character* currentCharacterTurn = nullptr;
 	int turn = 0;
 	Uint32 startTime;
+	vector<int> pathfindingBlock;
+	float seconds = 0.0f;
+
+	int playersAlive;
 };
 
 class EntityManager : public Module

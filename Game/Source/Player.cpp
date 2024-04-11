@@ -78,6 +78,9 @@ bool Player::Update(float dt)
 						exploringState = ExploringState::FOLLOWING;
 					}
 				}
+
+				PosState = app->sceneManager->currentScene->GetPlayer()->PosState;
+
 			}
 			else
 			{
@@ -213,6 +216,7 @@ bool Player::Update(float dt)
 		{
 
 		case CombatState::WAITING:
+			movementUsed = 0;
 			break;
 
 		case CombatState::IDLE:
@@ -224,6 +228,11 @@ bool Player::Update(float dt)
 					movementUsed += path.Count() - 1;
 				}
 			}
+
+			if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
+				combatState = CombatState::ATTACKING;
+			}
+
 			break;
 			
 		case CombatState::MOVING:
@@ -243,6 +252,14 @@ bool Player::Update(float dt)
 			break;
 
 		case CombatState::ATTACKING:
+
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && (DistanceToTile(GetTile(), destination) <= (inventory.weapon.range)))
+			{
+				app->entityManager->combatManager->CheckIfHit(destination, &inventory.weapon);
+				combatState = CombatState::IDLE;
+				app->input->ResetMouseButtonState();
+			}
+
 			break;
 		case CombatState::DEAD:
 			break;
