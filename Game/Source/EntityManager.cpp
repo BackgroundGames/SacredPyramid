@@ -372,21 +372,7 @@ bool CombatManager::Update(float dt)
 		CombatList[i]->Update(dt);
 	}
 
-	for (int i = 0; i < CombatList.size(); i++) {
-		if (CombatList[i]->combatState == CombatState::DEAD) {
-			if (CombatList[i]->type == EntityType::PLAYER) {
-				CombatList.erase(CombatList.begin() + i);
-				playersAlive--;
-			}
-			else {
-				DestroyEntity(CombatList[i], i);
-			}
-			i--;
-			if (i < 0) {
-				i = 0;
-			}
-		}
-	}
+	CheckIfCharDead();
 
 	if (currentCharacterTurn->combatState == CombatState::WAITING)
 	{
@@ -497,6 +483,59 @@ void CombatManager::CheckIfHit(iPoint& dest, Weapon* weapon)
 			CombatList[i]->stats.health -= weapon->damage;
 			if (CombatList[i]->stats.health <= 0) {
 				CombatList[i]->combatState = CombatState::DEAD;
+			}
+		}
+	}
+}
+
+Player* CombatManager::GetClosestPlayer(Character* entity, int& dist)
+{
+
+	dist = 999;
+	int	aux;
+	int iterator = -1;
+
+	for (size_t i = 0; i < players.size(); i++)
+	{
+		if (players[i]->combatState != CombatState::DEAD) {
+			aux = abs(abs(players[i]->GetTile().x) - abs(entity->GetTile().x)) + abs(abs(players[i]->GetTile().y) - abs(entity->GetTile().y));
+			if (aux < dist) {
+				dist = aux;
+				iterator = i;
+			}
+		}
+	}
+
+	if (iterator == -1) {
+		entity->combatState = CombatState::NONE;
+		return nullptr;
+	}
+
+	return players[iterator];
+}
+
+void CombatManager::CheckIfCharDead()
+{
+	for (int i = 0; i < CombatList.size(); i++) {
+		if (CombatList[i]->combatState == CombatState::DEAD) {
+			for (size_t j = 0; j < CombatList.size(); j++)
+			{
+				if (currentCharacterTurn == CombatList[j]) {
+					if (i < j) {
+						turn--;
+					}
+				}
+			}
+			if (CombatList[i]->type == EntityType::PLAYER) {
+				CombatList.erase(CombatList.begin() + i);
+				playersAlive--;
+			}
+			else {
+				DestroyEntity(CombatList[i], i);
+			}
+			i--;
+			if (i < 0) {
+				i = 0;
 			}
 		}
 	}

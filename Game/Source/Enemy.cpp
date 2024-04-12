@@ -61,7 +61,6 @@ bool Enemy::Start()
 
 bool Enemy::Update(float dt)
 {
-	distanceFromPlayer = DistanceToTile(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
 
 	if (app->sceneManager->currentScene->settings) {
 		previousEState = exploringState;
@@ -146,6 +145,7 @@ bool Enemy::Update(float dt)
 		break;
 	case MainState::IN_COMBAT:
 
+		pFocus = app->entityManager->combatManager->GetClosestPlayer(this, distanceFromPlayer);
 		aviableMovement = stats.movement - movementUsed;
 
 		switch (combatState)
@@ -168,7 +168,7 @@ bool Enemy::Update(float dt)
 				hasAttacked = true;
 			}
 			else {
-				app->map->pathfinding->CreatePath(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
+				app->map->pathfinding->CreatePath(GetTile(), pFocus->GetTile());
 				if (distanceFromPlayer > (aviableMovement + inventory.weapon.range)) {
 					moveTo(*app->map->pathfinding->GetLastPath()->At(aviableMovement));
 				}
@@ -204,7 +204,7 @@ bool Enemy::Update(float dt)
 			break;
 		case CombatState::ATTACKING:
 			LOG("hola");
-			app->entityManager->combatManager->CheckIfHit(app->sceneManager->currentScene->GetPlayer()->GetTile(), &inventory.weapon);
+			app->entityManager->combatManager->CheckIfHit(pFocus->GetTile(), &inventory.weapon);
 			combatState = CombatState::WAITING;
 			break;
 		case CombatState::DEAD:

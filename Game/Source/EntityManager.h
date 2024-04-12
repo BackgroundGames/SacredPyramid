@@ -49,6 +49,10 @@ public:
 
 	void CheckIfHit(iPoint& dest, Weapon* weapon);
 
+	Player* GetClosestPlayer(Character* entity, int& dist);
+
+	void CheckIfCharDead();
+
 public:
 
 	Enemy* summoner = nullptr;

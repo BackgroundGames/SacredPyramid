@@ -34,6 +34,7 @@ public:
 	bool assaulted = false;
 	bool hasAttacked = false;
 	vector<iPoint> combatPos;
+	Character* pFocus = nullptr;
 };
 #endif // !__ENEMY_H__
 
