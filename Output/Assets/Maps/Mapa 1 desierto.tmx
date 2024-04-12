@@ -2,7 +2,7 @@
 <map version="1.10" tiledversion="1.10.2" orientation="isometric" renderorder="right-down" width="30" height="21" tilewidth="128" tileheight="64" infinite="0" nextlayerid="3" nextobjectid="1">
  <tileset firstgid="1" name="TABERNA" tilewidth="128" tileheight="128" tilecount="60" columns="10">
   <tileoffset x="0" y="32"/>
-  <image source="TABERNA.png" width="1280" height="820"/>
+  <image source="Tileset mapa 1.png" width="1280" height="820"/>
  </tileset>
  <layer id="1" name="Tile Layer 1" width="30" height="21">
   <properties>
