@@ -168,6 +168,13 @@ bool Player::Update(float dt)
 
 		case ExploringState::INTERACT:
 
+			if (PosState == Direction::UL || PosState == Direction::UR) {
+				currentAnimation = &idleAnimB;
+			}
+			else {
+				currentAnimation = &idleAnim;
+			}
+
 			switch (interacted->type)
 			{
 			case EntityType::NPC:
@@ -221,6 +228,13 @@ bool Player::Update(float dt)
 
 		case CombatState::IDLE:
 
+			if (PosState == Direction::UL || PosState == Direction::UR) {
+				currentAnimation = &idleAnimB;
+			}
+			else {
+				currentAnimation = &idleAnim;
+			}
+
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && (DistanceToTile(GetTile(), destination) <= (stats.movement - movementUsed)))
 			{
 				if (moveTo(destination)) {
@@ -236,6 +250,13 @@ bool Player::Update(float dt)
 			break;
 			
 		case CombatState::MOVING:
+
+			if (PosState == Direction::UL || PosState == Direction::UR) {
+				currentAnimation = &idleAnimB;
+			}
+			else {
+				currentAnimation = &idleAnim;
+			}
 
 			if (move)
 			{

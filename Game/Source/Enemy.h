@@ -33,6 +33,7 @@ public:
 	vector<Entity*> enemies;
 	bool assaulted = false;
 	bool hasAttacked = false;
+	vector<iPoint> combatPos;
 };
 #endif // !__ENEMY_H__
 

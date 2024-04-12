@@ -27,7 +27,7 @@ bool NPC::Start()
 	if (currentAnimation == nullptr) {
 		idleAnim.loop = true;
 		idleAnim.speed = 1.0f;
-		idleAnim.PushBack({ 0, 0, 56, 124 });
+		idleAnim.PushBack({ 0, 0, 224, 246 });
 	}
 
 	currentAnimation = &idleAnim;
@@ -45,7 +45,9 @@ bool NPC::Update(float dt)
 {
 	distanceFromPlayer = DistanceToTile(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
 
-	if (GetMouseTile(mousePos) == GetTile() && app->sceneManager->currentScene->GetPlayer()->interacted != this)
+	iPoint aux = { GetTile().x - 1,GetTile().y };
+
+	if (GetMouseTile(mousePos) == aux && app->sceneManager->currentScene->GetPlayer()->interacted != this)
 	{
 		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 		{
