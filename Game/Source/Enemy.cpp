@@ -61,7 +61,6 @@ bool Enemy::Start()
 
 bool Enemy::Update(float dt)
 {
-	distanceFromPlayer = DistanceToTile(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
 
 	if (app->sceneManager->currentScene->settings) {
 		previousEState = exploringState;
@@ -111,6 +110,11 @@ bool Enemy::Update(float dt)
 					enemy->combatState = CombatState::NONE;
 					enemy->exploringState = ExploringState::NONE;
 				}
+
+				combatPos.push_back(iPoint{ parameters.attribute("cx").as_int(), parameters.attribute("cy").as_int() });
+				combatPos.push_back(iPoint{ parameters.attribute("p1x").as_int(), parameters.attribute("p1y").as_int() });
+				combatPos.push_back(iPoint{ parameters.attribute("p2x").as_int(), parameters.attribute("p2x").as_int() });
+
 				app->entityManager->StartCombat(enemies, this);
 				assaulted = false;
 			}
@@ -141,6 +145,7 @@ bool Enemy::Update(float dt)
 		break;
 	case MainState::IN_COMBAT:
 
+		pFocus = app->entityManager->combatManager->GetClosestPlayer(this, distanceFromPlayer);
 		aviableMovement = stats.movement - movementUsed;
 
 		switch (combatState)
@@ -150,13 +155,20 @@ bool Enemy::Update(float dt)
 			hasAttacked = false;
 			break;
 		case CombatState::IDLE:
+
+			if (PosState == Direction::UL || PosState == Direction::UR) {
+				currentAnimation = &idleAnimB;
+			}
+			else {
+				currentAnimation = &idleAnim;
+			}
 			
 			if(distanceFromPlayer <= inventory.weapon.range && !hasAttacked) {
 				combatState = CombatState::ATTACKING;
 				hasAttacked = true;
 			}
 			else {
-				app->map->pathfinding->CreatePath(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
+				app->map->pathfinding->CreatePath(GetTile(), pFocus->GetTile());
 				if (distanceFromPlayer > (aviableMovement + inventory.weapon.range)) {
 					moveTo(*app->map->pathfinding->GetLastPath()->At(aviableMovement));
 				}
@@ -169,6 +181,13 @@ bool Enemy::Update(float dt)
 
 			break;
 		case CombatState::MOVING:
+
+			if (PosState == Direction::UL || PosState == Direction::UR) {
+				currentAnimation = &idleAnimB;
+			}
+			else {
+				currentAnimation = &idleAnim;
+			}
 
 			if (move) {
 				DoPathMoving();
@@ -185,7 +204,7 @@ bool Enemy::Update(float dt)
 			break;
 		case CombatState::ATTACKING:
 			LOG("hola");
-			app->entityManager->combatManager->CheckIfHit(app->sceneManager->currentScene->GetPlayer()->GetTile(), &inventory.weapon);
+			app->entityManager->combatManager->CheckIfHit(pFocus->GetTile(), &inventory.weapon);
 			combatState = CombatState::WAITING;
 			break;
 		case CombatState::DEAD:

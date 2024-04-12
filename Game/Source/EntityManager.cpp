@@ -342,15 +342,9 @@ bool CombatManager::Update(float dt)
 	seconds = (elapsedTime / 1000) % 60;
 	//Seconds = elapsedTime % 1000;
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || seconds >= 5.0f)
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || seconds >= 10.0f)
 	{
 		currentCharacterTurn->combatState = CombatState::WAITING;
-		currentCharacterTurn = CombatList[NextTurn()];
-		currentCharacterTurn->combatState = CombatState::IDLE;
-	}
-
-	if (currentCharacterTurn->combatState == CombatState::WAITING)
-	{
 		currentCharacterTurn = CombatList[NextTurn()];
 		currentCharacterTurn->combatState = CombatState::IDLE;
 	}
@@ -375,22 +369,15 @@ bool CombatManager::Update(float dt)
 
 			//app->sceneManager->currentScene->cameraFocus = currentCharacterTurn;
 
-		if (CombatList[i]->combatState == CombatState::DEAD) {
-			if (CombatList[i]->type == EntityType::PLAYER) {
-				CombatList.erase(CombatList.begin() + i);
-				playersAlive--;
-			}
-			else {
-				DestroyEntity(CombatList[i], i);
-			}
-			i--;
-			if (i < 0) {
-				i = 0;
-			}
-			turn--;
-		}
-
 		CombatList[i]->Update(dt);
+	}
+
+	CheckIfCharDead();
+
+	if (currentCharacterTurn->combatState == CombatState::WAITING)
+	{
+		currentCharacterTurn = CombatList[NextTurn()];
+		currentCharacterTurn->combatState = CombatState::IDLE;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || (enemies.Count() == 0 && summoner == nullptr) || playersAlive == 0)
@@ -440,7 +427,7 @@ int CombatManager::NextTurn()
 {
 	turn++;
 
-	if (turn == CombatList.size()) 
+	if (turn >= CombatList.size())
 		turn = 0;
 
 	startTime = SDL_GetTicks();
@@ -456,6 +443,10 @@ void CombatManager::EndCombat()
 		players[i]->mainState = MainState::OUT_OF_COMBAT;
 		players[i]->combatState = CombatState::NONE;
 		players[i]->exploringState = ExploringState::IDLE;
+		players[i]->PosState = Direction::DR;
+		if (i == 1) {
+			players[i]->TpToCell(app->sceneManager->currentScene->GetPlayer()->GetTile().x - 1, app->sceneManager->currentScene->GetPlayer()->GetTile().y);
+		}
 		players[i]->stats.health = 1;
 		players[i] = nullptr;
 	}
@@ -497,6 +488,59 @@ void CombatManager::CheckIfHit(iPoint& dest, Weapon* weapon)
 	}
 }
 
+Player* CombatManager::GetClosestPlayer(Character* entity, int& dist)
+{
+
+	dist = 999;
+	int	aux;
+	int iterator = -1;
+
+	for (size_t i = 0; i < players.size(); i++)
+	{
+		if (players[i]->combatState != CombatState::DEAD) {
+			aux = abs(abs(players[i]->GetTile().x) - abs(entity->GetTile().x)) + abs(abs(players[i]->GetTile().y) - abs(entity->GetTile().y));
+			if (aux < dist) {
+				dist = aux;
+				iterator = i;
+			}
+		}
+	}
+
+	if (iterator == -1) {
+		entity->combatState = CombatState::NONE;
+		return nullptr;
+	}
+
+	return players[iterator];
+}
+
+void CombatManager::CheckIfCharDead()
+{
+	for (int i = 0; i < CombatList.size(); i++) {
+		if (CombatList[i]->combatState == CombatState::DEAD) {
+			for (size_t j = 0; j < CombatList.size(); j++)
+			{
+				if (currentCharacterTurn == CombatList[j]) {
+					if (i < j) {
+						turn--;
+					}
+				}
+			}
+			if (CombatList[i]->type == EntityType::PLAYER) {
+				CombatList.erase(CombatList.begin() + i);
+				playersAlive--;
+			}
+			else {
+				DestroyEntity(CombatList[i], i);
+			}
+			i--;
+			if (i < 0) {
+				i = 0;
+			}
+		}
+	}
+}
+
 void EntityManager::MakeStartCombatFade()
 {
 	if (currentStep == Fade_StepFade::TO_BLACKF)
@@ -506,6 +550,11 @@ void EntityManager::MakeStartCombatFade()
 		{
 			currentStep = Fade_StepFade::FROM_BLACKF;
 			inCombat = true;
+			combatManager->summoner->TpToCell(combatManager->summoner->combatPos[0].x, combatManager->summoner->combatPos[0].y);
+			for (size_t i = 0; i < combatManager->players.size(); i++)
+			{
+				combatManager->players[i]->TpToCell(combatManager->summoner->combatPos[i + 1].x, combatManager->summoner->combatPos[i + 1].y);
+			}
 			combatManager->CombatList[0]->combatState = CombatState::IDLE;
 			combatManager->startTime = SDL_GetTicks();
 		}
