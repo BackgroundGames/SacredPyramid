@@ -38,6 +38,7 @@ bool Level1::Start()
 	app->map->path = sceneconfig.child("map").attribute("path").as_string();
 	app->render->SetSelectionTex(app->tex->Load(sceneconfig.child("map").attribute("selectionPath").as_string()));
 	app->map->InitMap();
+	app->audio->PlayMusic(sceneconfig.attribute("audio").as_string(), 0);
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);

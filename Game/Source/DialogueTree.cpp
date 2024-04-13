@@ -7,6 +7,7 @@
 #include "SceneManager.h"
 #include "Window.h"
 #include "Log.h"
+#include "Textures.h"
 
 #include "SceneManager.h"
 #include "Player.h"
@@ -55,6 +56,11 @@ bool DialogueTree::Start()
 	quat.x = (windowW/2) - (quat.w/2);
 	quat.y = (windowH / 2) - (quat.h / 2);
 
+	textures.push_back(app->tex->Load(treeConf.attribute("zhaak").as_string()));
+	textures.push_back(app->tex->Load(treeConf.attribute("eli").as_string()));
+	textures.push_back(app->tex->Load(treeConf.attribute("bandit").as_string()));
+	textures.push_back(app->tex->Load(treeConf.attribute("drunkard").as_string()));
+
 	return true;
 }
 
@@ -64,8 +70,7 @@ bool DialogueTree::Update(float dt)
 		deleteOptions();
 	}
 
-	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(125));
-	SDL_RenderFillRect(app->render->renderer, &quat);
+	app->render->DrawTexture(currentNode->texture, quat.x - app->render->camera.x, quat.y - app->render->camera.y, NULL);
 
 	longitud_total = std::strlen(currentNode->text);
 
@@ -175,6 +180,8 @@ int DialogueTree::performDialogue(const char * dialogueName)
 		}
 
 		aux++;
+
+		node->texture = textures[itemNode.attribute("speaker").as_int()];
 
 		dialogueNodes.push_back(node);
 	}

@@ -118,6 +118,8 @@ public:
 	Fade_StepFade currentStep = Fade_StepFade::NOF;
 	Uint32 maxFadeFrames = 75;
 	Uint32 frameCount = 0;
+
+	pugi::xml_node config;
 };
 
 #endif // __ENTITYMANAGER_H__

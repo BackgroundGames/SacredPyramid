@@ -19,11 +19,13 @@
 		<resizable value="false"/>
 		<fullscreen_window value="false"/>
 	</window>
+	
+	<entitymanager audio="Assets\Audio\Music\Battle.ogg"/>
 
 	<scenemanager>
 		<intro texturePath="Assets/Textures/bgg.jpg"/>
-		<menu texturePath="Assets/Textures/Menu Piramide.jpeg"/>
-		<level1>
+		<menu texturePath="Assets/Textures/Menu Piramide.jpeg" audio="Assets\Audio\Music\Main_Menu.ogg"/>
+		<level1 audio="Assets\Audio\Music\Town.ogg">
 			<zhaak x="13" y="13"/>
 			<eli x="13" y="14"/>
 			<enemy x="15" y="8" cx="12" cy="8" id="0" p1x="13" p1y="12" p2x="15" p2y="12">
@@ -36,32 +38,33 @@
 			<npc x="17" y="15" id="0"/>
 			<map path="Assets/Maps/" name="Mapa 1 desierto.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 		</level1>
-		<level2>
+		<level2 audio="Assets\Audio\Music\Town.ogg">
 			<map path="Assets/Maps/" name="Mapa 1.5 Taberna.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 			<zhaak x="6" y="6"/>
 			<eli x="7" y="7"/>
 		</level2>
 	</scenemanager>
 	
-	<dialogues>
+	<dialogues zhaak="Assets/Textures/Papyrus_Zhak.png" eli="Assets/Textures/Papyrus_Eli_Flip.png" bandit="Assets/Textures/Papyrus_Bandit.png" drunkard="Assets/Textures/Papyrus_Drunk_Flip.png">
 		<dialogue1>
-			<node id="0" text="hola que tal qtlqgqglfghfghfh fg hgfh fh ft yurty urt yurt yurt yurty urty ur tyurt yurt yur tyurt uyr tyrtyur tyurt yur tyufgh fg hfg hfg hfg hfg hfg hf dgs">
+		<!--speaker (id): (Zhaak = 0; Eli = 1; Bandit = 2; Drunkard = 3; -->
+			<node id="0" speaker="0" text="hola que tal qtlqgqglfghfghfh fg hgfh fh ft yurty urt yurt yurt yurty urty ur tyurt yurt yur tyurt uyr tyrtyur tyurt yur tyufgh fg hfg hfg hfg hfg hfg hf dgs">
 				<option text="- mal" returnCode="0" pnode="1"/>
 				<option text="- be" returnCode="0" pnode="2"/>
 			</node>
-			<node id="1" text="llastima">
+			<node id="1" speaker="1" text="llastima">
 				<option text="- chao" returnCode="0" pnode="-1"/>
 			</node>
-			<node id="2" text="si? que guai, 4 o 5? asdf sad fasd fsdf sdfasdfas dfds f">
+			<node id="2" speaker="2" text="si? que guai, 4 o 5? asdf sad fasd fsdf sdfasdfas dfds f">
 				<option text="- chao" returnCode="0" pnode="-1"/>
 				<option text="- 5" returnCode="0" pnode="4"/>
 				<option text="- 4" returnCode="0" pnode="3"/>
 			</node>
-			<node id="3" text="nem al 5? asdfasdfasdf ">
+			<node id="3" speaker="3" text="nem al 5? asdfasdfasdf ">
 				<option text="- go 5" returnCode="0" pnode="4"/>
 				<option text="- chao" returnCode="0" pnode="-1"/>
 			</node>
-			<node id="4" text="soc 5  i final asdfasdf asdfasdfasdfasdfasdfjashdkfajshfkasjhdkfjashdsd fsk">
+			<node id="4" speaker="0" text="soc 5  i final asdfasdf asdfasdfasdfasdfasdfjashdkfajshfkasjhdkfjashdsd fsk">
 				<option text="- accepto" returnCode="1" pnode="-1"/>
 				<option text="- im out" returnCode="0" pnode="-1"/>
 			</node>

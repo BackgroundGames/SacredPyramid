@@ -4,6 +4,7 @@
 #include "Module.h"
 #include <vector>
 #include "SDL/include/SDL_rect.h"
+#include "SDL_image/include/SDL_image.h"
 
 #include "PugiXml/src/pugixml.hpp"
 
@@ -25,6 +26,7 @@ public:
 	const char* text;
 	vector <DialogueOption> dialogueOptions;
 	char* textLines[6];
+	SDL_Texture* texture = nullptr;
 };
 
 class GuiControlButton;
@@ -65,6 +67,8 @@ private:
 	int numero_secciones;
 	SDL_Rect quat;
 	bool delOptions = false;
+
+	vector<SDL_Texture*> textures;
 };
 
 #endif

@@ -28,7 +28,7 @@ bool Menu::Awake(pugi::xml_node config)
 bool Menu::Start()
 {
 	img = app->tex->Load(config.attribute("texturePath").as_string());
-	/*app->audio->PlayMusic(config.attribute("musicpath").as_string(),0);*/
+	app->audio->PlayMusic(config.attribute("audio").as_string(),0);
 	app->tex->GetSize(img, texW, texH);
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;

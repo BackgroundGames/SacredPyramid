@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "Window.h"
 #include "Map.h"
+#include "Audio.h"
 
 #include "Player.h"
 #include "Zhaak.h"
@@ -37,6 +38,8 @@ bool EntityManager::Awake(pugi::xml_node config)
 {
 	LOG("Loading Entity Manager");
 	bool ret = true;
+
+	this->config = config;
 
 	//Iterates over the entities and calls the Awake
 	ListItem<Entity*>* item;
@@ -557,6 +560,7 @@ void EntityManager::MakeStartCombatFade()
 			}
 			combatManager->CombatList[0]->combatState = CombatState::IDLE;
 			combatManager->startTime = SDL_GetTicks();
+			app->audio->PlayMusic(config.attribute("audio").as_string(), 0);
 		}
 	}
 	else
@@ -582,6 +586,7 @@ void EntityManager::MakeEndCombatFade()
 			delete combatManager;
 			combatManager = nullptr;
 			inCombat = false;
+			app->audio->PlayMusic(app->sceneManager->currentScene->sceneconfig.attribute("audio").as_string(), 0);
 		}
 	}
 	else
