@@ -589,7 +589,7 @@
    <tile/>
    <tile gid="22"/>
    <tile/>
-   <tile gid="29"/>
+   <tile/>
    <tile/>
    <tile gid="6"/>
    <tile/>
@@ -758,11 +758,23 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="10"/>
    <tile/>
    <tile/>
    <tile/>
    <tile gid="21"/>
+   <tile gid="9"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="9"/>
    <tile/>
    <tile/>
    <tile/>
@@ -778,19 +790,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="10"/>
   </data>
  </layer>
 </map>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="isometric" renderorder="right-down" width="12" height="12" tilewidth="128" tileheight="64" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="isometric" renderorder="right-down" width="12" height="12" tilewidth="128" tileheight="64" infinite="0" nextlayerid="3" nextobjectid="1">
  <properties>
   <property name="Draw" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" name="128" tilewidth="128" tileheight="128" tilecount="60" columns="12">
   <tileoffset x="0" y="32"/>
-  <image source="Pyramid.png" trans="ff00ff" width="1539" height="650"/>
+  <image source="Tileset mapa 3.png" trans="ff00ff" width="1539" height="650"/>
   <wangsets>
    <wangset name="Unnamed Set" type="corner" tile="-1">
     <wangcolor name="Terrain" color="#ff0000" tile="-1" probability="1"/>
