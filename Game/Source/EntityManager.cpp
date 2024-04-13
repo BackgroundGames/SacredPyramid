@@ -367,7 +367,7 @@ bool CombatManager::Update(float dt)
 				}
 			}*/
 
-			//app->sceneManager->currentScene->cameraFocus = currentCharacterTurn;
+		app->sceneManager->currentScene->cameraFocus = currentCharacterTurn;
 
 		CombatList[i]->Update(dt);
 	}

@@ -83,6 +83,16 @@
 				<idleB x="108" y="123" w="54" h="123"/>
 				<idleB x="162" y="123" w="54" h="123"/>
 			</idleBAnim>
+			<walkingAnim loop="true" speed="0.1f">
+				<walk x="392" y="123" w="54" h="123"/>
+				<walk x="336" y="123" w="54" h="123"/>
+				<walk x="280" y="123" w="54" h="123"/>
+				<walk x="224" y="123" w="54" h="123"/>
+				<walk x="168" y="123" w="54" h="123"/>
+				<walk x="112" y="123" w="54" h="123"/>
+				<walk x="56" y="123" w="54" h="123"/>
+				<walk x="0" y="123" w="54" h="123"/>				
+			</walkingAnim>
 		</zhaak>
 		
 		<eli texturePath="Assets/Textures/Eli anim.png">

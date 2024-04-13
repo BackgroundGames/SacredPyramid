@@ -53,7 +53,7 @@ bool Enemy::Start()
 
 	//prova combat
 	stats.health = 1;
-	inventory.weapon.range = 1;
+	inventory.weapon.range = 3;
 	inventory.weapon.damage = 1;
 
 	return true;

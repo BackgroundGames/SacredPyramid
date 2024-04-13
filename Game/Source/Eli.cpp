@@ -6,7 +6,7 @@ Eli::Eli()
 	name.Create("eli");
 	subtype = PlayerType::ELI;
 	inventory.weapon.damage = 1;
-	inventory.weapon.range = 1;
+	inventory.weapon.range = 3;
 	stats.health = 1;
 	Awake();
 }

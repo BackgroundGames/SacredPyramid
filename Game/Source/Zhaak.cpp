@@ -49,6 +49,16 @@ bool Zhaak::Awake()
 		idleAnimB.PushBack({ idleBNode.attribute("x").as_int(), idleBNode.attribute("y").as_int() ,idleBNode.attribute("w").as_int() ,idleBNode.attribute("h").as_int() });
 	}
 
+	auxAnim = parametersAnim.child("walkingAnim");
+
+	walkingAnim.speed = auxAnim.attribute("speed").as_float();
+	walkingAnim.loop = auxAnim.attribute("loop").as_bool();
+
+	for (pugi::xml_node idleNode = auxAnim.child("walk"); idleNode; idleNode = idleNode.next_sibling("walk"))
+	{
+		walkingAnim.PushBack({ idleNode.attribute("x").as_int(), idleNode.attribute("y").as_int() ,idleNode.attribute("w").as_int() ,idleNode.attribute("h").as_int() });
+	}
+
 	return true;
 }
 
