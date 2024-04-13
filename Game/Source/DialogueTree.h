@@ -69,6 +69,7 @@ private:
 	bool delOptions = false;
 
 	vector<SDL_Texture*> textures;
+	uint windowW, windowH;
 };
 
 #endif

@@ -47,14 +47,12 @@ bool DialogueTree::Awake(pugi::xml_node config)
 
 bool DialogueTree::Start()
 {
-	uint windowW, windowH;
-
 	app->win->GetWindowSize(windowW, windowH);
 
 	quat.w = windowW/2;
-	quat.h = windowH/3;
+	quat.h = windowH/4;
 	quat.x = (windowW/2) - (quat.w/2);
-	quat.y = (windowH / 2) - (quat.h / 2);
+	quat.y = (windowH / 2) + (quat.h / 2);
 
 	textures.push_back(app->tex->Load(treeConf.attribute("zhaak").as_string()));
 	textures.push_back(app->tex->Load(treeConf.attribute("eli").as_string()));
@@ -70,12 +68,18 @@ bool DialogueTree::Update(float dt)
 		deleteOptions();
 	}
 
-	app->render->DrawTexture(currentNode->texture, quat.x - app->render->camera.x, quat.y - app->render->camera.y, NULL);
+	uint textW, textH;
+
+	app->tex->GetSize(currentNode->texture, textW, textH);
+	app->render->DrawTexture(currentNode->texture, (windowW/2) - app->render->camera.x - (textW / 2), (windowH/2) - (textH/3) - app->render->camera.y + 45, NULL);
+
+	//SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(125));
+	//SDL_RenderFillRect(app->render->renderer, &quat);
 
 	longitud_total = std::strlen(currentNode->text);
 
 	// Definir la longitud de las secciones
-	longitud_seccion = quat.w/10 - 1; // Por ejemplo, longitud de cada sección
+	longitud_seccion = quat.w/12; // Por ejemplo, longitud de cada sección
 
 	// Calcular el número total de secciones
 	numero_secciones = longitud_total / longitud_seccion;
@@ -101,7 +105,7 @@ bool DialogueTree::Update(float dt)
 
 
 		// Imprimir la sección actual
-		app->render->DrawText(seccion_actual, quat.x + 5, quat.y + (25 * i) + 5, longitud_actual * 10, 25, 220, 220, 220);
+		app->render->DrawText(seccion_actual, quat.x + 50, quat.y + (20 * i) + 40, longitud_actual * 10, 20, 0, 0, 0);
 
 		// Liberar la memoria asignada para la sección actual
 		delete[] seccion_actual;
@@ -150,7 +154,7 @@ int DialogueTree::performDialogue(const char * dialogueName)
 		longitud_total = std::strlen(node->text);
 
 		// Definir la longitud de las secciones
-		longitud_seccion = quat.w / 10 - 1; // Por ejemplo, longitud de cada sección
+		longitud_seccion = quat.w / 8 - 1; // Por ejemplo, longitud de cada sección
 
 		// Calcular el número total de secciones
 		numero_secciones = longitud_total / longitud_seccion;
@@ -213,7 +217,7 @@ int DialogueTree::performDialogue(const char * dialogueName)
 
 	for (int i = 0; i < currentNode->dialogueOptions.size(); i++) {
 		size_t Size = strlen(currentNode->dialogueOptions[i].text);
-		SDL_Rect playPos = { quat.x, quat.y + (quat.h - 25*3) + (25 * i), 15 * Size,20 };
+		SDL_Rect playPos = { quat.x + 40, quat.y + (quat.h - 20 * 3) + (15 * i), 10 * Size,20 };
 		optionNodes.push_back((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, currentNode->dialogueOptions[i].text, playPos, app->sceneManager->currentScene));
 		optionNodes[i]->animated = false;
 	}
@@ -253,7 +257,7 @@ void DialogueTree::deleteOptions()
 
 	for (int i = 0; i < currentNode->dialogueOptions.size(); i++) {
 		size_t Size = strlen(currentNode->dialogueOptions[i].text);
-		SDL_Rect playPos = { quat.x, quat.y + (quat.h - 25 * 3) + (25 * i), 15 * Size,25 };
+		SDL_Rect playPos = { quat.x + 40, quat.y + (quat.h - 20 * 3) + (15 * i), 10 * Size,20 };
 		optionNodes.push_back((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, currentNode->dialogueOptions[i].text, playPos, app->sceneManager->currentScene));
 		optionNodes[i]->animated = false;
 	}
