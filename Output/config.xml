@@ -197,16 +197,46 @@
 				<option text="..." returnCode="0" pnode="-1"/>
 			</node>	
 		</dialogue4>
-		<!--- Zhaak interrupts Eli from leaving -->
+		<!--- Zhaak and Eli confront the Sphinx -->
 		<dialogue5>
-			<node id="0" speaker="1" text="Hold up there stranger, what do you need?">
-				<option text="Who, me?" returnCode="0" pnode="1"/>
+			<node id="0" speaker="6" text="Who dares to break into the Sacred Pyramid of Ra?">
+				<option text="..." returnCode="0" pnode="1"/>
 			</node>
-			<node id="1" speaker="1" text="Is he talking to me? I should go where he is.">
-				<option text="I'm coming" returnCode="0" pnode="-1"/>
+			<node id="1" speaker="6" text="Who dares awaken the great Sphinx, Guardian of everything and everyone!">
+				<option text="- Huh?" returnCode="0" pnode="2"/>
+			</node>
+			<node id="2" speaker="1" text="Ah!">
+				<option text="- Huh?" returnCode="0" pnode="3"/>
+			</node>
+			<node id="3" speaker="1" text="Mrhbaan bi'abu alhawl aleazimi. atina musalimina.">
+				<option text="..." returnCode="0" pnode="4"/>
+			</node>
+			<node id="4" speaker="1" text="nurid dukhul alharam li'iinqadh sadiqiN">
+				<option text="..." returnCode="0" pnode="5"/>
+			</node>
+			<node id="5" speaker="6" text="...">
+				<option text="..." returnCode="0" pnode="6"/>
+			</node>
+			<node id="6" speaker="1" text="...">
+				<option text="- What happened?" returnCode="0" pnode="7"/>
+			</node>
+			<node id="7" speaker="0" text="What's wrong, are you okay?">
+				<option text="..." returnCode="0" pnode="8"/>
+			</node>
+			<node id="8" speaker="1" text="If we don't pass the test, we won't enter the pyramid.">
+				<option text="- Reassure her" returnCode="0" pnode="9"/>
+			</node>
+			<node id="9" speaker="6" text="Then we will pass it!">
+				<option text="..." returnCode="0" pnode="10"/>
+			</node>
+			<node id="10" speaker="1" text="Yes!">
+				<option text="..." returnCode="0" pnode="11"/>
+			</node>
+			<node id="11" speaker="0" text="Nahn jahizuN.">
+				<option text="..." returnCode="0" pnode="-1"/>
 			</node>
 		</dialogue5>
-		<!--- Eli entering the town, talking to herself -->
+		<!--- More dialogue -->
 		<dialogue6>
 			<node id="0" speaker="1" text="...">
 				<option text="..." returnCode="0" pnode="-1"/>
