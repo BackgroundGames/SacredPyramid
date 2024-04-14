@@ -29,7 +29,7 @@ bool Intro::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->win->GetWindowSize(windowW, windowH);
-	introFx = app->audio->LoadFx("Assets/Audio/Fx/logo.wav");
+	introFx = app->audio->LoadFx(sceneconfig.attribute("audio").as_string());
 	app->audio->PlayFx(introFx);
 	return true;
 }
