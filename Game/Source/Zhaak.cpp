@@ -11,14 +11,12 @@ Zhaak::Zhaak()
 	stats.health = 3;
 }
 
-Zhaak::Zhaak(Stats stats)
+Zhaak::Zhaak(Stats stats, Equipment inventory)
 {
 	name.Create("zhaak");
 	this->stats = stats;
+	this->inventory = inventory;
 	subtype = PlayerType::ZHAAK;
-	//porves
-
-
 	Awake();
 }
 

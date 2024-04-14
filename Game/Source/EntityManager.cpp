@@ -105,6 +105,9 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 {
 	Entity* entity = nullptr;
 
+	Stats stats;
+	Equipment inventory;
+
 	//Instantiate entity according to the type and add the new entity to the list of Entities
 	switch (type)
 	{
@@ -113,19 +116,30 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		switch (p_type)
 		{
 		case PlayerType::ZHAAK:
-			entity = new Zhaak();
+			stats.health = 3;
+			inventory.weapon.damage = 1;
+			inventory.weapon.range = 1;
+			entity = new Zhaak(stats, inventory);
 			break;
+
 		case PlayerType::AMIR:
 			entity = new Amir();
 			break;
+
 		case PlayerType::AMUMMY:
 			break;
+
 		case PlayerType::ELI:
+			stats.health = 3;
+			inventory.weapon.damage = 1;
+			inventory.weapon.range = 3;
 			entity = new Eli();
 			break;
+
 		case PlayerType::UNKNOWN:
 			entity = new Player();
 			break;
+
 		default:
 			break;
 		}
@@ -136,14 +150,23 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		switch (e_type)
 		{
 		case EnemyType::BANDIT:
-			entity = new Bandit();
+			stats.health = 1;
+			inventory.weapon.range = 2;
+			entity = new Bandit(stats, inventory);
 			break;
+
 		case EnemyType::DRUNKARD:
-			entity = new Drunkard();
+			inventory.weapon.range = 1;
+			inventory.weapon.damage = 1;
+			entity = new Drunkard(stats, inventory);
 			break;
+
 		case EnemyType::EVIL_MUMMY:
-			entity = new EvilMummy();
+			inventory.weapon.range = 2;
+			inventory.weapon.damage = 1;
+			entity = new EvilMummy(stats, inventory);
 			break;
+
 		case EnemyType::UNKNOWN:
 			entity = new Enemy();
 			break;

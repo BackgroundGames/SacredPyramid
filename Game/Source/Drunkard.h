@@ -7,6 +7,7 @@ class Drunkard : public Enemy
 {
 public:
 	Drunkard();
+	Drunkard(Stats stats, Equipment inventory);
 
 	~Drunkard();
 

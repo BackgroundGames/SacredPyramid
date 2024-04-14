@@ -13,6 +13,16 @@ Drunkard::Drunkard()
 	inventory.weapon.damage = 1;
 }
 
+Drunkard::Drunkard(Stats stats, Equipment inventory)
+{
+	name.Create("drunkard");
+	this->stats = stats;
+	this->inventory = inventory;
+	type = EntityType::ENEMY;
+	subtype = EnemyType::DRUNKARD;
+	Awake();
+}
+
 Drunkard::~Drunkard()
 {
 }

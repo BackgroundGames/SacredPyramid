@@ -11,17 +11,12 @@ Eli::Eli()
 	stats.health = 3;
 }
 
-Eli::Eli(Stats stats)
+Eli::Eli(Stats stats, Equipment inventory)
 {
 	name.Create("eli");
 	this->stats = stats;
+	this->inventory = inventory;
 	subtype = PlayerType::ELI;
-
-	//porves
-	inventory.weapon.damage = 1;
-	inventory.weapon.range = 1;
-	stats.health = 1;
-
 	Awake();
 }
 
