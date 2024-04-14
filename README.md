@@ -3,6 +3,8 @@
 
 # Zhaak and the Sacred Pyramid: The Legacy of Ra
 
+ - Link to [GitHub](https://github.com/BackgroundGames/SacredPyramid)
+
 ## Description
 
 Zhaak and the Sacred Pyramid is a grid based strategy rpg inspired by Egyptian mythology, where a young Zhaak is enlisted for help to
