@@ -67,7 +67,7 @@
 				<option text="- accepto" returnCode="1" pnode="-1"/>
 				<option text="- im out" returnCode="0" pnode="-1"/>
 			</node>
-		</dialogue2>
+		</dialogue1>
 	</dialogues>
 	
 	<animations>
