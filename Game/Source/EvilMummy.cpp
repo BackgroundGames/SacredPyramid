@@ -13,10 +13,11 @@ EvilMummy::EvilMummy()
 	inventory.weapon.damage = 1;
 }
 
-EvilMummy::EvilMummy(Stats stats)
+EvilMummy::EvilMummy(Stats stats, Equipment inventory)
 {
 	name.Create("evilMummy");
 	this->stats = stats;
+	this->inventory = inventory;
 	type = EntityType::ENEMY;
 	subtype = EnemyType::EVIL_MUMMY;
 	Awake();

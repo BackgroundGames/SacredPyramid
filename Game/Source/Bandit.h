@@ -8,7 +8,7 @@ class Bandit : public Enemy
 {
 public:
 	Bandit();
-	Bandit(Stats stats);
+	Bandit(Stats stats, Equipment inventory);
 
 	~Bandit();
 

@@ -13,13 +13,13 @@
 
 struct Stats
 {
-	int health;
-	uint mana;
-	uint attack;
-	uint defense;
-	uint magicAttack;
-	uint magicDefense;
-	uint initiative;
+	int health = 1;
+	uint mana = 0;
+	uint attack = 1;
+	uint defense = 0;
+	uint magicAttack = 0;
+	uint magicDefense = 0;
+	uint initiative = 0;
 	uint movement = 3;
 };
 

@@ -13,10 +13,11 @@ Bandit::Bandit()
 	inventory.weapon.damage = 1;
 }
 
-Bandit::Bandit(Stats stats)
+Bandit::Bandit(Stats stats, Equipment inventory)
 {
 	name.Create("bandit");
 	this->stats = stats;
+	this->inventory = inventory;
 	type = EntityType::ENEMY;
 	subtype = EnemyType::BANDIT;
 	Awake();
