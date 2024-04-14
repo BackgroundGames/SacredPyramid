@@ -51,11 +51,6 @@ bool Enemy::Start()
 
 	observer = app->sceneManager->currentScene->GetPlayer();
 
-	//prova combat
-	stats.health = 1;
-	inventory.weapon.range = 1;
-	inventory.weapon.damage = 1;
-
 	return true;
 }
 

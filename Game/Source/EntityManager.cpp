@@ -220,7 +220,7 @@ void EntityManager::StartCombat(vector<Entity*> &enemies, Entity* summoner)
 		combatManager->players.push_back((Player*)app->sceneManager->currentScene->players[i]);
 		combatManager->players[i]->mainState = MainState::IN_COMBAT;
 		combatManager->players[i]->combatState = CombatState::WAITING;
-		combatManager->players[i]->stats.health = 1;
+		combatManager->players[i]->stats.health = 3;
 		length++;
 	}
 
@@ -450,7 +450,7 @@ void CombatManager::EndCombat()
 		if (i == 1) {
 			players[i]->TpToCell(app->sceneManager->currentScene->GetPlayer()->GetTile().x - 1, app->sceneManager->currentScene->GetPlayer()->GetTile().y);
 		}
-		players[i]->stats.health = 1;
+		players[i]->stats.health = 3;
 		players[i] = nullptr;
 	}
 	players.clear();

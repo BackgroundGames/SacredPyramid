@@ -34,7 +34,7 @@ bool NPC::Start()
 		parametersAnim = app->configFile.child("config").child("animations").child("tabernero");
 	}
 	if (id == 3) {
-		parametersAnim = app->configFile.child("config").child("animations").child("npc");
+		parametersAnim = app->configFile.child("config").child("animations").child("esfinge");
 	}
 
 	Character::Start();

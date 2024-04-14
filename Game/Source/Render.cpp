@@ -131,6 +131,8 @@ bool Render::Update(float dt)
 			text = combatTurnTimer.c_str();
 			DrawText(text, 0, 110, 250, 30, 0, 0, 255);
 		}
+
+		app->sceneManager->currentScene->GetPlayer()->stats.health = 999;
 	}
 
 	return true;
