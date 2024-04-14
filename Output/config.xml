@@ -39,10 +39,15 @@
 			<map path="Assets/Maps/" name="Mapa 1 desierto.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 		</level1>
 		<level2 audio="Assets\Audio\Music\Town.ogg">
-			<map path="Assets/Maps/" name="Mapa 1.5 Taberna.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
+			<map path="Assets/Maps/" name="Mapa 3 Pyramid.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 			<zhaak x="6" y="6"/>
 			<eli x="7" y="7"/>
 		</level2>
+		<level3>
+			<map path="Assets/Maps/" name="Mapa 3 Pyramid.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
+			<zhaak x="6" y="6"/>
+			<eli x="7" y="7"/>
+		</level3>
 	</scenemanager>
 	
 	<dialogues zhaak="Assets/Textures/Papyrus_Zhak.png" eli="Assets/Textures/Papyrus_Eli.png" bandit="Assets/Textures/Papyrus_Bandit.png" drunkard="Assets/Textures/Papyrus_Drunk_Flip.png" npc1="Assets/Textures/Papyrus_NPC1_Flip.png" bartender= "Assets/Textures/Papyrus_Bartender_Flip.png" npczhaak="Assets/Textures/Papyrus_Zhak_Flip.png">
