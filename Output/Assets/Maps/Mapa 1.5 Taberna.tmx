@@ -11,6 +11,10 @@
   <tileoffset x="0" y="32"/>
   <image source="128.png" width="128" height="128"/>
  </tileset>
+ <tileset firstgid="62" name="Tileset mapa 3" tilewidth="128" tileheight="128" tilecount="60" columns="12">
+  <tileoffset x="0" y="32"/>
+  <image source="Tileset mapa 3.png" width="1539" height="650"/>
+ </tileset>
  <layer id="1" name="Tile Layer 1" width="16" height="16">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -593,19 +597,19 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="84"/>
    <tile gid="22"/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="61"/>
+   <tile gid="61"/>
    <tile gid="6"/>
+   <tile gid="85"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="84"/>
    <tile gid="6"/>
-   <tile/>
+   <tile gid="61"/>
    <tile/>
    <tile/>
    <tile/>
@@ -625,6 +629,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="61"/>
    <tile/>
    <tile/>
    <tile/>
@@ -656,6 +661,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="61"/>
    <tile/>
    <tile/>
    <tile/>
@@ -671,9 +677,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="61"/>
    <tile/>
    <tile/>
    <tile/>
@@ -705,7 +709,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="61"/>
    <tile gid="39"/>
    <tile/>
    <tile/>
@@ -737,7 +741,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="84"/>
    <tile/>
    <tile/>
    <tile gid="51"/>
@@ -785,13 +789,13 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="61"/>
+   <tile gid="61"/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="61"/>
+   <tile gid="61"/>
+   <tile gid="61"/>
    <tile/>
    <tile/>
    <tile/>
