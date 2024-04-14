@@ -117,8 +117,6 @@ bool DialogueTree::Update(float dt)
 
 bool DialogueTree::CleanUp()
 {
-	active = false;
-
 	for (int i = 0; i < optionNodes.size(); i++) {
 		app->guiManager->DeleteGuiControl((GuiControl*)optionNodes.at(i));
 		delete optionNodes[i];
@@ -132,13 +130,17 @@ bool DialogueTree::CleanUp()
 
 	dialogueNodes.clear();
 
-	app->guiManager->CleanUp();
+	if (active) {
+		app->guiManager->CleanUp();
+	}
 
 	for (size_t i = 0; i < app->sceneManager->currentScene->players.size(); i++)
 	{
 		dynamic_cast<Player*>(app->sceneManager->currentScene->players.at(i))->exploringState = ExploringState::IDLE;
 		dynamic_cast<Player*>(app->sceneManager->currentScene->players.at(i))->interacted = nullptr;
 	}
+
+	active = false;
 
 	return true;
 }

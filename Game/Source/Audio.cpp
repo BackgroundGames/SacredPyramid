@@ -195,7 +195,6 @@ void Audio::ChangeFxVolume(float percent)
 void Audio::UnloadFx(unsigned int id)
 {
 	Mix_FreeChunk(fx[id]);
-	fx.erase(fx.begin() + id);
 }
 
 void Audio::StopFx(unsigned int channel)
