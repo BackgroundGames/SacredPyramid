@@ -804,7 +804,7 @@
    <tile gid="10"/>
   </data>
  </layer>
- <layer id="4" name="Navigation" width="16" height="16">
+ <layer id="4" name="Navigation" width="16" height="16" visible="0">
   <properties>
    <property name="Navigation" type="bool" value="true"/>
   </properties>
@@ -883,23 +883,23 @@
    <tile/>
    <tile gid="61"/>
    <tile gid="61"/>
-   <tile/>
-   <tile/>
-   <tile gid="61"/>
-   <tile gid="61"/>
    <tile gid="61"/>
    <tile/>
    <tile gid="61"/>
    <tile gid="61"/>
    <tile gid="61"/>
    <tile/>
+   <tile gid="61"/>
+   <tile gid="61"/>
+   <tile gid="61"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile gid="61"/>
    <tile gid="61"/>
-   <tile/>
+   <tile gid="61"/>
    <tile/>
    <tile gid="61"/>
    <tile gid="61"/>

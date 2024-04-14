@@ -30,6 +30,9 @@ bool NPC::Start()
 	if (id == 1) {
 		parametersAnim = app->configFile.child("config").child("animations").child("random");
 	}
+	if (id == 2) {
+		parametersAnim = app->configFile.child("config").child("animations").child("tabernero");
+	}
 
 	Character::Start();
 
@@ -73,7 +76,16 @@ bool NPC::Update(float dt)
 	Character::Update(dt);
 
 	if (startTalking) {
-		app->dialogueTree->performDialogue("dialogue1");
+		if (id == 0) {
+			app->dialogueTree->performDialogue("dialogue4");
+		}
+		if (id == 1) {
+			app->dialogueTree->performDialogue("dialogue1");
+		}
+		if (id == 2) {
+			app->dialogueTree->performDialogue("dialogue2");
+		}
+		
 		startTalking = false;
 	}
 

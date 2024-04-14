@@ -59,6 +59,7 @@ bool DialogueTree::Start()
 	textures.push_back(app->tex->Load(treeConf.attribute("bandit").as_string()));
 	textures.push_back(app->tex->Load(treeConf.attribute("drunkard").as_string()));
 	textures.push_back(app->tex->Load(treeConf.attribute("npc1").as_string()));
+	textures.push_back(app->tex->Load(treeConf.attribute("bartender").as_string()));
 
 	return true;
 }
@@ -142,11 +143,18 @@ bool DialogueTree::CleanUp()
 
 	active = false;
 
+	if (dialog == "dialogue4") {
+		app->sceneManager->currentScene->GetPlayer()->exploringState = ExploringState::NONE;
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level1);
+	}
+
 	return true;
 }
 
 int DialogueTree::performDialogue(const char * dialogueName)
 {
+	dialog = dialogueName;
+
 	pugi::xml_node itemNode = treeConf.child(dialogueName).child("node");
 
 	int aux = 0;

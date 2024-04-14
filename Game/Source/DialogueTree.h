@@ -70,6 +70,7 @@ private:
 
 	vector<SDL_Texture*> textures;
 	uint windowW, windowH;
+	const char* dialog;
 };
 
 #endif

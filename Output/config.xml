@@ -39,12 +39,13 @@
 		</level1>
 		<level2 audio="Assets\Audio\Music\Town.ogg">
 			<map path="Assets/Maps/" name="Mapa 1.5 Taberna.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
-			<eli x="15" y="16"/>
-			<npc x="5" y="5" id="0"/>
+			<eli x="15" y="9"/>
+			<npc x="11" y="4" id="2"/>
+			<npc x="15" y="15" id="0"/>
 		</level2>
 	</scenemanager>
 	
-	<dialogues zhaak="Assets/Textures/Papyrus_Zhak.png" eli="Assets/Textures/Papyrus_Eli.png" bandit="Assets/Textures/Papyrus_Bandit.png" drunkard="Assets/Textures/Papyrus_Drunk_Flip.png" npc1="Assets/Textures/Papyrus_NPC1_Flip.png" bartender= "Assets/Textures/Papyrus_Bartender_Flip.png" npczhaak="Assets/Textures/Papyrus_Zhak_Flip.png">
+	<dialogues zhaak="Assets/Textures/Papyrus_Zhak_Flip.png" eli="Assets/Textures/Papyrus_Eli.png" bandit="Assets/Textures/Papyrus_Bandit.png" drunkard="Assets/Textures/Papyrus_Drunk_Flip.png" npc1="Assets/Textures/Papyrus_NPC1_Flip.png" bartender= "Assets/Textures/Papyrus_Bartender_Flip.png" npczhaak="Assets/Textures/Papyrus_Zhak_Flip.png">
 	<!--speaker (id): (Zhaak = 0; Eli = 1; Bandit = 2; Drunkard = 3; NPC1 = 4; Bartender = 5; Sphynx = 6; Zhaak_Flip = 7 -->
 		<!--- Eli entering the town, talking to herself -->
 		<dialogue0>
@@ -85,7 +86,7 @@
 		</dialogue2>
 		<!--- Zhaak interrupts Eli from leaving -->
 		<dialogue3>
-			<node id="0" speaker="7" text="Hold up there stranger, what do you need?">
+			<node id="0" speaker="1" text="Hold up there stranger, what do you need?">
 				<option text="Who, me?" returnCode="0" pnode="1"/>
 			</node>
 			<node id="1" speaker="1" text="Is he talking to me? I should go where he is.">
@@ -109,19 +110,19 @@
 			<node id="4" speaker="1" text="I don't know anything about him.">
 				<option text="..." returnCode="0" pnode="5"/>
 			</node>
-			<node id="5" speaker="7" text="'The Pyramid of Ra? It's cursed, everyone knows that.'">
+			<node id="5" speaker="0" text="'The Pyramid of Ra? It's cursed, everyone knows that.'">
 				<option text="..." returnCode="0" pnode="6"/>
 			</node>
-			<node id="6" speaker="7" text="...">
+			<node id="6" speaker="0" text="...">
 				<option text="- Keep talking" returnCode="0" pnode="7"/>
 			</node>
 			<node id="7" speaker="1" text="Well, maybe this wasn't the best idea. I'll go.">
 				<option text="..." returnCode="0" pnode="8"/>
 			</node>
-			<node id="8" speaker="7" text="...">
+			<node id="8" speaker="0" text="...">
 				<option text="..." returnCode="0" pnode="9"/>
 			</node>
-			<node id="9" speaker="7" text="How long has it been since your friend was trapped?">
+			<node id="9" speaker="0" text="How long has it been since your friend was trapped?">
 				<option text="..." returnCode="0" pnode="10"/>
 			</node>
 			<node id="10" speaker="1" text="Oh! Ehm, a couple of days">
@@ -130,13 +131,13 @@
 			<node id="11" speaker="1" text="It took me a while to get across the people here.">
 				<option text="..." returnCode="0" pnode="12"/>
 			</node>
-			<node id="12" speaker="7" text="Your friend hasn't exactly chosen the best place to get stuck.">
+			<node id="12" speaker="0" text="Your friend hasn't exactly chosen the best place to get stuck.">
 				<option text="..." returnCode="0" pnode="13"/>
 			</node>
-			<node id="13" speaker="7" text=" You're going to need help from someone who knows what mysteries it hides.">
+			<node id="13" speaker="0" text=" You're going to need help from someone who knows what mysteries it hides.">
 				<option text="..." returnCode="0" pnode="14"/>
 			</node>
-			<node id="14" speaker="7" text="Not to mention the Sphinx.">
+			<node id="14" speaker="0" text="Not to mention the Sphinx.">
 				<option text="..." returnCode="0" pnode="15"/>
 			</node>
 			<node id="15" speaker="1" text="'He's not a bad person, maybe he can help me'">
@@ -148,34 +149,34 @@
 			<node id="17" speaker="1" text="You would be rewarded with part of the donations we have at our disposal for the excavations.">
 				<option text="..." returnCode="0" pnode="18"/>
 			</node>
-			<node id="18" speaker="7" text="Still, it doesn't seem to me enough for a request that involves the possibility of losing your life in it.">
+			<node id="18" speaker="0" text="Still, it doesn't seem to me enough for a request that involves the possibility of losing your life in it.">
 				<option text="..." returnCode="0" pnode="19"/>
 			</node>
-			<node id="19" speaker="7" text="Not to mention that maybe it's your friend the one who has already lost it.">
+			<node id="19" speaker="0" text="Not to mention that maybe it's your friend the one who has already lost it.">
 				<option text="..." returnCode="0" pnode="20"/>
 			</node>
 			<node id="20" speaker="1" text="Yeah...">
 				<option text="..." returnCode="0" pnode="21"/>
 			</node>
-			<node id="21" speaker="7" text="Okay, I'll help you.">
+			<node id="21" speaker="0" text="Okay, I'll help you.">
 				<option text="..." returnCode="0" pnode="22"/>
 			</node>
-			<node id="22" speaker="7" text=" Maybe if your friend is a little smart he has found a way to take shelter.">
+			<node id="22" speaker="0" text=" Maybe if your friend is a little smart he has found a way to take shelter.">
 				<option text="..." returnCode="0" pnode="23"/>
 			</node>
-			<node id="23" speaker="7" text="But we don't have time to waste.">
+			<node id="23" speaker="0" text="But we don't have time to waste.">
 				<option text="- Introduce yourself" returnCode="0" pnode="24"/>
 			</node>
 			<node id="24" speaker="1" text="I'm Eli, by the way. Nice to meet you.">
 				<option text="..." returnCode="0" pnode="25"/>
 			</node>			
-			<node id="25" speaker="7" text="... I'm Zhaak.">
+			<node id="25" speaker="0" text="... I'm Zhaak.">
 				<option text="..." returnCode="0" pnode="26"/>
 			</node>					
 			<node id="26" speaker="1" text="Nice to meet you, Zhaak.">
 				<option text="..." returnCode="0" pnode="27"/>
 			</node>	
-			<node id="27" speaker="7" text="Whatever, let's go.">
+			<node id="27" speaker="0" text="Whatever, let's go.">
 				<option text="..." returnCode="0" pnode="-1"/>
 			</node>	
 		</dialogue4>
@@ -261,6 +262,12 @@
 				<idle x="0" y="0" w="56" h="123"/>
 			</idleAnim>
 		</random>
+		
+		<tabernero texturePath="Assets/Textures/NPC 2.png">
+			<idleAnim loop="true" speed="0.05f">
+				<idle x="0" y="0" w="56" h="123"/>
+			</idleAnim>
+		</tabernero>
 		
 	</animations>
   
