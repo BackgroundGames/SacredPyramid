@@ -35,7 +35,7 @@
 			<enemy x="11" y="9" cx="13" cy="10" id="1" p1x="12" p1y="14" p2x="14" p2y="14">
 				<minion x="11" y="10" id="0"/>
 			</enemy>
-			<npc x="17" y="15" id="0"/>
+			<npc x="20" y="20" id="0"/>
 			<map path="Assets/Maps/" name="Mapa 1 desierto.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 		</level1>
 		<level2 audio="Assets\Audio\Music\Town.ogg">
@@ -45,7 +45,7 @@
 		</level2>
 	</scenemanager>
 	
-	<dialogues zhaak="Assets/Textures/Papyrus_Zhak.png" eli="Assets/Textures/Papyrus_Eli_Flip.png" bandit="Assets/Textures/Papyrus_Bandit.png" drunkard="Assets/Textures/Papyrus_Drunk_Flip.png">
+	<dialogues zhaak="Assets/Textures/Papyrus_Zhak.png" eli="Assets/Textures/Papyrus_Eli_Flip.png" bandit="Assets/Textures/Papyrus_Bandit_Flip.png" drunkard="Assets/Textures/Papyrus_Drunk_Flip.png">
 		<dialogue1>
 		<!--speaker (id): (Zhaak = 0; Eli = 1; Bandit = 2; Drunkard = 3; NPC1 = 4; Bartender = 5; Sphynx = 6 -->
 			<node id="0" speaker="4" text="If it's help you're seeking, you can find a lot of people in the tavern.">
@@ -54,9 +54,7 @@
 			<node id="1" speaker="1" text="Thanks for the help!">
 				<option text="- chao" returnCode="0" pnode="-1"/>
 			</node>
-		</dialogue1>
-		<dialogue2>
-			<node id="2" speaker="2" text="si? que guai, 4 o 5? asdf sad fasd fsdf sdfasdfas dfds f">
+			<node id="2" speaker="2" text="si? que guai, 4 o 5? asdf sad fasd fsdf sdfasddfg dfg df gdfgdfg d f gdfgfdgd fgdf gdfg dfg df gdf gdf gdf fas dfds f">
 				<option text="- chao" returnCode="0" pnode="-1"/>
 				<option text="- 5" returnCode="0" pnode="4"/>
 				<option text="- 4" returnCode="0" pnode="3"/>

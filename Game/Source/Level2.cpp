@@ -109,9 +109,9 @@ bool Level2::Update(float dt)
 
 	//Implement a method that repositions the player in the map with a mouse click
 
-
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-		app->dialogueTree->performDialogue("dialogue1");
+	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->SaveRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->LoadRequest();
 
 	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level1);

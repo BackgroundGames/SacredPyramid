@@ -14,6 +14,15 @@ class Enemy;
 class NPC;
 class GuiControl;
 
+enum SceneType
+{
+	INTRO,
+	MENU,
+	LEVEL1,
+	LEVEL2,
+	NONE
+};
+
 class Scene
 {
 public:
@@ -101,6 +110,7 @@ public:
 public:
 
 	pugi::xml_node sceneconfig;
+	pugi::xml_node sceneload;
 	uint windowW, windowH;
 
 	SString name;
@@ -115,6 +125,10 @@ public:
 	vector<Entity*> npcs;
 
 	Entity* cameraFocus = nullptr;
+
+	SceneType sceneType;
+
+	bool loaded = false;
 };
 
 #endif // __SCENE_H__

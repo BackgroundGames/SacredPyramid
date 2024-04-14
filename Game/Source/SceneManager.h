@@ -23,15 +23,6 @@ enum Fade_Step
 	FROM_BLACK
 };
 
-enum SceneType
-{
-	INTRO,
-	MENU,
-	LEVEL1,
-	LEVEL2,
-	NONE
-};
-
 class SceneManager : public Module
 {
 public:
@@ -73,6 +64,8 @@ public:
 
 	void CleanAllLevels();
 
+	Scene* GetSceneFromID(SceneType sceneType);
+
 	Scene* currentScene = nullptr;
 	Scene* newScene = nullptr;
 	Scene* previousScene = nullptr;
@@ -101,8 +94,6 @@ private:
 	SDL_Rect screenRect;
 
 	List<Scene*> scenes;
-
-	SceneType sceneType;
 
 	pugi::xml_node configScenes;
 

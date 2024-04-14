@@ -17,9 +17,13 @@ SceneManager::SceneManager()
 	name.Create("scenemanager");
 
 	intro = new Intro();
+	intro->sceneType = SceneType::INTRO;
 	menu = new Menu();
+	menu->sceneType = SceneType::MENU;
 	level1 = new Level1();
+	level1->sceneType = SceneType::LEVEL1;
 	level2 = new Level2();
+	level2->sceneType = SceneType::LEVEL2;
 	settings = new Settings();
 	gamePause = new GamePause();
 
@@ -130,6 +134,59 @@ bool SceneManager::CleanUp()
 	return true;
 }
 
+bool SceneManager::LoadState(pugi::xml_node node)
+{
+	pugi::xml_node SceneNode = node.first_child();
+
+	Character* aux;
+
+	switch (SceneNode.attribute("currentScene").as_int())
+	{
+	case 0:
+		break;
+	case 1:
+		break;
+	case 2:
+		for (size_t i = 0; i < scenes.Count(); i++)
+		{
+			if (scenes[i]->sceneType == SceneType::LEVEL1) {
+				SceneNode = SceneNode.child("player");
+				if (currentScene->sceneType == SceneType::LEVEL1) {
+					for (size_t i = 0; i < currentScene->players.size(); i++)
+					{
+						aux = (Character*)currentScene->players[i];
+						aux->TpToCell(SceneNode.attribute("x").as_int(), SceneNode.attribute("y").as_int());
+						SceneNode = SceneNode.next_sibling("player");
+					}
+				}
+			}
+		}
+		break;
+	case 3:
+		for (size_t i = 0; i < scenes.Count(); i++)
+		{
+			if (scenes[i]->sceneType == SceneType::LEVEL2) {
+				SceneNode = SceneNode.child("player");
+				if (currentScene->sceneType == SceneType::LEVEL2) {
+					for (size_t i = 0; i < currentScene->players.size(); i++)
+					{
+						aux = (Character*)currentScene->players[i];
+						aux->TpToCell(SceneNode.attribute("x").as_int(), SceneNode.attribute("y").as_int());
+						SceneNode = SceneNode.next_sibling("player");
+					}
+				}
+			}
+		}
+		break;
+	case 4:
+		break;
+	default:
+		break;
+	}
+
+	return true;
+}
+
 void SceneManager::ChangeScane(Scene* newScene)
 {
 	fade = true;
@@ -199,8 +256,16 @@ bool SceneManager::SaveState(pugi::xml_node node)
 {
 	bool ret = true;
 
-	pugi::xml_node scene = node.append_child(name.GetString());
-	scene.append_attribute("currentScene").set_value(sceneType);
+	pugi::xml_node scene = node.append_child(currentScene->name.GetString());
+	scene.append_attribute("currentScene").set_value(currentScene->sceneType);
+
+	for (size_t i = 0; i < currentScene->players.size(); i++)
+	{
+		pugi::xml_node player = scene.append_child("player");
+		Character* aux = dynamic_cast<Character*>(currentScene->players[i]);
+		player.append_attribute("x").set_value(aux->GetTile().x);
+		player.append_attribute("y").set_value(aux->GetTile().y);
+	}
 
 	return ret;
 }
@@ -222,4 +287,31 @@ void SceneManager::OpenGamePause()
 void SceneManager::CleanAllLevels() {
 	level1->CleanUp();
 	level2->CleanUp();
+}
+
+Scene* SceneManager::GetSceneFromID(SceneType sceneType)
+{
+	Scene* auxScene = nullptr;
+
+	switch (sceneType)
+	{
+	case INTRO:
+		auxScene = intro;
+		break;
+	case MENU:
+		auxScene = menu;
+		break;
+	case LEVEL1:
+		auxScene = level1;
+		break;
+	case LEVEL2:
+		auxScene = level2;
+		break;
+	case NONE:
+		break;
+	default:
+		break;
+	}
+
+	return auxScene;
 }

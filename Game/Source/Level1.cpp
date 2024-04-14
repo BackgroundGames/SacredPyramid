@@ -139,6 +139,10 @@ bool Level1::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->menu);
+
+	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->SaveRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->LoadRequest();
 	
 	return true;
 }
@@ -174,6 +178,14 @@ bool Level1::CleanUp()
 		delete enemies[i];
 	}
 	enemies.clear();
+
+	for (size_t i = 0; i < npcs.size(); i++)
+	{
+		npcs[i]->CleanUp();
+		app->entityManager->DestroyEntity((Entity*)npcs[i]);
+		delete npcs[i];
+	}
+	npcs.clear();
 
 	return true;
 }
