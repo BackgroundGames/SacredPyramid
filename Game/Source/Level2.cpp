@@ -136,10 +136,16 @@ bool Level2::CleanUp()
 		}
 		zhaak = nullptr;
 		eli = nullptr;
-
 	}
-
 	players.clear();
+
+	for (size_t i = 0; i < npcs.size(); i++)
+	{
+		npcs[i]->CleanUp();
+		app->entityManager->DestroyEntity((Entity*)npcs[i]);
+		delete npcs[i];
+	}
+	npcs.clear();
 
 	return true;
 }

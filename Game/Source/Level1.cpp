@@ -55,6 +55,7 @@ bool Level1::Start()
 		eli->parameters = sceneconfig.child("eli");
 		eli->Start();
 		eli->TpToCell(16, 15);
+		eli->exploringState = ExploringState::FOLLOWING;
 
 		// iterate all entities in the scene --> Check https://pugixml.org/docs/quickstart.html#access
 		for (pugi::xml_node enemyNode = sceneconfig.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
@@ -90,6 +91,9 @@ bool Level1::Start()
 			npc->parameters = npcNode;
 			npc->Start();
 		}
+
+		app->dialogueTree->performDialogue("dialogue0");
+		GetPlayer()->exploringState = ExploringState::TALKING;
 
 		/*for (pugi::xml_node itemNode = sceneconfig.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 		{

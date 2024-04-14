@@ -73,11 +73,17 @@ bool Player::Update(float dt)
 
 			if (this != app->sceneManager->currentScene->GetPlayer())
 			{
-				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && destination != app->sceneManager->currentScene->GetPlayer()->GetTile() && app->sceneManager->currentScene->GetPlayer()->path.Count() > 0)
+				if (app->sceneManager->currentScene->GetPlayer()->exploringState == ExploringState::MOVING)
 				{
-					if (moveTo(*app->sceneManager->currentScene->GetPlayer()->path.At(app->sceneManager->currentScene->GetPlayer()->path.Count() - 2))) {
-						exploringState = ExploringState::FOLLOWING;
+					if(destination != app->sceneManager->currentScene->GetPlayer()->GetTile()){
+						int a = app->sceneManager->currentScene->GetPlayer()->path.Count();
+						if (app->sceneManager->currentScene->GetPlayer()->path.Count() > 0) {
+							if (moveTo(*app->sceneManager->currentScene->GetPlayer()->path.At(app->sceneManager->currentScene->GetPlayer()->path.Count() - 2))) {
+								exploringState = ExploringState::FOLLOWING;
+							}
+						}
 					}
+					
 				}
 
 				PosState = app->sceneManager->currentScene->GetPlayer()->PosState;
@@ -105,11 +111,21 @@ bool Player::Update(float dt)
 
 		case ExploringState::MOVING:
 
-			if (PosState == Direction::UL || PosState == Direction::UR) {
-				currentAnimation = &idleAnim;
+			if (app->sceneManager->currentScene->eli == app->sceneManager->currentScene->GetPlayer()) {
+				if (PosState == Direction::UL || PosState == Direction::UR) {
+					currentAnimation = &idleAnimB;
+				}
+				else {
+					currentAnimation = &idleAnim;
+				}
 			}
 			else {
-				currentAnimation = &idleAnimB;
+				if (PosState == Direction::UL || PosState == Direction::UR) {
+					currentAnimation = &walkingAnim;
+				}
+				else {
+					currentAnimation = &walkingAnim;
+				}
 			}
 
 			//move to the tile clicked
