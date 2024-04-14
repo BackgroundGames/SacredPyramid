@@ -49,7 +49,7 @@ private:
 	uint texW, texH;
 	SDL_Texture* mouseTileTex = nullptr;
 	iPoint tabernTile = { 16,15 };
-	iPoint pyramidTile = { 26,15 };
+	iPoint puenteTile = { 37,11 };
 };
 
 #endif // __LEVEL1_H__

@@ -6,10 +6,9 @@
 	<audio />
 	<:anonymous />
 	<scenemanager>
-		<level2 currentScene="3">
-			<player x="7" y="6" />
-			<player x="8" y="7" />
-		</level2>
+		<level1 currentScene="2">
+			<player x="37" y="29" />
+		</level1>
 	</scenemanager>
 	<entitymanager />
 	<dialogues />

@@ -34,10 +34,7 @@ bool Level1::Awake(pugi::xml_node config)
 bool Level1::Start()
 {
 	//Get the map name from the config file and assigns the value in the module
-	app->map->name = sceneconfig.child("map").attribute("name").as_string();
-	app->map->path = sceneconfig.child("map").attribute("path").as_string();
-	app->render->SetSelectionTex(app->tex->Load(sceneconfig.child("map").attribute("selectionPath").as_string()));
-	app->map->InitMap();
+	
 	app->audio->PlayMusic(sceneconfig.attribute("audio").as_string(), 0);
 
 	//Get the size of the window
@@ -45,16 +42,20 @@ bool Level1::Start()
 
 	if (app->sceneManager->previousScene != (Scene*)app->sceneManager->menu &&
 		app->sceneManager->previousScene != (Scene*)app->sceneManager->intro) {
+
+		app->map->name = "Mapa 1.75 desierto.tmx";
+		app->map->path = "Assets/Maps/";
+		app->render->SetSelectionTex(app->tex->Load("Assets/Maps/tileSelectionIso128.png"));
+		app->map->InitMap();
+
 		zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ZHAAK);
 		players.push_back(zhaak);
 		//Assigns the XML node to a member in player
 		zhaak->Start();
-		zhaak->TpToCell(17,15);
+		zhaak->TpToCell(17,25);
 
 		players.push_back(eli);
-		eli->parameters = sceneconfig.child("eli");
-		eli->Start();
-		eli->TpToCell(16, 15);
+		eli->TpToCell(16, 25);
 		eli->exploringState = ExploringState::FOLLOWING;
 
 		// iterate all entities in the scene --> Check https://pugixml.org/docs/quickstart.html#access
@@ -76,6 +77,11 @@ bool Level1::Start()
 
 	}
 	else {
+
+		app->map->name = sceneconfig.child("map").attribute("name").as_string();
+		app->map->path = sceneconfig.child("map").attribute("path").as_string();
+		app->render->SetSelectionTex(app->tex->Load(sceneconfig.child("map").attribute("selectionPath").as_string()));
+		app->map->InitMap();
 
 		eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
 		players.push_back(eli);
@@ -140,7 +146,7 @@ bool Level1::Update(float dt)
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
 	}
 
-	if (GetPlayer()->GetTile() == pyramidTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
+	if (GetPlayer()->GetTile() == puenteTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
 		GetPlayer()->exploringState = ExploringState::NONE;
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level3);
 	}

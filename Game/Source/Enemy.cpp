@@ -53,7 +53,7 @@ bool Enemy::Start()
 
 	//prova combat
 	stats.health = 1;
-	inventory.weapon.range = 3;
+	inventory.weapon.range = 1;
 	inventory.weapon.damage = 1;
 
 	return true;
@@ -113,7 +113,7 @@ bool Enemy::Update(float dt)
 
 				combatPos.push_back(iPoint{ parameters.attribute("cx").as_int(), parameters.attribute("cy").as_int() });
 				combatPos.push_back(iPoint{ parameters.attribute("p1x").as_int(), parameters.attribute("p1y").as_int() });
-				combatPos.push_back(iPoint{ parameters.attribute("p2x").as_int(), parameters.attribute("p2x").as_int() });
+				combatPos.push_back(iPoint{ parameters.attribute("p2x").as_int(), parameters.attribute("p2y").as_int() });
 
 				app->entityManager->StartCombat(enemies, this);
 				assaulted = false;

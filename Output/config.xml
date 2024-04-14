@@ -27,8 +27,8 @@
 		<menu texturePath="Assets/Textures/Menu Piramide.jpeg" audio="Assets\Audio\Music\Main_Menu.ogg"/>
 		<level1 audio="Assets\Audio\Music\Town.ogg">
 			<eli x="37" y="29"/>
-			<enemy x="25" y="15" cx="25" cy="15" id="1" p1x="20" p1y="15" p2x="20" p2y="16">
-				<minion x="25" y="16" id="1"/>
+			<enemy x="25" y="25" cx="25" cy="25" id="1" p1x="20" p1y="25" p2x="20" p2y="26">
+				<minion x="25" y="26" id="1"/>
 			</enemy>
 			<npc x="34" y="17" id="1"/>
 			<map path="Assets/Maps/" name="Mapa 1 desierto.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>

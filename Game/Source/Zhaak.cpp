@@ -7,7 +7,7 @@ Zhaak::Zhaak()
 	subtype = PlayerType::ZHAAK;
 	inventory.weapon.damage = 1;
 	inventory.weapon.range = 1;
-	stats.health = 1;
+	stats.health = 3;
 	Awake();
 }
 
