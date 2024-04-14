@@ -1,7 +1,6 @@
 #ifndef __DRUNKARD_H__
 #define __DRUNKARD_H__
 
-#include "Entity.h"
 #include "Enemy.h"
 
 class Drunkard : public Enemy
