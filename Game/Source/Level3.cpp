@@ -1,4 +1,4 @@
-#include "Level1.h"
+#include "Level3.h"
 #include "App.h"
 #include "Input.h"
 #include "Textures.h"
@@ -12,26 +12,25 @@
 #include "Defs.h"
 #include "Log.h"
 
-Level1::Level1() : Scene()
+Level3::Level3()
 {
-	name.Create("level1");
+	name.Create("level3");
 }
 
-Level1::~Level1()
+Level3::~Level3()
 {
 }
 
-bool Level1::Awake(pugi::xml_node config)
+bool Level3::Awake(pugi::xml_node config)
 {
-	LOG("Loading Scene");
-	bool ret = true;
+	LOG("Loading Scene 3");
 
 	sceneconfig = config;
 
-	return ret;
+	return true;
 }
 
-bool Level1::Start()
+bool Level3::Start()
 {
 	//Get the map name from the config file and assigns the value in the module
 	app->map->name = sceneconfig.child("map").attribute("name").as_string();
@@ -43,63 +42,32 @@ bool Level1::Start()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	if (app->sceneManager->previousScene != (Scene*)app->sceneManager->menu &&
-		app->sceneManager->previousScene != (Scene*)app->sceneManager->intro) {
-		zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ZHAAK);
-		players.push_back(zhaak);
-		//Assigns the XML node to a member in player
-		zhaak->Start();
-		zhaak->TpToCell(17,15);
+	zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ZHAAK);
+	players.push_back(zhaak);
+	//Assigns the XML node to a member in player
+	zhaak->parameters = sceneconfig.child("zhaak");
+	zhaak->Start();
 
-		players.push_back(eli);
-		eli->parameters = sceneconfig.child("eli");
-		eli->Start();
-		eli->TpToCell(16, 15);
-		eli->exploringState = ExploringState::FOLLOWING;
+	eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
+	players.push_back(eli);
+	eli->parameters = sceneconfig.child("eli");
+	eli->Start();
 
-		// iterate all entities in the scene --> Check https://pugixml.org/docs/quickstart.html#access
-		for (pugi::xml_node enemyNode = sceneconfig.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+	// iterate all entities in the scene --> Check https://pugixml.org/docs/quickstart.html#access
+	for (pugi::xml_node enemyNode = sceneconfig.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+	{
+		Enemy* enemy;
+		if (enemyNode.attribute("id").as_uint() == 0)
 		{
-			Enemy* enemy;
-			if (enemyNode.attribute("id").as_uint() == 0)
-			{
-				enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::BANDIT);
-			}
-			else {
-				enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::DRUNKARD);
-			}
-			enemy->id = enemyNode.attribute("id").as_uint();
-			enemies.push_back(enemy);
-			enemy->parameters = enemyNode;
-			enemy->Start();
+			enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::BANDIT);
 		}
-
-	}
-	else {
-
-		eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
-		players.push_back(eli);
-		//Assigns the XML node to a member in player
-		eli->parameters = sceneconfig.child("eli");
-		eli->Start();
-
-		for (pugi::xml_node npcNode = sceneconfig.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
-		{
-			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
-			npc->id = npcNode.attribute("id").as_uint();
-			npcs.push_back(npc);
-			npc->parameters = npcNode;
-			npc->Start();
+		else {
+			enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::DRUNKARD);
 		}
-
-		app->dialogueTree->performDialogue("dialogue0");
-		GetPlayer()->exploringState = ExploringState::TALKING;
-
-		/*for (pugi::xml_node itemNode = sceneconfig.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
-		{
-			Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-			item->parameters = itemNode;
-		}*/
+		enemy->id = enemyNode.attribute("id").as_uint();
+		enemies.push_back(enemy);
+		enemy->parameters = enemyNode;
+		enemy->Start();
 	}
 
 	app->render->camera.y = 0;
@@ -111,12 +79,12 @@ bool Level1::Start()
 	return true;
 }
 
-bool Level1::PreUpdate()
+bool Level3::PreUpdate()
 {
 	return true;
 }
 
-bool Level1::Update(float dt)
+bool Level3::Update(float dt)
 {
 	LockCamera();
 	//Make the camera movement independent of framerate
@@ -134,42 +102,29 @@ bool Level1::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x += (int)ceil(camSpeed * dt);
 
-	//DEBUG: Change Scenes forward and backward
-	if (GetPlayer()->GetTile() == tabernTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
+
+	if (GetPlayer()->GetTile() == endTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
 		GetPlayer()->exploringState = ExploringState::NONE;
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->menu);
 	}
-
-	if (GetPlayer()->GetTile() == pyramidTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
-		GetPlayer()->exploringState = ExploringState::NONE;
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level3);
-	}
-
-	//degug
-	/*if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
-
-	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->menu);*/
 
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->LoadRequest();
-	
+
+	//degug
+	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
+
 	return true;
 }
 
-bool Level1::PostUpdate()
+bool Level3::PostUpdate()
 {
-	bool ret = true;
-
-	//if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		//ret = false;
-
-	return ret;
+	return true;
 }
 
-bool Level1::CleanUp()
+bool Level3::CleanUp()
 {
 	if (app->sceneManager->newScene == (Scene*)app->sceneManager->menu) {
 		for (size_t i = 0; i < players.size(); i++)
@@ -202,14 +157,14 @@ bool Level1::CleanUp()
 	return true;
 }
 
-bool Level1::OnGuiMouseClickEvent(GuiControl* control) {
+bool Level3::OnGuiMouseClickEvent(GuiControl* control) {
 
 	app->dialogueTree->ChoseOption(control->id);
 
 	return true;
 }
 
-void Level1::LockCamera()
+void Level3::LockCamera()
 {
 	int limitCamXend = (app->map->getMapWidth() / 2 + app->map->GetTileWidth() / 2 - windowW) * -1;
 	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2);

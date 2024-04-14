@@ -10,11 +10,11 @@
 
 class Level1;
 class Level2;
+class Level3;
 class Intro;
 class Menu;
 class Settings;
 class GamePause;
-class Level2;
 
 enum Fade_Step
 {
@@ -74,6 +74,7 @@ public:
 
 	Level1* level1;
 	Level2* level2;
+	Level3* level3;
 	Intro* intro;
 	Menu* menu;
 	Settings* settings;
