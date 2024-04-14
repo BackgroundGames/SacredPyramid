@@ -801,6 +801,9 @@
   </data>
  </layer>
  <layer id="4" name="Navigation" width="16" height="16">
+  <properties>
+   <property name="Navigation" type="bool" value="true"/>
+  </properties>
   <data>
    <tile gid="61"/>
    <tile gid="61"/>

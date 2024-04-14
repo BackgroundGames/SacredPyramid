@@ -2,7 +2,7 @@
 <!--Create configuration file-->
 <config>
 	<app>
-		<title>My video game</title>
+		<title>Zhaak and the Sacred Pyramid</title>
 		<maxFrameDuration value="16"/>
 	</app>
 
@@ -93,6 +93,18 @@
 				<option text="I'm coming" returnCode="0" pnode="-1"/>
 			</node>
 		</dialogue3>
+		<!--- Eli goes to tak with Zhaak-->
+		<dialogue4>
+			<node id="0" speaker="1" text="You were the one calling for me, right?">
+				<option text="..." returnCode="0" pnode="1"/>
+			</node>
+			<node id="1" speaker="1" text="I need help urgently. My friend Amir and I">
+				<option text="..." returnCode="0" pnode="2"/>
+			</node>
+			<node id="2" speaker="1" text="You were the one calling for me, right?">
+				<option text="..." returnCode="0" pnode="1"/>
+			</node>
+		</dialogue4>
 	</dialogues>
 	
 	<animations>
