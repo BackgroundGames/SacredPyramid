@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="isometric" renderorder="right-down" width="50" height="41" tilewidth="128" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="1">
+ <properties>
+  <property name="Navigation" type="bool" value="true"/>
+ </properties>
  <tileset firstgid="1" name="TABERNA" tilewidth="128" tileheight="128" tilecount="60" columns="10">
   <tileoffset x="0" y="32"/>
   <image source="Tileset mapa 1.png" width="1280" height="820"/>
@@ -4123,6 +4126,9 @@
   </data>
  </layer>
  <layer id="3" name="Navigation" width="50" height="41">
+  <properties>
+   <property name="Navigation" type="bool" value="true"/>
+  </properties>
   <data>
    <tile gid="61"/>
    <tile gid="61"/>
