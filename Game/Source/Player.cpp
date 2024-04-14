@@ -73,10 +73,9 @@ bool Player::Update(float dt)
 
 			if (this != app->sceneManager->currentScene->GetPlayer())
 			{
-				if (app->sceneManager->currentScene->GetPlayer()->exploringState == ExploringState::MOVING)
+				if (app->sceneManager->currentScene->GetPlayer()->exploringState == ExploringState::MOVING || app->sceneManager->currentScene->GetPlayer()->exploringState == ExploringState::INTERACT)
 				{
 					if(destination != app->sceneManager->currentScene->GetPlayer()->GetTile()){
-						int a = app->sceneManager->currentScene->GetPlayer()->path.Count();
 						if (app->sceneManager->currentScene->GetPlayer()->path.Count() > 0) {
 							if (moveTo(*app->sceneManager->currentScene->GetPlayer()->path.At(app->sceneManager->currentScene->GetPlayer()->path.Count() - 2))) {
 								exploringState = ExploringState::FOLLOWING;
@@ -250,6 +249,8 @@ bool Player::Update(float dt)
 			break;
 
 		case CombatState::IDLE:
+
+			app->audio->StopFx(sandChannel);
 
 			if (PosState == Direction::UL || PosState == Direction::UR) {
 				currentAnimation = &idleAnimB;
