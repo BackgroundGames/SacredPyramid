@@ -10,6 +10,7 @@
 #include "Map.h"
 #include "NPC.h"
 #include "Enemy.h"
+#include "GamePause.h"
 
 Player::Player()
 {
@@ -105,10 +106,10 @@ bool Player::Update(float dt)
 		case ExploringState::MOVING:
 
 			if (PosState == Direction::UL || PosState == Direction::UR) {
-				currentAnimation = &walkingAnim;
+				currentAnimation = &idleAnim;
 			}
 			else {
-				currentAnimation = &walkingAnim;
+				currentAnimation = &idleAnimB;
 			}
 
 			//move to the tile clicked
@@ -166,7 +167,7 @@ bool Player::Update(float dt)
 			break;
 
 		case ExploringState::TALKING:
-
+			app->audio->StopFx(sandChannel);
 			break;
 
 		case ExploringState::INTERACT:
@@ -210,8 +211,11 @@ bool Player::Update(float dt)
 			break;
 
 		case ExploringState::NONE:
-			if (!app->sceneManager->currentScene->settings) {
-				exploringState = previousEState;
+			if (PosState == Direction::UL || PosState == Direction::UR) {
+				currentAnimation = &idleAnimB;
+			}
+			else {
+				currentAnimation = &idleAnim;
 			}
 			break;
 			

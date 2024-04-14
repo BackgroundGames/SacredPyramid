@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Item.h"
 #include "DialogueTree.h"
+#include "NPC.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -38,7 +39,7 @@ bool Level2::Start()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	if (zhaak != nullptr) {
+	if (eli != nullptr) {
 		players.push_back(zhaak);
 		zhaak->parameters = sceneconfig.child("zhaak");
 		zhaak->Start();
@@ -48,21 +49,20 @@ bool Level2::Start()
 		eli->Start();
 	}
 	else {
-		//Instantiate the player using the entity manager
-		//Get player paremeters
-		zhaak = (Player*)app->sceneManager->previousScene->GetZhaak();
-		players.push_back(zhaak);
-		//SI HA CARREGAT PARTIDA MIRAR AL SAVE
-		//////player->parameters = sceneconfig.child("player");
-		zhaak->parameters = sceneconfig.child("zhaak");
-		zhaak->Start();
-
 		eli = (Player*)app->sceneManager->previousScene->GetEli();
 		players.push_back(eli);
 		//SI HA CARREGAT PARTIDA MIRAR AL SAVE
 		//////player->parameters = sceneconfig.child("player");
 		eli->parameters = sceneconfig.child("eli");
 		eli->Start();
+
+		for (pugi::xml_node npcNode = sceneconfig.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
+		{
+			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
+			npcs.push_back(npc);
+			npc->parameters = npcNode;
+			npc->Start();
+		}
 	}
 
 	/*enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
@@ -79,6 +79,7 @@ bool Level2::Start()
 
 	app->render->camera.y = 0;
 	app->render->camera.x = 0;
+	cameraFocus = GetPlayer();
 	LockCamera();
 
 	return true;
@@ -154,8 +155,8 @@ void Level2::LockCamera()
 	int limitCamXend = (app->map->getMapWidth() / 2 + app->map->GetTileWidth() / 2 - windowW) * -1;
 	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2);
 
-	app->render->camera.y = ((zhaak->position.y - 26 / 2) - windowH / 2) * -1;
-	app->render->camera.x = ((zhaak->position.x - 40 / 2) - (windowW / 2)) * -1;
+	app->render->camera.y = ((cameraFocus->position.y - cameraFocus->texW / 2) - (windowH / 2)) * -1;
+	app->render->camera.x = ((cameraFocus->position.x - cameraFocus->texH / 2) - (windowW / 2)) * -1;
 
 	if (app->render->camera.x > limitCamXbeg) {
 		app->render->camera.x = limitCamXbeg;
