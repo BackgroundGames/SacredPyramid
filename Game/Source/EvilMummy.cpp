@@ -5,8 +5,12 @@ EvilMummy::EvilMummy()
 {
 	name.Create("evilMummy");
 	type = EntityType::ENEMY;
-	subtype = EnemyType::BANDIT;
+	subtype = EnemyType::EVIL_MUMMY;
 	Awake();
+	//prova combat
+	stats.health = 1;
+	inventory.weapon.range = 3;
+	inventory.weapon.damage = 1;
 }
 
 EvilMummy::EvilMummy(Stats stats)
@@ -14,7 +18,7 @@ EvilMummy::EvilMummy(Stats stats)
 	name.Create("evilMummy");
 	this->stats = stats;
 	type = EntityType::ENEMY;
-	subtype = EnemyType::BANDIT;
+	subtype = EnemyType::EVIL_MUMMY;
 	Awake();
 }
 

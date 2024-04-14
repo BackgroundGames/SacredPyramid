@@ -76,6 +76,7 @@ bool Audio::CleanUp()
 
 	for (size_t i = 0; i < fx.size(); i++)
 	{
+		if(fx[i] != nullptr)
 		UnloadFx(i);
 	}
 	fx.clear();
@@ -195,6 +196,7 @@ void Audio::ChangeFxVolume(float percent)
 void Audio::UnloadFx(unsigned int id)
 {
 	Mix_FreeChunk(fx[id]);
+	fx[id] = nullptr;
 }
 
 void Audio::StopFx(unsigned int channel)

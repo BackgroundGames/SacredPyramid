@@ -187,11 +187,21 @@ bool Player::Update(float dt)
 
 		case ExploringState::INTERACT:
 
-			if (PosState == Direction::UL || PosState == Direction::UR) {
-				currentAnimation = &idleAnimB;
+			if (app->sceneManager->currentScene->eli == app->sceneManager->currentScene->GetPlayer()) {
+				if (PosState == Direction::UL || PosState == Direction::UR) {
+					currentAnimation = &idleAnimB;
+				}
+				else {
+					currentAnimation = &idleAnim;
+				}
 			}
 			else {
-				currentAnimation = &idleAnim;
+				if (PosState == Direction::UL || PosState == Direction::UR) {
+					currentAnimation = &walkingAnim;
+				}
+				else {
+					currentAnimation = &walkingAnim;
+				}
 			}
 
 			switch (interacted->type)
@@ -216,6 +226,7 @@ bool Player::Update(float dt)
 					exploringState = ExploringState::TALKING;
 					dynamic_cast<Enemy*>(interacted)->assaulted = true;
 					move = false;
+					app->audio->StopFx(sandChannel);
 				}
 
 				break;

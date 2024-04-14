@@ -107,7 +107,7 @@ bool DialogueTree::Update(float dt)
 
 
 		// Imprimir la sección actual
-		app->render->DrawText(seccion_actual, quat.x + 50, quat.y + (20 * i) + 40, longitud_actual * 10, 20, 0, 0, 0);
+		app->render->DrawText(seccion_actual, quat.x + 50, quat.y + (20 * i) + 100, longitud_actual * 10, 20, 0, 0, 0);
 
 		// Liberar la memoria asignada para la sección actual
 		delete[] seccion_actual;
@@ -143,12 +143,12 @@ bool DialogueTree::CleanUp()
 
 	active = false;
 
-	if (dialog == "dialogue4") {
+	if (dialog == "dialogue4" && app->sceneManager->currentScene->GetPlayer() != nullptr) {
 		app->sceneManager->currentScene->GetPlayer()->exploringState = ExploringState::NONE;
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level1);
 	}
 
-	if (dialog == "dialogue5") {
+	if (dialog == "dialogue5" && app->sceneManager->currentScene->GetPlayer() != nullptr) {
 		app->sceneManager->currentScene->GetPlayer()->exploringState = ExploringState::NONE;
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level4);
 	}
@@ -233,7 +233,7 @@ int DialogueTree::performDialogue(const char * dialogueName)
 
 	for (int i = 0; i < currentNode->dialogueOptions.size(); i++) {
 		size_t Size = strlen(currentNode->dialogueOptions[i].text);
-		SDL_Rect playPos = { quat.x + 40, quat.y + (quat.h - 20 * 3) + (15 * i), 10 * Size,20 };
+		SDL_Rect playPos = { quat.x + 40, quat.y + (20 * i) + 150, 10 * Size,20 };
 		optionNodes.push_back((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, currentNode->dialogueOptions[i].text, playPos, app->sceneManager->currentScene));
 		optionNodes[i]->animated = false;
 	}
@@ -273,7 +273,7 @@ void DialogueTree::deleteOptions()
 
 	for (int i = 0; i < currentNode->dialogueOptions.size(); i++) {
 		size_t Size = strlen(currentNode->dialogueOptions[i].text);
-		SDL_Rect playPos = { quat.x + 40, quat.y + (quat.h - 20 * 3) + (15 * i), 10 * Size,20 };
+		SDL_Rect playPos = { quat.x + 40, quat.y + (20 * i) + 150, 10 * Size,20 };
 		optionNodes.push_back((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, i, currentNode->dialogueOptions[i].text, playPos, app->sceneManager->currentScene));
 		optionNodes[i]->animated = false;
 	}
