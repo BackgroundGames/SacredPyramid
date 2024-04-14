@@ -26,8 +26,8 @@
 		<intro texturePath="Assets/Textures/bgg.jpg"/>
 		<menu texturePath="Assets/Textures/Menu Piramide.jpeg" audio="Assets\Audio\Music\Main_Menu.ogg"/>
 		<level1 audio="Assets\Audio\Music\Town.ogg">
-			<zhaak x="13" y="13"/>
-			<eli x="13" y="14"/>
+			<zhaak x="37" y="28"/>
+			<eli x="37" y="29"/>
 			<enemy x="15" y="8" cx="12" cy="8" id="0" p1x="13" p1y="12" p2x="15" p2y="12">
 				<minion x="13" y="7" id="0"/>
 				<minion x="11" y="9" id="1"/>
@@ -97,28 +97,28 @@
 	
 	<animations>
 	
-		<zhaak texturePath="Assets/Textures/Zhaak anim.png">
+		<zhaak texturePath="Assets/Textures/Zhaak comp.png">
 			<idleAnim loop="true" speed="0.05f">
-				<idle x="0" y="0" w="56" h="123"/>
-				<idle x="56" y="0" w="56" h="123"/>
-				<idle x="112" y="0" w="56" h="123"/>
-				<idle x="168" y="0" w="56" h="123"/>
+				<idle x="0" y="123" w="56" h="123"/>
+				<idle x="56" y="123" w="56" h="123"/>
+				<idle x="112" y="123" w="56" h="123"/>
+				<idle x="168" y="123" w="56" h="123"/>
 			</idleAnim>
 			<idleBAnim loop="true" speed="0.05f">
-				<idleB x="0" y="123" w="54" h="123"/>
-				<idleB x="54" y="123" w="54" h="123"/>
-				<idleB x="108" y="123" w="54" h="123"/>
-				<idleB x="162" y="123" w="54" h="123"/>
+				<idleB x="0" y="246" w="56" h="123"/>
+				<idleB x="56" y="246" w="56" h="123"/>
+				<idleB x="112" y="246" w="56" h="123"/>
+				<idleB x="168" y="246" w="56" h="123"/>
 			</idleBAnim>
 			<walkingAnim loop="true" speed="0.1f">
-				<walk x="392" y="123" w="54" h="123"/>
-				<walk x="336" y="123" w="54" h="123"/>
-				<walk x="280" y="123" w="54" h="123"/>
-				<walk x="224" y="123" w="54" h="123"/>
-				<walk x="168" y="123" w="54" h="123"/>
-				<walk x="112" y="123" w="54" h="123"/>
-				<walk x="56" y="123" w="54" h="123"/>
-				<walk x="0" y="123" w="54" h="123"/>				
+				<walk x="392" y="0" w="56" h="123"/>
+				<walk x="336" y="0" w="56" h="123"/>
+				<walk x="280" y="0" w="56" h="123"/>
+				<walk x="224" y="0" w="56" h="123"/>
+				<walk x="168" y="0" w="56" h="123"/>
+				<walk x="112" y="0" w="56" h="123"/>
+				<walk x="56" y="0" w="56" h="123"/>
+				<walk x="0" y="0" w="56" h="123"/>	
 			</walkingAnim>
 		</zhaak>
 		

@@ -105,10 +105,10 @@ bool Player::Update(float dt)
 		case ExploringState::MOVING:
 
 			if (PosState == Direction::UL || PosState == Direction::UR) {
-				currentAnimation = &idleAnimB;
+				currentAnimation = &walkingAnim;
 			}
 			else {
-				currentAnimation = &idleAnim;
+				currentAnimation = &walkingAnim;
 			}
 
 			//move to the tile clicked
