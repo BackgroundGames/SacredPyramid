@@ -43,6 +43,12 @@
 			<npc x="11" y="4" id="2"/>
 			<npc x="15" y="15" id="0"/>
 		</level2>
+		<level3 audio="Assets\Audio\Music\Main_Menu.ogg">
+			<map path="Assets/Maps/" name="Mapa 1.5 Taberna.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
+			<eli x="4" y="4"/>
+			<npc x="11" y="4" id="2"/>
+			<npc x="15" y="15" id="0"/>
+		</level3>
 	</scenemanager>
 	
 	<dialogues zhaak="Assets/Textures/Papyrus_Zhak_Flip.png" eli="Assets/Textures/Papyrus_Eli.png" bandit="Assets/Textures/Papyrus_Bandit.png" drunkard="Assets/Textures/Papyrus_Drunk_Flip.png" npc1="Assets/Textures/Papyrus_NPC1_Flip.png" bartender= "Assets/Textures/Papyrus_Bartender_Flip.png" npczhaak="Assets/Textures/Papyrus_Zhak_Flip.png">
