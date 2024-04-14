@@ -101,7 +101,7 @@ bool Player::Update(float dt)
 				}
 
 				//If space button is pressed modify put player in the cell of the cursor
-				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && move == false) {
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && move == false && app->debug) {
 					TpToCell(destination.x, destination.y);
 					app->sceneManager->currentScene->LockCamera();
 				}
