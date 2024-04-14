@@ -148,6 +148,11 @@ bool DialogueTree::CleanUp()
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level1);
 	}
 
+	if (dialog == "dialogue5") {
+		app->sceneManager->currentScene->GetPlayer()->exploringState = ExploringState::NONE;
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level4);
+	}
+
 	return true;
 }
 

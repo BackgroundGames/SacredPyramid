@@ -353,8 +353,14 @@ bool Player::OnGuiMouseClickEvent(Entity* control)
 	switch (interacted->type)
 	{
 	case EntityType::NPC:
-
-		moveTo(dynamic_cast<Character*>(interacted)->GetTile());
+		if (dynamic_cast<NPC*>(interacted)->id == 3) {
+			iPoint aux = dynamic_cast<Character*>(interacted)->GetTile();
+			aux.x--;
+			moveTo(aux);
+		}
+		else {
+			moveTo(dynamic_cast<Character*>(interacted)->GetTile());
+		}
 		break;
 
 	case EntityType::ENEMY:

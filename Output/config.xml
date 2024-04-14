@@ -41,15 +41,14 @@
 		</level2>
 		<level3 audio="Assets\Audio\Music\Town.ogg">
 			<map path="Assets/Maps/" name="Mapa 2 Puente.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
-			<zhaak x="4" y="4"/>
-			<eli x="3" y="4"/>
-			<enemy x="15" y="8" cx="12" cy="8" id="0" p1x="13" p1y="12" p2x="15" p2y="12">
-				<minion x="13" y="7" id="0"/>
-				<minion x="11" y="9" id="1"/>
+			<zhaak x="15" y="57"/>
+			<eli x="15" y="58"/>
+			<enemy x="19" y="61" cx="12" cy="8" id="0" p1x="13" p1y="12" p2x="15" p2y="12">
+				<minion x="20" y="60" id="0"/>
+				<minion x="20" y="59" id="0"/>
+				<minion x="19" y="58" id="0"/>
 			</enemy>
-			<enemy x="11" y="9" cx="13" cy="10" id="1" p1x="12" p1y="14" p2x="14" p2y="14">
-				<minion x="11" y="10" id="0"/>
-			</enemy>
+			<npc x="15" y="7" id="3"/>
 		</level3>
 		<level4 audio="Assets\Audio\Music\Main_Menu.ogg">
 			<map path="Assets/Maps/" name="Mapa 3 Pyramid.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
@@ -200,6 +199,15 @@
 				<option text="..." returnCode="0" pnode="-1"/>
 			</node>	
 		</dialogue4>
+		<!--- Zhaak interrupts Eli from leaving -->
+		<dialogue5>
+			<node id="0" speaker="1" text="Hold up there stranger, what do you need?">
+				<option text="Who, me?" returnCode="0" pnode="1"/>
+			</node>
+			<node id="1" speaker="1" text="Is he talking to me? I should go where he is.">
+				<option text="I'm coming" returnCode="0" pnode="-1"/>
+			</node>
+		</dialogue5>
 	</dialogues>
 	
 	<animations>

@@ -42,14 +42,17 @@ bool Level4::Start()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ZHAAK);
+	zhaak = (Player*)app->sceneManager->previousScene->GetZhaak();
 	players.push_back(zhaak);
-	//Assigns the XML node to a member in player
-	zhaak->parameters = sceneconfig.child("zhaak");
+	//SI HA CARREGAT PARTIDA MIRAR AL SAVE
+	//////player->parameters = sceneconfig.child("player");
+	zhaak->parameters = sceneconfig.child("eli");
 	zhaak->Start();
 
-	eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
+	eli = (Player*)app->sceneManager->previousScene->GetEli();
 	players.push_back(eli);
+	//SI HA CARREGAT PARTIDA MIRAR AL SAVE
+	//////player->parameters = sceneconfig.child("player");
 	eli->parameters = sceneconfig.child("eli");
 	eli->Start();
 

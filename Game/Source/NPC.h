@@ -25,6 +25,7 @@ public:
 	Animation idleAnim;
 	uint id;
 	bool startTalking = false;
+	iPoint aux;
 };
 #endif // !__NPC_H__
 

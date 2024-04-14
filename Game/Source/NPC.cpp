@@ -33,6 +33,9 @@ bool NPC::Start()
 	if (id == 2) {
 		parametersAnim = app->configFile.child("config").child("animations").child("tabernero");
 	}
+	if (id == 3) {
+		parametersAnim = app->configFile.child("config").child("animations").child("npc");
+	}
 
 	Character::Start();
 
@@ -61,9 +64,13 @@ bool NPC::Start()
 
 bool NPC::Update(float dt)
 {
-	distanceFromPlayer = DistanceToTile(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
 
-	iPoint aux = { GetTile().x,GetTile().y };
+	aux = { GetTile().x,GetTile().y };
+	if (id == 3) {
+		aux = { GetTile().x - 1,GetTile().y };
+	}
+
+	distanceFromPlayer = DistanceToTile(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
 
 	if (GetMouseTile(mousePos) == aux && app->sceneManager->currentScene->GetPlayer()->interacted != this)
 	{
@@ -84,6 +91,9 @@ bool NPC::Update(float dt)
 		}
 		if (id == 2) {
 			app->dialogueTree->performDialogue("dialogue2");
+		}
+		if (id == 3) {
+			app->dialogueTree->performDialogue("dialogue5");
 		}
 		
 		startTalking = false;

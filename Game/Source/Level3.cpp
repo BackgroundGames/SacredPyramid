@@ -73,6 +73,15 @@ bool Level3::Start()
 		enemy->Start();
 	}
 
+	for (pugi::xml_node npcNode = sceneconfig.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
+	{
+		NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
+		npc->id = npcNode.attribute("id").as_uint();
+		npcs.push_back(npc);
+		npc->parameters = npcNode;
+		npc->Start();
+	}
+
 	app->render->camera.y = 0;
 	app->render->camera.x = 0;
 	cameraFocus = GetPlayer();
@@ -106,7 +115,7 @@ bool Level3::Update(float dt)
 		app->render->camera.x += (int)ceil(camSpeed * dt);
 
 
-	if (GetPlayer()->GetTile() == endTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
+	if (GetPlayer()->GetTile() == pyramidTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
 		GetPlayer()->exploringState = ExploringState::NONE;
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->menu);
 	}
@@ -170,7 +179,7 @@ bool Level3::OnGuiMouseClickEvent(GuiControl* control) {
 void Level3::LockCamera()
 {
 	int limitCamXend = (app->map->getMapWidth() / 2 + app->map->GetTileWidth() / 2 - windowW) * -1;
-	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2);
+	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2) *2;
 
 	app->render->camera.y = ((cameraFocus->position.y - cameraFocus->texW / 2) - (windowH / 2)) * -1;
 	app->render->camera.x = ((cameraFocus->position.x - cameraFocus->texH / 2) - (windowW / 2)) * -1;
