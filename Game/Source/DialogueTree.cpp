@@ -58,6 +58,7 @@ bool DialogueTree::Start()
 	textures.push_back(app->tex->Load(treeConf.attribute("eli").as_string()));
 	textures.push_back(app->tex->Load(treeConf.attribute("bandit").as_string()));
 	textures.push_back(app->tex->Load(treeConf.attribute("drunkard").as_string()));
+	textures.push_back(app->tex->Load(treeConf.attribute("npc1").as_string()));
 
 	return true;
 }

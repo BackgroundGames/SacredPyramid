@@ -45,29 +45,54 @@
 		</level2>
 	</scenemanager>
 	
-	<dialogues zhaak="Assets/Textures/Papyrus_Zhak.png" eli="Assets/Textures/Papyrus_Eli_Flip.png" bandit="Assets/Textures/Papyrus_Bandit_Flip.png" drunkard="Assets/Textures/Papyrus_Drunk_Flip.png">
+	<dialogues zhaak="Assets/Textures/Papyrus_Zhak.png" eli="Assets/Textures/Papyrus_Eli.png" bandit="Assets/Textures/Papyrus_Bandit.png" drunkard="Assets/Textures/Papyrus_Drunk_Flip.png" npc1="Assets/Textures/Papyrus_NPC1_Flip.png" bartender= "Assets/Textures/Papyrus_Bartender_Flip.png" npczhaak="Assets/Textures/Papyrus_Zhak_Flip.png">
+	<!--speaker (id): (Zhaak = 0; Eli = 1; Bandit = 2; Drunkard = 3; NPC1 = 4; Bartender = 5; Sphynx = 6; Zhaak_Flip = 7 -->
+		<!--- Eli entering the town, talking to herself -->
+		<dialogue0>
+			<node id="0" speaker="1" text="I need to find help before it's too late! Should I talk to that man over there?">
+				<option text="- Let's go." returnCode="0" pnode="-1"/>
+			</node>
+		</dialogue0>
+		<!--- Eli talking to npc1-->
 		<dialogue1>
-		<!--speaker (id): (Zhaak = 0; Eli = 1; Bandit = 2; Drunkard = 3; NPC1 = 4; Bartender = 5; Sphynx = 6 -->
 			<node id="0" speaker="4" text="If it's help you're seeking, you can find a lot of people in the tavern.">
-				<option text="- Thanks" returnCode="0" pnode="1"/>
+				<option text="- Thanks!" returnCode="0" pnode="1"/>
 			</node>
 			<node id="1" speaker="1" text="Thanks for the help!">
-				<option text="- chao" returnCode="0" pnode="-1"/>
-			</node>
-			<node id="2" speaker="2" text="si? que guai, 4 o 5? asdf sad fasd fsdf sdfasddfg dfg df gdfgdfg d f gdfgfdgd fgdf gdfg dfg df gdf gdf gdf fas dfds f">
-				<option text="- chao" returnCode="0" pnode="-1"/>
-				<option text="- 5" returnCode="0" pnode="4"/>
-				<option text="- 4" returnCode="0" pnode="3"/>
-			</node>
-			<node id="3" speaker="3" text="nem al 5? asdfasdfasdf ">
-				<option text="- go 5" returnCode="0" pnode="4"/>
-				<option text="- chao" returnCode="0" pnode="-1"/>
-			</node>
-			<node id="4" speaker="0" text="soc 5  i final asdfasdf asdfasdfasdfasdfasdfjashdkfajshfkasjhdkfjashdsd fsk">
-				<option text="- accepto" returnCode="1" pnode="-1"/>
-				<option text="- im out" returnCode="0" pnode="-1"/>
+				<option text="..." returnCode="0" pnode="-1"/>
 			</node>
 		</dialogue1>
+		<!--- Eli talking to the bartender, inside the bar.-->
+		<dialogue2>
+			<node id="0" speaker="1" text="Anybody, please, I need help!">
+				<option text="..." returnCode="0" pnode="1"/>
+			</node>
+			<node id="1" speaker="5" text="(I don't know what you're saying, get out of here you woman!)">
+				<option text="- Sorry, but i really need the help!" returnCode="0" pnode="2"/>
+				<option text="- Hey now, that was very rude!" returnCode="0" pnode="3"/>
+			</node>
+			<node id="2" speaker="1" text="I don't want to disturb you guys, but my friend is in trouble and...">
+				<option text="..." returnCode="0" pnode="4"/>
+			</node>
+			<node id="3" speaker="1" text="You don't have to be rude about it, i was just looking for help for my...">
+				<option text="..." returnCode="0" pnode="4"/>
+			</node>
+			<node id="4" speaker="5" text="(I don't care, leave now.)">
+				<option text="- Fine." returnCode="0" pnode="5"/>
+			</node>
+			<node id="5" speaker="1" text="Guess I'll have to keep on looking.">
+				<option text="..." returnCode="1" pnode="-1"/>
+			</node>
+		</dialogue2>
+		<!--- Zhaak interrupts Eli from leaving -->
+		<dialogue3>
+			<node id="0" speaker="7" text="Hold up there stranger, what do you need?">
+				<option text="Who, me?" returnCode="0" pnode="1"/>
+			</node>
+			<node id="1" speaker"1" text="Is he talking to me? I should go where he is.">
+				<option text="I'm coming" returnCode="0" pnode="-1"/>
+			</node>
+		</dialogue3>
 	</dialogues>
 	
 	<animations>
