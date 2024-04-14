@@ -36,6 +36,7 @@ Left click- Move & Interact
 (Combat Only)
 
 K- Attack on click
+
 P- Skip turn
 
 F10- God Mode
@@ -43,9 +44,13 @@ F10- God Mode
 (GOD MODE ONLY)
 
 W- Move Up
+
 A- Move Left
+
 S- Move Down
+
 D- Move Right
+
 Spacebar- TP to mouse
 
 ## Links
