@@ -7,6 +7,7 @@
 #include "Level1.h"
 #include "Level2.h"
 #include "Level3.h"
+#include "Level4.h"
 #include "Intro.h"
 #include "Menu.h"
 #include "GamePause.h"
@@ -27,6 +28,8 @@ SceneManager::SceneManager()
 	level2->sceneType = SceneType::LEVEL2;
 	level3 = new Level3();
 	level3->sceneType = SceneType::LEVEL3;
+	level4 = new Level4();
+	level4->sceneType = SceneType::LEVEL4;
 	settings = new Settings();
 	gamePause = new GamePause();
 
@@ -35,6 +38,7 @@ SceneManager::SceneManager()
 	scenes.Add(level1);
 	scenes.Add(level2);
 	scenes.Add(level3);
+	scenes.Add(level4);
 	scenes.Add(gamePause);
 	scenes.Add(settings);
 }

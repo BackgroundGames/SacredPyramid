@@ -1,5 +1,5 @@
-#ifndef __LEVEL3_H__
-#define __LEVEL3_H__
+#ifndef __LEVEL4_H__
+#define __LEVEL4_H__
 
 #include "Scene.h"
 #include "Player.h"
@@ -12,14 +12,14 @@
 
 struct SDL_Texture;
 
-class Level3 : public Scene
+class Level4 : public Scene
 {
 public:
 
-	Level3();
+	Level4();
 
 	// Destructor
-	virtual ~Level3();
+	virtual ~Level4();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -50,7 +50,7 @@ private:
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	SDL_Texture* mouseTileTex = nullptr;
-	iPoint pyramidTile = { 2,24 };
+	iPoint endTile = { 2,24 };
 };
 
 #endif // __LEVEL3_H__
