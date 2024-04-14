@@ -26,6 +26,26 @@ ARTIST: Justo T, Joel Ch
  - MARC - DEVELOPER, AUDIO
  - JOEL - TECHNICAL ARTIST, QA TESTER
 
+
+## Controls
+
+Esc- Open menu
+
+Left click- Move & Interact
+
+(Combat Only)
+K- Attack on click
+P- Skip turn
+
+F10- God Mode
+
+(GOD MODE ONLY)
+W- Move Up
+A- Move Left
+S- Move Down
+D- Move Right
+Spacebar- TP to mouse
+
 ## Links
 
  - Link to [GDD](https://docs.google.com/document/d/10BjJT5iYlnWMUcPq0piOajL4E_s3uIRq5hB165xh6m0/edit?usp=sharing)
