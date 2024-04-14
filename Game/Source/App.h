@@ -120,8 +120,8 @@ private:
 
 	List<Module *> modules;
 	
-	uint frames;
-	float dt;
+	uint frames = 0;
+	float dt = 0;
 
     // required variables are provided:
 	Timer startupTime;

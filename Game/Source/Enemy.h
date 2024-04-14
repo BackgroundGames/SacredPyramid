@@ -12,8 +12,6 @@ public:
 	
 	Enemy();
 
-	Enemy(uint hp, uint mp, uint atk, uint def, uint matk, uint mdef, uint ini);
-
 	~Enemy();
 
 	bool Awake();

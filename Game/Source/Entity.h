@@ -122,7 +122,7 @@ public:
 	SDL_Texture* texture = NULL;
 	uint texH, texW;
 
-	iPoint position;      
+	iPoint position = { 0,0 };
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...

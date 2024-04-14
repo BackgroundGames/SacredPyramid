@@ -16,19 +16,6 @@ Enemy::Enemy()
 	type = EntityType::ENEMY;
 }
 
-Enemy::Enemy(uint hp, uint mp, uint atk, uint def, uint matk, uint mdef, uint ini)
-{
-	name.Create("Enemy");
-	type = EntityType::ENEMY;
-	this->stats.health = hp;
-	this->stats.mana = mp;
-	this->stats.attack = atk;
-	this->stats.defense = def;
-	this->stats.magicAttack = matk;
-	this->stats.magicDefense = mdef;
-	this->stats.initiative = ini;
-}
-
 Enemy::~Enemy() {}
 
 bool Enemy::Awake()
