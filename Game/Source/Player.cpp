@@ -215,6 +215,13 @@ bool Player::Update(float dt)
 					exploringState = ExploringState::TALKING;
 					dynamic_cast<NPC*>(interacted)->startTalking = true;
 					move = false;
+					app->audio->StopFx(sandChannel);
+					if (PosState == Direction::UL || PosState == Direction::UR) {
+						currentAnimation = &idleAnimB;
+					}
+					else {
+						currentAnimation = &idleAnim;
+					}
 				}
 				break;
 			case EntityType::ENEMY:
@@ -227,6 +234,12 @@ bool Player::Update(float dt)
 					dynamic_cast<Enemy*>(interacted)->assaulted = true;
 					move = false;
 					app->audio->StopFx(sandChannel);
+					if (PosState == Direction::UL || PosState == Direction::UR) {
+						currentAnimation = &idleAnimB;
+					}
+					else {
+						currentAnimation = &idleAnim;
+					}
 				}
 
 				break;

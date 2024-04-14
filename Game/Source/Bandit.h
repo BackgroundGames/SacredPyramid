@@ -1,7 +1,6 @@
 #ifndef __BANDIT_H__
 #define __BANDIT_H__
 
-#include "Entity.h"
 #include "Enemy.h"
 
 class Bandit : public Enemy

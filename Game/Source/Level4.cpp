@@ -59,7 +59,7 @@ bool Level4::Start()
 	// iterate all entities in the scene --> Check https://pugixml.org/docs/quickstart.html#access
 	for (pugi::xml_node enemyNode = sceneconfig.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
 	{
-		Enemy* enemy;
+		Enemy* enemy = nullptr;
 
 		switch (enemyNode.attribute("id").as_uint())
 		{

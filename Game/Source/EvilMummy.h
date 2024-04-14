@@ -1,7 +1,6 @@
 #ifndef __EVILMUMMY_H__
 #define __EVILMUMMY_H__
 
-#include "Entity.h"
 #include "Enemy.h"
 
 class EvilMummy : public Enemy
