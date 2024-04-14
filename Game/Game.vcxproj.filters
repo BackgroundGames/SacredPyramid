@@ -41,6 +41,7 @@
     <ClCompile Include="Source\Eli.cpp" />
     <ClCompile Include="Source\NPC.cpp" />
     <ClCompile Include="Source\Drunkard.cpp" />
+    <ClCompile Include="Source\Level3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Amir.h" />
@@ -95,5 +96,6 @@
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\NPC.h" />
     <ClInclude Include="Source\Drunkard.h" />
+    <ClInclude Include="Source\Level3.h" />
   </ItemGroup>
 </Project>

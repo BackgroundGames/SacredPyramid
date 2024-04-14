@@ -1,5 +1,5 @@
-#ifndef __LEVEL1_H__
-#define __LEVEL1_H__
+#ifndef __LEVEL3_H__
+#define __LEVEL3_H__
 
 #include "Scene.h"
 #include "Player.h"
@@ -12,14 +12,14 @@
 
 struct SDL_Texture;
 
-class Level1 : public Scene
+class Level3 : public Scene
 {
 public:
 
-	Level1();
+	Level3();
 
 	// Destructor
-	virtual ~Level1();
+	virtual ~Level3();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -43,13 +43,14 @@ public:
 
 	void LockCamera();
 
+	uint windowW, windowH;
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	SDL_Texture* mouseTileTex = nullptr;
-	iPoint tabernTile = { 16,15 };
-	iPoint pyramidTile = { 26,15 };
+	iPoint endTile = { 2,24 };
 };
 
-#endif // __LEVEL1_H__
+#endif // __LEVEL3_H__
