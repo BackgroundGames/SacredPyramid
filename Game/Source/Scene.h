@@ -17,6 +17,7 @@ class GuiControl;
 enum SceneType
 {
 	INTRO,
+	GAME_TITLE,
 	MENU,
 	LEVEL1,
 	LEVEL2,

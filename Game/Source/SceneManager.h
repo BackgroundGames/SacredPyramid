@@ -13,6 +13,7 @@ class Level2;
 class Level3;
 class Level4;
 class Intro;
+class GameTitle;
 class Menu;
 class Settings;
 class GamePause;
@@ -78,6 +79,7 @@ public:
 	Level3* level3;
 	Level4* level4;
 	Intro* intro;
+	GameTitle* gameTitle;
 	Menu* menu;
 	Settings* settings;
 	GamePause* gamePause;
