@@ -45,28 +45,16 @@ bool Level1::Start()
 
 	if (app->sceneManager->previousScene != (Scene*)app->sceneManager->menu &&
 		app->sceneManager->previousScene != (Scene*)app->sceneManager->intro) {
-		players.push_back(zhaak);
-		zhaak->parameters = sceneconfig.child("zhaak");
-		zhaak->Start();
-
-		players.push_back(eli);
-		eli->parameters = sceneconfig.child("eli");
-		eli->Start();
-	}
-	else {
-		//Instantiate the player using the entity manager
-		//Get player paremeters
 		zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ZHAAK);
 		players.push_back(zhaak);
 		//Assigns the XML node to a member in player
-		zhaak->parameters = sceneconfig.child("zhaak");
 		zhaak->Start();
+		zhaak->TpToCell(17,15);
 
-		eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
 		players.push_back(eli);
-		//Assigns the XML node to a member in player
 		eli->parameters = sceneconfig.child("eli");
 		eli->Start();
+		eli->TpToCell(16, 15);
 
 		// iterate all entities in the scene --> Check https://pugixml.org/docs/quickstart.html#access
 		for (pugi::xml_node enemyNode = sceneconfig.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
@@ -84,6 +72,15 @@ bool Level1::Start()
 			enemy->parameters = enemyNode;
 			enemy->Start();
 		}
+
+	}
+	else {
+
+		eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
+		players.push_back(eli);
+		//Assigns the XML node to a member in player
+		eli->parameters = sceneconfig.child("eli");
+		eli->Start();
 
 		for (pugi::xml_node npcNode = sceneconfig.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
 		{
@@ -134,11 +131,17 @@ bool Level1::Update(float dt)
 		app->render->camera.x += (int)ceil(camSpeed * dt);
 
 	//DEBUG: Change Scenes forward and backward
-	if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
+	if (GetPlayer()->GetTile() == tabernTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
+		GetPlayer()->exploringState = ExploringState::NONE;
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
+	}
+
+	//degug
+	/*if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
 
 	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->menu);
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->menu);*/
 
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->SaveRequest();
@@ -168,8 +171,8 @@ bool Level1::CleanUp()
 		}
 		zhaak = nullptr;
 		eli = nullptr;
-		players.clear();
 	}
+	players.clear();
 
 	for (size_t i = 0; i < enemies.size(); i++)
 	{

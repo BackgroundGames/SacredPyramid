@@ -48,6 +48,7 @@ private:
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	SDL_Texture* mouseTileTex = nullptr;
+	iPoint tabernTile = { 16,15 };
 };
 
 #endif // __LEVEL1_H__

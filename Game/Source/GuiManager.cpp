@@ -14,7 +14,9 @@ GuiManager::GuiManager() :Module()
 	name.Create("guiManager");
 }
 
-GuiManager::~GuiManager() {}
+GuiManager::~GuiManager() {
+	app->audio->UnloadFx(butonFx);
+}
 
 bool GuiManager::Start()
 {
@@ -97,8 +99,6 @@ bool GuiManager::CleanUp()
 	{
 		RELEASE(control);
 	}
-
-	app->audio->UnloadFx(butonFx);
 
 	return true;
 

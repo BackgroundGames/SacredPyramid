@@ -22,12 +22,27 @@ bool NPC::Awake()
 
 bool NPC::Start()
 {
+	id = parameters.attribute("id").as_uint();
+
+	if (id == 0) {
+		parametersAnim = app->configFile.child("config").child("animations").child("zhaaknpc");
+	}
+	if (id == 1) {
+		parametersAnim = app->configFile.child("config").child("animations").child("random");
+	}
+
 	Character::Start();
 
 	if (currentAnimation == nullptr) {
-		idleAnim.loop = true;
-		idleAnim.speed = 1.0f;
-		idleAnim.PushBack({ 0, 0, 224, 246 });
+		pugi::xml_node auxAnim = parametersAnim.child("idleAnim");
+
+		idleAnim.speed = auxAnim.attribute("speed").as_float();
+		idleAnim.loop = auxAnim.attribute("loop").as_bool();
+
+		for (pugi::xml_node idleNode = auxAnim.child("idle"); idleNode; idleNode = idleNode.next_sibling("idle"))
+		{
+			idleAnim.PushBack({ idleNode.attribute("x").as_int(), idleNode.attribute("y").as_int() ,idleNode.attribute("w").as_int() ,idleNode.attribute("h").as_int() });
+		}
 	}
 
 	currentAnimation = &idleAnim;
@@ -45,7 +60,7 @@ bool NPC::Update(float dt)
 {
 	distanceFromPlayer = DistanceToTile(GetTile(), app->sceneManager->currentScene->GetPlayer()->GetTile());
 
-	iPoint aux = { GetTile().x - 1,GetTile().y };
+	iPoint aux = { GetTile().x,GetTile().y };
 
 	if (GetMouseTile(mousePos) == aux && app->sceneManager->currentScene->GetPlayer()->interacted != this)
 	{

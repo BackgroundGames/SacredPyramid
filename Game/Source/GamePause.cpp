@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "GuiManager.h"
 #include "Audio.h"
+#include "Player.h"
 
 GamePause::GamePause() : Scene()
 {
@@ -71,6 +72,7 @@ bool GamePause::OnGuiMouseClickEvent(GuiControl* control)
 {
 	if (control->id == 10) {
 		app->sceneManager->CloseGamePause();
+		app->sceneManager->currentScene->GetPlayer()->exploringState = app->sceneManager->currentScene->GetPlayer()->previousEState;
 	}
 	if (control->id == 11) {
 		app->sceneManager->OpenSettings();
