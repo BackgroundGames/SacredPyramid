@@ -89,7 +89,7 @@
 			<node id="0" speaker="7" text="Hold up there stranger, what do you need?">
 				<option text="Who, me?" returnCode="0" pnode="1"/>
 			</node>
-			<node id="1" speaker"1" text="Is he talking to me? I should go where he is.">
+			<node id="1" speaker="1" text="Is he talking to me? I should go where he is.">
 				<option text="I'm coming" returnCode="0" pnode="-1"/>
 			</node>
 		</dialogue3>
