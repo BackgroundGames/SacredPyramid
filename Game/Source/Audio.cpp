@@ -55,6 +55,9 @@ bool Audio::Awake(pugi::xml_node config)
 		ret = true;
 	}
 
+	Mix_Volume(-1, MIX_MAX_VOLUME * 0.15);
+	Mix_VolumeMusic(MIX_MAX_VOLUME * 0.15);
+
 	return ret;
 }
 
@@ -71,11 +74,11 @@ bool Audio::CleanUp()
 		Mix_FreeMusic(music);
 	}
 
-	ListItem<Mix_Chunk*>* item;
-	for(item = fx.start; item != NULL; item = item->next)
-		Mix_FreeChunk(item->data);
-
-	fx.Clear();
+	for (size_t i = 0; i < fx.size(); i++)
+	{
+		UnloadFx(i);
+	}
+	fx.clear();
 
 	Mix_CloseAudio();
 	Mix_Quit();
@@ -145,7 +148,7 @@ unsigned int Audio::LoadFx(const char* path)
 
 	if(!active)
 		return 0;
-
+	
 	Mix_Chunk* chunk = Mix_LoadWAV(path);
 
 	if(chunk == NULL)
@@ -154,27 +157,29 @@ unsigned int Audio::LoadFx(const char* path)
 	}
 	else
 	{
-		fx.Add(chunk);
-		ret = fx.Count();
+		fx.push_back(chunk);
+		ret = fx.size() - 1;
 	}
 
 	return ret;
 }
 
 // Play WAV
-bool Audio::PlayFx(unsigned int id, int repeat)
+int Audio::PlayFx(unsigned int id, int repeat)
 {
 	bool ret = false;
 
 	if(!active)
 		return false;
 
-	if(id > 0 && id <= fx.Count())
+	int channel;
+
+	if(id >= 0 && id <= fx.size())
 	{
-		Mix_PlayChannel(-1, fx[id - 1], repeat);
+		channel = Mix_PlayChannel(-1, fx[id], repeat);
 	}
 
-	return ret;
+	return channel;
 }
 
 void Audio::ChangeMusicVolume(float percent)
@@ -185,4 +190,15 @@ void Audio::ChangeMusicVolume(float percent)
 void Audio::ChangeFxVolume(float percent)
 {
 	Mix_Volume(-1, MIX_MAX_VOLUME * percent);
+}
+
+void Audio::UnloadFx(unsigned int id)
+{
+	Mix_FreeChunk(fx[id]);
+	fx.erase(fx.begin() + id);
+}
+
+void Audio::StopFx(unsigned int channel)
+{
+	Mix_HaltChannel(channel);
 }

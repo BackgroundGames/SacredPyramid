@@ -1,6 +1,7 @@
 #include "GuiControlButton.h"
 #include "Render.h"
 #include "App.h"
+#include "Audio.h"
 #include "GuiManager.h"
 
 GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
@@ -37,6 +38,7 @@ bool GuiControlButton::Update(float dt)
 			
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
 				NotifyObserver();
+				app->audio->PlayFx(app->guiManager->butonFx);
 			}
 		}
 		else {

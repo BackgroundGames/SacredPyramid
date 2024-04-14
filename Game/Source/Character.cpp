@@ -34,6 +34,8 @@ bool Character::Start()
 
 	PosState = Direction::DR;
 
+	sandFx = app->audio->LoadFx("Assets/Audio/Fx/sandwalk.wav");
+
 	return true;
 }
 
@@ -91,6 +93,7 @@ bool Character::Update(float dt)
 bool Character::CleanUp()
 {
 	app->tex->UnLoad(texture);
+	app->audio->UnloadFx(sandFx);
 	texture = nullptr;
 
 	return true;

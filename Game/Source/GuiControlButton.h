@@ -28,6 +28,8 @@ private:
 	float animW = 0;
 	float animH = 0;
 	float animSpeed = 0.02;
+
+	int fx;
 };
 
 #endif // __GUICONTROLBUTTON_H__

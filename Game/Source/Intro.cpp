@@ -29,6 +29,8 @@ bool Intro::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->win->GetWindowSize(windowW, windowH);
+	introFx = app->audio->LoadFx("Assets/Audio/Fx/logo.wav");
+	app->audio->PlayFx(introFx);
 	return true;
 }
 
@@ -62,5 +64,6 @@ bool Intro::PostUpdate()
 bool Intro::CleanUp()
 {
 	app->tex->UnLoad(img);
+	app->audio->UnloadFx(introFx);
 	return true;
 }

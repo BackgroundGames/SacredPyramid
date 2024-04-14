@@ -7,6 +7,9 @@
 
 struct _Mix_Music;
 struct Mix_Chunk;
+#include <vector>
+
+using namespace std;
 
 class Audio : public Module
 {
@@ -30,16 +33,20 @@ public:
 	unsigned int LoadFx(const char* path);
 
 	// Play a previously loaded WAV
-	bool PlayFx(unsigned int fx, int repeat = 0);
+	int PlayFx(unsigned int fx, int repeat = 0);
 
 	void ChangeMusicVolume(float percent);
 
 	void ChangeFxVolume(float percent);
 
+	void UnloadFx(unsigned int fx);
+
+	void StopFx(unsigned int channel);
+
 private:
 
 	_Mix_Music* music;
-	List<Mix_Chunk *>	fx;
+	vector<Mix_Chunk *>	fx;
 };
 
 #endif // __AUDIO_H__

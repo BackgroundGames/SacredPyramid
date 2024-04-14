@@ -147,6 +147,9 @@ public:
 	CombatState combatState;
 	ExploringState exploringState;
 	ExploringState previousEState;
+
+	int sandFx;
+	int sandChannel;
 };
 
 

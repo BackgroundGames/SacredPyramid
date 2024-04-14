@@ -23,6 +23,7 @@ bool GuiManager::Start()
 	quat.y = 0;
 	quat.w = windowW;
 	quat.h = windowH;
+	butonFx = app->audio->LoadFx("Assets/Audio/Fx/click.wav");
 	return true;
 }
 
@@ -96,6 +97,8 @@ bool GuiManager::CleanUp()
 	{
 		RELEASE(control);
 	}
+
+	app->audio->UnloadFx(butonFx);
 
 	return true;
 

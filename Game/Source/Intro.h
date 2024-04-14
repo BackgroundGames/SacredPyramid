@@ -39,6 +39,7 @@ private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
+	int introFx;
 };
 
 #endif //__SCENE_INTRO__
