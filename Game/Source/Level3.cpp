@@ -46,7 +46,7 @@ bool Level3::Start()
 	players.push_back(zhaak);
 	//SI HA CARREGAT PARTIDA MIRAR AL SAVE
 	//////player->parameters = sceneconfig.child("player");
-	zhaak->parameters = sceneconfig.child("eli");
+	zhaak->parameters = sceneconfig.child("zhaak");
 	zhaak->Start();
 
 	eli = (Player*)app->sceneManager->previousScene->GetEli();

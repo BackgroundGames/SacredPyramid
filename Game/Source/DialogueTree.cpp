@@ -143,12 +143,12 @@ bool DialogueTree::CleanUp()
 
 	active = false;
 
-	if (dialog == "dialogue4" && app->sceneManager->currentScene->GetPlayer() != nullptr) {
+	if (dialog == "dialogue4" && app->sceneManager->currentScene != (Scene*)app->sceneManager->menu) {
 		app->sceneManager->currentScene->GetPlayer()->exploringState = ExploringState::NONE;
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level1);
 	}
 
-	if (dialog == "dialogue5" && app->sceneManager->currentScene->GetPlayer() != nullptr) {
+	if (dialog == "dialogue5" && app->sceneManager->currentScene != (Scene*)app->sceneManager->menu) {
 		app->sceneManager->currentScene->GetPlayer()->exploringState = ExploringState::NONE;
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level4);
 	}

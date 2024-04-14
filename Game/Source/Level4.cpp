@@ -46,7 +46,7 @@ bool Level4::Start()
 	players.push_back(zhaak);
 	//SI HA CARREGAT PARTIDA MIRAR AL SAVE
 	//////player->parameters = sceneconfig.child("player");
-	zhaak->parameters = sceneconfig.child("eli");
+	zhaak->parameters = sceneconfig.child("zhaak");
 	zhaak->Start();
 
 	eli = (Player*)app->sceneManager->previousScene->GetEli();
@@ -64,8 +64,11 @@ bool Level4::Start()
 		{
 			enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::BANDIT);
 		}
-		else {
+		else if(enemyNode.attribute("id").as_uint() == 1) {
 			enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::DRUNKARD);
+		}
+		else if (enemyNode.attribute("id").as_uint() == 2) {
+			enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::EVIL_MUMMY);
 		}
 		enemy->id = enemyNode.attribute("id").as_uint();
 		enemies.push_back(enemy);

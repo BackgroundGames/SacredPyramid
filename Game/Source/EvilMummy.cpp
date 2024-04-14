@@ -9,7 +9,7 @@ EvilMummy::EvilMummy()
 	Awake();
 	//prova combat
 	stats.health = 1;
-	inventory.weapon.range = 3;
+	inventory.weapon.range = 2;
 	inventory.weapon.damage = 1;
 }
 

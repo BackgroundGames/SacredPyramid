@@ -42,9 +42,9 @@
 		</level2>
 		<level3 audio="Assets\Audio\Music\Town.ogg">
 			<map path="Assets/Maps/" name="Mapa 2 Puente.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
-			<zhaak x="15" y="57"/>
-			<eli x="15" y="58"/>
-			<enemy x="19" y="61" cx="19" cy="61" id="0" p1x="17" p1y="60" p2x="17" p2y="58">
+			<zhaak x="14" y="62"/>
+			<eli x="14" y="63"/>
+			<enemy x="16" y="57" cx="19" cy="61" id="0" p1x="17" p1y="60" p2x="17" p2y="58">
 				<minion x="20" y="60" id="0"/>
 				<minion x="20" y="59" id="0"/>
 				<minion x="19" y="58" id="0"/>
