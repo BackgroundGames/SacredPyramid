@@ -34,12 +34,14 @@ Esc- Open menu
 Left click- Move & Interact
 
 (Combat Only)
+
 K- Attack on click
 P- Skip turn
 
 F10- God Mode
 
 (GOD MODE ONLY)
+
 W- Move Up
 A- Move Left
 S- Move Down
