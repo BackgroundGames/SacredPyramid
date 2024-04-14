@@ -162,17 +162,23 @@
 				<option text="..." returnCode="0" pnode="22"/>
 			</node>
 			<node id="22" speaker="7" text=" Maybe if your friend is a little smart he has found a way to take shelter.">
-				<option text="..." returnCode="0" pnode="22"/>
+				<option text="..." returnCode="0" pnode="23"/>
 			</node>
 			<node id="23" speaker="7" text="But we don't have time to waste.">
-				<option text="- Introduce yourself" returnCode="0" pnode="22"/>
+				<option text="- Introduce yourself" returnCode="0" pnode="24"/>
 			</node>
 			<node id="24" speaker="1" text="I'm Eli, by the way. Nice to meet you.">
-				<option text="..." returnCode="0" pnode="22"/>
+				<option text="..." returnCode="0" pnode="25"/>
 			</node>			
 			<node id="25" speaker="7" text="... I'm Zhaak.">
 				<option text="..." returnCode="0" pnode="26"/>
 			</node>					
+			<node id="26" speaker="1" text="Nice to meet you, Zhaak.">
+				<option text="..." returnCode="0" pnode="27"/>
+			</node>	
+			<node id="27" speaker="7" text="Whatever, let's go.">
+				<option text="..." returnCode="0" pnode="-1"/>
+			</node>	
 		</dialogue4>
 	</dialogues>
 	
