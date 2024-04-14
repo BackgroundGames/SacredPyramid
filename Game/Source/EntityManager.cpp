@@ -11,6 +11,7 @@
 #include "Enemy.h"
 #include "Bandit.h"
 #include "Drunkard.h"
+#include "EvilMummy.h"
 
 #include "NPC.h"
 
@@ -141,6 +142,7 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 			entity = new Drunkard();
 			break;
 		case EnemyType::EVIL_MUMMY:
+			entity = new EvilMummy();
 			break;
 		case EnemyType::UNKNOWN:
 			entity = new Enemy();

@@ -7,6 +7,7 @@
 #include "Pathfinding.h"
 #include "Bandit.h"
 #include "Drunkard.h"
+#include "EvilMummy.h"
 #include "Textures.h"
 
 Enemy::Enemy()
@@ -89,12 +90,21 @@ bool Enemy::Update(float dt)
 
 				for (pugi::xml_node enemyNode = parameters.child("minion"); enemyNode; enemyNode = enemyNode.next_sibling("minion"))
 				{
-					Enemy* enemy;
-					if (enemyNode.attribute("id").as_int() == 0) {
+					Enemy* enemy = nullptr;
+
+					switch (enemyNode.attribute("id").as_int())
+					{
+					case 0:
 						enemy = new Bandit();
-					}
-					else {
+						break;
+					case 1:
 						enemy = new Drunkard();
+						break;
+					case 2:
+						enemy = new EvilMummy();
+						break;
+					default:
+						break;
 					}
 
 					enemy->id = enemyNode.attribute("id").as_uint();

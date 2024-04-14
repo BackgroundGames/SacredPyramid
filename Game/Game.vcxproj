@@ -106,6 +106,7 @@
     <ClCompile Include="Source\Eli.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\EvilMummy.cpp" />
     <ClCompile Include="Source\GamePause.cpp" />
     <ClCompile Include="Source\GameTitle.cpp" />
     <ClCompile Include="Source\GuiCheckBox.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\EvilMummy.h" />
     <ClInclude Include="Source\GamePause.h" />
     <ClInclude Include="Source\GameTitle.h" />
     <ClInclude Include="Source\GuiCheckBox.h" />

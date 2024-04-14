@@ -4401,8 +4401,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="121"/>
+   <tile gid="121"/>
    <tile/>
    <tile/>
    <tile/>
@@ -4431,8 +4431,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="121"/>
+   <tile gid="121"/>
    <tile/>
    <tile/>
    <tile/>

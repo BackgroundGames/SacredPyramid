@@ -55,9 +55,9 @@
 			<map path="Assets/Maps/" name="Mapa 3 Pyramid.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 			<zhaak x="4" y="4"/>
 			<eli x="3" y="4"/>
-			<enemy x="15" y="4" cx="18" cy="4" id="0" p1x="13" p1y="4" p2x="12" p2y="3">
-				<minion x="13" y="5" id="0"/>
-				<minion x="11" y="6" id="1"/>
+			<enemy x="15" y="4" cx="18" cy="4" id="2" p1x="13" p1y="4" p2x="12" p2y="3">
+				<minion x="13" y="5" id="2"/>
+				<minion x="11" y="6" id="2"/>
 			</enemy>
 		</level4>	
 	</scenemanager>
@@ -301,6 +301,12 @@
 			</idleAnim>
 		</tabernero>
 		
+		<evilMummy texturePath="Assets/Textures/Momia anim.png">
+			<idleAnim loop="true" speed="0.05f">
+				<idle x="0" y="0" w="56" h="123"/>
+				<idle x="56" y="0" w="55" h="123"/>
+			</idleAnim>
+		</evilMummy>
 	</animations>
   
 </config>
