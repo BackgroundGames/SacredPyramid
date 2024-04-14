@@ -206,6 +206,12 @@
 				<option text="I'm coming" returnCode="0" pnode="-1"/>
 			</node>
 		</dialogue5>
+		<!--- Eli entering the town, talking to herself -->
+		<dialogue6>
+			<node id="0" speaker="1" text="...">
+				<option text="..." returnCode="0" pnode="-1"/>
+			</node>
+		</dialogue6>
 	</dialogues>
 	
 	<animations>
@@ -268,11 +274,11 @@
 			</idleBAnim>
 		</drunkard>
 		
-		<npc texturePath="Assets/Textures/Esfinge.png">
+		<esfinge texturePath="Assets/Textures/Esfinge.png">
 			<idleAnim loop="true" speed="0.05f">
 				<idle x="0" y="0" w="224" h="246"/>
 			</idleAnim>
-		</npc>
+		</esfinge>
 		
 		<zhaaknpc texturePath="Assets/Textures/Zhaak comp.png">
 			<idleAnim loop="true" speed="0.05f">

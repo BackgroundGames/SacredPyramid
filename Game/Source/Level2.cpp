@@ -63,6 +63,8 @@ bool Level2::Start()
 			npc->parameters = npcNode;
 			npc->Start();
 		}
+
+		eli->OnGuiMouseClickEvent(npcs[0]);
 	}
 
 	/*enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
