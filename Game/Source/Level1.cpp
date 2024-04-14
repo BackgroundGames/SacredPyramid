@@ -62,13 +62,22 @@ bool Level1::Start()
 		for (pugi::xml_node enemyNode = sceneconfig.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
 		{
 			Enemy* enemy;
-			if (enemyNode.attribute("id").as_uint() == 0)
+
+			switch (enemyNode.attribute("id").as_uint())
 			{
+			case 0:
 				enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::BANDIT);
-			}
-			else {
+				break;
+			case 1:
 				enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::DRUNKARD);
+				break;
+			case 2:
+				enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, PlayerType::UNKNOWN, EnemyType::EVIL_MUMMY);
+				break;
+			default:
+				break;
 			}
+
 			enemy->id = enemyNode.attribute("id").as_uint();
 			enemies.push_back(enemy);
 			enemy->parameters = enemyNode;
