@@ -46,6 +46,7 @@ public:
 
 	bool debug = false;
 
+	int butonFx;
 };
 
 #endif // __GUIMANAGER_H__

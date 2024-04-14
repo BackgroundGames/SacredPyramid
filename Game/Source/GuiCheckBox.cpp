@@ -3,7 +3,7 @@
 #include "Render.h"
 #include "Window.h"
 #include "GuiManager.h"
-
+#include "Audio.h"
 
 GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::CHECKBOX, id)
 {
@@ -58,6 +58,7 @@ bool GuiCheckBox::Update(float dt)
 					checked = true;
 				}
 				NotifyObserver();
+				app->audio->PlayFx(app->guiManager->butonFx);
 			}
 		}
 		else {

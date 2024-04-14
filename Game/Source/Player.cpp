@@ -88,8 +88,10 @@ bool Player::Update(float dt)
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 				{
 					if (destination != prevDestination)
-						if (moveTo(destination))
+						if (moveTo(destination)) {
 							exploringState = ExploringState::MOVING;
+							sandChannel = app->audio->PlayFx(sandFx, -1);
+						}
 				}
 
 				//If space button is pressed modify put player in the cell of the cursor
@@ -123,6 +125,7 @@ bool Player::Update(float dt)
 			else
 			{
 				exploringState = ExploringState::IDLE;
+				app->audio->StopFx(sandChannel);
 			}
 
 			break;
