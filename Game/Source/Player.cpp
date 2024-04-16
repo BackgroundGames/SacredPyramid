@@ -34,6 +34,9 @@ bool Player::Start() {
 	combatState = CombatState::NONE;
 	exploringState = ExploringState::IDLE;
 
+	path.Clear();
+	move = false;
+
 	return true;
 }
 

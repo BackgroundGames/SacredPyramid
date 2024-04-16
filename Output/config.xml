@@ -62,7 +62,7 @@
 		</level4>	
 	</scenemanager>
 	
-	<dialogues zhaak="Assets/Textures/Papyrus_Zhak.png" eli="Assets/Textures/Papyrus_Eli.png" bandit="Assets/Textures/Papyrus_Bandit.png" drunkard="Assets/Textures/Papyrus_Drunk_Flip.png" npc1="Assets/Textures/Papyrus_NPC1_Flip.png" bartender= "Assets/Textures/Papyrus_Bartender_Flip.png" npczhaak="Assets/Textures/Papyrus_Zhak_Flip.png" sphynx="Assets/Textures/Papyrus_Esfinge_Flip.png">
+	<dialogues zhaak="Assets/Textures/Papyrus_Zhak_Flip.png" eli="Assets/Textures/Papyrus_Eli.png" bandit="Assets/Textures/Papyrus_Bandit.png" drunkard="Assets/Textures/Papyrus_Drunk_Flip.png" npc1="Assets/Textures/Papyrus_NPC1_Flip.png" bartender= "Assets/Textures/Papyrus_Bartender_Flip.png" npczhaak="Assets/Textures/Papyrus_Zhak_Flip.png" sphynx="Assets/Textures/Papyrus_Esfinge_Flip.png">
 	<!--speaker (id): (Zhaak = 0; Eli = 1; Bandit = 2; Drunkard = 3; NPC1 = 4; Bartender = 5; Sphynx = 6; Zhaak_Flip = 7 -->
 		<!--- Eli entering the town, talking to herself -->
 		<dialogue0>
@@ -299,8 +299,8 @@
 				<idle x="56" y="0" w="56" h="122"/>
 			</idleAnim>
 			<idleBAnim loop="true" speed="0.02f">
-				<idleB x="0" y="0" w="56" h="122"/>
-				<idleB x="56" y="0" w="56" h="122"/>
+				<idleB x="0" y="122" w="56" h="122"/>
+				<idleB x="56" y="122" w="56" h="122"/>
 			</idleBAnim>
 		</drunkard>
 		
@@ -336,6 +336,10 @@
 				<idle x="0" y="0" w="56" h="123"/>
 				<idle x="56" y="0" w="55" h="123"/>
 			</idleAnim>
+			<idleBAnim loop="true" speed="0.02f">
+				<idleB x="0" y="122" w="56" h="122"/>
+				<idleB x="56" y="122" w="56" h="122"/>
+			</idleBAnim>
 		</evilMummy>
 	</animations>
   
