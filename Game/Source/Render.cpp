@@ -105,7 +105,7 @@ bool Render::Update(float dt)
 
 		// Render a texture where the mouse is over to highlight the tile, use the texture 'mouseTileTex'
 		iPoint highlightedTileWorld = app->map->MapToWorld(mouseTile.x, mouseTile.y);
-		app->render->DrawTexture(selectionTex, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
+ 		app->render->DrawTexture(selectionTex, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
 
 		//Mouse Tile print text
 		mousePosDebug = "Mouse Tile : (" + std::to_string(app->map->WorldToMap(X, Y).x) + ", " + std::to_string(app->map->WorldToMap(X, Y).y) + ")";

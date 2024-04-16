@@ -165,6 +165,10 @@ public:
         return mapData.width;
     }
 
+    int GetMapTilesHeight() {
+        return mapData.height;
+    }
+
     void InitMap();
 
 public: 

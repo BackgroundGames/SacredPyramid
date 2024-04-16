@@ -55,6 +55,7 @@ bool Level1::Start()
 		zhaak->TpToCell(17,25);
 
 		players.push_back(eli);
+		eli->Start();
 		eli->TpToCell(16, 25);
 		eli->exploringState = ExploringState::FOLLOWING;
 

@@ -19,12 +19,18 @@ public:
 
 	bool OnGuiMouseClickEvent(Entity* control);
 
+	void FindAttackRange();
+
+	bool isValidTile(int x, int y);
+
 public:
 	iPoint destination = iPoint{ 0, 0 };
 	PlayerType subtype;
 
 	bool lastStand = false;
 	Entity* interacted = nullptr;
+
+	DynArray<iPoint> attackTiles;
 };
 
 #endif // __PLAYER_H__
