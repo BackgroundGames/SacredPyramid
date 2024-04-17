@@ -42,8 +42,6 @@ public:
 
 	void DestroyEntity(Character* entity, int i);
 
-	void AddEntity(Character* entity);
-
 	int NextTurn();
 
 	void EndCombat();
@@ -55,6 +53,8 @@ public:
 	void CheckIfCharDead();
 
 	void UIEvent(int id);
+
+	void PreapareUINextTurn();
 
 public:
 

@@ -372,11 +372,12 @@ bool CombatManager::Update(float dt)
 	seconds = (elapsedTime / 1000) % 60;
 	//Seconds = elapsedTime % 1000;
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || seconds >= 60.0f)
+	if (currentCharacterTurn->combatState == CombatState::WAITING || seconds >= 60.0f)
 	{
 		currentCharacterTurn->combatState = CombatState::WAITING;
 		currentCharacterTurn = CombatList[NextTurn()];
 		currentCharacterTurn->combatState = CombatState::IDLE;
+		PreapareUINextTurn();
 	}
 
 	for (int i = 0; i < CombatList.size(); i++)
@@ -403,12 +404,6 @@ bool CombatManager::Update(float dt)
 	}
 
 	CheckIfCharDead();
-
-	if (currentCharacterTurn->combatState == CombatState::WAITING)
-	{
-		currentCharacterTurn = CombatList[NextTurn()];
-		currentCharacterTurn->combatState = CombatState::IDLE;
-	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || (enemies.Count() == 0 && summoner == nullptr) || playersAlive == 0)
 	{
@@ -447,10 +442,6 @@ void CombatManager::DestroyEntity(Character* entity, int i)
 	}
 
 	CombatList.erase(CombatList.begin() + i);
-}
-
-void CombatManager::AddEntity(Character* entity)
-{
 }
 
 int CombatManager::NextTurn()
@@ -581,6 +572,7 @@ void CombatManager::UIEvent(int id)
 		currentCharacterTurn->combatState = CombatState::WAITING;
 		currentCharacterTurn = CombatList[NextTurn()];
 		currentCharacterTurn->combatState = CombatState::IDLE;
+		PreapareUINextTurn();
 	}
 	if (id == 1) {
 
@@ -593,6 +585,16 @@ void CombatManager::UIEvent(int id)
 	}
 	if (id == 4) {
 
+	}
+}
+
+void CombatManager::PreapareUINextTurn()
+{
+	if (currentCharacterTurn->type != EntityType::PLAYER) {
+		nextTurnButton->active = false;
+	}
+	else {
+		nextTurnButton->active = true;
 	}
 }
 
