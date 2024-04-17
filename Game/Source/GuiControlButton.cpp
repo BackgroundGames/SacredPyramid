@@ -53,7 +53,7 @@ bool GuiControlButton::Update(float dt)
 			break;
 		case GuiControlState::NORMAL:
 			if (debug) {
-				app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
+				app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
 			}
 			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, 0, 0, 0);
 			anim = false;
@@ -62,7 +62,7 @@ bool GuiControlButton::Update(float dt)
 			break;
 		case GuiControlState::FOCUSED:
 			if (debug) {
-				app->render->DrawRectangle(bounds, 0, 0, 20, 255, true, false);
+				app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
 			}
 			app->render->DrawText(text.GetString(), bounds.x - (int)animW, bounds.y - (int)animH, bounds.w + (int)animW*2, bounds.h + (int)animH*2, 255,255,255);
 			if (animated) {
@@ -84,7 +84,7 @@ bool GuiControlButton::Update(float dt)
 			break;
 		case GuiControlState::PRESSED:
 			if (debug) {
-				app->render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
+				app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
 			}
 			app->render->DrawText(text.GetString(), bounds.x + 5, bounds.y + 5, bounds.w - 10, bounds.h - 10, 125, 125, 125);
 			break;
@@ -93,7 +93,7 @@ bool GuiControlButton::Update(float dt)
 	}
 	else {
 		if (debug)
-		app->render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
+		app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
 		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, 50, 50, 50);
 	}
 

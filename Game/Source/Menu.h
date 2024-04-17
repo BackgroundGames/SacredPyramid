@@ -2,10 +2,10 @@
 #define __MENU__
 #include "Scene.h"
 
-#include "GuiControl.h"
 #include "GuiControlButton.h"
 #include "GuiSlider.h"
 #include "GuiCheckBox.h"
+#include "GuiControl.h"
 
 struct SDL_Texture;
 
@@ -52,8 +52,6 @@ private:
 	GuiControlButton* settingsButton;
 	GuiControlButton* creditsButton;
 	GuiControlButton* exitButton;
-	GuiSlider* gcSlider;
-	GuiCheckBox* checkBox;
 };
 
 #endif //__MENU__

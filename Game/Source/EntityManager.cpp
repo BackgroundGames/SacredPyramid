@@ -2,6 +2,8 @@
 #include "Window.h"
 #include "Map.h"
 #include "Audio.h"
+#include "GuiManager.h"
+#include "GuiControlButton.h"
 
 #include "Player.h"
 #include "Zhaak.h"
@@ -370,7 +372,7 @@ bool CombatManager::Update(float dt)
 	seconds = (elapsedTime / 1000) % 60;
 	//Seconds = elapsedTime % 1000;
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || seconds >= 10.0f)
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || seconds >= 60.0f)
 	{
 		currentCharacterTurn->combatState = CombatState::WAITING;
 		currentCharacterTurn = CombatList[NextTurn()];
@@ -465,6 +467,10 @@ int CombatManager::NextTurn()
 
 void CombatManager::EndCombat()
 {
+	//UI
+	app->guiManager->DeleteGuiControl(nextTurnButton);
+	app->guiManager->CleanUp();
+
 	// victory
 	for (int i = 0; i < players.size(); i++)
 	{
@@ -569,6 +575,27 @@ void CombatManager::CheckIfCharDead()
 	}
 }
 
+void CombatManager::UIEvent(int id)
+{
+	if (id == 0) {
+		currentCharacterTurn->combatState = CombatState::WAITING;
+		currentCharacterTurn = CombatList[NextTurn()];
+		currentCharacterTurn->combatState = CombatState::IDLE;
+	}
+	if (id == 1) {
+
+	}
+	if (id == 2) {
+
+	}
+	if (id == 3) {
+
+	}
+	if (id == 4) {
+
+	}
+}
+
 void EntityManager::MakeStartCombatFade()
 {
 	if (currentStep == Fade_StepFade::TO_BLACKF)
@@ -577,15 +604,28 @@ void EntityManager::MakeStartCombatFade()
 		if (frameCount >= maxFadeFrames)
 		{
 			currentStep = Fade_StepFade::FROM_BLACKF;
-			inCombat = true;
+
+			//tp all characters
 			combatManager->summoner->TpToCell(combatManager->summoner->combatPos[0].x, combatManager->summoner->combatPos[0].y);
 			for (size_t i = 0; i < combatManager->players.size(); i++)
 			{
 				combatManager->players[i]->TpToCell(combatManager->summoner->combatPos[i + 1].x, combatManager->summoner->combatPos[i + 1].y);
 			}
+
+			//prepare UI
+			// 25px per letter
+			SDL_Rect nextturnPos = { windowW *0.3 - 350, windowH * 0.8, 200,50 };
+			combatManager->nextTurnButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 0, "END TURN", nextturnPos, app->sceneManager->currentScene);
+			combatManager->nextTurnButton->animated = false;
+			combatManager->nextTurnButton->debug = true;
+
+			//play music
+			app->audio->PlayMusic(config.attribute("audio").as_string(), 0);
+
+			//start fisrt turn
 			combatManager->CombatList[0]->combatState = CombatState::IDLE;
 			combatManager->startTime = SDL_GetTicks();
-			app->audio->PlayMusic(config.attribute("audio").as_string(), 0);
+			inCombat = true;
 		}
 	}
 	else

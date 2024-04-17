@@ -10,6 +10,7 @@
 
 using namespace std;
 
+class GuiControlButton;
 class Character;
 class Player;
 class Enemy;
@@ -53,6 +54,8 @@ public:
 
 	void CheckIfCharDead();
 
+	void UIEvent(int id);
+
 public:
 
 	Enemy* summoner = nullptr;
@@ -67,6 +70,8 @@ public:
 	float seconds = 0.0f;
 
 	int playersAlive;
+
+	GuiControlButton* nextTurnButton;
 };
 
 class EntityManager : public Module
