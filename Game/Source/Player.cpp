@@ -298,11 +298,6 @@ bool Player::Update(float dt)
 				}
 			}
 
-			if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
-				combatState = CombatState::ATTACKING;
-				FindAttackRange();
-			}
-
 			break;
 			
 		case CombatState::MOVING:
@@ -337,10 +332,6 @@ bool Player::Update(float dt)
 					combatState = CombatState::IDLE;
 					attackTiles.Clear();
 					app->input->ResetMouseButtonState();
-				}
-				else {
-					combatState = CombatState::IDLE;
-					attackTiles.Clear();
 				}
 			}
 

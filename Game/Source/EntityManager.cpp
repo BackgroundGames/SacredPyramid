@@ -460,6 +460,7 @@ void CombatManager::EndCombat()
 {
 	//UI
 	app->guiManager->DeleteGuiControl(nextTurnButton);
+	app->guiManager->DeleteGuiControl(attackButton);
 	app->guiManager->CleanUp();
 
 	// victory
@@ -575,7 +576,14 @@ void CombatManager::UIEvent(int id)
 		PreapareUINextTurn();
 	}
 	if (id == 1) {
-
+		if (currentCharacterTurn->combatState == CombatState::ATTACKING) {
+			currentCharacterTurn->combatState = CombatState::IDLE;
+			dynamic_cast<Player*>(currentCharacterTurn)->attackTiles.Clear();
+		}
+		else {
+			currentCharacterTurn->combatState = CombatState::ATTACKING;
+			dynamic_cast<Player*>(currentCharacterTurn)->FindAttackRange();
+		}
 	}
 	if (id == 2) {
 
@@ -586,15 +594,18 @@ void CombatManager::UIEvent(int id)
 	if (id == 4) {
 
 	}
+	app->input->ResetMouseButtonState();
 }
 
 void CombatManager::PreapareUINextTurn()
 {
 	if (currentCharacterTurn->type != EntityType::PLAYER) {
 		nextTurnButton->active = false;
+		attackButton->active = false;
 	}
 	else {
 		nextTurnButton->active = true;
+		attackButton->active = true;
 	}
 }
 
@@ -620,6 +631,11 @@ void EntityManager::MakeStartCombatFade()
 			combatManager->nextTurnButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 0, "END TURN", nextturnPos, app->sceneManager->currentScene);
 			combatManager->nextTurnButton->animated = false;
 			combatManager->nextTurnButton->debug = true;
+
+			SDL_Rect attackPos = { windowW * 0.3 - 350, (windowH * 0.8) + 75, 150,50 };
+			combatManager->attackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "ATTACK", attackPos, app->sceneManager->currentScene);
+			combatManager->attackButton->animated = false;
+			combatManager->attackButton->debug = true;
 
 			//play music
 			app->audio->PlayMusic(config.attribute("audio").as_string(), 0);

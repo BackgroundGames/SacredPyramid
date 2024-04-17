@@ -72,6 +72,8 @@ public:
 	int playersAlive;
 
 	GuiControlButton* nextTurnButton;
+	GuiControlButton* attackButton;
+	GuiControlButton* moveButton;
 };
 
 class EntityManager : public Module

@@ -180,7 +180,12 @@ bool Level3::CleanUp()
 
 bool Level3::OnGuiMouseClickEvent(GuiControl* control) {
 
-	app->dialogueTree->ChoseOption(control->id);
+	if (GetPlayer()->mainState == MainState::IN_COMBAT) {
+		app->entityManager->combatManager->UIEvent(control->id);
+	}
+	else {
+		app->dialogueTree->ChoseOption(control->id);
+	}
 
 	return true;
 }
