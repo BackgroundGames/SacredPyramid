@@ -55,7 +55,12 @@ bool GuiControlButton::Update(float dt)
 			if (debug) {
 				app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
 			}
-			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, 0, 0, 0);
+			if (app->sceneManager->currentScene == (Scene*)app->sceneManager->menu) {
+				app->render->DrawText(text.GetString(), bounds.x - (int)animW, bounds.y - (int)animH, bounds.w + (int)animW * 2, bounds.h + (int)animH * 2, 255, 255, 255, 1);
+			}
+			else {
+				app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, 0, 0, 0);
+			}
 			anim = false;
 			animW = 0;
 			animH = 0;
@@ -64,7 +69,7 @@ bool GuiControlButton::Update(float dt)
 			if (debug) {
 				app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
 			}
-			app->render->DrawText(text.GetString(), bounds.x - (int)animW, bounds.y - (int)animH, bounds.w + (int)animW*2, bounds.h + (int)animH*2, 255,255,255);
+			app->render->DrawText(text.GetString(), bounds.x - (int)animW, bounds.y - (int)animH, bounds.w + (int)animW * 2, bounds.h + (int)animH * 2, 255, 255, 255);
 			if (animated) {
 				if (!anim) {
 					animW += animSpeed * dt;

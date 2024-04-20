@@ -65,6 +65,7 @@ bool Render::Awake(pugi::xml_node config)
 	//Font initializtation
 	TTF_Init();
 	font = TTF_OpenFont(config.child("font").attribute("arialPath").as_string(), 200);
+	font1 = TTF_OpenFont(config.child("font").attribute("egyptianPath").as_string(), 200);
 
 	return ret;
 }
@@ -348,10 +349,16 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
-bool Render::DrawText(const char* text, int posx, int posy, int w, int h, int r, int g, int b)
+bool Render::DrawText(const char* text, int posx, int posy, int w, int h, int r, int g, int b, int idfont)
 {
 	SDL_Color color = { r,g,b };
-	SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
+	SDL_Surface* surface;
+	if (idfont == 0) {
+		surface = TTF_RenderText_Solid(font, text, color);
+	}
+	else {
+		surface = TTF_RenderText_Solid(font1, text, color);
+	}
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
 	int texW = 0;

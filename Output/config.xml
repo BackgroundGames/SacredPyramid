@@ -9,7 +9,7 @@
 	<renderer>
 		<vsync value="false"/>
 		<mouse texturePath="Assets/Textures/cursor.png"/>
-		<font arialPath="Assets/Fonts/arial/arial.ttf"/>
+		<font arialPath="Assets/Fonts/arial/arial.ttf" egyptianPath="Assets/Fonts/egyptian/egyptian.ttf"/>
 	</renderer>
 
 	<window>

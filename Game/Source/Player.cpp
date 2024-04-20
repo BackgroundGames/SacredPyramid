@@ -316,10 +316,6 @@ bool Player::Update(float dt)
 			else
 			{
 				combatState = CombatState::IDLE;
-				if (movementUsed == stats.movement) {
-					combatState = CombatState::WAITING;
-					movementUsed = 0;
-				}
 			}
 			break;
 
