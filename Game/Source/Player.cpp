@@ -35,8 +35,8 @@ bool Player::Start() {
 	combatState = CombatState::NONE;
 	exploringState = ExploringState::IDLE;
 
-	path.Clear();
-	move = false;
+	ResetPath();
+	interacted = nullptr;
 
 	return true;
 }
@@ -67,6 +67,8 @@ bool Player::Update(float dt)
 		switch (exploringState)
 		{
 		case ExploringState::IDLE:
+
+			ResetPath();
 
 			if (PosState == Direction::UL || PosState == Direction::UR) {
 				currentAnimation = &idleAnimB;
@@ -161,13 +163,7 @@ bool Player::Update(float dt)
 
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 			{
-				if (destination != app->sceneManager->currentScene->GetPlayer()->GetTile()) {
-					moveTo(*app->sceneManager->currentScene->GetPlayer()->path.At(app->sceneManager->currentScene->GetPlayer()->path.Count() - 2));
-				}
-				else {
-					TpToCell(GetTile().x, GetTile().y);
-					move = false;
-				}
+				exploringState = ExploringState::IDLE;
 			}
 
 			if (app->sceneManager->currentScene->GetPlayer()->exploringState == ExploringState::TALKING) {

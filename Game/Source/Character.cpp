@@ -238,6 +238,14 @@ void Character::DebugPath()
 	}
 }
 
+void Character::ResetPath()
+{
+	move = false;
+	pathingIteration = 0;
+	path.Clear();
+	translationOffset = { 0, 0 };
+}
+
 iPoint Character::GetTile()
 {
 	//el 14 seria la meitat del w i el 31 la meitat de h

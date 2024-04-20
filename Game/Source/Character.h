@@ -90,6 +90,8 @@ public:
 
 	void DebugPath();
 
+	void ResetPath();
+
 	iPoint GetTile();
 	iPoint GetMouseTile(iPoint mousePos);
 

@@ -248,6 +248,7 @@ void EntityManager::StartCombat(vector<Entity*> &enemies, Entity* summoner)
 		combatManager->players[i]->mainState = MainState::IN_COMBAT;
 		combatManager->players[i]->combatState = CombatState::WAITING;
 		combatManager->players[i]->stats.health = 3;
+		combatManager->players[i]->ResetPath();
 		length++;
 	}
 
@@ -623,6 +624,7 @@ void EntityManager::MakeStartCombatFade()
 			for (size_t i = 0; i < combatManager->players.size(); i++)
 			{
 				combatManager->players[i]->TpToCell(combatManager->summoner->combatPos[i + 1].x, combatManager->summoner->combatPos[i + 1].y);
+				combatManager->players[i]->ResetPath();
 			}
 
 			//prepare UI
