@@ -1,107 +1,321 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\Amir.cpp" />
-    <ClCompile Include="Source\Accessory.cpp" />
-    <ClCompile Include="Source\Armor.cpp" />
-    <ClCompile Include="Source\Bandit.cpp" />
-    <ClCompile Include="Source\Character.cpp" />
-    <ClCompile Include="Source\DialogueTree.cpp" />
-    <ClCompile Include="Source\Enemy.cpp" />
-    <ClCompile Include="Source\EntityManager.cpp" />
-    <ClCompile Include="Source\GamePause.cpp" />
-    <ClCompile Include="Source\GuiCheckBox.cpp" />
-    <ClCompile Include="Source\GuiControlButton.cpp" />
-    <ClCompile Include="Source\GuiManager.cpp" />
-    <ClCompile Include="Source\GuiSlider.cpp" />
-    <ClCompile Include="Source\Item.cpp" />
-    <ClCompile Include="Source\Level1.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
-    <ClCompile Include="Source\Audio.cpp" />
-    <ClCompile Include="Source\Input.cpp" />
-    <ClCompile Include="Source\Map.cpp" />
-    <ClCompile Include="Source\Menu.cpp" />
-    <ClCompile Include="Source\Pathfinding.cpp" />
-    <ClCompile Include="Source\PerfTimer.cpp" />
-    <ClCompile Include="Source\Player.cpp" />
-    <ClCompile Include="Source\Render.cpp" />
-    <ClCompile Include="Source\Intro.cpp" />
-    <ClCompile Include="Source\SceneManager.cpp" />
-    <ClCompile Include="Source\Settings.cpp" />
-    <ClCompile Include="Source\Textures.cpp" />
-    <ClCompile Include="Source\Timer.cpp" />
-    <ClCompile Include="Source\Weapon.cpp" />
-    <ClCompile Include="Source\Window.cpp" />
-    <ClCompile Include="Source\Zhaak.cpp" />
-    <ClCompile Include="Source\Log.cpp" />
-    <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
-    <ClCompile Include="Source\Level2.cpp" />
-    <ClCompile Include="Source\BattleManager.cpp" />
-    <ClCompile Include="Source\Eli.cpp" />
-    <ClCompile Include="Source\NPC.cpp" />
-    <ClCompile Include="Source\Drunkard.cpp" />
-    <ClCompile Include="Source\Level3.cpp" />
-    <ClCompile Include="Source\Level4.cpp" />
-    <ClCompile Include="Source\GameTitle.cpp" />
-    <ClCompile Include="Source\EvilMummy.cpp" />
+    <ClCompile Include="Source\DialogueTree.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Audio.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityManager.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Textures.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneManager.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Map.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Window.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPC.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Character.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Drunkard.cpp">
+      <Filter>Character\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EvilMummy.cpp">
+      <Filter>Character\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Bandit.cpp">
+      <Filter>Character\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Eli.cpp">
+      <Filter>Character\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Zhaak.cpp">
+      <Filter>Character\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Amir.cpp">
+      <Filter>Character\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Settings.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Menu.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level4.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level3.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level2.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level1.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GamePause.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiSlider.cpp">
+      <Filter>Scenes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiManager.cpp">
+      <Filter>Scenes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiControlButton.cpp">
+      <Filter>Scenes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiCheckBox.cpp">
+      <Filter>Scenes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameTitle.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Intro.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Pathfinding.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Log.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PerfTimer.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Timer.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Accessory.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Armor.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Weapon.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Amir.h" />
-    <ClInclude Include="Source\Accessory.h" />
-    <ClInclude Include="Source\Armor.h" />
-    <ClInclude Include="Source\Bandit.h" />
-    <ClInclude Include="Source\Character.h" />
-    <ClInclude Include="Source\DialogueTree.h" />
-    <ClInclude Include="Source\Enemy.h" />
-    <ClInclude Include="Source\Entity.h" />
-    <ClInclude Include="Source\EntityManager.h" />
-    <ClInclude Include="Source\GamePause.h" />
-    <ClInclude Include="Source\GuiCheckBox.h" />
-    <ClInclude Include="Source\GuiControl.h" />
-    <ClInclude Include="Source\GuiControlButton.h" />
-    <ClInclude Include="Source\GuiManager.h" />
-    <ClInclude Include="Source\GuiSlider.h" />
-    <ClInclude Include="Source\Item.h" />
-    <ClInclude Include="Source\Level1.h" />
-    <ClInclude Include="Source\Map.h" />
-    <ClInclude Include="Source\Menu.h" />
-    <ClInclude Include="Source\Pathfinding.h" />
-    <ClInclude Include="Source\PerfTimer.h" />
-    <ClInclude Include="Source\Player.h" />
-    <ClInclude Include="Source\PQueue.h" />
-    <ClInclude Include="Source\Queue.h" />
-    <ClInclude Include="Source\Audio.h" />
-    <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\App.h" />
-    <ClInclude Include="Source\Module.h" />
-    <ClInclude Include="Source\Render.h" />
-    <ClInclude Include="Source\Scene.h" />
-    <ClInclude Include="Source\Intro.h" />
-    <ClInclude Include="Source\SceneManager.h" />
-    <ClInclude Include="Source\Settings.h" />
-    <ClInclude Include="Source\Textures.h" />
-    <ClInclude Include="Source\Timer.h" />
-    <ClInclude Include="Source\Weapon.h" />
-    <ClInclude Include="Source\Window.h" />
-    <ClInclude Include="Source\Defs.h" />
-    <ClInclude Include="Source\List.h" />
-    <ClInclude Include="Source\Log.h" />
-    <ClInclude Include="Source\Point.h" />
-    <ClInclude Include="Source\SString.h" />
-    <ClInclude Include="Source\DynArray.h" />
-    <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
-    <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
-    <ClInclude Include="Source\Zhaak.h" />
-    <ClInclude Include="Source\Level2.h" />
-    <ClInclude Include="Source\BattleManager.h" />
-    <ClInclude Include="Source\Eli.h" />
-    <ClInclude Include="Source\Animation.h" />
-    <ClInclude Include="Source\NPC.h" />
-    <ClInclude Include="Source\Drunkard.h" />
-    <ClInclude Include="Source\Level3.h" />
-    <ClInclude Include="Source\Level4.h" />
-    <ClInclude Include="Source\GameTitle.h" />
-    <ClInclude Include="Source\EvilMummy.h" />
+    <ClInclude Include="Source\DialogueTree.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Audio.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityManager.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiManager.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Textures.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneManager.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Map.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Module.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Window.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Character.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Drunkard.h">
+      <Filter>Character\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EvilMummy.h">
+      <Filter>Character\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Bandit.h">
+      <Filter>Character\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Eli.h">
+      <Filter>Character\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Zhaak.h">
+      <Filter>Character\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Amir.h">
+      <Filter>Character\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Settings.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Menu.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level4.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level3.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level2.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level1.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GamePause.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiSlider.h">
+      <Filter>Scenes\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControlButton.h">
+      <Filter>Scenes\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControl.h">
+      <Filter>Scenes\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiCheckBox.h">
+      <Filter>Scenes\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameTitle.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Intro.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Pathfinding.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Defs.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DynArray.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\List.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Log.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PerfTimer.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Point.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PQueue.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SString.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Queue.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Timer.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Accessory.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Armor.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Weapon.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{79d0a9b7-bf27-4337-bde6-60e1c4dfb2ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character">
+      <UniqueIdentifier>{3b6adabf-5f15-479a-9253-365e8bc16ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Enemies">
+      <UniqueIdentifier>{d1bae907-e201-4cfd-97b3-f9fdb2ec632a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Players">
+      <UniqueIdentifier>{5d9c47ba-ce56-4a28-a812-a54772d68d52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{e97cccf0-cdc1-4a1e-8e11-06e8257e7b3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\UI">
+      <UniqueIdentifier>{dc2371d5-8bc7-46f4-ad3a-fc6e7c6c3034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{2ce45efe-731e-4bee-a0ce-4668da72ce32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items">
+      <UniqueIdentifier>{e34fe8ff-c6bd-408c-a73a-2c76ed234f0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

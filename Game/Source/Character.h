@@ -44,6 +44,7 @@ enum class CombatState
 	MOVING,
 	ATTACKING,
 	DEAD,
+	MOVEMENT,
 	NONE
 };
 

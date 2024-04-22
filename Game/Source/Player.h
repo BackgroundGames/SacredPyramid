@@ -19,7 +19,7 @@ public:
 
 	bool OnGuiMouseClickEvent(Entity* control);
 
-	void FindAttackRange();
+	void FindRange(int range);
 
 	bool isValidTile(int x, int y);
 
@@ -30,7 +30,7 @@ public:
 	bool lastStand = false;
 	Entity* interacted = nullptr;
 
-	DynArray<iPoint> attackTiles;
+	DynArray<iPoint> rangeTiles;
 };
 
 #endif // __PLAYER_H__

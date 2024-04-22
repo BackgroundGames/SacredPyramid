@@ -361,7 +361,41 @@ CombatManager::~CombatManager()
 
 bool CombatManager::Start()
 {
-	return false;
+
+	int windowW, windowH;
+	windowW = app->entityManager->windowW;
+	windowH = app->entityManager->windowH;
+
+	//tp all characters
+	summoner->TpToCell(summoner->combatPos[0].x, summoner->combatPos[0].y);
+	for (size_t i = 0; i < players.size(); i++)
+	{
+		players[i]->TpToCell(summoner->combatPos[i + 1].x, summoner->combatPos[i + 1].y);
+		players[i]->ResetPath();
+	}
+
+	//prepare UI
+	// 25px per letter
+	SDL_Rect nextturnPos = { windowW * 0.3 - 350, (windowH * 0.8) - 75, 200,50 };
+	nextTurnButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 0, "END TURN", nextturnPos, app->sceneManager->currentScene);
+	nextTurnButton->animated = false;
+	nextTurnButton->debug = true;
+
+	SDL_Rect movePos = { windowW * 0.3 - 350, windowH * 0.8, 100,50 };
+	moveButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "MOVE", movePos, app->sceneManager->currentScene);
+	moveButton->animated = false;
+	moveButton->debug = true;
+
+	SDL_Rect attackPos = { windowW * 0.3 - 350, (windowH * 0.8) + 75, 150,50 };
+	attackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "ATTACK", attackPos, app->sceneManager->currentScene);
+	attackButton->animated = false;
+	attackButton->debug = true;
+
+	//start fisrt turn
+	CombatList[0]->combatState = CombatState::IDLE;
+	startTime = SDL_GetTicks();
+
+	return true;
 }
 
 bool CombatManager::Update(float dt)
@@ -461,6 +495,7 @@ void CombatManager::EndCombat()
 {
 	//UI
 	app->guiManager->DeleteGuiControl(nextTurnButton);
+	app->guiManager->DeleteGuiControl(moveButton);
 	app->guiManager->DeleteGuiControl(attackButton);
 	app->guiManager->CleanUp();
 
@@ -570,30 +605,41 @@ void CombatManager::CheckIfCharDead()
 
 void CombatManager::UIEvent(int id)
 {
-	if (id == 0) {
-		currentCharacterTurn->combatState = CombatState::WAITING;
-		currentCharacterTurn = CombatList[NextTurn()];
-		currentCharacterTurn->combatState = CombatState::IDLE;
-		PreapareUINextTurn();
-	}
-	if (id == 1) {
-		if (currentCharacterTurn->combatState == CombatState::ATTACKING) {
+	if (currentCharacterTurn->combatState != CombatState::MOVING) {
+		if (id == 0) {
+			currentCharacterTurn->combatState = CombatState::WAITING;
+			currentCharacterTurn = CombatList[NextTurn()];
 			currentCharacterTurn->combatState = CombatState::IDLE;
-			dynamic_cast<Player*>(currentCharacterTurn)->attackTiles.Clear();
+			PreapareUINextTurn();
 		}
-		else {
-			currentCharacterTurn->combatState = CombatState::ATTACKING;
-			dynamic_cast<Player*>(currentCharacterTurn)->FindAttackRange();
+		if (id == 1) {
+			if (currentCharacterTurn->combatState == CombatState::ATTACKING) {
+				currentCharacterTurn->combatState = CombatState::IDLE;
+				dynamic_cast<Player*>(currentCharacterTurn)->rangeTiles.Clear();
+			}
+			else {
+				currentCharacterTurn->combatState = CombatState::ATTACKING;
+				dynamic_cast<Player*>(currentCharacterTurn)->rangeTiles.Clear();
+				dynamic_cast<Player*>(currentCharacterTurn)->FindRange(currentCharacterTurn->inventory.weapon.range);
+			}
 		}
-	}
-	if (id == 2) {
+		if (id == 2) {
+			if (currentCharacterTurn->combatState == CombatState::MOVEMENT) {
+				currentCharacterTurn->combatState = CombatState::IDLE;
+				dynamic_cast<Player*>(currentCharacterTurn)->rangeTiles.Clear();
+			}
+			else {
+				currentCharacterTurn->combatState = CombatState::MOVEMENT;
+				dynamic_cast<Player*>(currentCharacterTurn)->rangeTiles.Clear();
+				dynamic_cast<Player*>(currentCharacterTurn)->FindRange(currentCharacterTurn->stats.movement - currentCharacterTurn->movementUsed);
+			}
+		}
+		if (id == 3) {
 
-	}
-	if (id == 3) {
+		}
+		if (id == 4) {
 
-	}
-	if (id == 4) {
-
+		}
 	}
 	app->input->ResetMouseButtonState();
 }
@@ -603,10 +649,12 @@ void CombatManager::PreapareUINextTurn()
 	if (currentCharacterTurn->type != EntityType::PLAYER) {
 		nextTurnButton->active = false;
 		attackButton->active = false;
+		moveButton->active = false;
 	}
 	else {
 		nextTurnButton->active = true;
 		attackButton->active = true;
+		moveButton->active = true;
 	}
 }
 
@@ -618,33 +666,8 @@ void EntityManager::MakeStartCombatFade()
 		if (frameCount >= maxFadeFrames)
 		{
 			currentStep = Fade_StepFade::FROM_BLACKF;
-
-			//tp all characters
-			combatManager->summoner->TpToCell(combatManager->summoner->combatPos[0].x, combatManager->summoner->combatPos[0].y);
-			for (size_t i = 0; i < combatManager->players.size(); i++)
-			{
-				combatManager->players[i]->TpToCell(combatManager->summoner->combatPos[i + 1].x, combatManager->summoner->combatPos[i + 1].y);
-				combatManager->players[i]->ResetPath();
-			}
-
-			//prepare UI
-			// 25px per letter
-			SDL_Rect nextturnPos = { windowW *0.3 - 350, windowH * 0.8, 200,50 };
-			combatManager->nextTurnButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 0, "END TURN", nextturnPos, app->sceneManager->currentScene);
-			combatManager->nextTurnButton->animated = false;
-			combatManager->nextTurnButton->debug = true;
-
-			SDL_Rect attackPos = { windowW * 0.3 - 350, (windowH * 0.8) + 75, 150,50 };
-			combatManager->attackButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "ATTACK", attackPos, app->sceneManager->currentScene);
-			combatManager->attackButton->animated = false;
-			combatManager->attackButton->debug = true;
-
-			//play music
+			combatManager->Start();
 			app->audio->PlayMusic(config.attribute("audio").as_string(), 0);
-
-			//start fisrt turn
-			combatManager->CombatList[0]->combatState = CombatState::IDLE;
-			combatManager->startTime = SDL_GetTicks();
 			inCombat = true;
 		}
 	}

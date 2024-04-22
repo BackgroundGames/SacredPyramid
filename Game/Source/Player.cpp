@@ -38,6 +38,8 @@ bool Player::Start() {
 	ResetPath();
 	interacted = nullptr;
 
+	movementUsed = 0;
+
 	return true;
 }
 
@@ -270,7 +272,7 @@ bool Player::Update(float dt)
 
 		case CombatState::WAITING:
 			movementUsed = 0;
-			attackTiles.Clear();
+			rangeTiles.Clear();
 			move = false;
 			path.Clear();
 			break;
@@ -284,14 +286,6 @@ bool Player::Update(float dt)
 			}
 			else {
 				currentAnimation = &idleAnim;
-			}
-
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && (DistanceToTile(GetTile(), destination) <= (stats.movement - movementUsed)))
-			{
-				if (moveTo(destination)) {
-					combatState = CombatState::MOVING;
-					movementUsed += path.Count() - 1;
-				}
 			}
 
 			break;
@@ -317,24 +311,59 @@ bool Player::Update(float dt)
 
 		case CombatState::ATTACKING:
 
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
-			{
-				if (DistanceToTile(GetTile(), destination) <= (inventory.weapon.range)) {
+			if (DistanceToTile(GetTile(), destination) <= (inventory.weapon.range)) {
+				iPoint highlightedTileWorld = app->map->MapToWorld(destination.x, destination.y);
+				app->render->DrawTexture(selectionTex, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
 					app->entityManager->combatManager->CheckIfHit(destination, &inventory.weapon);
 					combatState = CombatState::IDLE;
-					attackTiles.Clear();
+					rangeTiles.Clear();
 					app->input->ResetMouseButtonState();
 				}
 			}
 
-			for (size_t i = 0; i < attackTiles.Count(); i++)
+			for (size_t i = 1; i < rangeTiles.Count(); i++)
 			{
-				iPoint highlightedTileWorld = app->map->MapToWorld(attackTiles[i].x, attackTiles[i].y);
-				app->render->DrawTexture(selectionTex, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
+				iPoint highlightedTileWorld = iPoint(rangeTiles[i].x, rangeTiles[i].y);
+				if (app->map->pathfinding->IsWalkable(highlightedTileWorld)) {
+					highlightedTileWorld = app->map->MapToWorld(rangeTiles[i].x, rangeTiles[i].y);
+					app->render->DrawTexture(selectionTex, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
+				}
 			}
 
 			break;
 		case CombatState::DEAD:
+			break;
+		case CombatState::MOVEMENT:
+
+			if (DistanceToTile(GetTile(), destination) <= (stats.movement - movementUsed)) {
+				if (app->map->pathfinding->CreatePath(GetTile(), destination) != -1) {
+					path.Clear();
+					for (size_t i = 1; i < app->map->pathfinding->GetLastPath()->Count(); i++)
+					{
+						path.PushBack(*app->map->pathfinding->GetLastPath()->At(i));
+					}
+					DebugPath();
+					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
+						if (moveTo(destination)) {
+							combatState = CombatState::MOVING;
+							movementUsed += path.Count() - 1;
+							rangeTiles.Clear();
+							app->input->ResetMouseButtonState();
+						}
+					}
+				}
+			}
+
+			for (size_t i = 1; i < rangeTiles.Count(); i++)
+			{
+				iPoint highlightedTileWorld = iPoint(rangeTiles[i].x, rangeTiles[i].y);
+				if (app->map->pathfinding->IsWalkable(highlightedTileWorld)) {
+					highlightedTileWorld = app->map->MapToWorld(rangeTiles[i].x, rangeTiles[i].y);
+					app->render->DrawTexture(selectionTex, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
+				}
+			}
+
 			break;
 		case CombatState::NONE:
 			break;
@@ -403,7 +432,7 @@ bool Player::OnGuiMouseClickEvent(Entity* control)
 	return false;
 }
 
-void Player::FindAttackRange()
+void Player::FindRange(int range)
 {
 	vector<vector<bool>> visited(app->map->GetMapTilesWidth(), vector<bool>(app->map->GetMapTilesHeight(), false));
 	queue<iPoint> q;
@@ -420,7 +449,7 @@ void Player::FindAttackRange()
 		q.pop();
 
 		// Agregar el tile actual a la lista de tiles de ataque
-		attackTiles.PushBack(currentTile);
+		rangeTiles.PushBack(currentTile);
 
 		// Explorar los tiles adyacentes
 		for (int i = 0; i < 4; ++i) {
@@ -430,7 +459,7 @@ void Player::FindAttackRange()
 			// Verificar si el nuevo tile está dentro del mapa y no ha sido visitado
 			if (isValidTile(newX, newY) && !visited[newX][newY]) {
 				// Verificar si el nuevo tile está dentro del alcance del ataque
-				if (abs(newX - GetTile().x) + abs(newY - GetTile().y) <= inventory.weapon.range) {
+				if (abs(newX - GetTile().x) + abs(newY - GetTile().y) <= range) {
 					q.push({ newX, newY });
 					visited[newX][newY] = true;
 				}
