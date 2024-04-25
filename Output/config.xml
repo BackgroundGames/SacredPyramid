@@ -202,7 +202,7 @@
 			<node id="0" speaker="6" text="Who dares to break into the Sacred Pyramid of Ra?">
 				<option text="..." returnCode="0" pnode="1"/>
 			</node>
-			<node id="1" speaker="6" text="Who dares awaken the great Sphinx, Guardian of everything and everyone!">
+			<node id="1" speaker="6" text="Who dares awaken the great Sphinx, Guardian of every thing and everyone!">
 				<option text="- Huh?" returnCode="0" pnode="2"/>
 			</node>
 			<node id="2" speaker="1" text="Ah!">
