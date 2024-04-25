@@ -36,6 +36,10 @@ bool NPC::Start()
 	if (id == 3) {
 		parametersAnim = app->configFile.child("config").child("animations").child("esfinge");
 	}
+	if (id == 4)
+	{
+		parametersAnim = app->configFile.child("config").child("animations").child("drunkard");
+	}
 
 	Character::Start();
 
@@ -94,6 +98,10 @@ bool NPC::Update(float dt)
 		}
 		if (id == 3) {
 			app->dialogueTree->performDialogue("dialogue5");
+		}
+		if (id == 4)
+		{
+
 		}
 		
 		startTalking = false;

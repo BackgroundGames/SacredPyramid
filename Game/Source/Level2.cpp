@@ -9,6 +9,7 @@
 #include "Item.h"
 #include "DialogueTree.h"
 #include "NPC.h"
+#include "Level1.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -117,7 +118,10 @@ bool Level2::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->LoadRequest();
 
 	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	{
+		app->sceneManager->level1->hasEntredTabern = true;
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level1);
+	}
 
 	return true;
 }

@@ -27,21 +27,22 @@
 		<gameTitle texturePath="Assets/Textures/gameTitle.png" audio="Assets/Audio/Fx/Flute Sound Effect.wav"/>
 		<menu texturePath="Assets/Textures/Menu Piramide.jpeg" audio="Assets\Audio\Music\Main_Menu.ogg"/>
 		<level1 audio="Assets\Audio\Music\Town.ogg">
-			<eli x="37" y="29"/>
+			<eli x="37" y="39"/>
 			<enemy x="25" y="25" cx="25" cy="25" id="1" p1x="20" p1y="25" p2x="20" p2y="26">
 				<minion x="25" y="26" id="1"/>
 			</enemy>
-			<npc x="34" y="17" id="1"/>
-			<map path="Assets/Maps/" name="Mapa 1 desierto.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
+			<npc x="34" y="27" id="1"/>
+			<npc x="36" y="23" id="4"/>
+			<map path="Assets/Maps/" name="Mapa 1 Desierto.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 		</level1>
 		<level2 audio="Assets\Audio\Music\Town.ogg">
-			<map path="Assets/Maps/" name="Mapa 1.5 Taberna.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
+			<map path="Assets/Maps/" name="Mapa 2 Taberna.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 			<eli x="15" y="9"/>
 			<npc x="11" y="4" id="2"/>
 			<npc x="15" y="15" id="0"/>
 		</level2>
 		<level3 audio="Assets\Audio\Music\Town.ogg">
-			<map path="Assets/Maps/" name="Mapa 2 Puente.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
+			<map path="Assets/Maps/" name="Mapa 3 Puente.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 			<zhaak x="14" y="62"/>
 			<eli x="14" y="63"/>
 			<enemy x="16" y="57" cx="19" cy="61" id="0" p1x="17" p1y="60" p2x="17" p2y="58">
@@ -52,7 +53,7 @@
 			<npc x="15" y="7" id="3"/>
 		</level3>
 		<level4 audio="Assets\Audio\Music\Main_Menu.ogg">
-			<map path="Assets/Maps/" name="Mapa 3 Pyramid.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
+			<map path="Assets/Maps/" name="Mapa 4 Pyramid.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
 			<zhaak x="4" y="4"/>
 			<eli x="3" y="4"/>
 			<enemy x="15" y="4" cx="18" cy="4" id="2" p1x="13" p1y="4" p2x="12" p2y="3">
