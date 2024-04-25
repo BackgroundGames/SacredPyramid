@@ -40,13 +40,14 @@ bool Level1::Start()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	app->map->name = sceneconfig.child("map").attribute("name").as_string();
-	app->map->path = sceneconfig.child("map").attribute("path").as_string();
-	app->render->SetSelectionTex(app->tex->Load(sceneconfig.child("map").attribute("selectionPath").as_string()));
-	app->map->InitMap();
+	if (app->sceneManager->previousScene != (Scene*)app->sceneManager->menu &&
+		app->sceneManager->previousScene != (Scene*)app->sceneManager->intro) {
 
-	if (hasEntredTabern)
-	{
+		app->map->name = "Mapa 1.75 desierto.tmx";
+		app->map->path = "Assets/Maps/";
+		app->render->SetSelectionTex(app->tex->Load("Assets/Maps/tileSelectionIso128.png"));
+		app->map->InitMap();
+
 		zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ZHAAK);
 		players.push_back(zhaak);
 		//Assigns the XML node to a member in player
@@ -85,8 +86,13 @@ bool Level1::Start()
 		}
 
 	}
-	else
-	{
+	else {
+
+		app->map->name = sceneconfig.child("map").attribute("name").as_string();
+		app->map->path = sceneconfig.child("map").attribute("path").as_string();
+		app->render->SetSelectionTex(app->tex->Load(sceneconfig.child("map").attribute("selectionPath").as_string()));
+		app->map->InitMap();
+
 		eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
 		players.push_back(eli);
 		//Assigns the XML node to a member in player

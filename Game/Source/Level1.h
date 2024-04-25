@@ -43,13 +43,12 @@ public:
 
 	void LockCamera();
 
-	bool hasEntredTabern = false;
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	SDL_Texture* mouseTileTex = nullptr;
-	iPoint tabernTile = { 16,25 };
+	iPoint tabernTile = { 16,15 };
 	iPoint puenteTile = { 37,11 };
 };
 
