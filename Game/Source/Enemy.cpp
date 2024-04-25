@@ -160,6 +160,7 @@ bool Enemy::Update(float dt)
 				hasAttacked = true;
 			}
 			else {
+				app->entityManager->combatManager->UpdateNavigation(pFocus);
 				app->map->pathfinding->CreatePath(GetTile(), pFocus->GetTile());
 				if (distanceFromPlayer > (aviableMovement + inventory.weapon.range)) {
 					moveTo(*app->map->pathfinding->GetLastPath()->At(aviableMovement));

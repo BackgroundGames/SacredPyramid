@@ -296,14 +296,6 @@ void EntityManager::StartCombat(vector<Entity*> &enemies, Entity* summoner)
 
 	combatManager->currentCharacterTurn = (Character*)combatManager->CombatList[0];
 
-	/*for (size_t i = 0; i < combatManager->CombatList.size(); i++)
-	{
-		if (combatManager->CombatList[i] != combatManager->currentCharacterTurn) {
-			int pos = (combatManager->CombatList[i]->GetTile().y * app->map->GetMapTilesWidth()) + combatManager->CombatList[i]->GetTile().x;
-			app->map->pathfinding->map[pos] = 0;
-		}
-	}*/
-	
 }
 
 bool EntityManager::Update(float dt)
@@ -395,6 +387,8 @@ bool CombatManager::Start()
 	CombatList[0]->combatState = CombatState::IDLE;
 	startTime = SDL_GetTicks();
 
+	UpdateNavigation();
+
 	return true;
 }
 
@@ -413,28 +407,11 @@ bool CombatManager::Update(float dt)
 		currentCharacterTurn = CombatList[NextTurn()];
 		currentCharacterTurn->combatState = CombatState::IDLE;
 		PreapareUINextTurn();
+		app->sceneManager->currentScene->cameraFocus = currentCharacterTurn;
 	}
 
 	for (int i = 0; i < CombatList.size(); i++)
 	{
-
-			/*for (size_t i = 0; i < pathfindingBlock.size(); i++)
-			{
-				app->map->pathfinding->map[pathfindingBlock[i]] = 1;
-			}
-			pathfindingBlock.clear();*/
-
-			/*for (size_t i = 0; i < CombatList.size(); i++)
-			{
-				if (CombatList[i] != currentCharacterTurn) {
-					pathfindingBlock.push_back((CombatList[i]->GetTile().y * app->map->GetMapTilesWidth()) + CombatList[i]->GetTile().x);
-					int aux = pathfindingBlock.back();
-					app->map->pathfinding->map[aux] = 0;
-				}
-			}*/
-
-		app->sceneManager->currentScene->cameraFocus = currentCharacterTurn;
-
 		CombatList[i]->Update(dt);
 	}
 
@@ -498,6 +475,8 @@ void CombatManager::EndCombat()
 	app->guiManager->DeleteGuiControl(moveButton);
 	app->guiManager->DeleteGuiControl(attackButton);
 	app->guiManager->CleanUp();
+
+	ClearNavigation();
 
 	// victory
 	for (int i = 0; i < players.size(); i++)
@@ -618,6 +597,7 @@ void CombatManager::UIEvent(int id)
 				dynamic_cast<Player*>(currentCharacterTurn)->rangeTiles.Clear();
 			}
 			else {
+				ClearNavigation();
 				currentCharacterTurn->combatState = CombatState::ATTACKING;
 				dynamic_cast<Player*>(currentCharacterTurn)->rangeTiles.Clear();
 				dynamic_cast<Player*>(currentCharacterTurn)->FindRange(currentCharacterTurn->inventory.weapon.range);
@@ -629,6 +609,7 @@ void CombatManager::UIEvent(int id)
 				dynamic_cast<Player*>(currentCharacterTurn)->rangeTiles.Clear();
 			}
 			else {
+				UpdateNavigation();
 				currentCharacterTurn->combatState = CombatState::MOVEMENT;
 				dynamic_cast<Player*>(currentCharacterTurn)->rangeTiles.Clear();
 				dynamic_cast<Player*>(currentCharacterTurn)->FindRange(currentCharacterTurn->stats.movement - currentCharacterTurn->movementUsed);
@@ -646,6 +627,7 @@ void CombatManager::UIEvent(int id)
 
 void CombatManager::PreapareUINextTurn()
 {
+	ClearNavigation();
 	if (currentCharacterTurn->type != EntityType::PLAYER) {
 		nextTurnButton->active = false;
 		attackButton->active = false;
@@ -656,6 +638,27 @@ void CombatManager::PreapareUINextTurn()
 		attackButton->active = true;
 		moveButton->active = true;
 	}
+}
+
+void CombatManager::UpdateNavigation(Entity* pFocus)
+{
+	for (size_t i = 0; i < CombatList.size(); i++)
+	{
+		if (CombatList[i] != currentCharacterTurn && pFocus != CombatList[i]) {
+			pathfindingBlock.push_back((CombatList[i]->GetTile().y * app->map->GetMapTilesWidth()) + CombatList[i]->GetTile().x);
+			int aux = pathfindingBlock.back();
+			app->map->pathfinding->map[aux] = 0;
+		}
+	}
+}
+
+void CombatManager::ClearNavigation()
+{
+	for (size_t i = 0; i < pathfindingBlock.size(); i++)
+	{
+		app->map->pathfinding->map[pathfindingBlock[i]] = 1;
+	}
+	pathfindingBlock.clear();
 }
 
 void EntityManager::MakeStartCombatFade()

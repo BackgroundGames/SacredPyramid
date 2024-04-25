@@ -337,15 +337,15 @@ bool Player::Update(float dt)
 		case CombatState::MOVEMENT:
 
 			if (DistanceToTile(GetTile(), destination) <= (stats.movement - movementUsed)) {
-				if (app->map->pathfinding->CreatePath(GetTile(), destination) != -1) {
+				if (app->map->pathfinding->CreatePath(GetTile(), destination) != -1 && app->map->pathfinding->GetLastPath()->Count() - 1 <= (stats.movement - movementUsed)) {
 					path.Clear();
-					for (size_t i = 1; i < app->map->pathfinding->GetLastPath()->Count(); i++)
+					for (size_t i = 1; i < app->map->pathfinding->GetLastPath()->Count() && i <= (stats.movement - movementUsed); i++)
 					{
 						path.PushBack(*app->map->pathfinding->GetLastPath()->At(i));
 					}
 					DebugPath();
 					if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
-						if (moveTo(destination)) {
+						if (moveTo(*path.At(path.Count() -1))) {
 							combatState = CombatState::MOVING;
 							movementUsed += path.Count() - 1;
 							rangeTiles.Clear();
@@ -358,7 +358,8 @@ bool Player::Update(float dt)
 			for (size_t i = 1; i < rangeTiles.Count(); i++)
 			{
 				iPoint highlightedTileWorld = iPoint(rangeTiles[i].x, rangeTiles[i].y);
-				if (app->map->pathfinding->IsWalkable(highlightedTileWorld)) {
+				app->map->pathfinding->CreatePath(GetTile(), highlightedTileWorld);
+				if (app->map->pathfinding->IsWalkable(highlightedTileWorld) && app->map->pathfinding->GetLastPath()->Count() - 1 <= (stats.movement - movementUsed)) {
 					highlightedTileWorld = app->map->MapToWorld(rangeTiles[i].x, rangeTiles[i].y);
 					app->render->DrawTexture(selectionTex, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
 				}

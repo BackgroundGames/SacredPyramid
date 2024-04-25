@@ -56,6 +56,10 @@ public:
 
 	void PreapareUINextTurn();
 
+	void UpdateNavigation(Entity* pFocus = nullptr);
+
+	void ClearNavigation();
+
 public:
 
 	Enemy* summoner = nullptr;
