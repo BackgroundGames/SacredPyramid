@@ -138,6 +138,7 @@ public:
 	//debug
 	SDL_Rect prect;
 	SDL_Texture* selectionTex = NULL;
+	SDL_Texture* selectionTexR = NULL;
 
 	//anim
 	Animation* currentAnimation = nullptr;

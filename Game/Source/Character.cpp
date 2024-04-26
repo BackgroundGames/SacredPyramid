@@ -31,6 +31,7 @@ bool Character::Start()
 	}
 
 	selectionTex = app->render->GetSelectionTex();
+	selectionTexR = app->tex->Load("Assets/Maps/tileSelectionIso128r.png");
 
 	PosState = Direction::DR;
 

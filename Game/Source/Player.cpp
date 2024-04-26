@@ -363,6 +363,10 @@ bool Player::Update(float dt)
 					highlightedTileWorld = app->map->MapToWorld(rangeTiles[i].x, rangeTiles[i].y);
 					app->render->DrawTexture(selectionTex, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
 				}
+				else if(app->map->pathfinding->IsWalkable(highlightedTileWorld)) {
+					highlightedTileWorld = app->map->MapToWorld(rangeTiles[i].x, rangeTiles[i].y);
+					app->render->DrawTexture(selectionTexR, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
+				}
 			}
 
 			break;
