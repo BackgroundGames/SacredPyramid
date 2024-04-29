@@ -11,7 +11,7 @@ public:
 
 	Zhaak();
 
-	Zhaak(Stats stats, Equipment inventory);
+	Zhaak(Stats stats, Inventory inventory);
 
 	~Zhaak();
 

@@ -108,7 +108,7 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 	Entity* entity = nullptr;
 
 	Stats stats;
-	Equipment inventory;
+	Inventory inventory;
 
 	//Instantiate entity according to the type and add the new entity to the list of Entities
 	switch (type)

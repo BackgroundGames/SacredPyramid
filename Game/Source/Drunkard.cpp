@@ -13,7 +13,7 @@ Drunkard::Drunkard()
 	inventory.weapon.damage = 1;
 }
 
-Drunkard::Drunkard(Stats stats, Equipment inventory)
+Drunkard::Drunkard(Stats stats, Inventory inventory)
 {
 	name.Create("drunkard");
 	this->stats = stats;

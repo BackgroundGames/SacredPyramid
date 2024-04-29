@@ -11,7 +11,7 @@ Eli::Eli()
 	stats.health = 3;
 }
 
-Eli::Eli(Stats stats, Equipment inventory)
+Eli::Eli(Stats stats, Inventory inventory)
 {
 	name.Create("eli");
 	this->stats = stats;

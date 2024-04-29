@@ -11,7 +11,7 @@ public:
 
 	Eli();
 
-	Eli(Stats stats, Equipment inventory);
+	Eli(Stats stats, Inventory inventory);
 
 	~Eli();
 

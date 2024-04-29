@@ -13,7 +13,7 @@ Bandit::Bandit()
 	inventory.weapon.damage = 1;
 }
 
-Bandit::Bandit(Stats stats, Equipment inventory)
+Bandit::Bandit(Stats stats, Inventory inventory)
 {
 	name.Create("bandit");
 	this->stats = stats;

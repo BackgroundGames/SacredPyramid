@@ -114,17 +114,17 @@
     <ClCompile Include="Source\Timer.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Accessory.cpp">
-      <Filter>Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Armor.cpp">
-      <Filter>Items</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Item.cpp">
       <Filter>Items</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Accessory.cpp">
+      <Filter>Items\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Armor.cpp">
+      <Filter>Items\Equipment</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Weapon.cpp">
-      <Filter>Items</Filter>
+      <Filter>Items\Equipment</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,17 +279,17 @@
     <ClInclude Include="Source\Timer.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Accessory.h">
-      <Filter>Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Armor.h">
-      <Filter>Items</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Item.h">
       <Filter>Items</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Accessory.h">
+      <Filter>Items\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Armor.h">
+      <Filter>Items\Equipment</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Weapon.h">
-      <Filter>Items</Filter>
+      <Filter>Items\Equipment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +316,9 @@
     </Filter>
     <Filter Include="Items">
       <UniqueIdentifier>{e34fe8ff-c6bd-408c-a73a-2c76ed234f0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items\Equipment">
+      <UniqueIdentifier>{f8dd6029-202b-42c1-a091-25785be3199f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@ EvilMummy::EvilMummy()
 	inventory.weapon.damage = 1;
 }
 
-EvilMummy::EvilMummy(Stats stats, Equipment inventory)
+EvilMummy::EvilMummy(Stats stats, Inventory inventory)
 {
 	name.Create("evilMummy");
 	this->stats = stats;

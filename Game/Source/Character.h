@@ -23,7 +23,7 @@ struct Stats
 	uint movement = 3;
 };
 
-struct Equipment
+struct Inventory
 {
 	Weapon weapon;
 	Armor armor;
@@ -117,7 +117,7 @@ public:
 public:
 	//Declare character parameters
 	Stats stats;
-	Equipment inventory;
+	Inventory inventory;
 	float speed = 0.2f;
 	float velocity = 1;
 

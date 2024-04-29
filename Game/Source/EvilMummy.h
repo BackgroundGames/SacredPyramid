@@ -7,7 +7,7 @@ class EvilMummy : public Enemy
 {
 public:
 	EvilMummy();
-	EvilMummy(Stats stats, Equipment inventory);
+	EvilMummy(Stats stats, Inventory inventory);
 
 	~EvilMummy();
 

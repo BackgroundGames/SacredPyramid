@@ -11,7 +11,7 @@ Zhaak::Zhaak()
 	stats.health = 3;
 }
 
-Zhaak::Zhaak(Stats stats, Equipment inventory)
+Zhaak::Zhaak(Stats stats, Inventory inventory)
 {
 	name.Create("zhaak");
 	this->stats = stats;
