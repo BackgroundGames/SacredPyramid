@@ -27,7 +27,10 @@ bool Item::Awake() {
 bool Item::Start() {
 
 	//initilize textures
-	texture = app->tex->Load(texturePath);
+	if (texture == nullptr)
+	{
+		texture = app->tex->Load(texturePath);
+	}
 
 	return true;
 }
@@ -41,5 +44,7 @@ bool Item::Update(float dt)
 
 bool Item::CleanUp()
 {
+	app->tex->UnLoad(texture);
+	texture = nullptr;
 	return true;
 }

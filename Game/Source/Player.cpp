@@ -11,6 +11,7 @@
 #include "NPC.h"
 #include "Enemy.h"
 #include "GamePause.h"
+#include "InventoryMenu.h"
 #include <queue>
 
 Player::Player()
@@ -384,6 +385,13 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->sceneManager->currentScene->settings == false) {
 		app->sceneManager->OpenGamePause();
+		previousEState = exploringState;
+		exploringState = ExploringState::NONE;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	{
+		app->sceneManager->OpenInventory();
 		previousEState = exploringState;
 		exploringState = ExploringState::NONE;
 	}

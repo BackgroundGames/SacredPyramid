@@ -12,6 +12,7 @@
 #include "GameTitle.h"
 #include "Menu.h"
 #include "GamePause.h"
+#include "InventoryMenu.h"
 #include "Map.h"
 
 
@@ -35,6 +36,7 @@ SceneManager::SceneManager()
 	level4->sceneType = SceneType::LEVEL4;
 	settings = new Settings();
 	gamePause = new GamePause();
+	inventoryMenu = new InventoryMenu();
 
 	scenes.Add(intro);
 	scenes.Add(gameTitle);
@@ -43,6 +45,7 @@ SceneManager::SceneManager()
 	scenes.Add(level2);
 	scenes.Add(level3);
 	scenes.Add(level4);
+	scenes.Add(inventoryMenu);
 	scenes.Add(gamePause);
 	scenes.Add(settings);
 }
@@ -282,6 +285,13 @@ bool SceneManager::SaveState(pugi::xml_node node)
 	return ret;
 }
 
+void SceneManager::OpenGamePause()
+{
+	currentScene->settings = true;
+	gamePause->Start();
+	gamePause->active = true;
+}
+
 void SceneManager::CloseGamePause()
 {
 	gamePause->CleanUp();
@@ -289,11 +299,16 @@ void SceneManager::CloseGamePause()
 	currentScene->settings = false;
 }
 
-void SceneManager::OpenGamePause()
+void SceneManager::OpenInventory()
 {
-	currentScene->settings = true;
-	gamePause->Start();
-	gamePause->active = true;
+	inventoryMenu->Start();
+	inventoryMenu->active = true;
+}
+
+void SceneManager::CloseInventory()
+{
+	inventoryMenu->CleanUp();
+	inventoryMenu->active = false;
 }
 
 void SceneManager::CleanAllLevels() {

@@ -40,6 +40,8 @@ enum class EnemyType
 
 enum class ItemType
 {
+	QUESTITEM,
+	CONSUMABLE,
 	WEAPON,
 	ARMOR,
 	ACCESSORY,

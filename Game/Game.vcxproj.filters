@@ -117,6 +117,12 @@
     <ClCompile Include="Source\Item.cpp">
       <Filter>Items</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Consumable.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\QuestItem.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Accessory.cpp">
       <Filter>Items\Equipment</Filter>
     </ClCompile>
@@ -125,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="Source\Weapon.cpp">
       <Filter>Items\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InventoryMenu.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +291,12 @@
     <ClInclude Include="Source\Item.h">
       <Filter>Items</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Consumable.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\QuestItem.h">
+      <Filter>Items</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Accessory.h">
       <Filter>Items\Equipment</Filter>
     </ClInclude>
@@ -290,6 +305,9 @@
     </ClInclude>
     <ClInclude Include="Source\Weapon.h">
       <Filter>Items\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InventoryMenu.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -318,7 +336,7 @@
       <UniqueIdentifier>{e34fe8ff-c6bd-408c-a73a-2c76ed234f0f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Items\Equipment">
-      <UniqueIdentifier>{f8dd6029-202b-42c1-a091-25785be3199f}</UniqueIdentifier>
+      <UniqueIdentifier>{88ff1aba-e44b-4378-b051-98cc8bb7ecf6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

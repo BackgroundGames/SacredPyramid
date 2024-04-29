@@ -17,6 +17,7 @@ class GameTitle;
 class Menu;
 class Settings;
 class GamePause;
+class InventoryMenu;
 
 enum Fade_Step
 {
@@ -60,9 +61,13 @@ public:
 
 	void CloseSettings();
 
+	void OpenGamePause();
+	
 	void CloseGamePause();
 
-	void OpenGamePause();
+	void OpenInventory();
+
+	void CloseInventory();
 
 	void CleanAllLevels();
 
@@ -83,6 +88,7 @@ public:
 	Menu* menu;
 	Settings* settings;
 	GamePause* gamePause;
+	InventoryMenu* inventoryMenu;
 
 	uint windowW, windowH;
 

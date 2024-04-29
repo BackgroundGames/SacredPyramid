@@ -43,12 +43,9 @@ bool Character::Start()
 bool Character::Update(float dt)
 {
 	//if player is requested to move, do movement till finish
-	if (move)
+	if (move && app->debug) 
 	{
-		// debug the path
-		if (app->debug) {
-			DebugPath();
-		}
+		DebugPath();
 	}
 
 	currentAnimation->Update();
