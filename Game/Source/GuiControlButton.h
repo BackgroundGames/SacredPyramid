@@ -12,6 +12,7 @@ class GuiControlButton : public GuiControl
 public:
 
 	GuiControlButton(uint32 id, SDL_Rect bounds, const char* text);
+	GuiControlButton(uint32 id, SDL_Rect section, SDL_Texture* texture);
 	virtual ~GuiControlButton();
 
 	// Called each loop iteration
@@ -24,6 +25,7 @@ private:
 
 	bool canClick = true;
 	bool drawBasic = false;
+	bool isTextureButton = false;
 	bool anim = false;
 	float animW = 0;
 	float animH = 0;

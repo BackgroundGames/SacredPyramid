@@ -26,6 +26,7 @@
 		<intro texturePath="Assets/Textures/bgg.jpg" audio="Assets/Audio/Fx/logo.wav"/>
 		<gameTitle texturePath="Assets/Textures/gameTitle.png" audio="Assets/Audio/Fx/Flute Sound Effect.wav"/>
 		<menu texturePath="Assets/Textures/Menu Piramide.jpeg" audio="Assets\Audio\Music\Main_Menu.ogg"/>
+		<inventory texturePath="Assets/Textures/inventory_placeholder.png" exitButton="Assets/Textures/check.png"/>
 		<level1 audio="Assets\Audio\Music\Town.ogg">
 			<eli x="37" y="29"/>
 			<enemy x="25" y="25" cx="25" cy="25" id="1" p1x="20" p1y="25" p2x="20" p2y="26">

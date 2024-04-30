@@ -13,6 +13,16 @@ GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text)
 	drawBasic = false;
 }
 
+GuiControlButton::GuiControlButton(uint32 id, SDL_Rect section, SDL_Texture* texture) : GuiControl(GuiControlType::BUTTON, id)
+{
+	this->section = section;
+	this->texture = texture;
+
+	canClick = true;
+	drawBasic = false;
+	isTextureButton = true;
+}
+
 GuiControlButton::~GuiControlButton()
 {
 
@@ -45,60 +55,138 @@ bool GuiControlButton::Update(float dt)
 			state = GuiControlState::NORMAL;
 		}
 
-		//Draw the button according the GuiControl State
-		switch (state)
+		if (isTextureButton)
 		{
-		case GuiControlState::DISABLED:
+			//Draw the button according the GuiControl State
+			switch (state)
+			{
+			case GuiControlState::DISABLED:
+				break;
 
-			break;
-		case GuiControlState::NORMAL:
-			if (debug) {
-				app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
-			}
-			if (app->sceneManager->currentScene == (Scene*)app->sceneManager->menu) {
-				app->render->DrawText(text.GetString(), bounds.x - (int)animW, bounds.y - (int)animH, bounds.w + (int)animW * 2, bounds.h + (int)animH * 2, 255, 255, 255, 1);
-			}
-			else {
-				app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, 0, 0, 0);
-			}
-			anim = false;
-			animW = 0;
-			animH = 0;
-			break;
-		case GuiControlState::FOCUSED:
-			if (debug) {
-				app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
-			}
-			app->render->DrawText(text.GetString(), bounds.x - (int)animW, bounds.y - (int)animH, bounds.w + (int)animW * 2, bounds.h + (int)animH * 2, 255, 255, 255);
-			if (animated) {
-				if (!anim) {
-					animW += animSpeed * dt;
-					animH += animSpeed * dt;
-					if (animW >= 10) {
-						anim = !anim;
+			case GuiControlState::NORMAL:
+				
+				if (debug) 
+				{
+					app->render->DrawRectangle(section, 239, 184, 16, 255, true, false);
+				}
+
+				app->render->DrawTexture(texture, section.x, section.y, &section);
+			
+				anim = false;
+				animW = 0;
+				animH = 0;
+				break;
+
+			case GuiControlState::FOCUSED:
+
+				if (debug) 
+				{
+					app->render->DrawRectangle(section, 239, 184, 16, 255, true, false);
+				}
+
+				app->render->DrawTexture(texture, section.x +10, section.y +10, &section);
+				
+				if (animated)
+				{
+					if (!anim) 
+					{
+						animW += animSpeed * dt;
+						animH += animSpeed * dt;
+
+						if (animW >= 10) 
+							anim = !anim;
 					}
+					else 
+					{
+						animW -= animSpeed * dt;
+						animH -= animSpeed * dt;
+
+						if (animW <= 0) 
+							anim = !anim;
+					}
+				}
+				break;
+
+			case GuiControlState::PRESSED:
+
+				if (debug) 
+				{
+					app->render->DrawRectangle(section, 239, 184, 16, 255, true, false);
+				}
+
+				app->render->DrawTexture(texture, section.x-10, section.y-10, &section);
+				break;
+			}
+		}
+		else
+		{
+			//Draw the button according the GuiControl State
+			switch (state)
+			{
+			case GuiControlState::DISABLED:
+				break;
+
+			case GuiControlState::NORMAL:
+
+				if (debug) {
+					app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
+				}
+
+				if (app->sceneManager->currentScene == (Scene*)app->sceneManager->menu) {
+					app->render->DrawText(text.GetString(), bounds.x - (int)animW, bounds.y - (int)animH, bounds.w + (int)animW * 2, bounds.h + (int)animH * 2, 255, 255, 255, 1);
 				}
 				else {
-					animW -= animSpeed * dt;
-					animH -= animSpeed * dt;
-					if (animW <= 0) {
-						anim = !anim;
+					app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, 0, 0, 0);
+				}
+
+				anim = false;
+				animW = 0;
+				animH = 0;
+				break;
+
+			case GuiControlState::FOCUSED:
+
+				if (debug) {
+					app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
+				}
+
+				app->render->DrawText(text.GetString(), bounds.x - (int)animW, bounds.y - (int)animH, bounds.w + (int)animW * 2, bounds.h + (int)animH * 2, 255, 255, 255);
+
+				if (animated) {
+					if (!anim) {
+						animW += animSpeed * dt;
+						animH += animSpeed * dt;
+						if (animW >= 10) {
+							anim = !anim;
+						}
+					}
+					else {
+						animW -= animSpeed * dt;
+						animH -= animSpeed * dt;
+						if (animW <= 0) {
+							anim = !anim;
+						}
 					}
 				}
+				break;
+
+			case GuiControlState::PRESSED:
+
+				if (debug) {
+					app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
+				}
+
+				app->render->DrawText(text.GetString(), bounds.x + 5, bounds.y + 5, bounds.w - 10, bounds.h - 10, 125, 125, 125);
+				break;
 			}
-			break;
-		case GuiControlState::PRESSED:
-			if (debug) {
-				app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
-			}
-			app->render->DrawText(text.GetString(), bounds.x + 5, bounds.y + 5, bounds.w - 10, bounds.h - 10, 125, 125, 125);
-			break;
 		}
 
 	}
-	else {
+	else 
+{
 		if (debug)
-		app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
+			app->render->DrawRectangle(bounds, 239, 184, 16, 255, true, false);
+
 		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h, 50, 50, 50);
 	}
 

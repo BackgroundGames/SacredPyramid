@@ -1,6 +1,10 @@
 #include "InventoryMenu.h"
+#include "App.h"
 #include "Window.h"
 #include "Textures.h"
+#include "GuiManager.h"
+#include "SceneManager.h"
+#include "Player.h"
 
 InventoryMenu::InventoryMenu()
 {
@@ -13,6 +17,7 @@ InventoryMenu::~InventoryMenu()
 
 bool InventoryMenu::Awake(pugi::xml_node config)
 {
+	sceneconfig = config;
 	return true;
 }
 
@@ -24,7 +29,11 @@ bool InventoryMenu::Start()
 	quat.x = 0;
 	quat.y = 0;
 
-	texture = app->tex->Load("Assets/Textures/inventory_placeholder.png");
+	inventoryTexture = app->tex->Load(sceneconfig.attribute("texturePath").as_string());
+	exitTexture = app->tex->Load(sceneconfig.attribute("exitButton").as_string());
+
+	SDL_Rect exitPos = { 0, 0, 42,42 };
+	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "", exitPos, this, { 0,0,0,0 }, exitTexture);
 
 	return true;
 }
@@ -39,7 +48,7 @@ bool InventoryMenu::Update(float dt)
 	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(125));
 	SDL_RenderFillRect(app->render->renderer, &quat);
 
-	app->render->DrawTexture(texture, windowW / 2, windowH / 2);
+	app->render->DrawTexture(inventoryTexture, windowW / 2, windowH / 2);
 
 	return true;
 }
@@ -51,10 +60,17 @@ bool InventoryMenu::PostUpdate()
 
 bool InventoryMenu::CleanUp()
 {
+	app->guiManager->DeleteGuiControl(exitButton);
+
 	return true;
 }
 
 bool InventoryMenu::OnGuiMouseClickEvent(GuiControl* control)
 {
+	if (control->id == 14) {
+		app->sceneManager->CloseInventory();
+		app->sceneManager->currentScene->GetPlayer()->exploringState = app->sceneManager->currentScene->GetPlayer()->previousEState;
+	}
+
 	return true;
 }

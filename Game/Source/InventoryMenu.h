@@ -37,11 +37,9 @@ public:
 	uint windowW, windowH;
 
 private:
-	SDL_Texture* texture = nullptr;
 
-	GuiControlButton* resumeButton;
-	GuiControlButton* settingsButton;
-	GuiControlButton* menuButton;
+	SDL_Texture* inventoryTexture = nullptr;
+	SDL_Texture* exitTexture = nullptr;
 	GuiControlButton* exitButton;
 
 	SDL_Rect quat;

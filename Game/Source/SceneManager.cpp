@@ -325,6 +325,8 @@ Scene* SceneManager::GetSceneFromID(SceneType sceneType)
 	case INTRO:
 		auxScene = intro;
 		break;
+	case GAME_TITLE:
+		auxScene = gameTitle;
 	case MENU:
 		auxScene = menu;
 		break;
@@ -334,6 +336,10 @@ Scene* SceneManager::GetSceneFromID(SceneType sceneType)
 	case LEVEL2:
 		auxScene = level2;
 		break;
+	case LEVEL3:
+		auxScene = level3;
+	case LEVEL4:
+		auxScene = level4;
 	case NONE:
 		break;
 	default:
