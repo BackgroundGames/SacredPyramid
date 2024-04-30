@@ -196,7 +196,6 @@ bool Enemy::Update(float dt)
 
 			break;
 		case CombatState::ATTACKING:
-			LOG("hola");
 			app->entityManager->combatManager->CheckIfHit(pFocus->GetTile(), &inventory.weapon);
 			combatState = CombatState::WAITING;
 			break;
