@@ -267,6 +267,40 @@ bool Render::IDrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* se
 	return ret;
 }
 
+bool Render::DrawTextureResize(SDL_Texture* texture, const SDL_Rect* posSize, const SDL_Rect* section) const
+{
+	bool ret = true;
+	uint scale = app->win->GetScale();
+
+	SDL_Rect rect;
+	rect.x = posSize->x * scale;
+	rect.y = posSize->y * scale;
+
+	if (section != NULL)
+	{
+		rect.w = posSize->w;
+		rect.h = posSize->h;
+	}
+	else
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+	}
+
+	rect.w *= scale;
+	rect.h *= scale;
+
+	SDL_Point* p = NULL;
+	SDL_Point pivot;
+
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, 0, p, SDL_FLIP_NONE) != 0)
+	{
+		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}
+
 bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
 {
 	bool ret = true;

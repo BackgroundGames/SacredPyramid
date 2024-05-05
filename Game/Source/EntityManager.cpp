@@ -415,6 +415,14 @@ bool CombatManager::Update(float dt)
 		CombatList[i]->Update(dt);
 	}
 
+	for (int i = 0; i < CombatList.size(); i++)
+	{
+		/*SDL_Rect quatSize = { i * CombatList[i]->idleAnim.frames[0].w / 2 + 10, 15, CombatList[i]->idleAnim.frames[0].w / 2 + 10, CombatList[i]->idleAnim.frames[0].h / 2 + 10 };
+		app->render->DrawRectangle(quatSize, 180, 180, 180, 255, true, false);*/
+		SDL_Rect posSize = { i * CombatList[i]->idleAnim.frames[0].w / 2 + 10, 20, CombatList[i]->idleAnim.frames[0].w / 2, CombatList[i]->idleAnim.frames[0].h / 2 };
+		app->render->DrawTextureResize(CombatList[i]->texture, &posSize, &CombatList[i]->idleAnim.frames[0]);
+	}
+
 	CheckIfCharDead();
 
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || (enemies.Count() == 0 && summoner == nullptr) || playersAlive == 0)
