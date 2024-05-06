@@ -32,10 +32,13 @@ bool InventoryMenu::Start()
 	inventoryTexture = app->tex->Load(sceneconfig.attribute("texturePath").as_string());
 	exitTexture = app->tex->Load(sceneconfig.attribute("exitButton").as_string());
 
-	app->tex->GetSize(inventoryTexture, textuerW, textuerH);
+	app->tex->GetSize(exitTexture, textuerW, textuerH);
 
-	SDL_Rect exitPos = { 0, 0, 42,42 };
-	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "", exitPos, this, { 0,0,0,0 }, exitTexture);
+	SDL_Rect exitPos = {0,  0, 42,42 };
+
+	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "hola", exitPos, this, { 0,0,(int)textuerW,(int)textuerH }, exitTexture);
+
+	app->tex->GetSize(inventoryTexture, textuerW, textuerH);
 
 	return true;
 }

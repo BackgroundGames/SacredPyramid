@@ -70,7 +70,7 @@ bool GuiControlButton::Update(float dt)
 					app->render->DrawRectangle(section, 239, 184, 16, 255, true, false);
 				}
 
-				app->render->DrawTexture(texture, section.x, section.y, &section);
+				app->render->DrawTexture(texture, section.x - app->render->camera.x, section.y - app->render->camera.y, &section);
 			
 				anim = false;
 				animW = 0;
