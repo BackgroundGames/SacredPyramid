@@ -284,6 +284,8 @@ bool Render::DrawTextureResize(SDL_Texture* texture, const SDL_Rect* posSize, co
 	else
 	{
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+		rect.w /= 2;
+		rect.h /= 2;
 	}
 
 	rect.w *= scale;

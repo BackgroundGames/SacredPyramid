@@ -78,6 +78,8 @@ public:
 	GuiControlButton* nextTurnButton;
 	GuiControlButton* attackButton;
 	GuiControlButton* moveButton;
+
+	SDL_Texture* turnArrow = nullptr;
 };
 
 class EntityManager : public Module

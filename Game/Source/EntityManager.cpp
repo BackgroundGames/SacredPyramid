@@ -358,6 +358,8 @@ bool CombatManager::Start()
 	windowW = app->entityManager->windowW;
 	windowH = app->entityManager->windowH;
 
+	turnArrow = app->tex->Load("Assets/Textures/TurnArrow.png");
+
 	//tp all characters
 	summoner->TpToCell(summoner->combatPos[0].x, summoner->combatPos[0].y);
 	for (size_t i = 0; i < players.size(); i++)
@@ -417,10 +419,13 @@ bool CombatManager::Update(float dt)
 
 	for (int i = 0; i < CombatList.size(); i++)
 	{
-		/*SDL_Rect quatSize = { i * CombatList[i]->idleAnim.frames[0].w / 2 + 10, 15, CombatList[i]->idleAnim.frames[0].w / 2 + 10, CombatList[i]->idleAnim.frames[0].h / 2 + 10 };
-		app->render->DrawRectangle(quatSize, 180, 180, 180, 255, true, false);*/
-		SDL_Rect posSize = { i * CombatList[i]->idleAnim.frames[0].w / 2 + 10, 20, CombatList[i]->idleAnim.frames[0].w / 2, CombatList[i]->idleAnim.frames[0].h / 2 };
+		SDL_Rect posSize = { 10, i * CombatList[i]->idleAnim.frames[0].h / 2 + 20, CombatList[i]->idleAnim.frames[0].w / 2, CombatList[i]->idleAnim.frames[0].h / 2 };
 		app->render->DrawTextureResize(CombatList[i]->texture, &posSize, &CombatList[i]->idleAnim.frames[0]);
+		if (CombatList[i] == currentCharacterTurn) {
+			posSize.x += CombatList[i]->idleAnim.frames[0].w / 2;
+			posSize.y -= 10;
+			app->render->DrawTextureResize(turnArrow, &posSize, NULL);
+		}
 	}
 
 	CheckIfCharDead();
@@ -521,6 +526,8 @@ void CombatManager::EndCombat()
 	currentCharacterTurn = nullptr;
 
 	CombatList.clear();
+
+	app->tex->UnLoad(turnArrow);
 
 	app->sceneManager->currentScene->cameraFocus = app->sceneManager->currentScene->GetPlayer();
 }
