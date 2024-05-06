@@ -43,9 +43,12 @@ bool Character::Start()
 bool Character::Update(float dt)
 {
 	//if player is requested to move, do movement till finish
-	if (move && app->debug) 
+	if (app->debug) 
 	{
-		DebugPath();
+		stats.health = maxHealth;
+		if (move) {
+			DebugPath();
+		}
 	}
 
 	currentAnimation->Update();
@@ -264,4 +267,12 @@ uint Character::DistanceToTile(iPoint Tile1, iPoint Tile2)
 	ret = abs(abs(Tile1.x) - abs(Tile2.x)) + abs(abs(Tile1.y) - abs(Tile2.y));
 
 	return ret;
+}
+
+void Character::DrawLife()
+{
+	SDL_Rect quat = { position.x + currentAnimation->GetCurrentFrame().w/2 - 50 , position.y - currentAnimation->GetCurrentFrame().h/2 - 20, 100, 10 };
+	app->render->DrawRectangle(quat, 255, 0, 0, 150, true, true);
+	quat.w = (stats.health * 100) / maxHealth;
+	app->render->DrawRectangle(quat, 255, 0, 0, 255, true, true);
 }

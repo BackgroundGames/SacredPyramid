@@ -9,6 +9,7 @@ Zhaak::Zhaak()
 	inventory.weapon.damage = 1;
 	inventory.weapon.range = 1;
 	stats.health = 3;
+	maxHealth = 3;
 }
 
 Zhaak::Zhaak(Stats stats, Inventory inventory)

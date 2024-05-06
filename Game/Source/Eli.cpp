@@ -9,6 +9,7 @@ Eli::Eli()
 	inventory.weapon.damage = 1;
 	inventory.weapon.range = 3;
 	stats.health = 3;
+	maxHealth = 3;
 }
 
 Eli::Eli(Stats stats, Inventory inventory)

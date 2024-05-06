@@ -40,6 +40,7 @@ bool Player::Start() {
 	interacted = nullptr;
 
 	movementUsed = 0;
+	maxHealth = 3;
 
 	return true;
 }
@@ -267,6 +268,10 @@ bool Player::Update(float dt)
 		break;
 
 	case MainState::IN_COMBAT:
+
+		if (app->entityManager->inCombat) {
+			DrawLife();
+		}
 
 		switch (combatState)
 		{

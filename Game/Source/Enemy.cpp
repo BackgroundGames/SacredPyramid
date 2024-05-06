@@ -38,6 +38,7 @@ bool Enemy::Start()
 	exploringState = ExploringState::IDLE;
 
 	observer = app->sceneManager->currentScene->GetPlayer();
+	maxHealth = 1;
 
 	return true;
 }
@@ -136,6 +137,10 @@ bool Enemy::Update(float dt)
 		}
 		break;
 	case MainState::IN_COMBAT:
+
+		if (app->entityManager->inCombat) {
+			DrawLife();
+		}
 
 		pFocus = app->entityManager->combatManager->GetClosestPlayer(this, distanceFromPlayer);
 		aviableMovement = stats.movement - movementUsed;

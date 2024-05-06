@@ -114,6 +114,8 @@ public:
 
 	uint DistanceToTile(iPoint Tile1, iPoint Tile2);
 
+	void DrawLife();
+
 public:
 	//Declare character parameters
 	Stats stats;
@@ -123,8 +125,10 @@ public:
 
 	iPoint mousePos = iPoint{ 0, 0 };
 
+	//aux stats
 	uint movementUsed = 0;
 	uint aviableMovement = 0;
+	uint maxHealth = 0;
 
 	//to move
 	DynArray<iPoint> path;

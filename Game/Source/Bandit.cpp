@@ -11,6 +11,7 @@ Bandit::Bandit()
 	stats.health = 1;
 	inventory.weapon.range = 2;
 	inventory.weapon.damage = 1;
+	maxHealth = 1;
 }
 
 Bandit::Bandit(Stats stats, Inventory inventory)

@@ -11,6 +11,7 @@ EvilMummy::EvilMummy()
 	stats.health = 1;
 	inventory.weapon.range = 2;
 	inventory.weapon.damage = 1;
+	maxHealth = 1;
 }
 
 EvilMummy::EvilMummy(Stats stats, Inventory inventory)
