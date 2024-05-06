@@ -8,10 +8,10 @@ EvilMummy::EvilMummy()
 	subtype = EnemyType::EVIL_MUMMY;
 	Awake();
 	//prova combat
-	stats.health = 1;
+	stats.health = 5;
 	inventory.weapon.range = 2;
 	inventory.weapon.damage = 1;
-	maxHealth = 1;
+	maxHealth = 5;
 }
 
 EvilMummy::EvilMummy(Stats stats, Inventory inventory)
@@ -59,7 +59,8 @@ bool EvilMummy::Awake()
 bool EvilMummy::Start()
 {
 	Enemy::Start();
-
+	stats.health = 5;
+	maxHealth = 5;
 	return true;
 }
 

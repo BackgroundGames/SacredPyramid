@@ -8,10 +8,10 @@ Drunkard::Drunkard()
 	subtype = EnemyType::DRUNKARD;
 	Awake();
 	//prova combat
-	stats.health = 1;
+	stats.health = 3;
 	inventory.weapon.range = 1;
 	inventory.weapon.damage = 1;
-	maxHealth = 1;
+	maxHealth = 3;
 }
 
 Drunkard::Drunkard(Stats stats, Inventory inventory)
@@ -58,7 +58,8 @@ bool Drunkard::Awake()
 bool Drunkard::Start()
 {
 	Enemy::Start();
-
+	maxHealth = 3;
+	stats.health = 3;
 	return true;
 }
 

@@ -38,7 +38,6 @@ bool Enemy::Start()
 	exploringState = ExploringState::IDLE;
 
 	observer = app->sceneManager->currentScene->GetPlayer();
-	maxHealth = 1;
 
 	return true;
 }

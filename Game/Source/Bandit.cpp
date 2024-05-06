@@ -8,10 +8,10 @@ Bandit::Bandit()
 	subtype = EnemyType::BANDIT;
 	Awake();
 	//prova combat
-	stats.health = 1;
+	stats.health = 2;
 	inventory.weapon.range = 2;
 	inventory.weapon.damage = 1;
-	maxHealth = 1;
+	maxHealth = 2;
 }
 
 Bandit::Bandit(Stats stats, Inventory inventory)
@@ -59,7 +59,8 @@ bool Bandit::Awake()
 bool Bandit::Start()
 {
 	Enemy::Start();
-
+	maxHealth = 2;
+	stats.health = 2;
 	return true;
 }
 
