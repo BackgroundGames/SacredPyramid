@@ -42,6 +42,9 @@ private:
 	SDL_Texture* exitTexture = nullptr;
 	GuiControlButton* exitButton;
 
+	uint textuerW = 0;
+	uint textuerH = 0;
+
 	SDL_Rect quat;
 };
 
