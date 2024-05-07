@@ -276,3 +276,22 @@ void Character::DrawLife()
 	quat.w = (stats.health * 100) / maxHealth;
 	app->render->DrawRectangle(quat, 255, 0, 0, 255, true, true);
 }
+
+Inventory::Inventory()
+{
+	this->weapon = Weapon();
+	this->armor = Armor();
+	this->accessory = Accessory();
+	this->consumable = Consumable();
+	//this->invenotryItem = {};
+}
+/*
+Inventory::Inventory(Weapon w, Armor ar, Accessory ac, Consumable c, vector<Item*> i)
+{
+	this->weapon = w;
+	this->armor = ar;
+	this->accessory = ac;
+	this->consumable = c;
+	this->invenotryItem = i;
+}
+*/

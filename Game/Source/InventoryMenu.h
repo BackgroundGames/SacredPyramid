@@ -39,13 +39,15 @@ public:
 private:
 
 	SDL_Texture* inventoryTexture = nullptr;
-	SDL_Texture* exitTexture = nullptr;
-	GuiControlButton* exitButton;
 
 	uint textuerW = 0;
 	uint textuerH = 0;
 
 	SDL_Rect quat;
-};
+	int X, Y;
+
+	SDL_Texture* characterTexture = nullptr;	//Character owner of the inventary
+	SDL_Texture* itemTexture = nullptr;			//All other items
+};	
 
 #endif //__INVENTORY_MENU__

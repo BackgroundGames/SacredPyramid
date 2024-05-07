@@ -7,11 +7,10 @@ Bandit::Bandit()
 	type = EntityType::ENEMY;
 	subtype = EnemyType::BANDIT;
 	Awake();
-	//prova combat
-	stats.health = 2;
-	inventory.weapon.range = 2;
+
+	stats.health = 1;
+	inventory.weapon.range = 1;
 	inventory.weapon.damage = 1;
-	maxHealth = 2;
 }
 
 Bandit::Bandit(Stats stats, Inventory inventory)

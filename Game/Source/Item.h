@@ -25,11 +25,11 @@ public:
 public:
 
 	bool isPicked = false;
+	SDL_Texture* texture;
 	ItemType subtype;
 
 private:
 
-	SDL_Texture* texture;
 	const char* texturePath;
 	uint texW, texH;
 };

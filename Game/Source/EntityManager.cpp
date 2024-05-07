@@ -119,8 +119,7 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		{
 		case PlayerType::ZHAAK:
 			stats.health = 3;
-			inventory.weapon.damage = 1;
-			inventory.weapon.range = 1;
+			inventory.weapon = Weapon(1, 1, WeaponType::SWORD, WeaponEffect::NO_EFFECT);
 			entity = new Zhaak(stats, inventory);
 			break;
 
@@ -133,9 +132,8 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 
 		case PlayerType::ELI:
 			stats.health = 3;
-			inventory.weapon.damage = 1;
-			inventory.weapon.range = 3;
-			entity = new Eli();
+			inventory.weapon = Weapon(3, 1, WeaponType::BOOK, WeaponEffect::NO_EFFECT);
+			entity = new Eli(stats, inventory);
 			break;
 
 		case PlayerType::UNKNOWN:
@@ -152,20 +150,20 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		switch (e_type)
 		{
 		case EnemyType::BANDIT:
-			stats.health = 1;
-			inventory.weapon.range = 2;
+			stats.health = 2;
+			inventory.weapon = Weapon(1, 2, WeaponType::DAGGER, WeaponEffect::NO_EFFECT);
 			entity = new Bandit(stats, inventory);
 			break;
 
 		case EnemyType::DRUNKARD:
-			inventory.weapon.range = 1;
-			inventory.weapon.damage = 1;
+			stats.health = 3;
+			inventory.weapon = Weapon(1, 1, WeaponType::FISTS, WeaponEffect::NO_EFFECT);
 			entity = new Drunkard(stats, inventory);
 			break;
 
 		case EnemyType::EVIL_MUMMY:
-			inventory.weapon.range = 2;
-			inventory.weapon.damage = 1;
+			stats.health = 5;
+			inventory.weapon = Weapon(2, 1, WeaponType::WRAPS, WeaponEffect::NO_EFFECT);
 			entity = new EvilMummy(stats, inventory);
 			break;
 

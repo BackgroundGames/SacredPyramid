@@ -4,24 +4,28 @@
 #include "Entity.h"
 #include "Item.h"
 
-enum WeaponType {
+enum class WeaponType {
 	SWORD,
 	BOOK,
 	SHIELD,
 	WRAPS,
-	DAGGER
+	DAGGER,
+	FISTS,
+	NO_WEAPON
 };
 
-enum WeaponEffect {
+enum class WeaponEffect {
 	POISON,
 	PIERCE,
-	MAGIC
+	MAGIC,
+	NO_EFFECT
 };
 
 class Weapon : public Item
 {
 public:
 	Weapon();
+	Weapon(int range, int damage, WeaponType wtype, WeaponEffect effect);
 
 	virtual ~Weapon();
 

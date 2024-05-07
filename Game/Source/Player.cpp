@@ -116,6 +116,14 @@ bool Player::Update(float dt)
 					app->sceneManager->currentScene->LockCamera();
 				}
 			}
+
+			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN && app->sceneManager->currentScene->settings == false && app->sceneManager->currentScene->inventory == false)
+			{
+				app->sceneManager->OpenInventory();
+				previousEState = ExploringState::IDLE;
+				exploringState = ExploringState::NONE;
+			}
+
 			break;
 
 		case ExploringState::MOVING:
@@ -388,15 +396,8 @@ bool Player::Update(float dt)
 		break;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->sceneManager->currentScene->settings == false) {
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->sceneManager->currentScene->settings == false && app->sceneManager->currentScene->inventory == false) {
 		app->sceneManager->OpenGamePause();
-		previousEState = exploringState;
-		exploringState = ExploringState::NONE;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
-	{
-		app->sceneManager->OpenInventory();
 		previousEState = exploringState;
 		exploringState = ExploringState::NONE;
 	}

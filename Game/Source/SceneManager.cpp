@@ -301,6 +301,7 @@ void SceneManager::CloseGamePause()
 
 void SceneManager::OpenInventory()
 {
+	currentScene->inventory = true;
 	inventoryMenu->Start();
 	inventoryMenu->active = true;
 }
@@ -309,6 +310,7 @@ void SceneManager::CloseInventory()
 {
 	inventoryMenu->CleanUp();
 	inventoryMenu->active = false;
+	currentScene->inventory = false;
 }
 
 void SceneManager::CleanAllLevels() {

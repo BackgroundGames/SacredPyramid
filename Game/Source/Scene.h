@@ -119,6 +119,7 @@ public:
 	SString name;
 	bool active;
 	bool settings = false;
+	bool inventory = false;
 	Player* zhaak = nullptr;
 	Player* eli = nullptr;
 	bool quit = false;

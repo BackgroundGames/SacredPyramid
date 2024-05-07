@@ -7,11 +7,10 @@ Drunkard::Drunkard()
 	type = EntityType::ENEMY;
 	subtype = EnemyType::DRUNKARD;
 	Awake();
-	//prova combat
-	stats.health = 3;
+
+	stats.health = 1;
 	inventory.weapon.range = 1;
 	inventory.weapon.damage = 1;
-	maxHealth = 3;
 }
 
 Drunkard::Drunkard(Stats stats, Inventory inventory)

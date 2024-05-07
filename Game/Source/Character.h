@@ -4,11 +4,12 @@
 #include "Entity.h"
 #include "SDL/include/SDL.h"
 #include "DynArray.h"
-
+#include <vector>
 
 #include "Weapon.h"
 #include "Armor.h"
 #include "Accessory.h"
+#include "Consumable.h"
 #include "Animation.h"
 
 struct Stats
@@ -28,6 +29,11 @@ struct Inventory
 	Weapon weapon;
 	Armor armor;
 	Accessory accessory;
+	Consumable consumable;
+	//vector<Item*> invenotryItem;
+
+	Inventory();
+	//Inventory(Weapon w, Armor ar, Accessory ac, Consumable c, vector<Item*> i);
 };
 
 enum class MainState

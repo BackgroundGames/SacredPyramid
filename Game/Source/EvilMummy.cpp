@@ -7,11 +7,10 @@ EvilMummy::EvilMummy()
 	type = EntityType::ENEMY;
 	subtype = EnemyType::EVIL_MUMMY;
 	Awake();
-	//prova combat
-	stats.health = 5;
-	inventory.weapon.range = 2;
+
+	stats.health = 1;
+	inventory.weapon.range = 1;
 	inventory.weapon.damage = 1;
-	maxHealth = 5;
 }
 
 EvilMummy::EvilMummy(Stats stats, Inventory inventory)
