@@ -18,6 +18,7 @@ enum class WeaponEffect {
 	POISON,
 	PIERCE,
 	MAGIC,
+	ELEMENT,
 	NO_EFFECT
 };
 

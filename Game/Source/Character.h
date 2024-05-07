@@ -4,7 +4,6 @@
 #include "Entity.h"
 #include "SDL/include/SDL.h"
 #include "DynArray.h"
-#include <vector>
 
 #include "Weapon.h"
 #include "Armor.h"
@@ -26,14 +25,22 @@ struct Stats
 
 struct Inventory
 {
-	Weapon weapon;
-	Armor armor;
-	Accessory accessory;
-	Consumable consumable;
-	//vector<Item*> invenotryItem;
+	Weapon weapon = Weapon();
+	Armor armor = Armor();
+	Accessory accessory = Accessory();
+	Consumable consumable = Consumable();
+	//DynArray<Item*> invenotryItem;
 
 	Inventory();
-	//Inventory(Weapon w, Armor ar, Accessory ac, Consumable c, vector<Item*> i);
+	Inventory(Weapon w, Armor ar, Accessory ac, Consumable c/*, DynArray<Item*> i*/);
+	void operator=(Inventory& inv)
+	{
+		this->weapon = inv.weapon;
+		this->armor = inv.armor;
+		this->accessory = inv.accessory;
+		this->consumable = inv.consumable;
+		//this->invenotryItem = inv.invenotryItem;
+	}
 };
 
 enum class MainState
@@ -156,11 +163,11 @@ public:
 	Animation idleAnimB;
 	Animation walkingAnim;
 
-	//player stats
+	//player state
 	MainState mainState;
 	CombatState combatState;
 	ExploringState exploringState;
-	ExploringState previousEState;
+	ExploringState previousState;
 
 	int sandFx;
 	int sandChannel;

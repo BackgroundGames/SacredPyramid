@@ -4,14 +4,25 @@
 #include "Entity.h"
 #include "Item.h"
 
-enum ArmorEffect {
-	THORNS
+enum class ArmorType {
+	LEATHER,
+	CHAINSHIRT,
+	SCALE,
+	HALFPLATE,
+	FULLPLATE,
+	NO_ARMOR
+};
+
+enum class ArmorEffect {
+	THORNS,
+	NO_EFFECT
 };
 
 class Armor : public Item
 {
 public:
 	Armor();
+	Armor(int defense, ArmorType atype, ArmorEffect effect);
 
 	virtual ~Armor();
 
@@ -23,6 +34,7 @@ public:
 
 	bool CleanUp();
 public:
+	ArmorType atype;
 	ArmorEffect effect;
 	int defense = 0;
 };

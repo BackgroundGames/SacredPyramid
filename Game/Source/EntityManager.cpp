@@ -119,7 +119,10 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		{
 		case PlayerType::ZHAAK:
 			stats.health = 3;
-			inventory.weapon = Weapon(1, 1, WeaponType::SWORD, WeaponEffect::NO_EFFECT);
+			inventory.weapon = Weapon(1, 2, WeaponType::SWORD, WeaponEffect::NO_EFFECT);
+			inventory.armor = Armor(1, ArmorType::LEATHER, ArmorEffect::NO_EFFECT);
+			inventory.accessory = Accessory(1, AccessoryType::ARTIFACT, AccessoryEffect::NO_EFFECT);
+			inventory.consumable = Consumable(1, 3, ConsumableType::POTION, ConsumableEffect::HEAL);
 			entity = new Zhaak(stats, inventory);
 			break;
 
@@ -133,6 +136,9 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		case PlayerType::ELI:
 			stats.health = 3;
 			inventory.weapon = Weapon(3, 1, WeaponType::BOOK, WeaponEffect::NO_EFFECT);
+			inventory.armor = Armor(0, ArmorType::NO_ARMOR, ArmorEffect::NO_EFFECT);
+			inventory.accessory = Accessory(1, AccessoryType::TOKEN, AccessoryEffect::NO_EFFECT);
+			inventory.consumable = Consumable(1, 3, ConsumableType::POTION, ConsumableEffect::HEAL);
 			entity = new Eli(stats, inventory);
 			break;
 
@@ -151,19 +157,28 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		{
 		case EnemyType::BANDIT:
 			stats.health = 2;
-			inventory.weapon = Weapon(1, 2, WeaponType::DAGGER, WeaponEffect::NO_EFFECT);
+			inventory.weapon = Weapon(1, 1, WeaponType::DAGGER, WeaponEffect::NO_EFFECT);
+			inventory.armor = Armor(0, ArmorType::NO_ARMOR, ArmorEffect::NO_EFFECT);
+			inventory.accessory = Accessory();
+			inventory.consumable = Consumable();
 			entity = new Bandit(stats, inventory);
 			break;
 
 		case EnemyType::DRUNKARD:
 			stats.health = 3;
-			inventory.weapon = Weapon(1, 1, WeaponType::FISTS, WeaponEffect::NO_EFFECT);
+			inventory.weapon = Weapon(1, 1, WeaponType::DAGGER, WeaponEffect::NO_EFFECT);
+			inventory.armor = Armor(0, ArmorType::NO_ARMOR, ArmorEffect::NO_EFFECT);
+			inventory.accessory = Accessory();
+			inventory.consumable = Consumable();	
 			entity = new Drunkard(stats, inventory);
 			break;
 
 		case EnemyType::EVIL_MUMMY:
 			stats.health = 5;
-			inventory.weapon = Weapon(2, 1, WeaponType::WRAPS, WeaponEffect::NO_EFFECT);
+			inventory.weapon = Weapon(2, 1, WeaponType::DAGGER, WeaponEffect::NO_EFFECT);
+			inventory.armor = Armor(0, ArmorType::NO_ARMOR, ArmorEffect::NO_EFFECT);
+			inventory.accessory = Accessory();
+			inventory.consumable = Consumable();
 			entity = new EvilMummy(stats, inventory);
 			break;
 

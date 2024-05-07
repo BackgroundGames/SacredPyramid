@@ -46,7 +46,7 @@ bool Enemy::Update(float dt)
 {
 
 	if (app->sceneManager->currentScene->settings) {
-		previousEState = exploringState;
+		previousState = exploringState;
 		exploringState = ExploringState::NONE;
 	}
 
@@ -128,7 +128,7 @@ bool Enemy::Update(float dt)
 			break;
 		case ExploringState::NONE:
 			if (!app->sceneManager->currentScene->settings) {
-				exploringState = previousEState;
+				exploringState = previousState;
 			}
 			break;
 		default:

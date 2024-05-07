@@ -2,8 +2,24 @@
 
 Armor::Armor() : Item()
 {
-	name.Create("armor");
+	name.Create("Armor");
 	subtype = ItemType::ARMOR;
+
+	defense = 0;
+	atype = ArmorType::NO_ARMOR;
+	effect = ArmorEffect::NO_EFFECT;
+}
+
+Armor::Armor(int defense, ArmorType atype, ArmorEffect effect)
+{
+	name.Create("Armor");
+	subtype = ItemType::ARMOR;
+
+	this->defense = defense;
+	this->atype = atype;
+	this->effect = effect;
+
+	Awake();
 }
 
 Armor::~Armor() 

@@ -285,13 +285,12 @@ Inventory::Inventory()
 	this->consumable = Consumable();
 	//this->invenotryItem = {};
 }
-/*
-Inventory::Inventory(Weapon w, Armor ar, Accessory ac, Consumable c, vector<Item*> i)
+
+Inventory::Inventory(Weapon w, Armor ar, Accessory ac, Consumable c/*, DynArray<Item*> inv*/)
 {
 	this->weapon = w;
 	this->armor = ar;
 	this->accessory = ac;
 	this->consumable = c;
-	this->invenotryItem = i;
+	//this->invenotryItem = inv;
 }
-*/

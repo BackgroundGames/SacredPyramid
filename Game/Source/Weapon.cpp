@@ -5,22 +5,24 @@
 Weapon::Weapon() : Item()
 {
 	name.Create("weapon");
+	subtype = ItemType::WEAPON;
+
 	range = 1;
 	damage = 1;
 	wtype = WeaponType::NO_WEAPON;
 	effect = WeaponEffect::NO_EFFECT;
-	subtype = ItemType::WEAPON;
 }
 
 Weapon::Weapon(int range, int damage, WeaponType wtype, WeaponEffect effect)
 {
 	name.Create("weapon");
+	subtype = ItemType::WEAPON;
+
 	this->range = range;
 	this->damage = damage;
 	this->wtype = wtype;
 	this->effect = effect;
 
-	subtype = ItemType::WEAPON;
 	Awake();
 }
 
@@ -37,24 +39,18 @@ bool Weapon::Awake()
 	case WeaponType::SWORD:
 		texture = app->tex->Load("Assets/Textures/Sword.png");
 		break;
-
 	case WeaponType::BOOK:
 		texture = app->tex->Load("Assets/Textures/Book.png");
 		break;
-
 	case WeaponType::SHIELD:
 		break;
-
 	case WeaponType::WRAPS:
 		break;
-
 	case WeaponType::DAGGER:
 		texture = app->tex->Load("Assets/Textures/Knife_Inv.png");
 		break;
-
 	case WeaponType::FISTS:
 		break;
-
 	default:
 		break;
 	}

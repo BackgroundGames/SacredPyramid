@@ -120,7 +120,7 @@ bool Player::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN && app->sceneManager->currentScene->settings == false && app->sceneManager->currentScene->inventory == false)
 			{
 				app->sceneManager->OpenInventory();
-				previousEState = ExploringState::IDLE;
+				previousState = exploringState;
 				exploringState = ExploringState::NONE;
 			}
 
@@ -398,7 +398,7 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->sceneManager->currentScene->settings == false && app->sceneManager->currentScene->inventory == false) {
 		app->sceneManager->OpenGamePause();
-		previousEState = exploringState;
+		previousState = exploringState;
 		exploringState = ExploringState::NONE;
 	}
 
