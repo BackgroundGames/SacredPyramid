@@ -7,6 +7,7 @@
 #include "SceneManager.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Level3.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -131,6 +132,30 @@ bool Render::Update(float dt)
 			combatTurnTimer = "Turn Timer: (" + std::to_string(app->entityManager->combatManager->seconds) + ")";
 			text = combatTurnTimer.c_str();
 			DrawText(text, 0, 110, 250, 30, 0, 0, 255);
+		}
+
+		//Puzzle 1 debug
+		if (app->sceneManager->currentScene->sceneType == SceneType::LEVEL3 && app->sceneManager->level3->playerPuzzle.size() > 0)
+		{
+			puzzleDebug = "Puzzle: ";
+			
+			if (app->sceneManager->level3->playerPuzzle.size() >= 0)
+				puzzleDebug += "(" + std::to_string(app->sceneManager->level3->playerPuzzle.at(0).x) + ", " + std::to_string(app->sceneManager->level3->playerPuzzle.at(0).y) + ")";
+			
+			if (app->sceneManager->level3->playerPuzzle.size() > 1)
+				puzzleDebug += "(" + std::to_string(app->sceneManager->level3->playerPuzzle.at(1).x) + ", " + std::to_string(app->sceneManager->level3->playerPuzzle.at(1).y) + ")";
+			
+			if (app->sceneManager->level3->playerPuzzle.size() > 2)
+				puzzleDebug += "(" + std::to_string(app->sceneManager->level3->playerPuzzle.at(2).x) + ", " + std::to_string(app->sceneManager->level3->playerPuzzle.at(2).y) + ")";
+
+			if (app->sceneManager->level3->playerPuzzle.size() > 3)
+				puzzleDebug += "(" + std::to_string(app->sceneManager->level3->playerPuzzle.at(3).x) + ", " + std::to_string(app->sceneManager->level3->playerPuzzle.at(3).y) + ")";
+
+			if (app->sceneManager->level3->playerPuzzle.size() > 4)
+				puzzleDebug += "(" + std::to_string(app->sceneManager->level3->playerPuzzle.at(4).x) + ", " + std::to_string(app->sceneManager->level3->playerPuzzle.at(4).y) + ")";
+
+			text = puzzleDebug.c_str();
+			DrawText(text, 0, 140, 500, 30, 0, 0, 255);
 		}
 	}
 

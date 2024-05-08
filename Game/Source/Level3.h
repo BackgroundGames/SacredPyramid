@@ -9,6 +9,9 @@
 #include "Enemy.h"
 #include "NPC.h"
 #include "GuiControl.h"
+#include <vector>
+
+using namespace std;
 
 struct SDL_Texture;
 
@@ -43,14 +46,21 @@ public:
 
 	void LockCamera();
 
+	bool CheckPuzzle();
+	void addInPuzzle(iPoint p);
+
 	uint windowW, windowH;
+	bool talkedSphinx = false;
+	bool addPuzzle = false;
+	vector<iPoint> playerPuzzle;
+	vector<iPoint> correctPuzzle;
 
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	SDL_Texture* mouseTileTex = nullptr;
-	iPoint pyramidTile = { 2,24 };
+	// 1 4 7 2 3
 };
 
 #endif // __LEVEL3_H__

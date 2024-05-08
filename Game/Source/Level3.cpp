@@ -91,6 +91,16 @@ bool Level3::Start()
 		npc->Start();
 	}
 
+	playerPuzzle.clear();
+
+	//The corrcet answer to the Puzzle
+	correctPuzzle.push_back({ 0, 0 });
+	correctPuzzle.push_back({ 10, 25 });
+	correctPuzzle.push_back({ 14, 27 });
+	correctPuzzle.push_back({ 17, 26 });
+	correctPuzzle.push_back({ 11, 27 });
+	correctPuzzle.push_back({ 13, 25 });
+
 	app->render->camera.y = 0;
 	app->render->camera.x = 0;
 	cameraFocus = GetPlayer();
@@ -123,19 +133,22 @@ bool Level3::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x += (int)ceil(camSpeed * dt);
 
+	if (talkedSphinx)
+	{
+		if (GetPlayer()->GetTile() == iPoint(10, 25) || GetPlayer()->GetTile() == iPoint(11, 27) ||
+			GetPlayer()->GetTile() == iPoint(13, 25) || GetPlayer()->GetTile() == iPoint(14, 27) ||
+			GetPlayer()->GetTile() == iPoint(15, 25) || GetPlayer()->GetTile() == iPoint(16, 28) ||
+			GetPlayer()->GetTile() == iPoint(17, 26) || GetPlayer()->GetTile() == iPoint(18, 28) &&
+			GetPlayer()->exploringState == ExploringState::IDLE &&
+			GetPlayer()->GetTile().x != playerPuzzle.back().x && GetPlayer()->GetTile().y != playerPuzzle.back().y) {
 
-	if (GetPlayer()->GetTile() == pyramidTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
-		GetPlayer()->exploringState = ExploringState::NONE;
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->menu);
+			addInPuzzle(GetPlayer()->GetTile());
+		}
 	}
 
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->LoadRequest();
-
-	//degug
-	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
 
 	return true;
 }
@@ -193,7 +206,7 @@ bool Level3::OnGuiMouseClickEvent(GuiControl* control) {
 void Level3::LockCamera()
 {
 	int limitCamXend = (app->map->getMapWidth() / 2 + app->map->GetTileWidth() / 2 - windowW) * -1;
-	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2) *2;
+	int limitCamXbeg = (app->map->getMapWidth() / 2 - app->map->GetTileWidth() / 2) *3;
 
 	app->render->camera.y = ((cameraFocus->position.y - cameraFocus->texW / 2) - (windowH / 2)) * -1;
 	app->render->camera.x = ((cameraFocus->position.x - cameraFocus->texH / 2) - (windowW / 2)) * -1;
@@ -214,4 +227,38 @@ void Level3::LockCamera()
 	else if (app->render->camera.y < limitCamYend) {
 		app->render->camera.y = limitCamYend;
 	}
+}
+
+bool Level3::CheckPuzzle()
+{
+	bool ret = false;
+
+	for (size_t i = 0; i < correctPuzzle.size(); i++)
+	{
+		for (size_t j = 0; j < playerPuzzle.size(); j++)
+		{
+			if (correctPuzzle.at(i) == playerPuzzle.at(j))
+				ret = true;
+			else
+				ret = false;
+		}
+	}
+
+	playerPuzzle.clear();
+
+	return ret;
+}
+
+void Level3::addInPuzzle(iPoint p)
+{
+	bool isInPuzzle = false;
+
+	for (size_t i = 0; i < playerPuzzle.size(); i++)
+	{
+		if (playerPuzzle.at(i) == p)
+			isInPuzzle = true;	
+	}
+
+	if (!isInPuzzle)
+		playerPuzzle.push_back(p);
 }

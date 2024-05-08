@@ -48,14 +48,14 @@
 		</level2>
 		<level3 audio="Assets\Audio\Music\Town.ogg">
 			<map path="Assets/Maps/" name="Mapa 2 Puente.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
-			<zhaak x="14" y="62"/>
-			<eli x="14" y="63"/>
-			<enemy x="16" y="57" cx="19" cy="61" id="0" p1x="17" p1y="60" p2x="17" p2y="58">
-				<minion x="20" y="60" id="0"/>
-				<minion x="20" y="59" id="0"/>
-				<minion x="19" y="58" id="0"/>
+			<zhaak x="7" y="77"/>
+			<eli x="6" y="77"/>
+			<enemy x="16" y="77" cx="16" cy="78" id="0" p1x="13" p1y="77" p2x="13" p2y="76">
+				<minion x="17" y="77" id="0"/>
+				<minion x="17" y="76" id="0"/>
+				<minion x="16" y="75" id="0"/>
 			</enemy>
-			<npc x="15" y="7" id="3"/>
+			<npc x="19" y="24" id="3"/>
 		</level3>
 		<level4 audio="Assets\Audio\Music\Main_Menu.ogg">
 			<map path="Assets/Maps/" name="Mapa 3 Pyramid.tmx" selectionPath="Assets/Maps/tileSelectionIso128.png"/>
@@ -230,24 +230,39 @@
 				<option text="..." returnCode="0" pnode="8"/>
 			</node>
 			<node id="8" speaker="1" text="If we don't pass the test, we won't enter the pyramid.">
-				<option text="- Reassure her" returnCode="0" pnode="9"/>
+				<option text="- What test?" returnCode="0" pnode="9"/>
 			</node>
-			<node id="9" speaker="0" text="Then we will pass it!">
+				<node id="9" speaker="0" text="What are you talking about?">
 				<option text="..." returnCode="0" pnode="10"/>
 			</node>
-			<node id="10" speaker="1" text="Yes!">
+			<node id="10" speaker="1" text="We have to activate the stones following the instructions!">
 				<option text="..." returnCode="0" pnode="11"/>
 			</node>
-			<node id="11" speaker="6" text="Nahn jahizuN.">
+			<node id="11" speaker="0" text="Let's do this then">
 				<option text="..." returnCode="0" pnode="-1"/>
 			</node>
 		</dialogue5>
-		<!--- More dialogue -->
+		<!--ELi and Zhaak confront the Sphinx after attemting the Puzzle-->
 		<dialogue6>
-			<node id="0" speaker="1" text="...">
+			<node id="0" speaker="6" text="Are you mere humans trying to enter the Sacred Pyramid of Ra?">
+				<option text="- Yes" returnCode="0" pnode="1"/>
+			</node>
+		<node id="1" speaker="6" text="Only someone worthy of the Gods can enter.">
 				<option text="..." returnCode="0" pnode="-1"/>
 			</node>
 		</dialogue6>
+		<!--The Sphinx answers depending on if the attemt is correct or not-->
+		<dialogue7>	
+			<node id="0" speaker="6" text="You have failed in your attemot to decive me. YOU BOTH ARE NOT WORTHY!! Suffer the consequence!">
+				<option text="- Oh no" returnCode="0" pnode="-1"/>
+			</node>
+		</dialogue7>
+		<dialogue8>
+			<node id="0" speaker="6" text="You.. you.. you have answered correctly. You both are worthy of entering the sacred tomb. Be careful.">
+				<option text="Perfect!" returnCode="0" pnode="-1"/>
+			</node>
+		</dialogue8>
+		<!--- More dialogue -->
 	</dialogues>
 	
 	<animations>

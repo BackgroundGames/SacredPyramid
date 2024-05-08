@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "DialogueTree.h"
 #include "Map.h"
+#include "Level3.h"
 
 NPC::NPC()
 {
@@ -82,18 +83,28 @@ bool NPC::Update(float dt)
 
 	Character::Update(dt);
 
-	if (startTalking) {
-		if (id == 0) {
+	if (startTalking) 
+	{
+		if (id == 0) 
+		{
 			app->dialogueTree->performDialogue("dialogue4");
 		}
-		if (id == 1) {
+		if (id == 1) 
+		{
 			app->dialogueTree->performDialogue("dialogue1");
 		}
-		if (id == 2) {
+		if (id == 2) 
+		{
 			app->dialogueTree->performDialogue("dialogue2");
 		}
-		if (id == 3) {
-			app->dialogueTree->performDialogue("dialogue5");
+		if (id == 3)
+		{
+			if (app->sceneManager->level3->talkedSphinx)
+			{
+				app->dialogueTree->performDialogue("dialogue6");
+			}
+			else
+				app->dialogueTree->performDialogue("dialogue5");
 		}
 		
 		startTalking = false;

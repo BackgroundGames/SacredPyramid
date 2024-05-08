@@ -8,7 +8,7 @@
 #include "Window.h"
 #include "Log.h"
 #include "Textures.h"
-
+#include "Level3.h"
 #include "SceneManager.h"
 #include "Player.h"
 
@@ -151,6 +151,19 @@ bool DialogueTree::CleanUp()
 	}
 
 	if (dialog == "dialogue5" && app->sceneManager->currentScene != (Scene*)app->sceneManager->menu) {
+		app->sceneManager->level3->talkedSphinx = true;
+		app->sceneManager->level3->playerPuzzle.push_back({ 0, 0 });
+	}
+
+	if (dialog == "dialogue6" && app->sceneManager->currentScene != (Scene*) app->sceneManager->menu)
+	{
+		if (app->sceneManager->level3->CheckPuzzle())
+			app->dialogueTree->performDialogue("dialogue8");
+		else
+			app->dialogueTree->performDialogue("dialogue7");
+	}
+
+	if (dialog == "dialogue8" && app->sceneManager->currentScene != (Scene*)app->sceneManager->menu) {
 		app->sceneManager->currentScene->GetPlayer()->exploringState = ExploringState::NONE;
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level4);
 	}
