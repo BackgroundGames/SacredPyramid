@@ -4,12 +4,15 @@
 #include "Entity.h"
 #include "SDL/include/SDL.h"
 #include "DynArray.h"
+#include <vector>
 
 #include "Weapon.h"
 #include "Armor.h"
 #include "Accessory.h"
 #include "Consumable.h"
 #include "Animation.h"
+
+using namespace std;
 
 struct Stats
 {
@@ -29,17 +32,17 @@ struct Inventory
 	Armor armor = Armor();
 	Accessory accessory = Accessory();
 	Consumable consumable = Consumable();
-	//DynArray<Item*> invenotryItem;
+	vector<Item*> invenotryItem;
 
 	Inventory();
-	Inventory(Weapon w, Armor ar, Accessory ac, Consumable c/*, DynArray<Item*> i*/);
+	Inventory(Weapon w, Armor ar, Accessory ac, Consumable c, vector<Item*> i);
 	void operator=(Inventory& inv)
 	{
 		this->weapon = inv.weapon;
 		this->armor = inv.armor;
 		this->accessory = inv.accessory;
 		this->consumable = inv.consumable;
-		//this->invenotryItem = inv.invenotryItem;
+		this->invenotryItem = inv.invenotryItem;
 	}
 };
 

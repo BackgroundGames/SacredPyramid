@@ -119,10 +119,14 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		{
 		case PlayerType::ZHAAK:
 			stats.health = 3;
-			inventory.weapon = Weapon(1, 2, WeaponType::SWORD, WeaponEffect::NO_EFFECT);
-			inventory.armor = Armor(1, ArmorType::LEATHER, ArmorEffect::NO_EFFECT);
-			inventory.accessory = Accessory(1, AccessoryType::ARTIFACT, AccessoryEffect::NO_EFFECT);
-			inventory.consumable = Consumable(1, 3, ConsumableType::POTION, ConsumableEffect::HEAL);
+			inventory = Inventory(	Weapon(1, 2, WeaponType::SWORD, WeaponEffect::NO_EFFECT),
+									Armor(1, ArmorType::LEATHER, ArmorEffect::NO_EFFECT),
+									Accessory(1, AccessoryType::ARTIFACT, AccessoryEffect::NO_EFFECT),
+									Consumable(1, 3, ConsumableType::POTION, ConsumableEffect::HEAL),
+									inventory.invenotryItem);
+			inventory.invenotryItem.push_back((Item*) new Weapon(1, 2, WeaponType::SWORD, WeaponEffect::NO_EFFECT));
+			inventory.invenotryItem.push_back((Item*) new Accessory(1, AccessoryType::ARTIFACT, AccessoryEffect::NO_EFFECT));
+			inventory.invenotryItem.push_back((Item*) new Consumable(1, 3, ConsumableType::POTION, ConsumableEffect::HEAL));
 			entity = new Zhaak(stats, inventory);
 			break;
 
@@ -135,10 +139,11 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 
 		case PlayerType::ELI:
 			stats.health = 3;
-			inventory.weapon = Weapon(3, 1, WeaponType::BOOK, WeaponEffect::NO_EFFECT);
-			inventory.armor = Armor(0, ArmorType::NO_ARMOR, ArmorEffect::NO_EFFECT);
-			inventory.accessory = Accessory(1, AccessoryType::TOKEN, AccessoryEffect::NO_EFFECT);
-			inventory.consumable = Consumable(1, 3, ConsumableType::POTION, ConsumableEffect::HEAL);
+			inventory = Inventory(	Weapon(3, 1, WeaponType::BOOK, WeaponEffect::NO_EFFECT),
+									Armor(0, ArmorType::NO_ARMOR, ArmorEffect::NO_EFFECT),
+									Accessory(1, AccessoryType::TOKEN, AccessoryEffect::NO_EFFECT),
+									Consumable(1, 3, ConsumableType::POTION, ConsumableEffect::HEAL),
+									inventory.invenotryItem);
 			entity = new Eli(stats, inventory);
 			break;
 

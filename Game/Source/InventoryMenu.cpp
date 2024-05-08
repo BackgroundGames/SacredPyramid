@@ -69,16 +69,18 @@ bool InventoryMenu::PostUpdate()
 	app->render->DrawTexture(app->sceneManager->currentScene->GetPlayer()->inventory.accessory.texture, X, Y += 100);
 	app->render->DrawTexture(app->sceneManager->currentScene->GetPlayer()->inventory.consumable.texture, X, Y += 100);
 
-	/*X += 246; Y -= 455;
-	for (size_t i = 0; i < 10; i++)
+	X += 246; Y -= 455;
+	for (size_t i = 0; i < app->sceneManager->currentScene->GetPlayer()->inventory.invenotryItem.size(); i++)
 	{
-		app->render->DrawTexture(app->sceneManager->currentScene->GetPlayer()->inventory.weapon.texture, X, Y += 100);
+		if (app->sceneManager->currentScene->GetPlayer()->inventory.invenotryItem.at(i) != nullptr)
+			app->render->DrawTexture(app->sceneManager->currentScene->GetPlayer()->inventory.invenotryItem.at(i)->texture, X, Y += 100);
+		
 		if (i == 4)
 		{
 			X += 104;
 			Y -= 500;
 		}
-	}*/
+	}
 
 	return true;
 }

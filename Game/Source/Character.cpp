@@ -279,18 +279,18 @@ void Character::DrawLife()
 
 Inventory::Inventory()
 {
-	this->weapon = Weapon();
-	this->armor = Armor();
-	this->accessory = Accessory();
-	this->consumable = Consumable();
-	//this->invenotryItem = {};
+	weapon = Weapon();
+	armor = Armor();
+	accessory = Accessory();
+	consumable = Consumable();
+	invenotryItem.clear();
 }
 
-Inventory::Inventory(Weapon w, Armor ar, Accessory ac, Consumable c/*, DynArray<Item*> inv*/)
+Inventory::Inventory(Weapon w, Armor ar, Accessory ac, Consumable c, vector<Item*> i)
 {
 	this->weapon = w;
 	this->armor = ar;
 	this->accessory = ac;
 	this->consumable = c;
-	//this->invenotryItem = inv;
+	this->invenotryItem = i;
 }
