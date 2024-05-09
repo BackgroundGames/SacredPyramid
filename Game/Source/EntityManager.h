@@ -125,6 +125,7 @@ public:
 	bool inCombat = false;
 	bool startCombat = false;
 	bool combatFinished = false;
+	bool hasLosed = false;
 
 	uint windowW, windowH;
 	SDL_Rect screenRect;

@@ -135,6 +135,12 @@
     <ClCompile Include="Source\InventoryMenu.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\WinScreen.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoseScreen.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -307,6 +313,12 @@
       <Filter>Items\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="Source\InventoryMenu.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WinScreen.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoseScreen.h">
       <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>

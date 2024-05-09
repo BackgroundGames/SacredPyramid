@@ -119,6 +119,7 @@
     <ClCompile Include="Source\Level2.cpp" />
     <ClCompile Include="Source\Level3.cpp" />
     <ClCompile Include="Source\Level4.cpp" />
+    <ClCompile Include="Source\LoseScreen.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
     <ClCompile Include="Source\Window.cpp" />
+    <ClCompile Include="Source\WinScreen.cpp" />
     <ClCompile Include="Source\Zhaak.cpp" />
     <ClInclude Include="Source\Amir.h" />
     <ClInclude Include="Source\Accessory.h" />
@@ -166,6 +168,7 @@
     <ClInclude Include="Source\Level2.h" />
     <ClInclude Include="Source\Level3.h" />
     <ClInclude Include="Source\Level4.h" />
+    <ClInclude Include="Source\LoseScreen.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\NPC.h" />
@@ -198,6 +201,7 @@
     <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
+    <ClInclude Include="Source\WinScreen.h" />
     <ClInclude Include="Source\Zhaak.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

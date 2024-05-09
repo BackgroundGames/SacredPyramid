@@ -509,6 +509,9 @@ void CombatManager::EndCombat()
 
 	ClearNavigation();
 
+	if (playersAlive == 0)
+		app->entityManager->hasLosed = true;
+	
 	// victory
 	for (int i = 0; i < players.size(); i++)
 	{

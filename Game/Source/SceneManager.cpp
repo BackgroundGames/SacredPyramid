@@ -12,6 +12,8 @@
 #include "GameTitle.h"
 #include "Menu.h"
 #include "GamePause.h"
+#include "WinScreen.h"
+#include "LoseScreen.h"
 #include "InventoryMenu.h"
 #include "Map.h"
 
@@ -36,17 +38,22 @@ SceneManager::SceneManager()
 	level4->sceneType = SceneType::LEVEL4;
 	settings = new Settings();
 	gamePause = new GamePause();
+	winScreen = new WinScreen();
+	loseScreen = new LoseScreen();
 	inventoryMenu = new InventoryMenu();
 
 	scenes.Add(intro);
 	scenes.Add(gameTitle);
 	scenes.Add(menu);
+	scenes.Add(winScreen);
+	scenes.Add(loseScreen);
 	scenes.Add(level1);
 	scenes.Add(level2);
 	scenes.Add(level3);
 	scenes.Add(level4);
 	scenes.Add(inventoryMenu);
 	scenes.Add(gamePause);
+	
 	scenes.Add(settings);
 }
 
@@ -217,8 +224,14 @@ void SceneManager::MakeFade()
 		++frameCount;
 		if (frameCount >= maxFadeFrames)
 		{
-			if (currentScene != nullptr) {
+			if (currentScene != nullptr) 
+			{
 				currentScene->CleanUp();
+
+				if (currentScene->sceneType == LEVEL1 || currentScene->sceneType == LEVEL2 || currentScene->sceneType == LEVEL3 || currentScene->sceneType == LEVEL4)
+					if (newScene->sceneType == WIN_SCREEN || newScene->sceneType == LOSE_SCREEN)
+						app->entityManager->CleanUp();
+
 				currentScene->active = false;
 			}
 

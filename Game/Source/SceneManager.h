@@ -17,6 +17,8 @@ class GameTitle;
 class Menu;
 class Settings;
 class GamePause;
+class WinScreen;
+class LoseScreen;
 class InventoryMenu;
 
 enum Fade_Step
@@ -88,6 +90,8 @@ public:
 	Menu* menu;
 	Settings* settings;
 	GamePause* gamePause;
+	WinScreen* winScreen;
+	LoseScreen* loseScreen;
 	InventoryMenu* inventoryMenu;
 
 	uint windowW, windowH;

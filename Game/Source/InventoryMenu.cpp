@@ -87,6 +87,8 @@ bool InventoryMenu::PostUpdate()
 
 bool InventoryMenu::CleanUp()
 {
+	app->tex->UnLoad(inventoryTexture);
+	app->tex->UnLoad(characterTexture);
 	return true;
 }
 

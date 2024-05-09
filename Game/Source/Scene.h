@@ -23,6 +23,8 @@ enum SceneType
 	LEVEL2,
 	LEVEL3,
 	LEVEL4,
+	WIN_SCREEN,
+	LOSE_SCREEN,
 	NONE
 };
 
