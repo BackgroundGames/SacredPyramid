@@ -3,6 +3,8 @@
 
 #include "Character.h"
 
+class Quest;
+
 class NPC : public Character
 {
 public:
@@ -20,12 +22,15 @@ public:
 	bool CleanUp();
 
 	void PerformDialog();
+	
+	void QuestAccepted();
 
 public:
 	Animation idleAnim;
 	uint id;
 	bool startTalking = false;
 	iPoint aux;
+	Quest* quest = nullptr;
 };
 #endif // !__NPC_H__
 

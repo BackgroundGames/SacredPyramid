@@ -141,6 +141,10 @@
     <ClCompile Include="Source\LoseScreen.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\QuestManager.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Quest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -321,6 +325,10 @@
     <ClInclude Include="Source\LoseScreen.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\QuestManager.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Quest.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Modules">

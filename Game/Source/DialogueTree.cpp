@@ -263,6 +263,10 @@ bool DialogueTree::ChoseOption(int optionid)
 
 	delOptions = true;
 
+	/*if (npcInteracted != nullptr) {
+
+	}*/
+
 	currentNode = currentNode->dialogueOptions[optionid].nextNode;
 
 	if (currentNode == nullptr) {

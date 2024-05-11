@@ -128,3 +128,20 @@ void NPC::PerformDialog()
 		dynamic_cast<Player*>(app->sceneManager->currentScene->players.at(i))->exploringState = ExploringState::TALKING;
 	}
 }
+
+void NPC::QuestAccepted()
+{
+	if (id == 0)
+	{
+		//terminar mision
+		//iniciar mision ir al bar
+	}
+	if (id == 1)
+	{
+		
+	}
+	if (id == 2)
+	{
+
+	}
+}

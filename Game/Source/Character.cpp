@@ -271,6 +271,10 @@ uint Character::DistanceToTile(iPoint Tile1, iPoint Tile2)
 
 void Character::DrawLife()
 {
+	if (stats.health < 0) {
+		stats.health = 0;
+	}
+
 	SDL_Rect quat = { position.x + currentAnimation->GetCurrentFrame().w/2 - 50 , position.y - currentAnimation->GetCurrentFrame().h/2 - 20, 100, 10 };
 	app->render->DrawRectangle(quat, 255, 0, 0, 150, true, true);
 	quat.w = (stats.health * 100) / maxHealth;

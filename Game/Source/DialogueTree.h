@@ -11,6 +11,7 @@
 using namespace std;
 
 class DialogueNode;
+class NPC;
 
 class DialogueOption {
 public:
@@ -71,6 +72,8 @@ private:
 	vector<SDL_Texture*> textures;
 	uint windowW, windowH;
 	const char* dialog;
+
+	NPC* npcInteracted = nullptr;
 };
 
 #endif
