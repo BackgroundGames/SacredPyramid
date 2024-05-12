@@ -1,5 +1,6 @@
 #include "Eli.h"
 #include "App.h"
+#include "Audio.h"
 
 Eli::Eli()
 {
@@ -44,6 +45,8 @@ bool Eli::Awake()
 	{
 		idleAnimB.PushBack({ idleBNode.attribute("x").as_int(), idleBNode.attribute("y").as_int() ,idleBNode.attribute("w").as_int() ,idleBNode.attribute("h").as_int() });
 	}
+
+	atack = app->audio->LoadFx("Assets/Audio/Fx/BookSlap.wav");
 
 	return true;
 }

@@ -174,6 +174,7 @@ public:
 
 	int sandFx;
 	int sandChannel;
+	int atack;
 };
 
 

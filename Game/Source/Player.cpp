@@ -329,6 +329,7 @@ bool Player::Update(float dt)
 				iPoint highlightedTileWorld = app->map->MapToWorld(destination.x, destination.y);
 				app->render->DrawTexture(selectionTex, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
+					app->audio->PlayFx(atack);
 					app->entityManager->combatManager->CheckIfHit(destination, &inventory.weapon);
 					combatState = CombatState::IDLE;
 					rangeTiles.Clear();
