@@ -37,6 +37,10 @@ Left click- Move & Interact
 
 F10- God Mode
 
+Q- Toggle quest menu/UI
+
+I- Inventory
+
 (Combat Only)
 
 K- Attack on click
