@@ -9,10 +9,12 @@ using namespace std;
 
 class QuestManager : public Module
 {
+public:
+
 	QuestManager();
 
 	// Destructor
-	virtual ~QuestManager();
+	~QuestManager();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -28,9 +30,11 @@ class QuestManager : public Module
 	// Called before quitting
 	bool CleanUp();
 
+	Quest* AddQuest(int id);
+
 public:
 	pugi::xml_node config;
-	vector<Quest> activeQuests;
+	vector<Quest*> activeQuests;
 };
 
 #endif //__QUESTMANAGER_H__

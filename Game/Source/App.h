@@ -23,6 +23,7 @@ class SceneManager;
 class GuiManager;
 class Map;
 class DialogueTree;
+class QuestManager;
 
 class App
 {
@@ -102,6 +103,7 @@ public:
 	GuiManager* guiManager;
 	Map* map;
 	DialogueTree* dialogueTree;
+	QuestManager* questManager;
 
 	bool debug = false;
 

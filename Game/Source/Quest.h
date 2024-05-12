@@ -7,16 +7,17 @@
 enum QuestType
 {
 	TALKTO,
-	GETITEM,
-	NONE
+	GETITEM
 };
 
 class Quest
 {
+public:
+
 	Quest();
 
 	// Destructor
-	virtual ~Quest();
+	~Quest();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -41,12 +42,14 @@ public:
 	SString questDescription;
 	QuestType questType;
 	pugi::xml_node config;
+	bool completed = false;
 };
 
 class Character;
 
 class TalkTo : public Quest
 {
+public:
 	TalkTo();
 
 	// Destructor

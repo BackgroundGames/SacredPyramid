@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "GuiManager.h"
 #include "DialogueTree.h"
+#include "QuestManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -38,6 +39,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager();
 	guiManager = new GuiManager();
 	dialogueTree = new DialogueTree();
+	questManager = new QuestManager();
 
 
 	// Ordered for awake / Start / Update
@@ -50,6 +52,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(sceneManager);
 	AddModule(entityManager);
 	AddModule(dialogueTree);
+	AddModule(questManager);
 	AddModule(guiManager);
 
 	// Render last to swap buffer

@@ -276,9 +276,18 @@ void Character::DrawLife()
 	}
 
 	SDL_Rect quat = { position.x + currentAnimation->GetCurrentFrame().w/2 - 50 , position.y - currentAnimation->GetCurrentFrame().h/2 - 20, 100, 10 };
-	app->render->DrawRectangle(quat, 255, 0, 0, 150, true, true);
-	quat.w = (stats.health * 100) / maxHealth;
-	app->render->DrawRectangle(quat, 255, 0, 0, 255, true, true);
+
+	if (type == EntityType::PLAYER) {
+		app->render->DrawRectangle(quat, 0, 255, 0, 150, true, true);
+		quat.w = (stats.health * 100) / maxHealth;
+		app->render->DrawRectangle(quat, 0, 255, 0, 255, true, true);
+	}
+	else {
+		app->render->DrawRectangle(quat, 255, 0, 0, 150, true, true);
+		quat.w = (stats.health * 100) / maxHealth;
+		app->render->DrawRectangle(quat, 255, 0, 0, 255, true, true);
+	}
+
 }
 
 Inventory::Inventory()
