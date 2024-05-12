@@ -147,13 +147,6 @@ bool Level3::Update(float dt)
 		}
 	}
 
-	if (app->entityManager->hasLosed)
-	{
-		app->entityManager->hasLosed = false;
-		GetPlayer()->exploringState = ExploringState::NONE;
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->loseScreen);
-	}
-
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->LoadRequest();

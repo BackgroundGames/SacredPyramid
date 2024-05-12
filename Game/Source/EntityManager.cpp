@@ -358,6 +358,13 @@ bool EntityManager::PostUpdate()
 		SDL_RenderFillRect(app->render->renderer, &screenRect);
 	}
 
+	if (hasLosed)
+	{
+		hasLosed = false;
+		app->sceneManager->currentScene->GetPlayer()->exploringState = ExploringState::NONE;
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->loseScreen);
+	}
+
 	return true;
 }
 
