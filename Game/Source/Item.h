@@ -22,16 +22,19 @@ public:
 
 	bool CleanUp();
 
-public:
+	void PlaceItem(int x, int y);
 
+public:
+	uint id = 0;
 	bool isPicked = false;
 	SDL_Texture* texture;
 	ItemType subtype;
 
 private:
-
-	const char* texturePath;
 	uint texW, texH;
+
+	//debug
+	SDL_Rect prect;
 };
 
 #endif // __ITEM_H__

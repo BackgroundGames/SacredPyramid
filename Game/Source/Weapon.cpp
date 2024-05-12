@@ -9,11 +9,13 @@ Weapon::Weapon() : Item()
 
 	range = 1;
 	damage = 1;
-	wtype = WeaponType::NO_WEAPON;
-	effect = WeaponEffect::NO_EFFECT;
+	wtype = "no_weapon";
+	effect = "no_effect";
+
+	Awake();
 }
 
-Weapon::Weapon(int range, int damage, WeaponType wtype, WeaponEffect effect)
+Weapon::Weapon(int range, int damage, string wtype, string effect)
 {
 	name.Create("weapon");
 	subtype = ItemType::WEAPON;
@@ -34,27 +36,15 @@ bool Weapon::Awake()
 {
 	Item::Awake();
 
-	switch (wtype)
-	{
-	case WeaponType::SWORD:
+	if (wtype == "sword")
 		texture = app->tex->Load("Assets/Textures/Sword.png");
-		break;
-	case WeaponType::BOOK:
-		texture = app->tex->Load("Assets/Textures/Book.png");
-		break;
-	case WeaponType::SHIELD:
-		break;
-	case WeaponType::WRAPS:
-		break;
-	case WeaponType::DAGGER:
-		texture = app->tex->Load("Assets/Textures/Knife_Inv.png");
-		break;
-	case WeaponType::FISTS:
-		break;
-	default:
-		break;
-	}
 
+	if (wtype == "book")
+		texture = app->tex->Load("Assets/Textures/Book.png");
+	
+	if (wtype == "dagger")
+		texture = app->tex->Load("Assets/Textures/Knife_Inv.png");
+		
 	return true;
 }
 
