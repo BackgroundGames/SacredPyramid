@@ -43,6 +43,8 @@ public:
 
 	void StopFx(unsigned int channel);
 
+	bool PlayMusicSpatially(iPoint musicGeneratorPosition);
+
 private:
 
 	_Mix_Music* music;

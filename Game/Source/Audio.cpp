@@ -1,5 +1,7 @@
 #include "App.h"
 #include "Audio.h"
+#include "SceneManager.h"
+#include "Player.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -202,4 +204,16 @@ void Audio::UnloadFx(unsigned int id)
 void Audio::StopFx(unsigned int channel)
 {
 	Mix_HaltChannel(channel);
+}
+
+bool Audio::PlayMusicSpatially(iPoint musicGeneratorPosition)
+{
+	// Todo 2 (done): Complete the function to be able to play music tracks spatially
+	int setMusicVolume = MIX_MAX_VOLUME - (sqrt(pow(app->sceneManager->currentScene->zhaak->position.x - musicGeneratorPosition.x, 2) + pow(app->sceneManager->currentScene->zhaak->position.y - musicGeneratorPosition.y, 2)) / 6);
+
+	if (setMusicVolume <= 0) setMusicVolume = 0;
+
+	Mix_VolumeMusic(setMusicVolume);
+
+	return true;
 }
