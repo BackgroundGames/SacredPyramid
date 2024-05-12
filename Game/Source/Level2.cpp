@@ -9,6 +9,7 @@
 #include "Item.h"
 #include "DialogueTree.h"
 #include "NPC.h"
+#include "QuestManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -35,6 +36,8 @@ bool Level2::Start()
 	app->map->path = sceneconfig.child("map").attribute("path").as_string();
 	app->render->SetSelectionTex(app->tex->Load(sceneconfig.child("map").attribute("selectionPath").as_string()));
 	app->map->InitMap();
+
+	app->questManager->QuestCompleted(1);
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);

@@ -43,6 +43,7 @@ public:
 	QuestType questType;
 	pugi::xml_node config;
 	bool completed = false;
+	int id = -1;
 };
 
 class Character;
@@ -50,7 +51,7 @@ class Character;
 class TalkTo : public Quest
 {
 public:
-	TalkTo();
+	TalkTo(int id);
 
 	// Destructor
 	~TalkTo();

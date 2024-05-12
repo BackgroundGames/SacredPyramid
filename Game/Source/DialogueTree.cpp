@@ -262,10 +262,11 @@ bool DialogueTree::ChoseOption(int optionid)
 {
 
 	delOptions = true;
-
-	/*if (npcInteracted != nullptr) {
-
-	}*/
+	
+	if (currentNode->dialogueOptions[optionid].returnCode == 1 && npcInteracted != nullptr) {
+		npcInteracted->QuestAccepted();
+		npcInteracted = nullptr;
+	}
 
 	currentNode = currentNode->dialogueOptions[optionid].nextNode;
 

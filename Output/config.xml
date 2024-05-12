@@ -84,7 +84,7 @@
 				<option text="- Thanks!" returnCode="0" pnode="1"/>
 			</node>
 			<node id="1" speaker="1" text="Thanks for the help!">
-				<option text="..." returnCode="0" pnode="-1"/>
+				<option text="..." returnCode="1" pnode="-1"/>
 			</node>
 		</dialogue1>
 		<!--- Eli talking to the bartender, inside the bar.-->
@@ -202,7 +202,7 @@
 				<option text="..." returnCode="0" pnode="27"/>
 			</node>	
 			<node id="27" speaker="7" text="Whatever, let's go.">
-				<option text="..." returnCode="0" pnode="-1"/>
+				<option text="..." returnCode="1" pnode="-1"/>
 			</node>	
 		</dialogue4>
 		<!--- Zhaak and Eli confront the Sphinx -->

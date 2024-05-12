@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Item.h"
 #include "DialogueTree.h"
+#include "QuestManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -110,6 +111,7 @@ bool Level1::Start()
 
 		app->dialogueTree->performDialogue("dialogue0");
 		GetPlayer()->exploringState = ExploringState::TALKING;
+		app->questManager->AddQuest(0, 0);
 
 		/*for (pugi::xml_node itemNode = sceneconfig.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 		{

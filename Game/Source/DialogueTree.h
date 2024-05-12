@@ -73,6 +73,7 @@ private:
 	uint windowW, windowH;
 	const char* dialog;
 
+public: 
 	NPC* npcInteracted = nullptr;
 };
 

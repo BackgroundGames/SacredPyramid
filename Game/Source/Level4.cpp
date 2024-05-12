@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Item.h"
 #include "DialogueTree.h"
+#include "QuestManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -87,6 +88,8 @@ bool Level4::Start()
 	cameraFocus = GetPlayer();
 
 	LockCamera();
+
+	app->questManager->QuestCompleted(2);
 
 	return true;
 }

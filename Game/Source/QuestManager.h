@@ -30,11 +30,15 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	Quest* AddQuest(int id);
+	Quest* AddQuest(int type, int id);
+
+	void QuestCompleted(int id);
 
 public:
 	pugi::xml_node config;
 	vector<Quest*> activeQuests;
+	uint winW, winH;
+	bool showQuests = true;
 };
 
 #endif //__QUESTMANAGER_H__

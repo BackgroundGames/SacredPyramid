@@ -14,8 +14,21 @@ bool Quest::Awake(pugi::xml_node config)
 
 //Talk To
 
-TalkTo::TalkTo() : Quest() {
-	questName = "hola";
+TalkTo::TalkTo(int id) : Quest() {
+	if (id == 0) {
+		questName = "Seek for help";
+		
+	}
+	else if (id == 1) {
+		questName = "Go to the bar";
+	}
+	else if (id == 2) {
+		questName = "Enter the pyramid";
+	}
+
+
+	questDescription = "incompleted";
+	this->id = id;
 }
 
 bool TalkTo::Start()
@@ -25,9 +38,6 @@ bool TalkTo::Start()
 
 bool TalkTo::Update(float dt)
 {
-	if (completed) {
-		questName = "done";
-	}
 	return true;
 }
 

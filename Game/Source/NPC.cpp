@@ -5,6 +5,7 @@
 #include "DialogueTree.h"
 #include "Map.h"
 #include "Level3.h"
+#include "QuestManager.h"
 
 NPC::NPC()
 {
@@ -88,10 +89,12 @@ bool NPC::Update(float dt)
 		if (id == 0) 
 		{
 			app->dialogueTree->performDialogue("dialogue4");
+			app->dialogueTree->npcInteracted = this;
 		}
 		if (id == 1) 
 		{
 			app->dialogueTree->performDialogue("dialogue1");
+			app->dialogueTree->npcInteracted = this;
 		}
 		if (id == 2) 
 		{
@@ -133,12 +136,15 @@ void NPC::QuestAccepted()
 {
 	if (id == 0)
 	{
-		//terminar mision
 		//iniciar mision ir al bar
+		app->questManager->AddQuest(0, 2);
 	}
 	if (id == 1)
 	{
-		
+		//terminar mision hablar con alguien
+		app->questManager->QuestCompleted(0);
+		//iniciar mision ir al bar
+		app->questManager->AddQuest(0, 1);
 	}
 	if (id == 2)
 	{
