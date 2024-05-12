@@ -59,7 +59,7 @@ bool Zhaak::Awake()
 		walkingAnim.PushBack({ idleNode.attribute("x").as_int(), idleNode.attribute("y").as_int() ,idleNode.attribute("w").as_int() ,idleNode.attribute("h").as_int() });
 	}
 
-	atack = app->audio->LoadFx("Assets/Audio/Fx/KnifeStab.wav");
+	atackFx = app->audio->LoadFx("Assets/Audio/Fx/KnifeStab.wav");
 
 	return true;
 }

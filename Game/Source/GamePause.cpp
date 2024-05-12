@@ -38,7 +38,7 @@ bool GamePause::Start()
 	SDL_Rect exitPos = { windowW / 2 - 50, windowH / 2 - 25 + (windowH / 7), 100,50 };
 	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "EXIT", exitPos, this);
 
-	app->audio->PlayMusic(sceneconfig.attribute("audio").as_string());
+	app->audio->PlayMusic(sceneconfig.attribute("audio").as_string(), 0);
 
 	return true;
 }
@@ -76,7 +76,7 @@ bool GamePause::OnGuiMouseClickEvent(GuiControl* control)
 	if (control->id == 10) {
 		app->sceneManager->CloseGamePause();
 		app->sceneManager->currentScene->GetPlayer()->exploringState = app->sceneManager->currentScene->GetPlayer()->previousState;
-		//app->audio->PlayMusic(app->sceneManager->currentScene->sceneconfig.attribute("audio").as_string(), 0);
+		app->audio->PlayMusic(app->sceneManager->currentScene->sceneconfig.attribute("audio").as_string(), 0);
 	}
 	if (control->id == 11) {
 		app->sceneManager->OpenSettings();

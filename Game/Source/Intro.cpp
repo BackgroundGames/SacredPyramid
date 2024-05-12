@@ -19,6 +19,13 @@ Intro::~Intro()
 bool Intro::Awake(pugi::xml_node config)
 {
 	sceneconfig = config;
+
+	animation.speed = 0.05f;
+	animation.loop = false;
+	animation.PushBack({0,0,1280,720});
+	animation.PushBack({ 1280,0,1280,720 });
+	animation.PushBack({ 0,720,1280,720 });
+	animation.PushBack({ 1280,720,1280,720 });
 	return true;
 }
 
@@ -41,6 +48,7 @@ bool Intro::PreUpdate()
 
 bool Intro::Update(float dt)
 {
+	animation.Update();
 	return true;
 }
 
@@ -48,7 +56,7 @@ bool Intro::PostUpdate()
 {
 	//OPTICK_EVENT();
 
-	app->render->DrawTexture(img, windowW/2 - texW/2, windowH / 2 - texH / 2,NULL);
+	app->render->DrawTexture(img, 0, 0, &animation.GetCurrentFrame());
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->gameTitle);

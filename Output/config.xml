@@ -23,7 +23,7 @@
 	<entitymanager audio="Assets\Audio\Music\Battle.ogg"/>
 
 	<scenemanager>
-		<intro texturePath="Assets/Textures/bgg.jpg" audio="Assets/Audio/Fx/logo.wav"/>
+		<intro texturePath="Assets/Textures/BGG_Anim.png" audio="Assets/Audio/Fx/logo.wav"/>
 		<gameTitle texturePath="Assets/Textures/gameTitle.png" audio="Assets/Audio/Fx/Flute Sound Effect.wav"/>
 		<menu texturePath="Assets/Textures/Menu Piramide.jpeg" audio="Assets\Audio\Music\Main_Menu.ogg"/>
 		<inventory texturePath="Assets/Textures/inventory.png" exitButton="Assets/Textures/check.png">

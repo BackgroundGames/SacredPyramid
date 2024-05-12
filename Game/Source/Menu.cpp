@@ -9,6 +9,7 @@
 #include "GuiManager.h"
 #include "Settings.h"
 #include "Level1.h"
+#include "QuestManager.h"
 
 Menu::Menu() : Scene()
 {
@@ -27,6 +28,8 @@ bool Menu::Awake(pugi::xml_node config)
 
 bool Menu::Start()
 {
+	app->questManager->CleanUp();
+
 	img = app->tex->Load(config.attribute("texturePath").as_string());
 	app->audio->PlayMusic(config.attribute("audio").as_string(),0);
 	app->tex->GetSize(img, texW, texH);

@@ -95,7 +95,7 @@ bool Character::CleanUp()
 {
 	app->tex->UnLoad(texture);
 	app->audio->UnloadFx(sandFx);
-	app->audio->UnloadFx(atack);
+	app->audio->UnloadFx(atackFx);
 	texture = nullptr;
 
 	return true;

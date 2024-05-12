@@ -2,6 +2,7 @@
 #define __SCENE_INTRO__
 
 #include "Scene.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -40,6 +41,8 @@ private:
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	int introFx;
+
+	Animation animation;
 };
 
 #endif //__SCENE_INTRO__

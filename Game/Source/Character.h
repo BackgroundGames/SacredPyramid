@@ -169,12 +169,13 @@ public:
 	//player state
 	MainState mainState;
 	CombatState combatState;
+	CombatState previousCombatState;
 	ExploringState exploringState;
 	ExploringState previousState;
 
-	int sandFx;
+	int sandFx = -1;
 	int sandChannel;
-	int atack;
+	int atackFx;
 };
 
 

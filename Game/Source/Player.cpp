@@ -293,7 +293,9 @@ bool Player::Update(float dt)
 
 		case CombatState::IDLE:
 
-			app->audio->StopFx(sandChannel);
+			if (previousCombatState == CombatState::MOVING) {
+				app->audio->StopFx(sandChannel);
+			}
 
 			if (PosState == Direction::UL || PosState == Direction::UR) {
 				currentAnimation = &idleAnimB;
@@ -301,6 +303,8 @@ bool Player::Update(float dt)
 			else {
 				currentAnimation = &idleAnim;
 			}
+
+			previousCombatState = CombatState::IDLE;
 
 			break;
 			
@@ -319,8 +323,10 @@ bool Player::Update(float dt)
 			}
 			else
 			{
+				previousCombatState = CombatState::MOVING;
 				combatState = CombatState::IDLE;
 			}
+
 			break;
 
 		case CombatState::ATTACKING:
@@ -329,11 +335,12 @@ bool Player::Update(float dt)
 				iPoint highlightedTileWorld = app->map->MapToWorld(destination.x, destination.y);
 				app->render->DrawTexture(selectionTex, highlightedTileWorld.x, highlightedTileWorld.y + app->map->GetTileHeight() / 2);
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
-					app->audio->PlayFx(atack);
 					app->entityManager->combatManager->CheckIfHit(destination, &inventory.weapon);
 					combatState = CombatState::IDLE;
+					previousCombatState = CombatState::ATTACKING;
 					rangeTiles.Clear();
 					app->input->ResetMouseButtonState();
+					app->audio->PlayFx(atackFx);
 				}
 			}
 
@@ -365,6 +372,7 @@ bool Player::Update(float dt)
 							movementUsed += path.Count() - 1;
 							rangeTiles.Clear();
 							app->input->ResetMouseButtonState();
+							sandChannel = app->audio->PlayFx(sandFx, -1);
 						}
 					}
 				}
