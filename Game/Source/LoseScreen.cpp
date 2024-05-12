@@ -26,7 +26,7 @@ bool LoseScreen::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	app->win->GetWindowSize(windowW, windowH);
-	app->audio->PlayMusic(sceneconfig.attribute("audio").as_string());
+	app->audio->PlayMusic(sceneconfig.attribute("audio").as_string(),0);
 	return true;
 }
 

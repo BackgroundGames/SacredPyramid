@@ -71,7 +71,7 @@ bool Player::Update(float dt)
 		switch (exploringState)
 		{
 		case ExploringState::IDLE:
-
+			//app->audio->StopFx(sandChannel);
 			ResetPath();
 
 			if (PosState == Direction::UL || PosState == Direction::UR) {

@@ -82,6 +82,13 @@ bool InventoryMenu::PostUpdate()
 		}
 	}
 
+	app->render->DrawText("health:", 300, 120, 130, 20, 255, 255, 255, 0);
+	app->render->DrawText("3", 440, 120, 20, 20, 255, 255, 255, 0);
+	app->render->DrawText("damge:", 300, 145, 110, 20, 255, 255, 255, 0);
+	app->render->DrawText("1", 440, 145, 20, 20, 255, 255, 255, 0);
+	app->render->DrawText("mvp:", 300, 170, 70, 20, 255, 255, 255, 0);
+	app->render->DrawText("3", 440, 170, 20, 20, 255, 255, 255, 0);
+
 	return true;
 }
 

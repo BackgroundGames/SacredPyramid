@@ -24,7 +24,6 @@ bool Intro::Awake(pugi::xml_node config)
 	animation.loop = false;
 	animation.PushBack({0,0,1280,720});
 	animation.PushBack({ 1280,0,1280,720 });
-	animation.PushBack({ 0,720,1280,720 });
 	animation.PushBack({ 1280,720,1280,720 });
 	return true;
 }

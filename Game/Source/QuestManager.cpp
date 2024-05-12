@@ -68,7 +68,7 @@ bool QuestManager::PostUpdate()
 
 bool QuestManager::CleanUp()
 {
-    app->audio->UnloadFx(questComplete);
+    //app->audio->UnloadFx(questComplete);
     for (size_t i = 0; i < activeQuests.size(); i++)
     {
         delete activeQuests.at(i);
