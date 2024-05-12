@@ -39,6 +39,8 @@ public:
 	vector<Quest*> activeQuests;
 	uint winW, winH;
 	bool showQuests = true;
+
+	int questComplete;
 };
 
 #endif //__QUESTMANAGER_H__

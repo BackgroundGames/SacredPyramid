@@ -33,8 +33,8 @@
 			</inventoryItem>
 		</inventory>
 		<win_screen texturePath="Assets/Textures/Win.png"/>
-		<lose_screen texturePath="Assets/Textures/You died.png"/>
-		<gamepause audio="Assets\Audio\Music\Pause.ogg"/>
+		<lose_screen texturePath="Assets/Textures/You died.png" audio="Assets\Audio\Music\GameOver.ogg"/>
+		<gamepause audio="Assets\Audio\Music\Pause2.wav"/>
 		<level1 audio="Assets\Audio\Music\Town.ogg">
 			<eli x="37" y="29"/>
 			<enemy x="25" y="25" cx="25" cy="25" id="1" p1x="20" p1y="25" p2x="20" p2y="26">

@@ -60,6 +60,9 @@ private:
 	uint texW, texH;
 	SDL_Texture* mouseTileTex = nullptr;
 	// 1 4 7 2 3
+
+	//Audio
+	int rockFx;
 };
 
 #endif // __LEVEL3_H__

@@ -3,6 +3,7 @@
 #include "App.h"
 #include "Render.h"
 #include "Window.h"
+#include "Audio.h"
 
 QuestManager::QuestManager() : Module()
 {
@@ -22,6 +23,7 @@ bool QuestManager::Awake(pugi::xml_node config)
 bool QuestManager::Start()
 {
     app->win->GetWindowSize(winW,winH);
+    questComplete = app->audio->LoadFx("Assets/Audio/Fx/Quest complete.wav");
     return true;
 }
 
@@ -89,6 +91,7 @@ void QuestManager::QuestCompleted(int id)
         if (activeQuests.at(i)->id == id) {
             activeQuests.at(i)->questDescription = "completed";
             activeQuests.at(i)->completed = true;
+            app->audio->PlayFx(questComplete);
         }
     }
 }

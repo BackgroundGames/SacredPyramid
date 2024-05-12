@@ -38,7 +38,7 @@ bool GamePause::Start()
 	SDL_Rect exitPos = { windowW / 2 - 50, windowH / 2 - 25 + (windowH / 7), 100,50 };
 	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "EXIT", exitPos, this);
 
-	//app->audio->PlayMusic(sceneconfig.attribute("audio").as_string(), 0);
+	app->audio->PlayMusic(sceneconfig.attribute("audio").as_string());
 
 	return true;
 }

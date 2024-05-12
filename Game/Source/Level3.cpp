@@ -38,6 +38,7 @@ bool Level3::Start()
 	app->render->SetSelectionTex(app->tex->Load(sceneconfig.child("map").attribute("selectionPath").as_string()));
 	app->map->InitMap();
 	app->audio->PlayMusic(sceneconfig.attribute("audio").as_string(), 0);
+	rockFx = app->audio->LoadFx("Assets/Audio/Fx/Rock_press.wav");
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -136,14 +137,17 @@ bool Level3::Update(float dt)
 
 	if (talkedSphinx)
 	{
-		if (GetPlayer()->GetTile() == iPoint(10, 25) || GetPlayer()->GetTile() == iPoint(11, 27) ||
-			GetPlayer()->GetTile() == iPoint(13, 25) || GetPlayer()->GetTile() == iPoint(14, 27) ||
-			GetPlayer()->GetTile() == iPoint(15, 25) || GetPlayer()->GetTile() == iPoint(16, 28) ||
-			GetPlayer()->GetTile() == iPoint(17, 26) || GetPlayer()->GetTile() == iPoint(18, 28) &&
-			GetPlayer()->exploringState == ExploringState::IDLE &&
-			GetPlayer()->GetTile().x != playerPuzzle.back().x && GetPlayer()->GetTile().y != playerPuzzle.back().y) {
-
-			addInPuzzle(GetPlayer()->GetTile());
+		if (GetPlayer()->exploringState == ExploringState::IDLE &&
+			GetPlayer()->GetTile() != playerPuzzle.back())
+		{
+			if (GetPlayer()->GetTile() == iPoint(10, 25) || GetPlayer()->GetTile() == iPoint(11, 27) ||
+				GetPlayer()->GetTile() == iPoint(13, 25) || GetPlayer()->GetTile() == iPoint(14, 27) ||
+				GetPlayer()->GetTile() == iPoint(15, 25) || GetPlayer()->GetTile() == iPoint(16, 28) ||
+				GetPlayer()->GetTile() == iPoint(17, 26) || GetPlayer()->GetTile() == iPoint(18, 28)) 
+			{
+				addInPuzzle(GetPlayer()->GetTile());
+				app->audio->PlayFx(rockFx);
+			}
 		}
 	}
 
@@ -191,6 +195,8 @@ bool Level3::CleanUp()
 		delete npcs[i];
 	}
 	npcs.clear();
+
+	app->audio->UnloadFx(rockFx);
 
 	return true;
 }
