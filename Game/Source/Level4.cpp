@@ -114,6 +114,12 @@ bool Level4::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x += (int)ceil(camSpeed * dt);
 
+	if (app->entityManager->hasLosed)
+	{
+		app->entityManager->hasLosed = false;
+		GetPlayer()->exploringState = ExploringState::NONE;
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->loseScreen);
+	}
 
 	if (GetPlayer()->GetTile() == endTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
 		GetPlayer()->exploringState = ExploringState::NONE;
@@ -138,7 +144,10 @@ bool Level4::PostUpdate()
 
 bool Level4::CleanUp()
 {
-	if (app->sceneManager->newScene == (Scene*)app->sceneManager->menu) {
+	if (app->sceneManager->newScene->sceneType == MENU ||
+		app->sceneManager->newScene->sceneType == WIN_SCREEN ||
+		app->sceneManager->newScene->sceneType == LOSE_SCREEN)
+	{
 		for (size_t i = 0; i < players.size(); i++)
 		{
 			players[i]->CleanUp();

@@ -67,18 +67,6 @@ bool Level2::Start()
 		eli->OnGuiMouseClickEvent(npcs[0]);
 	}
 
-	/*enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-	enemy->parameters = sceneconfig.child("enemy");
-	enemy->Start();*/
-
-	// iterate all items in the scene
-	// Check https://pugixml.org/docs/quickstart.html#access
-	/*for (pugi::xml_node itemNode = sceneconfig.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
-	{
-		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-		item->parameters = itemNode;
-	}*/
-
 	app->render->camera.y = 0;
 	app->render->camera.x = 0;
 	cameraFocus = GetPlayer();
@@ -110,8 +98,6 @@ bool Level2::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x += (int)ceil(camSpeed * dt);
 
-	//Implement a method that repositions the player in the map with a mouse click
-
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->LoadRequest();
@@ -129,7 +115,10 @@ bool Level2::PostUpdate()
 
 bool Level2::CleanUp()
 {
-	if (app->sceneManager->newScene == (Scene*)app->sceneManager->menu) {
+	if (app->sceneManager->newScene->sceneType == MENU ||
+		app->sceneManager->newScene->sceneType == WIN_SCREEN ||
+		app->sceneManager->newScene->sceneType == LOSE_SCREEN)
+	{
 		for (size_t i = 0; i < players.size(); i++)
 		{
 			players[i]->CleanUp();

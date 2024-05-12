@@ -28,6 +28,10 @@ SceneManager::SceneManager()
 	gameTitle->sceneType = SceneType::GAME_TITLE;
 	menu = new Menu();
 	menu->sceneType = SceneType::MENU;
+	winScreen = new WinScreen();
+	winScreen->sceneType = SceneType::WIN_SCREEN;
+	loseScreen = new LoseScreen();
+	loseScreen->sceneType = SceneType::LOSE_SCREEN;
 	level1 = new Level1();
 	level1->sceneType = SceneType::LEVEL1;
 	level2 = new Level2();
@@ -38,8 +42,6 @@ SceneManager::SceneManager()
 	level4->sceneType = SceneType::LEVEL4;
 	settings = new Settings();
 	gamePause = new GamePause();
-	winScreen = new WinScreen();
-	loseScreen = new LoseScreen();
 	inventoryMenu = new InventoryMenu();
 
 	scenes.Add(intro);
@@ -228,16 +230,14 @@ void SceneManager::MakeFade()
 			{
 				currentScene->CleanUp();
 
-				if (currentScene->sceneType == LEVEL1 || currentScene->sceneType == LEVEL2 || currentScene->sceneType == LEVEL3 || currentScene->sceneType == LEVEL4)
-					if (newScene->sceneType == WIN_SCREEN || newScene->sceneType == LOSE_SCREEN)
-						app->entityManager->CleanUp();
-
 				currentScene->active = false;
 			}
 
 			currentScene = newScene;
 
-			if (currentScene == menu) {
+			if (currentScene->sceneType == MENU ||
+				currentScene->sceneType == WIN_SCREEN ||
+				currentScene->sceneType == LOSE_SCREEN) {
 				app->map->CleanUp();
 				app->map->active = false;
 				app->entityManager->CleanUp();

@@ -150,7 +150,13 @@ bool Level1::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x += (int)ceil(camSpeed * dt);
 
-	//DEBUG: Change Scenes forward and backward
+	if (app->entityManager->hasLosed)
+	{
+		app->entityManager->hasLosed = false;
+		GetPlayer()->exploringState = ExploringState::NONE;
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->loseScreen);
+	}
+
 	if (GetPlayer()->GetTile() == tabernTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
 		GetPlayer()->exploringState = ExploringState::NONE;
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
@@ -160,13 +166,6 @@ bool Level1::Update(float dt)
 		GetPlayer()->exploringState = ExploringState::NONE;
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level3);
 	}
-
-	//degug
-	/*if (app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level2);
-
-	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->menu);*/
 
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->SaveRequest();
@@ -179,15 +178,15 @@ bool Level1::PostUpdate()
 {
 	bool ret = true;
 
-	//if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		//ret = false;
-
 	return ret;
 }
 
 bool Level1::CleanUp()
 {
-	if (app->sceneManager->newScene == (Scene*)app->sceneManager->menu) {
+	if (app->sceneManager->newScene->sceneType == MENU ||
+		app->sceneManager->newScene->sceneType == WIN_SCREEN ||
+		app->sceneManager->newScene->sceneType == LOSE_SCREEN) 
+	{
 		for (size_t i = 0; i < players.size(); i++)
 		{
 			players[i]->CleanUp();
@@ -214,6 +213,8 @@ bool Level1::CleanUp()
 		delete npcs[i];
 	}
 	npcs.clear();
+
+	cameraFocus = nullptr;
 
 	return true;
 }

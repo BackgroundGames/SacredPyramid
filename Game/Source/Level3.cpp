@@ -91,15 +91,16 @@ bool Level3::Start()
 		npc->Start();
 	}
 
+	talkedSphinx = false;
+
 	playerPuzzle.clear();
 
 	//The corrcet answer to the Puzzle
-	correctPuzzle.push_back({ 0, 0 });
-	correctPuzzle.push_back({ 10, 25 });
-	correctPuzzle.push_back({ 14, 27 });
-	correctPuzzle.push_back({ 17, 26 });
-	correctPuzzle.push_back({ 11, 27 });
-	correctPuzzle.push_back({ 13, 25 });
+	correctPuzzle.push_back({ 10, 25 });		//Tile 1
+	correctPuzzle.push_back({ 14, 27 });		//Tile 4
+	correctPuzzle.push_back({ 17, 26 });		//Tile 7
+	correctPuzzle.push_back({ 11, 27 });		//Tile 2
+	correctPuzzle.push_back({ 13, 25 });		//Tile 3
 
 	app->render->camera.y = 0;
 	app->render->camera.x = 0;
@@ -146,6 +147,13 @@ bool Level3::Update(float dt)
 		}
 	}
 
+	if (app->entityManager->hasLosed)
+	{
+		app->entityManager->hasLosed = false;
+		GetPlayer()->exploringState = ExploringState::NONE;
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->loseScreen);
+	}
+
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->LoadRequest();
@@ -160,7 +168,10 @@ bool Level3::PostUpdate()
 
 bool Level3::CleanUp()
 {
-	if (app->sceneManager->newScene == (Scene*)app->sceneManager->menu) {
+	if (app->sceneManager->newScene->sceneType == MENU ||
+		app->sceneManager->newScene->sceneType == WIN_SCREEN ||
+		app->sceneManager->newScene->sceneType == LOSE_SCREEN)
+	{
 		for (size_t i = 0; i < players.size(); i++)
 		{
 			players[i]->CleanUp();

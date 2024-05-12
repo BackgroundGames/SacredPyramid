@@ -51,7 +51,6 @@ public:
 
 	uint windowW, windowH;
 	bool talkedSphinx = false;
-	bool addPuzzle = false;
 	vector<iPoint> playerPuzzle;
 	vector<iPoint> correctPuzzle;
 
