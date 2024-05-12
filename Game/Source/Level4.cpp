@@ -119,7 +119,7 @@ bool Level4::Update(float dt)
 
 	if (GetPlayer()->GetTile() == endTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
 		GetPlayer()->exploringState = ExploringState::NONE;
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->menu);
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->winScreen);
 	}
 
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
