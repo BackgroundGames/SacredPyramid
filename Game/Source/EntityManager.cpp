@@ -103,7 +103,7 @@ bool EntityManager::CleanUp()
 	return ret;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyType e_type, ItemType i_type)
+Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyType e_type, Item* item)
 {
 	Entity* entity = nullptr;
 
@@ -119,14 +119,11 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		{
 		case PlayerType::ZHAAK:
 			stats.health = 3;
-			inventory = Inventory(	Weapon(1, 2, WeaponType::SWORD, WeaponEffect::NO_EFFECT),
+			inventory = Inventory(	Weapon(1, 2, "sword", "no_effect"),
 									Armor(1, ArmorType::LEATHER, ArmorEffect::NO_EFFECT),
 									Accessory(1, AccessoryType::ARTIFACT, AccessoryEffect::NO_EFFECT),
 									Consumable(1, 3, ConsumableType::POTION, ConsumableEffect::HEAL),
 									inventory.invenotryItem);
-			inventory.invenotryItem.push_back((Item*) new Weapon(1, 2, WeaponType::SWORD, WeaponEffect::NO_EFFECT));
-			inventory.invenotryItem.push_back((Item*) new Accessory(1, AccessoryType::ARTIFACT, AccessoryEffect::NO_EFFECT));
-			inventory.invenotryItem.push_back((Item*) new Consumable(1, 3, ConsumableType::POTION, ConsumableEffect::HEAL));
 			entity = new Zhaak(stats, inventory);
 			break;
 
@@ -139,7 +136,7 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 
 		case PlayerType::ELI:
 			stats.health = 3;
-			inventory = Inventory(	Weapon(3, 1, WeaponType::BOOK, WeaponEffect::NO_EFFECT),
+			inventory = Inventory(	Weapon(3, 1, "book", "no_effect"),
 									Armor(0, ArmorType::NO_ARMOR, ArmorEffect::NO_EFFECT),
 									Accessory(1, AccessoryType::TOKEN, AccessoryEffect::NO_EFFECT),
 									Consumable(1, 3, ConsumableType::POTION, ConsumableEffect::HEAL),
@@ -162,7 +159,7 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		{
 		case EnemyType::BANDIT:
 			stats.health = 2;
-			inventory.weapon = Weapon(1, 1, WeaponType::DAGGER, WeaponEffect::NO_EFFECT);
+			inventory.weapon = Weapon(1, 1, "dagger", "no_effect");
 			inventory.armor = Armor(0, ArmorType::NO_ARMOR, ArmorEffect::NO_EFFECT);
 			inventory.accessory = Accessory();
 			inventory.consumable = Consumable();
@@ -171,7 +168,7 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 
 		case EnemyType::DRUNKARD:
 			stats.health = 3;
-			inventory.weapon = Weapon(1, 1, WeaponType::DAGGER, WeaponEffect::NO_EFFECT);
+			inventory.weapon = Weapon(1, 1, "no_weapon", "no_effect");
 			inventory.armor = Armor(0, ArmorType::NO_ARMOR, ArmorEffect::NO_EFFECT);
 			inventory.accessory = Accessory();
 			inventory.consumable = Consumable();	
@@ -180,7 +177,7 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 
 		case EnemyType::EVIL_MUMMY:
 			stats.health = 5;
-			inventory.weapon = Weapon(2, 1, WeaponType::DAGGER, WeaponEffect::NO_EFFECT);
+			inventory.weapon = Weapon(2, 1, "no_weapon", "no_effect");
 			inventory.armor = Armor(0, ArmorType::NO_ARMOR, ArmorEffect::NO_EFFECT);
 			inventory.accessory = Accessory();
 			inventory.consumable = Consumable();
@@ -201,22 +198,8 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 
 	case EntityType::ITEM:
 
-		switch (i_type)
-		{
-		case ItemType::WEAPON:
-			entity = new Weapon();
-			break;
-		case ItemType::ARMOR:
-			entity = new Armor();
-			break;
-		case ItemType::ACCESSORY:
-			break;
-		case ItemType::UNKNOWN:
-			entity = new Item();
-			break;
-		default:
-			break;
-		}
+		entity = item;
+		
 		break;
 
 	default:

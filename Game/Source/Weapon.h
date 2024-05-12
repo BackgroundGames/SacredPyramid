@@ -4,6 +4,8 @@
 #include "Entity.h"
 #include "Item.h"
 
+using namespace std;
+
 enum class WeaponType {
 	SWORD,
 	BOOK,
@@ -26,7 +28,7 @@ class Weapon : public Item
 {
 public:
 	Weapon();
-	Weapon(int range, int damage, WeaponType wtype, WeaponEffect effect);
+	Weapon(int range, int damage, string wtype, string effect);
 
 	virtual ~Weapon();
 
@@ -39,8 +41,8 @@ public:
 	bool CleanUp();
 
 public:
-	WeaponType wtype;
-	WeaponEffect effect;
+	string wtype;
+	string effect;
 	int range;
 	int damage;
 };

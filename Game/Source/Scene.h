@@ -12,6 +12,7 @@ class Entity;
 class Player;
 class Enemy;
 class NPC;
+class Item;
 class GuiControl;
 
 enum SceneType
@@ -129,6 +130,7 @@ public:
 	vector<Entity*> enemies;
 	vector<Entity*> players;
 	vector<Entity*> npcs;
+	vector<Item*> items;
 
 	Entity* cameraFocus = nullptr;
 
