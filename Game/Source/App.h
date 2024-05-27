@@ -24,6 +24,7 @@ class GuiManager;
 class Map;
 class DialogueTree;
 class QuestManager;
+class ModuleParticles;
 
 class App
 {
@@ -104,6 +105,7 @@ public:
 	Map* map;
 	DialogueTree* dialogueTree;
 	QuestManager* questManager;
+	ModuleParticles* moduleParticles;
 
 	bool debug = false;
 

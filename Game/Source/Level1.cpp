@@ -9,6 +9,7 @@
 #include "Item.h"
 #include "DialogueTree.h"
 #include "QuestManager.h"
+#include "ModuleParticles.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -86,6 +87,8 @@ bool Level1::Start()
 			enemy->Start();
 		}
 
+		nextMap = app->moduleParticles->AddParticle(app->moduleParticles->laser, puenteTile.x, puenteTile.y);
+
 	}
 	else {
 
@@ -118,6 +121,8 @@ bool Level1::Start()
 			Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 			item->parameters = itemNode;
 		}*/
+
+		nextMap = app->moduleParticles->AddParticle(app->moduleParticles->laser, tabernTile.x, tabernTile.y);
 	}
 
 	app->render->camera.y = 0;
@@ -210,6 +215,8 @@ bool Level1::CleanUp()
 	npcs.clear();
 
 	cameraFocus = nullptr;
+
+	nextMap->pendingToDelete = true;
 
 	return true;
 }

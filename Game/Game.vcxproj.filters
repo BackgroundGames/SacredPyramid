@@ -144,7 +144,15 @@
     <ClCompile Include="Source\QuestManager.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Quest.cpp" />
+    <ClCompile Include="Source\Particle.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleParticles.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Quest.cpp">
+      <Filter>Quest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -328,7 +336,15 @@
     <ClInclude Include="Source\QuestManager.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Quest.h" />
+    <ClInclude Include="Source\Particle.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleParticles.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Quest.h">
+      <Filter>Quest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Modules">
@@ -357,6 +373,12 @@
     </Filter>
     <Filter Include="Items\Equipment">
       <UniqueIdentifier>{88ff1aba-e44b-4378-b051-98cc8bb7ecf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particles">
+      <UniqueIdentifier>{3f6f29a3-add0-48ea-8ab8-32162e88c532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quest">
+      <UniqueIdentifier>{8fea442f-00c6-4a04-b460-10b9a6f1d30d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

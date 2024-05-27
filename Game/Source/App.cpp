@@ -9,6 +9,7 @@
 #include "GuiManager.h"
 #include "DialogueTree.h"
 #include "QuestManager.h"
+#include "ModuleParticles.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -40,6 +41,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	guiManager = new GuiManager();
 	dialogueTree = new DialogueTree();
 	questManager = new QuestManager();
+	moduleParticles = new ModuleParticles();
 
 
 	// Ordered for awake / Start / Update
@@ -51,6 +53,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(sceneManager);
 	AddModule(entityManager);
+	AddModule(moduleParticles);
 	AddModule(dialogueTree);
 	AddModule(questManager);
 	AddModule(guiManager);

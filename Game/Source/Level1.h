@@ -11,6 +11,7 @@
 #include "GuiControl.h"
 
 struct SDL_Texture;
+class Particle;
 
 class Level1 : public Scene
 {
@@ -45,6 +46,7 @@ public:
 
 private:
 	SDL_Texture* img;
+	Particle* nextMap;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	SDL_Texture* mouseTileTex = nullptr;
