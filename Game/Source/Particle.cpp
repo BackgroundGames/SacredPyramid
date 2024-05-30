@@ -37,10 +37,6 @@ bool Particle::Update(float dt)
 			auxPos.y += speed.y * dt;
 			position.x = auxPos.x;
 			position.y = auxPos.y;
-			/*if (auxPos.x >= 1.0f)
-			{
-				auxPos.x = 0.0f;
-			}*/
 		}
 
 		anim.Update();

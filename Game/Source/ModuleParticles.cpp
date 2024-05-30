@@ -134,9 +134,13 @@ bool ModuleParticles::Update(float dt)
 				q.y = particle->position.y;
 				q.w = 2;
 				q.h = 2;
-				app->render->DrawRectangle(q, 20, 100, 20);
+				app->render->DrawRectangle(q, r, g, b);
 			}
 		}
+	}
+
+	if (playWeather) {
+		AddParticle(weather, 0, 0, 0);
 	}
 
 	return true;
@@ -192,4 +196,37 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, u
 	}
 
 	return newParticle;
+}
+
+void ModuleParticles::PlaySandBreeze()
+{
+	minSpeedX = 0.005f;
+	maxSpeedX = 0.1f;
+	minSpeedY = -0.005f;
+	maxSpeedY = 0.005f;
+	minLifetime = 100;
+	maxLiftime = 500;
+	playWeather = true;
+	r = 194;
+	g = 178;
+	b = 128;
+}
+
+void ModuleParticles::PlayLowRain()
+{
+	minSpeedX = 0.0f;
+	maxSpeedX = 0.0f;
+	minSpeedY = 0.5f;
+	maxSpeedY = 0.5f;
+	minLifetime = 50;
+	maxLiftime = 50;
+	r = 0;
+	g = 0;
+	b = 255;
+	playWeather = true;
+}
+
+void ModuleParticles::StopWeather()
+{
+	playWeather = false;
 }

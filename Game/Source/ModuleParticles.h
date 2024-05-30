@@ -47,9 +47,13 @@ public:
 	// Param delay		- Delay time from the moment the function is called until the particle is displayed in screen
 	Particle* AddParticle(const Particle& particle, int x, int y, uint delay = 0);
 
+	void PlaySandBreeze();
+	void PlayLowRain();
+	void StopWeather();
+
 public:
 	Particle laser;
-	Particle sand;
+	Particle weather;
 
 	float minSpeedX = 0.005f;
 	float maxSpeedX = 0.1f;
@@ -69,6 +73,10 @@ private:
 	std::mt19937 gen;
 	std::uniform_real_distribution<> disf;
 	std::uniform_int_distribution<> disi;
+
+	Uint8 r, g, b;
+
+	bool playWeather = false;
 };
 
 #endif // !__MODULEPARTICLES_H__
