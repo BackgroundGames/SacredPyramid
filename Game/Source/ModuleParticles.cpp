@@ -221,8 +221,8 @@ void ModuleParticles::PlayLowRain()
 	minLifetime = 50;
 	maxLiftime = 50;
 	r = 0;
-	g = 0;
-	b = 255;
+	g = 170;
+	b = 228;
 	playWeather = true;
 }
 
