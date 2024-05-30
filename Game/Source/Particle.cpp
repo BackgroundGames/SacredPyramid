@@ -11,7 +11,7 @@ Particle::Particle()
 }
 
 Particle::Particle(const Particle& p) : anim(p.anim), position(p.position), speed(p.speed),
-										frameCount(p.frameCount), lifetime(p.lifetime)
+										frameCount(p.frameCount), lifetime(p.lifetime), texture(p.texture)
 {
 	isAlive = false;
 }
@@ -21,7 +21,7 @@ Particle::~Particle()
 
 }
 
-bool Particle::Update()
+bool Particle::Update(float dt)
 {
 	bool ret = true;
 	frameCount++;
@@ -32,6 +32,17 @@ bool Particle::Update()
 
 	if (isAlive)
 	{
+		if (speed.x != 0.0f || speed.y != 0.0f) {
+			auxPos.x += speed.x * dt;
+			auxPos.y += speed.y * dt;
+			position.x = auxPos.x;
+			position.y = auxPos.y;
+			/*if (auxPos.x >= 1.0f)
+			{
+				auxPos.x = 0.0f;
+			}*/
+		}
+
 		anim.Update();
 
 		// If the particle has a specific lifetime, check when it has to be destroyed

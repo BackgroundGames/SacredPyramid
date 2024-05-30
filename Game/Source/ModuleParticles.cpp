@@ -58,7 +58,8 @@ ModuleParticles::~ModuleParticles()
 
 bool ModuleParticles::Start()
 {
-	texture = app->tex->Load("Assets/Textures/laser.png");
+	laserTexture = app->tex->Load("Assets/Textures/laser.png");
+	laser.texture = laserTexture;
 
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -68,6 +69,9 @@ bool ModuleParticles::Start()
 			particles[i] = nullptr;
 		}
 	}
+
+	// Crear un generador de números aleatorios
+	gen.seed(std::random_device{}());
 
 	return true;
 }
@@ -99,8 +103,8 @@ bool ModuleParticles::CleanUp()
 		}
 		
 	}
-	app->tex->UnLoad(texture);
-	texture = nullptr;
+	app->tex->UnLoad(laserTexture);
+	laserTexture = nullptr;
 
 	return true;
 }
@@ -114,14 +118,24 @@ bool ModuleParticles::Update(float dt)
 		if(particle == nullptr)	continue;
 
 		// Call particle Update. If it has reached its lifetime, destroy it
-		if(particle->Update() == false)
+		if(particle->Update(dt) == false)
 		{
 			particles[i]->SetToDelete();
 		}
 
 		if (particle->isAlive)
 		{
-			app->render->DrawTexture(texture, particle->position.x, particle->position.y - particle->anim.GetCurrentFrame().h / 2, &(particle->anim.GetCurrentFrame()));
+			if (particle->texture != nullptr) {
+				app->render->DrawTexture(particle->texture, particle->position.x, particle->position.y - particle->anim.GetCurrentFrame().h / 2, &(particle->anim.GetCurrentFrame()));
+			}
+			else {
+				SDL_Rect q;
+				q.x = particle->position.x;
+				q.y = particle->position.y;
+				q.w = 2;
+				q.h = 2;
+				app->render->DrawRectangle(q, 20, 100, 20);
+			}
 		}
 	}
 
@@ -146,6 +160,31 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, u
 			newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay so when frameCount reaches 0 the particle will be activated
 			newParticle->position = iPoint(app->map->MapToWorld(x, y));
 			newParticle->position += iPoint((app->map->GetTileWidth() / 2) - (newParticle->anim.frames[0].w / 2), (app->map->GetTileHeight()) - (newParticle->anim.frames[0].h / 2));
+
+			if (newParticle->texture == nullptr) {
+				//random vel
+				disf = std::uniform_real_distribution<>(maxSpeedX, minSpeedX);
+				float random_float = disf(gen);
+				newParticle->speed.x = random_float;
+				disf = std::uniform_real_distribution<>(maxSpeedY, minSpeedY);
+				random_float = disf(gen);
+				newParticle->speed.y = random_float;
+
+				//random pos
+				disi = std::uniform_int_distribution<>((app->render->camera.x + 200) * -1, (app->render->camera.x - app->render->camera.w - 200) * -1);
+				int random_int = disi(gen);
+				newParticle->position.x = random_int;
+				newParticle->auxPos.x = newParticle->position.x;
+				disi = std::uniform_int_distribution<>((app->render->camera.y + 200) * -1, (app->render->camera.y - app->render->camera.h - 200)*-1);
+				random_int = disi(gen);
+				newParticle->position.y = random_int;
+				newParticle->auxPos.y = newParticle->position.y;
+
+				//life time
+				disi = std::uniform_int_distribution<>(minLifetime, maxLiftime);
+				random_int = disi(gen);
+				newParticle->lifetime = random_int;
+			}
 
 			particles[i] = newParticle;
 			break;

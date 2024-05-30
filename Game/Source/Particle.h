@@ -4,7 +4,7 @@
 #include "Animation.h"
 #include "Point.h"
 
-struct Collider;
+struct SDL_Texture;
 
 struct Particle
 {
@@ -21,7 +21,7 @@ public:
 	// Called in ModuleParticles' Update
 	// Handles the logic of the particle
 	// Returns false when the particle reaches its lifetime
-	bool Update();
+	bool Update(float dt);
 
 	// Sets flag for deletion and for the collider aswell
 	void SetToDelete();
@@ -29,9 +29,10 @@ public:
 public:
 	// Defines the position in the screen
 	iPoint position;
+	fPoint auxPos = { 0.0f,0.0f };
 
 	// Defines the speed at which the particle will move (pixels per second)
-	iPoint speed;
+	fPoint speed;
 
 	// A set of rectangle sprites
 	Animation anim;
@@ -47,13 +48,12 @@ public:
 	// Defines the total amount of frames during which the particle will be active
 	uint lifetime = 0;
 
-	// The particle's collider
-	Collider* collider = nullptr;
-
 	// A flag for the particle removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
 
-	bool pathing = false;
+	SDL_Texture* texture = nullptr;
+
+	bool acceletarion = false;
 };
 
 #endif //__PARTICLE_H__

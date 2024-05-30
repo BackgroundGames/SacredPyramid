@@ -4,6 +4,7 @@
 #include "Module.h"
 
 #include "Particle.h"
+#include <random>
 
 #define MAX_ACTIVE_PARTICLES 100
 
@@ -47,17 +48,27 @@ public:
 	Particle* AddParticle(const Particle& particle, int x, int y, uint delay = 0);
 
 public:
-
-	//Template particle for a laser
 	Particle laser;
+	Particle sand;
+
+	float minSpeedX = 0.005f;
+	float maxSpeedX = 0.1f;
+	float minSpeedY = -0.005f;
+	float maxSpeedY = 0.005f;
+	int minLifetime = 100;
+	int maxLiftime = 500;
 
 private:
 	// Particles spritesheet loaded into an SDL Texture
-	SDL_Texture* texture = nullptr;
+	SDL_Texture* laserTexture = nullptr;
 
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
 
+	//random floats
+	std::mt19937 gen;
+	std::uniform_real_distribution<> disf;
+	std::uniform_int_distribution<> disi;
 };
 
 #endif // !__MODULEPARTICLES_H__

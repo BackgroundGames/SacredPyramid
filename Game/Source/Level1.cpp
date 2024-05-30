@@ -131,6 +131,11 @@ bool Level1::Start()
 
 	LockCamera();
 
+	/*for (size_t i = 0; i < 10; i++)
+	{
+		app->moduleParticles->AddParticle(app->moduleParticles->sand, GetPlayer()->GetTile().x, GetPlayer()->GetTile().y);
+	}*/
+
 	return true;
 }
 
@@ -170,6 +175,8 @@ bool Level1::Update(float dt)
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->LoadRequest();
+
+	app->moduleParticles->AddParticle(app->moduleParticles->sand, GetPlayer()->GetTile().x, GetPlayer()->GetTile().y, 0);
 	
 	return true;
 }
