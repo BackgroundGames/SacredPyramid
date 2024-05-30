@@ -32,7 +32,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	bool OnGuiMouseClickEvent(GuiControl* control);
+	bool MouseClickEvent(int mouseX, int mouseY);
 
 	uint windowW, windowH;
 
@@ -46,8 +46,17 @@ private:
 	SDL_Rect quat;
 	int X, Y;
 
-	SDL_Texture* characterTexture = nullptr;	//Character owner of the inventary
-	SDL_Texture* itemTexture = nullptr;			//All other items
+
+	std::string statsText;
+
+	//debug
+	bool bol = true;
+	SDL_Rect weaponRect;							//Rectangle of Weapon slot
+	SDL_Rect armorRect;								//Rectangle of Armor slot
+	SDL_Rect accessoryRect;							//Rectangle of Accessory slot
+	SDL_Rect consumableRect;						//Rectangle of Consumable slot
+
+	std::vector<SDL_Rect> non_equipped;
 };	
 
 #endif //__INVENTORY_MENU__

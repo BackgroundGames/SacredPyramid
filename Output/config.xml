@@ -26,12 +26,7 @@
 		<intro texturePath="Assets/Textures/BGG_Anim.png" audio="Assets/Audio/Fx/logo.wav"/>
 		<gameTitle texturePath="Assets/Textures/gameTitle.png" audio="Assets/Audio/Fx/Flute Sound Effect.wav"/>
 		<menu texturePath="Assets/Textures/Menu Piramide.jpeg" audio="Assets\Audio\Music\Main_Menu.ogg"/>
-		<inventory texturePath="Assets/Textures/inventory.png" exitButton="Assets/Textures/check.png">
-			<equippedItem>
-			</equippedItem>
-			<inventoryItem>
-			</inventoryItem>
-		</inventory>
+		<inventory texturePath="Assets/Textures/inventory.png" exitButton="Assets/Textures/check.png"/>
 		<win_screen texturePath="Assets/Textures/Win.png"/>
 		<lose_screen texturePath="Assets/Textures/You died.png" audio="Assets\Audio\Music\GameOver.ogg"/>
 		<gamepause audio="Assets\Audio\Music\Pause.ogg"/>
