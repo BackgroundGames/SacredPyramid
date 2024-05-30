@@ -46,7 +46,7 @@ public:
 
 private:
 	SDL_Texture* img;
-	Particle* nextMap;
+	Particle* nextMap = nullptr;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	SDL_Texture* mouseTileTex = nullptr;

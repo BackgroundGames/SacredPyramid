@@ -216,7 +216,9 @@ bool Level1::CleanUp()
 
 	cameraFocus = nullptr;
 
-	nextMap->pendingToDelete = true;
+	if (nextMap != nullptr) {
+		nextMap->pendingToDelete = true;
+	}
 
 	return true;
 }
