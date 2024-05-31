@@ -132,15 +132,19 @@ bool ModuleParticles::Update(float dt)
 				SDL_Rect q;
 				q.x = particle->position.x;
 				q.y = particle->position.y;
-				q.w = 2;
-				q.h = 2;
+				q.w = 3;
+				q.h = 3;
 				app->render->DrawRectangle(q, r, g, b);
 			}
 		}
 	}
 
 	if (playWeather) {
-		AddParticle(weather, 0, 0, 0);
+		for (size_t i = 0; i < 10; i++)
+		{
+			AddParticle(weather, 0, 0, 0);
+
+		}
 	}
 
 	return true;
@@ -221,7 +225,7 @@ void ModuleParticles::PlayLowRain()
 	minLifetime = 50;
 	maxLiftime = 50;
 	r = 0;
-	g = 170;
+	g = 150;
 	b = 228;
 	playWeather = true;
 }

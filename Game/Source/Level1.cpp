@@ -131,7 +131,7 @@ bool Level1::Start()
 
 	LockCamera();
 
-	app->moduleParticles->PlayLowRain();
+	app->moduleParticles->PlaySandBreeze();
 
 	return true;
 }
