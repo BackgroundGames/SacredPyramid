@@ -45,6 +45,8 @@ public:
 
 	bool PlayMusicSpatially(iPoint musicGeneratorPosition);
 
+	bool PlayFxSpatially(unsigned int id, iPoint soundGeneratorPosition, int repeat);
+
 private:
 
 	_Mix_Music* music;

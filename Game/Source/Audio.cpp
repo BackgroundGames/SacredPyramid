@@ -217,3 +217,25 @@ bool Audio::PlayMusicSpatially(iPoint musicGeneratorPosition)
 
 	return true;
 }
+
+bool Audio::PlayFxSpatially(unsigned int id, iPoint soundGeneratorPosition, int repeat)
+{
+	bool ret = false;
+
+	if (!active)
+		return false;
+
+	int setChunkVolume = MIX_MAX_VOLUME - (sqrt(pow(app->sceneManager->currentScene->zhaak->position.x - soundGeneratorPosition.x, 2) +
+		pow(app->sceneManager->currentScene->zhaak->position.y - soundGeneratorPosition.y, 2)) / 6);
+
+	if (setChunkVolume <= 0) setChunkVolume = 0;
+
+	if (id > 0 && id <= fx.size())
+	{
+		Mix_PlayChannel(-1, fx[id - 1], repeat);
+
+		Mix_VolumeChunk(fx[id - 1], setChunkVolume);
+	}
+
+	return ret;
+}
