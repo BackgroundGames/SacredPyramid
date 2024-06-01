@@ -341,13 +341,6 @@ bool EntityManager::PostUpdate()
 		SDL_RenderFillRect(app->render->renderer, &screenRect);
 	}
 
-	if (hasLosed)
-	{
-		hasLosed = false;
-		app->sceneManager->currentScene->GetPlayer()->exploringState = ExploringState::NONE;
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->loseScreen);
-	}
-
 	return true;
 }
 
@@ -724,6 +717,12 @@ void EntityManager::MakeEndCombatFade()
 			combatManager = nullptr;
 			inCombat = false;
 			app->audio->PlayMusic(app->sceneManager->currentScene->sceneconfig.attribute("audio").as_string(), 0);
+
+			if (hasLosed)
+			{
+				hasLosed = false;
+				app->sceneManager->ChangeScane((Scene*)app->sceneManager->loseScreen);
+			}
 		}
 	}
 	else

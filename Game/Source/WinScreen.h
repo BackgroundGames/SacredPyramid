@@ -2,6 +2,7 @@
 #define __WIN_SCREEN__
 
 #include "Scene.h"
+#include "GuiControlButton.h"
 
 struct SDL_Texture;
 
@@ -34,11 +35,17 @@ public:
 
 	uint windowW, windowH;
 
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	int winningFx;
+
+	//UI
+	GuiControlButton* menuButton;
+	GuiControlButton* quitButton;
 };
 
 #endif //__WIN_SCREEN__

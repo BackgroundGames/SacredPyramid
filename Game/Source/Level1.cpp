@@ -56,10 +56,14 @@ bool Level1::Start()
 		zhaak->Start();
 		zhaak->TpToCell(17,25);
 
+		if (eli == nullptr) {
+			eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
+		}
 		players.push_back(eli);
 		eli->Start();
 		eli->TpToCell(16, 25);
 		eli->exploringState = ExploringState::FOLLOWING;
+
 
 		// iterate all entities in the scene --> Check https://pugixml.org/docs/quickstart.html#access
 		for (pugi::xml_node enemyNode = sceneconfig.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))

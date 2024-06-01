@@ -27,8 +27,8 @@
 		<gameTitle texturePath="Assets/Textures/gameTitle.png" audio="Assets/Audio/Fx/Flute Sound Effect.wav"/>
 		<menu texturePath="Assets/Textures/Menu Piramide.jpeg" audio="Assets\Audio\Music\Main_Menu.ogg"/>
 		<inventory texturePath="Assets/Textures/inventory.png" exitButton="Assets/Textures/check.png"/>
-		<win_screen texturePath="Assets/Textures/Win.png"/>
-		<lose_screen texturePath="Assets/Textures/You died.png" audio="Assets\Audio\Music\GameOver.ogg"/>
+		<win_screen texturePath="Assets/Textures/Win Menu.png"/>
+		<lose_screen texturePath="Assets/Textures/You died Menu.png" audio="Assets\Audio\Music\GameOver.ogg"/>
 		<gamepause audio="Assets\Audio\Music\Pause.ogg"/>
 		<level1 audio="Assets\Audio\Music\Town.ogg">
 			<eli x="37" y="29"/>
