@@ -243,6 +243,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6B3BFC5CE83F4B2291E1A97C05FAC823"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6C850658FC16444480A34B33A510347B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1408,6 +1414,26 @@
             "TargetName" = "8:Eli anim.png"
             "Tag" = "8:"
             "Folder" = "8:_08696CD40D194B3A9ECE75BE8A80BC0D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6B3BFC5CE83F4B2291E1A97C05FAC823"
+            {
+            "SourcePath" = "8:..\\Output\\Assets\\Textures\\Eli.ico"
+            "TargetName" = "8:Eli.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_ED93859A4B014E1EB6995331E695EBC6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2789,7 +2815,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SacredPyramid"
         "ProductCode" = "8:{53EC55FF-A0CC-4DF3-A8EC-C1BCDD77E32C}"
-        "PackageCode" = "8:{49EA289F-A496-44BB-824F-B625616A3856}"
+        "PackageCode" = "8:{35CE3934-CFEF-4A93-A5E3-39DABE44C830}"
         "UpgradeCode" = "8:{6BD9E08D-CA64-4753-B07A-3F6EBFFF7CC0}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -2920,7 +2946,7 @@
             "Target" = "8:_7511D5D65A834CC1A9ED378CB9BAF537"
             "Folder" = "8:_6464A24C7D80407A9D6A48CD88F92109"
             "WorkingFolder" = "8:_ED93859A4B014E1EB6995331E695EBC6"
-            "Icon" = "8:"
+            "Icon" = "8:_6B3BFC5CE83F4B2291E1A97C05FAC823"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_57CB388CD6374BC4A850DA0DD45FB11D"
@@ -2934,7 +2960,7 @@
             "Target" = "8:_7511D5D65A834CC1A9ED378CB9BAF537"
             "Folder" = "8:_40B8147B73244488A8921D194BFF025F"
             "WorkingFolder" = "8:_ED93859A4B014E1EB6995331E695EBC6"
-            "Icon" = "8:"
+            "Icon" = "8:_6B3BFC5CE83F4B2291E1A97C05FAC823"
             "Feature" = "8:"
             }
         }
