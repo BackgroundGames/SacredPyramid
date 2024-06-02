@@ -116,7 +116,7 @@ bool Level3::Start()
 
 	LockCamera();
 
-	puzzlehint = app->moduleParticles->AddParticle(app->moduleParticles->laser, 18, 25);
+	puzzlehint = app->moduleParticles->AddParticle(app->moduleParticles->laser, 18, 24);
 
 	return true;
 }
@@ -149,10 +149,58 @@ bool Level3::Update(float dt)
 		if (GetPlayer()->exploringState == ExploringState::IDLE &&
 			GetPlayer()->GetTile() != playerPuzzle.back())
 		{
-			if (GetPlayer()->GetTile() == iPoint(10, 25) || GetPlayer()->GetTile() == iPoint(11, 27) ||
-				GetPlayer()->GetTile() == iPoint(13, 25) || GetPlayer()->GetTile() == iPoint(14, 27) ||
-				GetPlayer()->GetTile() == iPoint(15, 25) || GetPlayer()->GetTile() == iPoint(16, 28) ||
-				GetPlayer()->GetTile() == iPoint(17, 26) || GetPlayer()->GetTile() == iPoint(18, 28)) 
+			if (GetPlayer()->GetTile() == iPoint(10, 25))
+			{
+				addInPuzzle(GetPlayer()->GetTile());
+				app->audio->PlayFx(rockFx);
+				puzzlehint->pendingToDelete = true;
+				puzzlehint = app->moduleParticles->AddParticle(app->moduleParticles->laser, 14, 27);
+			}
+
+			if (GetPlayer()->GetTile() == iPoint(11, 27))
+			{
+				addInPuzzle(GetPlayer()->GetTile());
+				app->audio->PlayFx(rockFx);
+				puzzlehint->pendingToDelete = true;
+				puzzlehint = app->moduleParticles->AddParticle(app->moduleParticles->laser, 13, 25);
+			}
+
+			if (GetPlayer()->GetTile() == iPoint(13, 25))
+			{
+				addInPuzzle(GetPlayer()->GetTile());
+				app->audio->PlayFx(rockFx);
+				puzzlehint->pendingToDelete = true;
+				puzzlehint = app->moduleParticles->AddParticle(app->moduleParticles->laser, 18, 24);
+			}
+			if (GetPlayer()->GetTile() == iPoint(14, 27))
+			{
+				addInPuzzle(GetPlayer()->GetTile());
+				app->audio->PlayFx(rockFx);
+				puzzlehint->pendingToDelete = true;
+				puzzlehint = app->moduleParticles->AddParticle(app->moduleParticles->laser, 17, 26);
+			}
+
+			if (GetPlayer()->GetTile() == iPoint(15, 25))
+			{
+				addInPuzzle(GetPlayer()->GetTile());
+				app->audio->PlayFx(rockFx);
+			}
+
+			if (GetPlayer()->GetTile() == iPoint(16, 28))
+			{
+				addInPuzzle(GetPlayer()->GetTile());
+				app->audio->PlayFx(rockFx);
+			}
+
+			if (GetPlayer()->GetTile() == iPoint(17, 26))
+			{
+				addInPuzzle(GetPlayer()->GetTile());
+				app->audio->PlayFx(rockFx);
+				puzzlehint->pendingToDelete = true;
+				puzzlehint = app->moduleParticles->AddParticle(app->moduleParticles->laser, 11, 27);
+			}
+
+			if (GetPlayer()->GetTile() == iPoint(18, 28))
 			{
 				addInPuzzle(GetPlayer()->GetTile());
 				app->audio->PlayFx(rockFx);

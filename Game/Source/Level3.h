@@ -55,6 +55,7 @@ public:
 	bool talkedSphinx = false;
 	vector<iPoint> playerPuzzle;
 	vector<iPoint> correctPuzzle;
+	Particle* puzzlehint = nullptr;
 
 private:
 	SDL_Texture* img;
@@ -64,8 +65,7 @@ private:
 	// 1 4 7 2 3
 
 	bool rain = false;
-	Particle* puzzlehint = nullptr;
-
+	
 	//Audio
 	int rockFx;
 };

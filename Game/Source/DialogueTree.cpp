@@ -11,6 +11,7 @@
 #include "Level3.h"
 #include "SceneManager.h"
 #include "Player.h"
+#include "ModuleParticles.h"
 
 #include <cstring>
 #include <algorithm>
@@ -153,6 +154,10 @@ bool DialogueTree::CleanUp()
 	if (dialog == "dialogue5" && app->sceneManager->currentScene != (Scene*)app->sceneManager->menu) {
 		app->sceneManager->level3->talkedSphinx = true;
 		app->sceneManager->level3->playerPuzzle.push_back({ 0, 0 });
+		if (app->sceneManager->level3->puzzlehint != nullptr) {
+			app->sceneManager->level3->puzzlehint->pendingToDelete = true;
+			app->sceneManager->level3->puzzlehint = app->moduleParticles->AddParticle(app->moduleParticles->laser, 10, 25);
+		}
 	}
 
 	if (dialog == "dialogue8" && app->sceneManager->currentScene != (Scene*)app->sceneManager->menu) {
@@ -162,6 +167,7 @@ bool DialogueTree::CleanUp()
 
 	if (dialog == "dialogue6" && app->sceneManager->currentScene != (Scene*) app->sceneManager->menu)
 	{
+		app->sceneManager->currentScene->GetPlayer()->exploringState = ExploringState::NONE;
 		if (app->sceneManager->level3->CheckPuzzle())
 			app->dialogueTree->performDialogue("dialogue8");
 		else
