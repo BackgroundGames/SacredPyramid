@@ -101,6 +101,7 @@
     <ClCompile Include="Source\Bandit.cpp" />
     <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\Consumable.cpp" />
+    <ClCompile Include="Source\Credits.cpp" />
     <ClCompile Include="Source\DialogueTree.cpp" />
     <ClCompile Include="Source\Drunkard.cpp" />
     <ClCompile Include="Source\Eli.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Source\Bandit.h" />
     <ClInclude Include="Source\Character.h" />
     <ClInclude Include="Source\Consumable.h" />
+    <ClInclude Include="Source\Credits.h" />
     <ClInclude Include="Source\DialogueTree.h" />
     <ClInclude Include="Source\Drunkard.h" />
     <ClInclude Include="Source\Eli.h" />

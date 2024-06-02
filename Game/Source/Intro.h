@@ -38,7 +38,6 @@ public:
 private:
 	int fx = -1;
 	SDL_Texture* img;
-	float textPosX, textPosY = 0;
 	uint texW, texH;
 	int introFx;
 

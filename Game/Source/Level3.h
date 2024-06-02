@@ -11,6 +11,8 @@
 #include "GuiControl.h"
 #include <vector>
 
+class Particle;
+
 using namespace std;
 
 struct SDL_Texture;
@@ -60,6 +62,9 @@ private:
 	uint texW, texH;
 	SDL_Texture* mouseTileTex = nullptr;
 	// 1 4 7 2 3
+
+	bool rain = false;
+	Particle* puzzlehint = nullptr;
 
 	//Audio
 	int rockFx;

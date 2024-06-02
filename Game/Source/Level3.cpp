@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Item.h"
 #include "DialogueTree.h"
+#include "ModuleParticles.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -115,6 +116,8 @@ bool Level3::Start()
 
 	LockCamera();
 
+	puzzlehint = app->moduleParticles->AddParticle(app->moduleParticles->laser, 18, 25);
+
 	return true;
 }
 
@@ -161,6 +164,21 @@ bool Level3::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && GetPlayer()->mainState != MainState::IN_COMBAT) app->LoadRequest();
 
+	if (rain == false) {
+		if (GetPlayer()->GetTile() == iPoint{ 14,71 } || GetPlayer()->GetTile() == iPoint{ 15,71 }
+			|| GetPlayer()->GetTile() == iPoint{ 14,32 } || GetPlayer()->GetTile() == iPoint{ 15,32 }) {
+			rain = true;
+			app->moduleParticles->PlayLowRain();
+		}
+	}
+	else {
+		if (GetPlayer()->GetTile() == iPoint{ 14,31 } || GetPlayer()->GetTile() == iPoint{ 15,31 }
+			|| GetPlayer()->GetTile() == iPoint{ 14,72 } || GetPlayer()->GetTile() == iPoint{ 15,72 }) {
+			rain = false;
+			app->moduleParticles->StopWeather();
+		}
+	}
+
 	return true;
 }
 
@@ -203,6 +221,11 @@ bool Level3::CleanUp()
 	npcs.clear();
 
 	app->audio->UnloadFx(rockFx);
+
+	if (puzzlehint != nullptr) {
+		puzzlehint->pendingToDelete = true;
+		puzzlehint = nullptr;
+	}
 
 	return true;
 }

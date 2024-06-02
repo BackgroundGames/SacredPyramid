@@ -232,6 +232,7 @@ bool Level1::CleanUp()
 
 	if (nextMap != nullptr) {
 		nextMap->pendingToDelete = true;
+		nextMap = nullptr;
 	}
 
 	app->moduleParticles->StopWeather();

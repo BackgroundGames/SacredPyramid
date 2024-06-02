@@ -143,7 +143,6 @@ bool ModuleParticles::Update(float dt)
 		for (size_t i = 0; i < 10; i++)
 		{
 			AddParticle(weather, 0, 0, 0);
-
 		}
 	}
 
