@@ -12,14 +12,6 @@ rescue an explorer that has found himself trapped in the pyramid. What mysteries
 
 ## Developers
 
-TECH TEAM LEAD: Joan M
-ART TEAM LEAD: Justo T
-GAME AND LEVEL DESIGN: Andrea D
-DEVELOPERS: Marc A, Pol C, Joan M
-QA TESTERS: Joel Ch, Pol C
-TECHNICAL ARTIST: Joel Ch, Justo T, Andrea D.
-AUDIO: Marc A, Andrea D
-ARTIST: Justo T, Joel Ch
 
  - Joan M - TECH TEAM LEAD, DEVELOPER
  - Pol C - DEVELOPER, QA TESTER
