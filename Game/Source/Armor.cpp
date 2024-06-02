@@ -18,6 +18,7 @@ Armor::Armor(int defense, ArmorType atype, ArmorEffect effect)
 	this->defense = defense;
 	this->atype = atype;
 	this->effect = effect;
+	this->isPicked = true;
 
 	Awake();
 }

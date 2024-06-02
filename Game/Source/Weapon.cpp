@@ -24,7 +24,8 @@ Weapon::Weapon(int range, int damage, string wtype, string effect)
 	this->damage = damage;
 	this->wtype = wtype;
 	this->effect = effect;
-
+	this->isPicked = true;
+	
 	Awake();
 }
 

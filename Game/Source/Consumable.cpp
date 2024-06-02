@@ -22,6 +22,7 @@ Consumable::Consumable(uint uses, uint value, ConsumableType ctype, ConsumableEf
 	this->value = value;
 	this->ctype = ctype;
 	this->effect = effect;
+	this->isPicked = true;
 
 	Awake();
 }

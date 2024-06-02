@@ -73,33 +73,34 @@ bool InventoryMenu::PostUpdate()
 
 	X += 420; Y += 140;
 	//Weapon Slot
-	if (app->sceneManager->currentScene->GetPlayer()->inventory.weapon.texture != nullptr)
+	if (!app->sceneManager->currentScene->GetPlayer()->inventory.weapon.isDropped)
 		app->render->DrawTexture(app->sceneManager->currentScene->GetPlayer()->inventory.weapon.texture, X, Y);
 	if (app->debug)
 		app->render->DrawRectangle(weaponRect, 255, 0, 0, 255, false);
 
 	Y += 100;
 	//Armor Slot
-	if (app->sceneManager->currentScene->GetPlayer()->inventory.weapon.texture != nullptr)
+	if (!app->sceneManager->currentScene->GetPlayer()->inventory.weapon.isDropped)
 		app->render->DrawTexture(app->sceneManager->currentScene->GetPlayer()->inventory.weapon.texture, X, Y);
 	if (app->debug)
 		app->render->DrawRectangle(armorRect, 255, 0, 0, 255, false);
 
 	Y += 100;
 	//Accessory Slot
-	if (app->sceneManager->currentScene->GetPlayer()->inventory.accessory.texture != nullptr)
+	if (!app->sceneManager->currentScene->GetPlayer()->inventory.accessory.isDropped)
 		app->render->DrawTexture(app->sceneManager->currentScene->GetPlayer()->inventory.accessory.texture, X, Y);
 	if (app->debug)
 		app->render->DrawRectangle(accessoryRect, 255, 0, 0, 255, false);
 
 	Y += 100;
 	//Consumable Slot
-	if (app->sceneManager->currentScene->GetPlayer()->inventory.consumable.texture != nullptr)
+	if (!app->sceneManager->currentScene->GetPlayer()->inventory.consumable.isDropped)
 		app->render->DrawTexture(app->sceneManager->currentScene->GetPlayer()->inventory.consumable.texture, X, Y);
 	if (app->debug)
 		app->render->DrawRectangle(consumableRect, 255, 0, 0, 255, false);
 
-	X += 246; Y -= 455; //Non-Eqipped Slots
+	X += 246; Y -= 455; 
+	//Non-Eqipped Slots
 	for (size_t i = 0; i < app->sceneManager->currentScene->GetPlayer()->inventory.invenotryItem.size(); i++)
 	{
 		if (app->sceneManager->currentScene->GetPlayer()->inventory.invenotryItem.at(i) != nullptr)
@@ -148,36 +149,74 @@ bool InventoryMenu::CleanUp()
 
 bool InventoryMenu::MouseClickEvent(int mouseX, int mouseY)
 {
+	//Left Button to Unequip an Item
 	if (app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		if (mouseX > (weaponRect.x + app->render->camera.x) && mouseY > (weaponRect.y + app->render->camera.y) && mouseX < (weaponRect.x + app->render->camera.x + weaponRect.w) && mouseY < (weaponRect.y + app->render->camera.y + weaponRect.h))
 		{
-			Weapon aux = app->sceneManager->currentScene->GetPlayer()->inventory.weapon;
-			app->sceneManager->currentScene->GetPlayer()->inventory.weapon = Weapon(0, 0, " ", "no effect");
+			//Weapon aux = app->sceneManager->currentScene->GetPlayer()->inventory.weapon;
 			//app->sceneManager->currentScene->GetPlayer()->inventory.invenotryItem.push_back(&aux);
 		}
 
 		if (mouseX > (armorRect.x + app->render->camera.x) && mouseY > (armorRect.y + app->render->camera.y) && mouseX < (armorRect.x + app->render->camera.x + armorRect.w) && mouseY < (armorRect.y + app->render->camera.y + armorRect.h))
 		{
-			Armor aux = app->sceneManager->currentScene->GetPlayer()->inventory.armor;
-			app->sceneManager->currentScene->GetPlayer()->inventory.armor = Armor(0, ArmorType::NO_ARMOR, ArmorEffect::NO_EFFECT);
+			//Armor aux = app->sceneManager->currentScene->GetPlayer()->inventory.armor;
 			//app->sceneManager->currentScene->GetPlayer()->inventory.invenotryItem.push_back(&aux);
 		}
 
 		if (mouseX > (accessoryRect.x + app->render->camera.x) && mouseY > (accessoryRect.y + app->render->camera.y) && mouseX < (accessoryRect.x + app->render->camera.x + accessoryRect.w) && mouseY < (accessoryRect.y + app->render->camera.y + accessoryRect.h))
 		{
-			Accessory aux = app->sceneManager->currentScene->GetPlayer()->inventory.accessory;
-			app->sceneManager->currentScene->GetPlayer()->inventory.accessory = Accessory(0, AccessoryType::NO_ACCESSORY, AccessoryEffect::NO_EFFECT);
+			//Accessory aux = app->sceneManager->currentScene->GetPlayer()->inventory.accessory;
 			//app->sceneManager->currentScene->GetPlayer()->inventory.invenotryItem.push_back(&aux);
 		}
 
 		if (mouseX > (consumableRect.x + app->render->camera.x) && mouseY > (consumableRect.y + app->render->camera.y) && mouseX < (consumableRect.x + app->render->camera.x + consumableRect.w) && mouseY < (consumableRect.y + app->render->camera.y + consumableRect.h))
 		{
-			Consumable aux = app->sceneManager->currentScene->GetPlayer()->inventory.consumable;
-			app->sceneManager->currentScene->GetPlayer()->inventory.consumable = Consumable(0, 0, ConsumableType::NO_CONSUMABLE, ConsumableEffect::NO_EFFECT);
+			//Consumable aux = app->sceneManager->currentScene->GetPlayer()->inventory.consumable;
 			//app->sceneManager->currentScene->GetPlayer()->inventory.invenotryItem.push_back(&aux);
 		}
 	}
 	
+	//Keyboard button D to drop an Item
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+	{
+		if (mouseX > (weaponRect.x + app->render->camera.x) && mouseY > (weaponRect.y + app->render->camera.y) && mouseX < (weaponRect.x + app->render->camera.x + weaponRect.w) && mouseY < (weaponRect.y + app->render->camera.y + weaponRect.h))
+		{
+			Weapon aux = app->sceneManager->currentScene->GetPlayer()->inventory.weapon;
+			app->sceneManager->currentScene->GetPlayer()->inventory.weapon.isDropped = true;
+			DropItem(1);
+		}
+
+		if (mouseX > (armorRect.x + app->render->camera.x) && mouseY > (armorRect.y + app->render->camera.y) && mouseX < (armorRect.x + app->render->camera.x + armorRect.w) && mouseY < (armorRect.y + app->render->camera.y + armorRect.h))
+		{
+			Armor aux = app->sceneManager->currentScene->GetPlayer()->inventory.armor;
+			app->sceneManager->currentScene->GetPlayer()->inventory.armor.isDropped = true;
+			DropItem(2);
+		}
+
+		if (mouseX > (accessoryRect.x + app->render->camera.x) && mouseY > (accessoryRect.y + app->render->camera.y) && mouseX < (accessoryRect.x + app->render->camera.x + accessoryRect.w) && mouseY < (accessoryRect.y + app->render->camera.y + accessoryRect.h))
+		{
+			Accessory aux = app->sceneManager->currentScene->GetPlayer()->inventory.accessory;
+			app->sceneManager->currentScene->GetPlayer()->inventory.accessory.isDropped = true;
+			DropItem(3);
+		}
+
+		if (mouseX > (consumableRect.x + app->render->camera.x) && mouseY > (consumableRect.y + app->render->camera.y) && mouseX < (consumableRect.x + app->render->camera.x + consumableRect.w) && mouseY < (consumableRect.y + app->render->camera.y + consumableRect.h))
+		{
+			Consumable aux = app->sceneManager->currentScene->GetPlayer()->inventory.consumable;
+			app->sceneManager->currentScene->GetPlayer()->inventory.consumable.isDropped = true;
+			DropItem(4);
+		}
+	}
+
 	return true;
+}
+
+void InventoryMenu::DropItem(uint item_type)
+{
+	Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM, PlayerType::UNKNOWN, EnemyType::UNKNOWN, item_type);
+	item->id = app->sceneManager->currentScene->GetPlayer()->inventory.consumable.id;
+	app->sceneManager->currentScene->items.push_back(item);
+	item->parameters = app->sceneManager->currentScene->GetPlayer()->inventory.consumable.parameters;
+	item->Start();
 }

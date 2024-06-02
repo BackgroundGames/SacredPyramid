@@ -47,22 +47,6 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	//Render the player texture and modify the position of the player using WSAD keys and render the texture
-	if (app->debug)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-			position.x += -0.2 * dt;
-
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-			position.x += 0.2 * dt;
-
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-			position.y += -0.2 * dt;
-
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-			position.y += 0.2 * dt;
-	}
-
 	destination = Player::GetMouseTile(mousePos);
 
 	switch (mainState)
