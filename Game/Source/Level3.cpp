@@ -44,6 +44,9 @@ bool Level3::Start()
 	app->win->GetWindowSize(windowW, windowH);
 
 	zhaak = (Player*)app->sceneManager->previousScene->GetZhaak();
+	if (zhaak == nullptr) {
+		zhaak = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ZHAAK);
+	}
 	players.push_back(zhaak);
 	//SI HA CARREGAT PARTIDA MIRAR AL SAVE
 	//////player->parameters = sceneconfig.child("player");
@@ -51,6 +54,9 @@ bool Level3::Start()
 	zhaak->Start();
 
 	eli = (Player*)app->sceneManager->previousScene->GetEli();
+	if (eli == nullptr) {
+		eli = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER, PlayerType::ELI);
+	}
 	players.push_back(eli);
 	//SI HA CARREGAT PARTIDA MIRAR AL SAVE
 	//////player->parameters = sceneconfig.child("player");
