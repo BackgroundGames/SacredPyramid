@@ -26,6 +26,7 @@ enum SceneType
 	LEVEL4,
 	WIN_SCREEN,
 	LOSE_SCREEN,
+	CREDITS,
 	NONE
 };
 

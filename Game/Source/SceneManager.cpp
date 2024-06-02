@@ -15,6 +15,7 @@
 #include "WinScreen.h"
 #include "LoseScreen.h"
 #include "InventoryMenu.h"
+#include "Credits.h"
 #include "Map.h"
 
 
@@ -28,6 +29,8 @@ SceneManager::SceneManager()
 	gameTitle->sceneType = SceneType::GAME_TITLE;
 	menu = new Menu();
 	menu->sceneType = SceneType::MENU;
+	credits = new Credits();
+	credits->sceneType = SceneType::CREDITS;
 	winScreen = new WinScreen();
 	winScreen->sceneType = SceneType::WIN_SCREEN;
 	loseScreen = new LoseScreen();
@@ -47,6 +50,7 @@ SceneManager::SceneManager()
 	scenes.Add(intro);
 	scenes.Add(gameTitle);
 	scenes.Add(menu);
+	scenes.Add(credits);
 	scenes.Add(winScreen);
 	scenes.Add(loseScreen);
 	scenes.Add(level1);

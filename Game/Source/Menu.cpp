@@ -67,9 +67,6 @@ bool Menu::Update(float dt)
 {
 	app->render->DrawTexture(img, windowW / 2 - texW / 2, windowH / 2 - texH / 2, NULL);
 
-	if (app->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
-		app->sceneManager->ChangeScane((Scene*)app->sceneManager->intro);
-
 	return true;
 }
 
@@ -110,8 +107,7 @@ bool Menu::OnGuiMouseClickEvent(GuiControl* control)
 		app->sceneManager->OpenSettings();
 	}
 	if (control->id == 4) {
-		/*app->sceneManager->level1->reset = false;
-		settings = true;*/
+		app->sceneManager->ChangeScane((Scene*)app->sceneManager->credits);
 	}
 	if (control->id == 5) {
 		quit = true;

@@ -20,6 +20,7 @@ class GamePause;
 class WinScreen;
 class LoseScreen;
 class InventoryMenu;
+class Credits;
 
 enum Fade_Step
 {
@@ -93,6 +94,7 @@ public:
 	WinScreen* winScreen;
 	LoseScreen* loseScreen;
 	InventoryMenu* inventoryMenu;
+	Credits* credits;
 
 	uint windowW, windowH;
 
