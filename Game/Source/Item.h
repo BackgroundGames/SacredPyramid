@@ -27,6 +27,7 @@ public:
 public:
 	uint id = 0;
 	bool isPicked = false;
+	bool isDropped = false;
 	SDL_Texture* texture;
 	ItemType subtype;
 

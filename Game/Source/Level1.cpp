@@ -120,11 +120,14 @@ bool Level1::Start()
 		GetPlayer()->exploringState = ExploringState::TALKING;
 		app->questManager->AddQuest(0, 0);
 
-		/*for (pugi::xml_node itemNode = sceneconfig.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
+		for (pugi::xml_node itemNode = sceneconfig.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 		{
-			Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+			Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM, PlayerType::UNKNOWN, EnemyType::UNKNOWN, itemNode.attribute("type").as_uint());
+			item->id = itemNode.attribute("id").as_uint();
+			items.push_back(item);
 			item->parameters = itemNode;
-		}*/
+			item->Start();
+		}
 
 		nextMap = app->moduleParticles->AddParticle(app->moduleParticles->laser, tabernTile.x, tabernTile.y);
 	}
@@ -171,6 +174,11 @@ bool Level1::Update(float dt)
 	if (GetPlayer()->GetTile() == puenteTile && (GetPlayer()->exploringState == ExploringState::IDLE)) {
 		GetPlayer()->exploringState = ExploringState::NONE;
 		app->sceneManager->ChangeScane((Scene*)app->sceneManager->level3);
+	}
+
+	for (size_t i = 0; i < items.size(); i++)
+	{
+
 	}
 
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)

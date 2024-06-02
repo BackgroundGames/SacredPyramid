@@ -20,7 +20,8 @@ Accessory::Accessory(uint value, AccessoryType atype, AccessoryEffect effect)
 	this->value = value;
 	this->atype = atype;
 	this->effect = effect;
-	
+	this->isPicked = true;
+
 	Awake();
 }
 

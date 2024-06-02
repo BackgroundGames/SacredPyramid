@@ -67,6 +67,15 @@ bool Level2::Start()
 			npc->Start();
 		}
 
+		for (pugi::xml_node itemNode = sceneconfig.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
+		{
+			Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM, PlayerType::UNKNOWN, EnemyType::UNKNOWN, itemNode.attribute("type").as_uint());
+			item->id = itemNode.attribute("id").as_uint();
+			items.push_back(item);
+			item->parameters = itemNode;
+			item->Start();
+		}
+
 		eli->OnGuiMouseClickEvent(npcs[0]);
 	}
 

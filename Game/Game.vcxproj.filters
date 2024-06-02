@@ -117,9 +117,6 @@
     <ClCompile Include="Source\Item.cpp">
       <Filter>Items</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Consumable.cpp">
-      <Filter>Items</Filter>
-    </ClCompile>
     <ClCompile Include="Source\QuestItem.cpp">
       <Filter>Items</Filter>
     </ClCompile>
@@ -152,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="Source\Quest.cpp">
       <Filter>Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Consumable.cpp">
+      <Filter>Items\Equipment</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -309,9 +309,6 @@
     <ClInclude Include="Source\Item.h">
       <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Consumable.h">
-      <Filter>Items</Filter>
-    </ClInclude>
     <ClInclude Include="Source\QuestItem.h">
       <Filter>Items</Filter>
     </ClInclude>
@@ -344,6 +341,9 @@
     </ClInclude>
     <ClInclude Include="Source\Quest.h">
       <Filter>Quest</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Consumable.h">
+      <Filter>Items\Equipment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -103,7 +103,7 @@ bool EntityManager::CleanUp()
 	return ret;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyType e_type, Item* item)
+Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyType e_type, uint i_type)
 {
 	Entity* entity = nullptr;
 
@@ -197,9 +197,34 @@ Entity* EntityManager::CreateEntity(EntityType type, PlayerType p_type, EnemyTyp
 		break;
 
 	case EntityType::ITEM:
-
-		entity = item;
-		
+		switch (i_type)
+		{
+		case 0:
+			//Unknown
+			entity = new Item();
+			break;
+		case 1:
+			//Weapon
+			entity = new Weapon();
+			break;
+		case 2:
+			//Armor
+			entity = new Armor();
+			break;
+		case 3:
+			//Accessory
+			entity = new Accessory();
+			break;
+		case 4:
+			//Consumable
+			entity = new Consumable();
+			break;
+		case 5:
+			//Quest Item
+			break;
+		default:
+			break;
+		}
 		break;
 
 	default:

@@ -34,6 +34,8 @@ public:
 
 	bool MouseClickEvent(int mouseX, int mouseY);
 
+	void DropItem(uint item_type);
+
 	uint windowW, windowH;
 
 private:
@@ -50,7 +52,6 @@ private:
 	std::string statsText;
 
 	//debug
-	bool bol = true;
 	SDL_Rect weaponRect;							//Rectangle of Weapon slot
 	SDL_Rect armorRect;								//Rectangle of Armor slot
 	SDL_Rect accessoryRect;							//Rectangle of Accessory slot
